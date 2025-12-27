@@ -15,9 +15,6 @@
     body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; scroll-behavior: smooth; }
     .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.06); }
     .glass { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.08); }
-    .shimmer { position: relative; overflow: hidden; }
-    .shimmer::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent); transform: translateX(-100%); animation: shimmer 1.6s infinite; }
-    @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
     .faq-item[aria-expanded="true"] .faq-answer { display:block; }
     .faq-item[aria-expanded="false"] .faq-answer { display:none; }
   </style>
@@ -77,6 +74,43 @@
     </div>
   </header>
 
+  <!-- SOURCING CATEGORIES (fills the blank space under the Track Order area) -->
+  <section class="py-20 px-6 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto text-center mb-12">
+      <h3 class="text-4xl font-black uppercase italic">What We Can Source for You</h3>
+      <p class="text-slate-600 mt-2 max-w-2xl mx-auto">
+        Kash Option specializes in sourcing and shipping a wide range of products from trusted suppliers worldwide.
+        If it's legal, we can import it for you — fast, secure, and hassle-free.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="glass p-6 rounded-3xl shadow-lg text-left">
+        <h4 class="font-black text-blue-600 mb-2"><i class="fas fa-laptop mr-2"></i> Electronics & Gadgets</h4>
+        <p class="text-slate-600">Smartphones, laptops, accessories, gaming consoles, and verified global brands.</p>
+      </div>
+      <div class="glass p-6 rounded-3xl shadow-lg text-left">
+        <h4 class="font-black text-pink-600 mb-2"><i class="fas fa-spray-can-sparkles mr-2"></i> Fashion & Cosmetics</h4>
+        <p class="text-slate-600">Designer wear, skincare, makeup, fragrances, and beauty tools from UK, US, and Asia.</p>
+      </div>
+      <div class="glass p-6 rounded-3xl shadow-lg text-left">
+        <h4 class="font-black text-green-600 mb-2"><i class="fas fa-car mr-2"></i> Auto Parts & Accessories</h4>
+        <p class="text-slate-600">OEM and aftermarket parts, electronics, tires, and interior upgrades sourced globally.</p>
+      </div>
+      <div class="glass p-6 rounded-3xl shadow-lg text-left">
+        <h4 class="font-black text-yellow-600 mb-2"><i class="fas fa-star mr-2"></i> Fashion Trends</h4>
+        <p class="text-slate-600">We stay ahead of the curve — viral styles, seasonal drops, and influencer picks.</p>
+      </div>
+      <div class="glass p-6 rounded-3xl shadow-lg text-left">
+        <h4 class="font-black text-indigo-600 mb-2"><i class="fas fa-boxes-stacked mr-2"></i> Bulk Business Orders</h4>
+        <p class="text-slate-600">Wholesale sourcing for resale: supplier negotiation, quality control, freight logistics.</p>
+      </div>
+      <div class="glass p-6 rounded-3xl shadow-lg text-left">
+        <h4 class="font-black text-red-600 mb-2"><i class="fas fa-shield-halved mr-2"></i> Anything Legal</h4>
+        <p class="text-slate-600">From niche items to custom requests — if it’s legal, we’ll source and ship it securely.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- BRANDS STRIP -->
   <section class="py-8 px-6 bg-white border-t border-b border-slate-200">
     <div class="max-w-7xl mx-auto">
@@ -117,24 +151,24 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
+  <!-- TESTIMONIALS (USA, UK, Germany) -->
   <section class="py-20 px-6 bg-slate-50">
     <div class="max-w-7xl mx-auto text-center mb-12">
       <h3 class="text-4xl font-black uppercase italic">What Our Clients Say</h3>
     </div>
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       <div class="glass p-6 rounded-3xl shadow-lg">
-        <p class="text-slate-500 mb-4">“Kash Option made importing so easy. My products arrived faster than expected!”</p>
+        <p class="text-slate-600 mb-4">“Kash Option made importing so easy. My products arrived faster than expected!”</p>
         <div class="flex items-center gap-3">
           <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-12 h-12 rounded-full" alt="Client from USA" />
-          <div>
+        <div>
             <h5 class="font-bold">Emily R.</h5>
             <p class="text-xs text-slate-500">New York, USA</p>
           </div>
         </div>
       </div>
       <div class="glass p-6 rounded-3xl shadow-lg">
-        <p class="text-slate-500 mb-4">“I sourced from UK suppliers and Kash Option handled everything seamlessly.”</p>
+        <p class="text-slate-600 mb-4">“I sourced from UK suppliers and Kash Option handled everything seamlessly.”</p>
         <div class="flex items-center gap-3">
           <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full" alt="Client from UK" />
           <div>
@@ -144,7 +178,7 @@
         </div>
       </div>
       <div class="glass p-6 rounded-3xl shadow-lg">
-        <p class="text-slate-500 mb-4">“The best dropshipping partner in Europe. Highly recommend for business sourcing.”</p>
+        <p class="text-slate-600 mb-4">“The best dropshipping partner in Europe. Highly recommend for business sourcing.”</p>
         <div class="flex items-center gap-3">
           <img src="https://randomuser.me/api/portraits/men/68.jpg" class="w-12 h-12 rounded-full" alt="Client from Germany" />
           <div>
@@ -192,17 +226,20 @@
       <p class="text-slate-600 mt-2">Everything you need to know about sourcing and dropshipping with Kash Option</p>
     </div>
     <div class="max-w-3xl mx-auto space-y-4">
+      <!-- Shipping timeline (updated policy) -->
       <div class="faq-item glass p-5 rounded-2xl" aria-expanded="false">
         <button class="w-full flex justify-between items-center font-bold" type="button">
           <span>How long does shipping typically take?</span>
           <i class="fas fa-plus text-slate-500"></i>
         </button>
         <div class="faq-answer mt-3 text-slate-600">
-         Express shipping takes 3 to 5 days to arrive from China. Economy shipping by sea takes 2 months. 
-Foreigners outside Ghana should inquire through our WhatsApp link below for shipping estimates.
-
+          Express shipping takes 3 days to arrive from China. Economy shipping by sea takes about 2 months.
+          Foreigners outside Ghana should inquire through our
+          <a href="https://wa.me/message/GKVHLNYNL7AEJ1" target="_blank" class="text-blue-600 font-bold hover:underline">WhatsApp</a>
+          for shipping estimates.
         </div>
       </div>
+      <!-- Customs -->
       <div class="faq-item glass p-5 rounded-2xl" aria-expanded="false">
         <button class="w-full flex justify-between items-center font-bold" type="button">
           <span>Do you handle customs and duties?</span>
@@ -212,6 +249,7 @@ Foreigners outside Ghana should inquire through our WhatsApp link below for ship
           Yes. We manage documentation, customs processing, and duties. You’ll see all costs upfront before shipping.
         </div>
       </div>
+      <!-- Marketplaces -->
       <div class="faq-item glass p-5 rounded-2xl" aria-expanded="false">
         <button class="w-full flex justify-between items-center font-bold" type="button">
           <span>Can you source from specific brands or marketplaces?</span>
@@ -221,13 +259,15 @@ Foreigners outside Ghana should inquire through our WhatsApp link below for ship
           Absolutely. We source from leading marketplaces like Amazon, Alibaba, eBay, and brand stores, depending on your needs.
         </div>
       </div>
+      <!-- Tracking (explicit top-right button instruction) -->
       <div class="faq-item glass p-5 rounded-2xl" aria-expanded="false">
         <button class="w-full flex justify-between items-center font-bold" type="button">
           <span>How do I track my order?</span>
           <i class="fas fa-plus text-slate-500"></i>
         </button>
         <div class="faq-answer mt-3 text-slate-600">
-Use the <strong>Track Order</strong> button at the top right of this page. Enter your tracking ID to view live status and ETA updates instantly.        </div>
+          Use the <strong>Track Order</strong> button at the top right of this page. Enter your tracking ID to view live status and ETA updates instantly.
+        </div>
       </div>
     </div>
   </section>
@@ -300,9 +340,14 @@ Use the <strong>Track Order</strong> button at the top right of this page. Enter
       "Order #F441 - Munich, Germany"
     ];
     function buildTicker() {
-      ticker.innerHTML = `<div class="animate-[ticker_20s_linear_infinite]">${orders.concat(orders).map(o => `<span class="mx-6">${o}</span>`).join('')}</div>`;
+      const inner = document.createElement('div');
+      inner.style.display = 'inline-block';
+      inner.style.whiteSpace = 'nowrap';
+      inner.style.animation = 'ticker 20s linear infinite';
+      inner.innerHTML = orders.concat(orders).map(o => `<span class="mx-6">${o}</span>`).join('');
+      ticker.innerHTML = '';
+      ticker.appendChild(inner);
     }
-    // Simple CSS animation injected for ticker
     const style = document.createElement('style');
     style.textContent = `@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }`;
     document.head.appendChild(style);
@@ -315,7 +360,6 @@ Use the <strong>Track Order</strong> button at the top right of this page. Enter
         const expanded = item.getAttribute('aria-expanded') === 'true';
         document.querySelectorAll('.faq-item').forEach(i => i.setAttribute('aria-expanded', 'false'));
         item.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        // toggle icon
         const icon = btn.querySelector('i');
         icon.className = expanded ? 'fas fa-plus text-slate-500' : 'fas fa-minus text-slate-600';
       });
@@ -352,4 +396,3 @@ Use the <strong>Track Order</strong> button at the top right of this page. Enter
   </script>
 </body>
 </html>
-
