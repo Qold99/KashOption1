@@ -100,7 +100,8 @@
   }
 
   function checkPin() {
-    if (document.getElementById("pin").value === "767484") {
+    const entered = document.getElementById("pin").value.trim();
+    if (entered === "767484") {
       document.getElementById("admin-form").classList.remove("hidden");
       document.getElementById("pin-gate").classList.add("hidden");
     } else {
@@ -126,5 +127,6 @@
 </script>
 
 </body>
-</html> 
+</html>
+
 
