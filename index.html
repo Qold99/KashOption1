@@ -8,182 +8,143 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
-.gradient-text { background: linear-gradient(90deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.card { background: #111; border: 1px solid #222; border-radius: 12px; transition: 0.3s; }
-.card:hover { border-color: #444; }
-details summary::-webkit-details-marker { display: none; }
+body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; }
+.brand-blue { color: #1e40af; }
+.bg-brand-blue { background-color: #1e40af; }
+.card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; transition: 0.3s; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<header class="p-6 flex justify-between items-center max-w-7xl mx-auto w-full sticky top-0 bg-black/80 backdrop-blur-md z-50">
-<h1 class="text-2xl font-bold tracking-tighter">KASH OPTION</h1>
-<a href="tracker.html" class="bg-white text-black px-4 py-2 rounded-full font-semibold text-sm hover:bg-gray-200 transition">Track Order</a>
+<!-- Navigation -->
+<header class="p-6 flex justify-between items-center max-w-7xl mx-auto w-full sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+<h1 class="text-2xl font-bold tracking-tighter brand-blue">KASH OPTION</h1>
+<a href="tracker.html" class="bg-brand-blue text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-blue-800 transition">Track Order</a>
 </header>
 
-<!-- Hero Section -->
-<section class="max-w-7xl mx-auto px-6 py-12 lg:py-24">
-<div class="max-w-3xl">
-<span class="text-xs uppercase tracking-widest text-gray-400 mb-4 block">100% Secure International Sourcing</span>
-<h2 class="text-5xl lg:text-7xl font-bold leading-tight mb-6">Shop Globally.<br><span class="gradient-text">Pay Locally.</span></h2>
-<p class="text-gray-400 text-lg mb-8">
+<!-- Hero Section with Image -->
+<section class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-1/2">
+<span class="text-xs uppercase tracking-widest text-blue-600 font-bold mb-4 block">100% Secure International Sourcing</span>
+<h2 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">Shop Globally.<br><span class="brand-blue">Pay Locally.</span></h2>
+<p class="text-gray-600 text-lg mb-8 leading-relaxed">
 We bring the world to your doorstep. Stress-free importing from China, UK, and USA straight to Ghana.
 </p>
 <div class="flex flex-col sm:flex-row gap-4">
-<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="bg-white text-black px-8 py-4 rounded-full font-bold text-center">SHOP NOW</a>
-<a href="#quote" class="border border-zinc-700 text-white px-8 py-4 rounded-full font-bold text-center hover:bg-zinc-900 transition">Get a Quote</a>
+<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold text-center hover:shadow-lg transition">SHOP NOW</a>
+<a href="#quote" class="border-2 border-gray-200 text-black px-8 py-4 rounded-full font-bold text-center hover:bg-gray-50 transition">Get a Quote</a>
 </div>
+</div>
+<div class="lg:w-1/2">
+<!-- This is a high-quality photo of a delivery/shopping person -->
+<img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=1000&auto=format&fit=crop" alt="International Shipping" class="rounded-3xl shadow-2xl object-cover h-[450px] w-full">
 </div>
 </section>
 
-<!-- What We Can Source Section -->
+<!-- Sourcing Section with Category Images -->
 <section class="max-w-7xl mx-auto px-6 py-16">
 <h3 class="text-3xl font-bold mb-4">What We Can Source For You</h3>
-<p class="text-gray-400 mb-10 max-w-2xl">If it's legal, we can import it for you — fast, secure, and hassle-free.</p>
+<p class="text-gray-600 mb-10 max-w-2xl">If it's legal, we can import it for you — fast, secure, and hassle-free.</p>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<div class="card p-6">
-<i data-lucide="smartphone" class="mb-4 text-gray-400"></i>
-<h4 class="font-bold mb-2 text-lg">Electronics & Gadgets</h4>
-<p class="text-sm text-gray-500">Smartphones, laptops, and verified global brands.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop" class="h-48 w-full object-cover">
+<div class="p-6">
+<h4 class="font-bold text-lg mb-2">Electronics & Gadgets</h4>
+<p class="text-sm text-gray-500">Phones, laptops, and consoles from US/UK/China.</p>
 </div>
-<div class="card p-6">
-<i data-lucide="shopping-bag" class="mb-4 text-gray-400"></i>
-<h4 class="font-bold mb-2 text-lg">Fashion & Cosmetics</h4>
-<p class="text-sm text-gray-500">Skincare, makeup, and designer wear from UK/US.</p>
 </div>
-<div class="card p-6">
-<i data-lucide="car" class="mb-4 text-gray-400"></i>
-<h4 class="font-bold mb-2 text-lg">Auto Parts</h4>
-<p class="text-sm text-gray-500">OEM parts, tires, and interior upgrades sourced globally.</p>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" class="h-48 w-full object-cover">
+<div class="p-6">
+<h4 class="font-bold text-lg mb-2">Fashion & Cosmetics</h4>
+<p class="text-sm text-gray-500">Designer wear and skincare from global brand stores.</p>
 </div>
-<div class="card p-6">
-<i data-lucide="briefcase" class="mb-4 text-gray-400"></i>
-<h4 class="font-bold mb-2 text-lg">Bulk Business Orders</h4>
-<p class="text-sm text-gray-500">Wholesale sourcing, supplier negotiation, and freight logistics.</p>
 </div>
-<div class="card p-6">
-<i data-lucide="trending-up" class="mb-4 text-gray-400"></i>
-<h4 class="font-bold mb-2 text-lg">Fashion Trends</h4>
-<p class="text-sm text-gray-500">Viral styles, seasonal drops, and influencer picks.</p>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1486006396193-471a6f58bc69?q=80&w=800&auto=format&fit=crop" class="h-48 w-full object-cover">
+<div class="p-6">
+<h4 class="font-bold text-lg mb-2">Auto Parts</h4>
+<p class="text-sm text-gray-500">OEM parts and accessories delivered to your door.</p>
 </div>
-<div class="card p-6">
-<i data-lucide="shield-check" class="mb-4 text-gray-400"></i>
-<h4 class="font-bold mb-2 text-lg">Anything Legal</h4>
-<p class="text-sm text-gray-500">From niche items to custom requests — we'll ship it securely.</p>
 </div>
 </div>
 </section>
 
-<!-- How It Works -->
-<section class="max-w-7xl mx-auto px-6 py-20 border-t border-zinc-900">
+<!-- How It Works Section -->
+<section class="max-w-7xl mx-auto px-6 py-20 bg-gray-50 rounded-[3rem] my-10">
 <h3 class="text-3xl font-bold mb-16 text-center">How It Works</h3>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-<div class="text-center">
-<div class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center px-6">
+<div>
+<div class="w-16 h-16 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold brand-blue border border-gray-100">1</div>
 <h4 class="text-xl font-bold mb-3">Shop Globally</h4>
-<p class="text-gray-500">Choose products from trusted suppliers or marketplaces worldwide.</p>
+<p class="text-gray-600">Choose products from any marketplace worldwide.</p>
 </div>
-<div class="text-center">
-<div class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+<div>
+<div class="w-16 h-16 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold brand-blue border border-gray-100">2</div>
 <h4 class="text-xl font-bold mb-3">We Source</h4>
-<p class="text-gray-500">We handle procurement, quality checks, and international logistics.</p>
+<p class="text-gray-600">We handle payment, checking, and global shipping.</p>
 </div>
-<div class="text-center">
-<div class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+<div>
+<div class="w-16 h-16 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold brand-blue border border-gray-100">3</div>
 <h4 class="text-xl font-bold mb-3">Receive Locally</h4>
-<p class="text-gray-500">Your package arrives safely at your doorstep in Ghana.</p>
+<p class="text-gray-600">Get your package safely at your doorstep in Ghana.</p>
 </div>
 </div>
 </section>
 
 <!-- Marketplace Checklist -->
-<section class="max-w-7xl mx-auto px-6 py-16 border-t border-zinc-900 bg-zinc-950/50 rounded-3xl">
-<h3 class="text-2xl font-bold mb-10 text-center">Trusted Global Marketplaces We Support</h3>
+<section class="max-w-7xl mx-auto px-6 py-16">
+<h3 class="text-2xl font-bold mb-10 text-center text-gray-400">Trusted Stores We Support</h3>
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-<div class="flex items-center justify-center gap-2 text-gray-300 font-medium"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Amazon</div>
-<div class="flex items-center justify-center gap-2 text-gray-300 font-medium"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Alibaba</div>
-<div class="flex items-center justify-center gap-2 text-gray-300 font-medium"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> eBay</div>
-<div class="flex items-center justify-center gap-2 text-gray-300 font-medium"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Zara</div>
-<div class="flex items-center justify-center gap-2 text-gray-300 font-medium"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Nike</div>
-<div class="flex items-center justify-center gap-2 text-gray-300 font-medium"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> H&M</div>
-</div>
-</section>
-
-<!-- Quote Section -->
-<section id="quote" class="max-w-3xl mx-auto px-6 py-20">
-<div class="card p-8 md:p-12">
-<h3 class="text-3xl font-bold mb-6">Get a Quote</h3>
-<div class="space-y-4">
-<button class="w-full p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-left flex justify-between items-center hover:border-zinc-600">
-Personal Shopping <i data-lucide="chevron-right" class="w-5 h-5"></i>
-</button>
-<button class="w-full p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-left flex justify-between items-center hover:border-zinc-600">
-Business Sourcing <i data-lucide="chevron-right" class="w-5 h-5"></i>
-</button>
-<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="block w-full p-4 rounded-xl bg-white text-black text-center font-bold">
-Send Request via WhatsApp
-</a>
-<p class="text-xs text-center text-gray-500 mt-4">We’ll reach you on WhatsApp within 24 hours.</p>
-</div>
+<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Amazon</div>
+<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Alibaba</div>
+<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> eBay</div>
+<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Zara</div>
+<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Nike</div>
+<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> H&M</div>
 </div>
 </section>
 
 <!-- FAQs Section -->
-<section class="max-w-4xl mx-auto px-6 py-20 border-t border-zinc-900">
+<section class="max-w-4xl mx-auto px-6 py-20 border-t border-gray-100">
 <h3 class="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h3>
 <div class="space-y-4">
-<details class="group border-b border-zinc-800 pb-4">
-<summary class="flex justify-between items-center font-bold cursor-pointer list-none py-4">
+<details class="group border border-gray-200 rounded-xl p-4">
+<summary class="flex justify-between items-center font-bold cursor-pointer list-none text-lg">
 How long does shipping typically take?
-<i data-lucide="plus" class="group-open:rotate-45 transition-transform"></i>
+<i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform text-blue-600"></i>
 </summary>
-<p class="text-gray-400 mt-2 leading-relaxed">
-Express shipping takes 3 days to arrive from China. Economy shipping by sea takes about 2 months.
-Foreigners outside Ghana should inquire through our WhatsApp for specific estimates.
-</p>
+<p class="text-gray-600 mt-4 leading-relaxed">Express shipping takes 3 days to arrive from China. Economy shipping by sea takes about 2 months.</p>
 </details>
-<details class="group border-b border-zinc-800 pb-4">
-<summary class="flex justify-between items-center font-bold cursor-pointer list-none py-4">
+<details class="group border border-gray-200 rounded-xl p-4">
+<summary class="flex justify-between items-center font-bold cursor-pointer list-none text-lg">
 Do you handle customs and duties?
-<i data-lucide="plus" class="group-open:rotate-45 transition-transform"></i>
+<i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform text-blue-600"></i>
 </summary>
-<p class="text-gray-400 mt-2 leading-relaxed">
-Yes. We manage documentation, customs processing, and duties. You’ll see all costs upfront before shipping.
-</p>
-</details>
-<details class="group border-b border-zinc-800 pb-4">
-<summary class="flex justify-between items-center font-bold cursor-pointer list-none py-4">
-Can you source from specific brands?
-<i data-lucide="plus" class="group-open:rotate-45 transition-transform"></i>
-</summary>
-<p class="text-gray-400 mt-2 leading-relaxed">
-Absolutely. We source from leading marketplaces like Amazon, Alibaba, eBay, and brand stores globally.
-</p>
+<p class="text-gray-600 mt-4 leading-relaxed">Yes. We manage all documentation and customs processing. You'll see all costs upfront.</p>
 </details>
 </div>
 </section>
 
-<!-- Start Journey CTA -->
+<!-- Final CTA -->
 <section class="max-w-7xl mx-auto px-6 py-20 text-center">
-<div class="bg-gradient-to-b from-zinc-900 to-black p-12 rounded-[2rem] border border-zinc-800">
-<h4 class="text-3xl md:text-4xl font-bold mb-6">Start your dropshipping journey today</h4>
-<p class="text-gray-400 mb-10 max-w-xl mx-auto">Reliable sourcing, transparent pricing, and fast delivery for all your global shopping needs.</p>
-<div class="flex flex-col sm:flex-row gap-4 justify-center">
-<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="bg-white text-black px-10 py-4 rounded-full font-bold">WhatsApp Us</a>
-</div>
+<div class="bg-brand-blue p-12 rounded-[2rem] text-white shadow-xl">
+<h4 class="text-3xl md:text-4xl font-bold mb-6">Start your journey today</h4>
+<p class="mb-10 text-blue-100 max-w-xl mx-auto">Reliable sourcing, transparent pricing, and fast delivery for all your global shopping.</p>
+<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="bg-white text-blue-900 px-10 py-4 rounded-full font-bold inline-block hover:scale-105 transition">WhatsApp Us Now</a>
 </div>
 </section>
 
-<footer class="p-12 text-center text-gray-600 border-t border-zinc-900">
-<h1 class="text-xl font-bold text-white mb-4">KASH OPTION</h1>
+<!-- Footer -->
+<footer class="p-12 text-center text-gray-500 border-t border-gray-100">
+<h1 class="text-xl font-bold brand-blue mb-2">KASH OPTION</h1>
 <p class="text-sm">© 2025 ALL RIGHTS RESERVED</p>
 </footer>
 
-<script>
-lucide.createIcons();
-</script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
+
+
