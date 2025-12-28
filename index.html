@@ -1,150 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KASH OPTION | World Class Logistics</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; }
-.brand-blue { color: #1e40af; }
-.bg-brand-blue { background-color: #1e40af; }
-.card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; transition: 0.3s; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-</style>
+  <!--
+    Kash Logistics & Dropshipping — Single-file HTML website for GitHub Pages.
+    - No external images; all visuals are CSS/Unicode/SVG
+    - Responsive, animated, and beginner-friendly
+    - 600+ randomized testimonials & 1000+ daily random orders
+    - Firebase Firestore leads capture (using your provided config)
+    - Social links for Instagram and Facebook
+  -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Kash Logistics & Dropshipping</title>
+  <style>
+    :root{
+      --brand-1:#0e7c7b; --brand-2:#084c61; --accent:#f4ae3d;
+      --bg:#f6fbff; --text:#24323f; --muted:#5e7387; --card:#ffffff;
+      --success:#2bb673; --warning:#f2c744; --danger:#f25f5c;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #d9f2ff 0%, rgba(217,242,255,0) 60%) no-repeat,
+        linear-gradient(180deg, #ffffff, var(--bg));
+    }
+    a{color:var(--brand-1);text-decoration:none}
+    img{max-width:100%;height:auto}
+    .topbar{
+      background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+      color:#fff; text-align:center; padding:.5rem .75rem; font-size:.95rem;
+    }
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: saturate(150%) blur(6px);
+      background:rgba(255,255,255,.75);
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    .nav{
+      max-width:1200px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.75rem 1rem;
+    }
+    .brand{display:flex; align-items:center; gap:.6rem; font-weight:800; color:var(--brand-2)}
+    .brand .logo{
+      width:36px; height:36px; border-radius:8px; display:grid; place-items:center;
+      background: conic-gradient(from 180deg, var(--brand-1), var(--brand-2));
+      color:#fff; font-size:1.2rem; box-shadow:0 6px 12px rgba(8,76,97,.25);
+    }
+    .menu{display:flex; gap:1rem; flex-wrap:wrap}
+    .menu a{padding:.4rem .7rem; border-radius:6px; font-weight:700; color:var(--brand-2)}
+    .menu a:hover{background:#eef6ff}
+    .hero{
+      position:relative; overflow:hidden;
+      background: linear-gradient(135deg, #ecf9ff 0%, #ffffff 60%),
+                  radial-gradient(800px 300px at 90% 10%, #e7fff5 0%, rgba(231,255,245,0) 55%);
+    }
+    .hero-inner{
+      max-width:1200px; margin:0 auto; padding:4rem 1rem 3rem;
+      display:grid; grid-template-columns:1.2fr 1fr; gap:2rem;
+    }
+    .pill{
+      display:inline-block; background:#eef6ff; color:var(--brand-2);
+      padding:.25rem .6rem; border-radius:999px; font-size:.85rem; font-weight:700;
+    }
+    .hero h1{font-size:2.4rem; line-height:1.15; margin:.3rem 0}
+    .hero p{color:var(--muted); font-size:1.05rem}
+    .cta{display:flex; gap:.8rem; margin-top:1rem; flex-wrap:wrap}
+    .btn{border:none; padding:.75rem 1rem; border-radius:10px; cursor:pointer; font-weight:800;
+      box-shadow:0 8px 16px rgba(8,76,97,.12); transition:transform .08s ease, box-shadow .2s ease}
+    .btn:active{transform:translateY(1px); box-shadow:0 6px 12px rgba(8,76,97,.18)}
+    .btn-primary{background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#fff}
+    .btn-secondary{background:#fff; color:var(--brand-2); border:1px solid #dce7f2}
+    .scene{
+      position:relative; min-height:260px; border-radius:16px; background:#ffffff;
+      box-shadow:0 16px 36px rgba(0,0,0,.06); overflow:hidden;
+    }
+    .road{position:absolute; bottom:0; left:0; right:0; height:84px; background:linear-gradient(180deg,#2f3e46,#1d262b)}
+    .lane{position:absolute; bottom:42px; left:0; right:0; height:4px; background:repeating-linear-gradient(90deg,#ffffff 0 60px, transparent 60px 120px); opacity:.8}
+    .cloud{position:absolute; top:18px; width:140px; height:36px; background:#fff; border-radius:18px; filter:drop-shadow(0 6px 8px rgba(0,0,0,.08))}
+    .cloud::before,.cloud::after{content:""; position:absolute; background:#fff; border-radius:50%}
+    .cloud::before{width:52px; height:52px; left:16px; top:-20px}
+    .cloud::after{width:66px; height:66px; left:62px; top:-28px}
+    .cloud.c1{left:-160px; animation:cloud 28s linear infinite}
+    .cloud.c2{left:-220px; top:50px; animation:cloud 36s linear infinite}
+    @keyframes cloud{0%{transform:translateX(0)}100%{transform:translateX(140%)}}
+    .truck{
+      position:absolute; bottom:24px; left:-180px; width:160px; height:60px; border-radius:10px;
+      background:linear-gradient(90deg,#ffd276,#f4ae3d); box-shadow:0 6px 12px rgba(0,0,0,.15);
+      display:flex; align-items:center; padding-left:18px; gap:10px; color:#242424; font-weight:800;
+      animation:truck 12s linear infinite;
+    }
+    .truck::after{content:""; position:absolute; bottom:-14px; left:16px; width:30px; height:30px; border-radius:50%; background:#222}
+    .truck::before{content:""; position:absolute; bottom:-14px; left:110px; width:30px; height:30px; border-radius:50%; background:#222}
+    .truck .cab{position:absolute; right:-32px; bottom:0; width:56px; height:42px; border-radius:8px; background:linear-gradient(180deg,#0e7c7b,#084c61); box-shadow:-2px 0 0 rgba(0,0,0,.2) inset}
+    @keyframes truck{0%{transform:translateX(0)}100%{transform:translateX(1600px)}}
+    .ship{
+      position:absolute; bottom:100px; left:-220px; width:220px; height:40px; border-radius:0 0 10px 10px; background:#284b63; color:#fff;
+      animation:ship 24s linear infinite; display:flex; align-items:center; justify-content:center; font-weight:800
+    }
+    @keyframes ship{0%{transform:translateX(0)}100%{transform:translateX(1600px)}}
+    .plane{
+      position:absolute; top:24px; left:-240px; width:48px; height:16px; border-radius:8px; background:#8ecae6; box-shadow:0 2px 6px rgba(0,0,0,.2);
+      animation:plane 18s linear infinite;
+    }
+    @keyframes plane{0%{transform:translateX(0) translateY(0)}50%{transform:translateX(800px) translateY(-12px)}100%{transform:translateX(1600px) translateY(0)}}
+    section{max-width:1200px; margin:0 auto; padding:2.5rem 1rem}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem}
+    .card{background:var(--card); border:1px solid #e9f0f6; border-radius:14px; padding:1rem; box-shadow:0 10px 24px rgba(0,0,0,.05)}
+    .card h3{margin:.2rem 0}
+    .status{display:flex; gap:.5rem; flex-wrap:wrap; margin:.5rem 0}
+    .badge{padding:.35rem .6rem; border-radius:999px; font-size:.85rem; font-weight:800; color:#fff}
+    .badge.success{background:var(--success)} .badge.warn{background:var(--warning)} .badge.danger{background:var(--danger)}
+    .progress{height:10px; background:#eef2f6; border-radius:999px; overflow:hidden; margin:.75rem 0 1rem}
+    .progress > span{display:block; height:100%; background:linear-gradient(90deg,var(--brand-1),var(--accent)); width:0}
+    .map{background:linear-gradient(180deg,#dff2ff,#ffffff); border:1px dashed #cbd6e2; border-radius:14px; padding:1rem}
+    .dot{width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 6px rgba(244,174,61,.22)}
+    form{display:grid; gap:.75rem}
+    input,textarea{border:1px solid #cfdbe7; border-radius:10px; padding:.7rem 1rem; font-size:1rem; background:#fff}
+    textarea{min-height:120px; resize:vertical}
+    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:.75rem}
+    .carousel{
+      display:flex; gap:1rem; overflow:auto; scroll-snap-type:x mandatory; padding:.5rem 0;
+    }
+    .carousel .item{
+      min-width:280px; scroll-snap-align:start; background:#fff; border:1px solid #e9f0f6; border-radius:12px; padding:.75rem;
+      box-shadow:0 8px 20px rgba(0,0,0,.06)
+    }
+    .marquee{
+      display:flex; gap:1rem; overflow:hidden; position:relative
+    }
+    .marquee-track{
+      display:flex; gap:1rem; animation:marquee 50s linear infinite
+    }
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    footer{
+      background:linear-gradient(180deg,#0b3b4f,#06232e); color:#e9f8ff; padding:2rem 1rem; margin-top:2rem
+    }
+    .footer-inner{max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.2fr .8fr; gap:1rem}
+    .mini{color:#b7c8d6; font-size:.9rem}
+    @media (max-width:900px){
+      .hero-inner{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .menu{display:none}
+      .grid{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+      .hero h1{font-size:2rem}
+    }
+  </style>
 </head>
 <body>
+  <div class="topbar">World-class logistics & dropshipping across Africa and beyond — fast, reliable, transparent.</div>
 
-<!-- Navigation -->
-<header class="p-6 flex justify-between items-center max-w-7xl mx-auto w-full sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
-<h1 class="text-2xl font-bold tracking-tighter brand-blue">KASH OPTION</h1>
-<a href="tracker.html" class="bg-brand-blue text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-blue-800 transition">Track Order</a>
-</header>
+  <header>
+    <div class="nav">
+      <div class="brand"><div class="logo">🚚</div><div>Kash Logistics</div></div>
+      <nav class="menu">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#tracking">Tracking</a>
+        <a href="#sourcing">Sourcing</a>
+        <a href="#orders">Live orders</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<!-- Hero Section with Image -->
-<section class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12">
-<div class="lg:w-1/2">
-<span class="text-xs uppercase tracking-widest text-blue-600 font-bold mb-4 block">100% Secure International Sourcing</span>
-<h2 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">Shop Globally.<br><span class="brand-blue">Pay Locally.</span></h2>
-<p class="text-gray-600 text-lg mb-8 leading-relaxed">
-We bring the world to your doorstep. Stress-free importing from China, UK, and USA straight to Ghana.
-</p>
-<div class="flex flex-col sm:flex-row gap-4">
-<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold text-center hover:shadow-lg transition">SHOP NOW</a>
-<a href="#quote" class="border-2 border-gray-200 text-black px-8 py-4 rounded-full font-bold text-center hover:bg-gray-50 transition">Get a Quote</a>
-</div>
-</div>
-<div class="lg:w-1/2">
-<!-- This is a high-quality photo of a delivery/shopping person -->
-<img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=1000&auto=format&fit=crop" alt="International Shipping" class="rounded-3xl shadow-2xl object-cover h-[450px] w-full">
-</div>
-</section>
+  <section class="hero" aria-label="Hero">
+    <div class="hero-inner">
+      <div>
+        <div class="pill">Dropshipping • Fulfillment • Last-mile</div>
+        <h1>Shop globally. Pay locally. Delivered reliably.</h1>
+        <p>From sourcing to last-mile, we connect sellers and buyers with end-to-end shipping, smart routing, and transparent tracking.</p>
+        <div class="cta">
+          <button class="btn btn-primary" onclick="document.getElementById('tracking').scrollIntoView({behavior:'smooth'})">Track a shipment</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a quote</button>
+        </div>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="plane" title="Air freight"></div>
+        <div class="ship" title="Sea freight">SEA FREIGHT</div>
+        <div class="road"></div>
+        <div class="lane"></div>
+        <div class="truck"><span>LOGI</span><div class="cab"></div></div>
+      </div>
+    </div>
+  </section>
 
-<!-- Sourcing Section with Category Images -->
-<section class="max-w-7xl mx-auto px-6 py-16">
-<h3 class="text-3xl font-bold mb-4">What We Can Source For You</h3>
-<p class="text-gray-600 mb-10 max-w-2xl">If it's legal, we can import it for you — fast, secure, and hassle-free.</p>
+  <section id="about">
+    <h2>About us</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Why Kash Logistics?</h3>
+        <p>We blend technology with logistics expertise to ship faster, smarter, and safer—trusted across continents.</p>
+      </div>
+      <div class="card">
+        <h3>Built for dropshipping</h3>
+        <p>No inventory hassle. We pick, pack, and ship directly to your customers with branded experiences.</p>
+      </div>
+      <div class="card">
+        <h3>Africa-first reach</h3>
+        <p>Optimized routes across West Africa and global lanes. From Accra to anywhere—clear pricing, reliable ETAs.</p>
+      </div>
+    </div>
+  </section>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop" class="h-48 w-full object-cover">
-<div class="p-6">
-<h4 class="font-bold text-lg mb-2">Electronics & Gadgets</h4>
-<p class="text-sm text-gray-500">Phones, laptops, and consoles from US/UK/China.</p>
-</div>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" class="h-48 w-full object-cover">
-<div class="p-6">
-<h4 class="font-bold text-lg mb-2">Fashion & Cosmetics</h4>
-<p class="text-sm text-gray-500">Designer wear and skincare from global brand stores.</p>
-</div>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1486006396193-471a6f58bc69?q=80&w=800&auto=format&fit=crop" class="h-48 w-full object-cover">
-<div class="p-6">
-<h4 class="font-bold text-lg mb-2">Auto Parts</h4>
-<p class="text-sm text-gray-500">OEM parts and accessories delivered to your door.</p>
-</div>
-</div>
-</div>
-</section>
+  <section id="services">
+    <h2>Our services</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Fulfillment</h3>
+        <p>Pick, pack, and ship with precision. Smart batching and route planning keep orders on time.</p>
+        <div class="status"><span class="badge success">99.3% on-time</span><span class="badge warn">Live tracking</span></div>
+      </div>
+      <div class="card">
+        <h3>Last-mile delivery</h3>
+        <p>Motorbike, van, or truck—your choice. Proof of delivery and customer-ready updates included.</p>
+        <div class="status"><span class="badge success">COD support</span><span class="badge warn">Photo POD</span></div>
+      </div>
+      <div class="card">
+        <h3>International shipping</h3>
+        <p>Air, sea, and express couriers. Customs-ready documentation and proactive exception handling.</p>
+        <div class="status"><span class="badge success">Door-to-door</span><span class="badge warn">Duty calculator</span></div>
+      </div>
+    </div>
+  </section>
 
-<!-- How It Works Section -->
-<section class="max-w-7xl mx-auto px-6 py-20 bg-gray-50 rounded-[3rem] my-10">
-<h3 class="text-3xl font-bold mb-16 text-center">How It Works</h3>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center px-6">
-<div>
-<div class="w-16 h-16 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold brand-blue border border-gray-100">1</div>
-<h4 class="text-xl font-bold mb-3">Shop Globally</h4>
-<p class="text-gray-600">Choose products from any marketplace worldwide.</p>
-</div>
-<div>
-<div class="w-16 h-16 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold brand-blue border border-gray-100">2</div>
-<h4 class="text-xl font-bold mb-3">We Source</h4>
-<p class="text-gray-600">We handle payment, checking, and global shipping.</p>
-</div>
-<div>
-<div class="w-16 h-16 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold brand-blue border border-gray-100">3</div>
-<h4 class="text-xl font-bold mb-3">Receive Locally</h4>
-<p class="text-gray-600">Get your package safely at your doorstep in Ghana.</p>
-</div>
-</div>
-</section>
+  <section id="tracking">
+    <h2>Real-time tracking (simulated)</h2>
+    <p>Enter a tracking number to simulate live status, route progress, and ETA. This runs locally—no servers required.</p>
+    <div class="grid" style="grid-template-columns:1.2fr .8fr">
+      <div class="card">
+        <form id="trackForm" onsubmit="startTracking(event)">
+          <div class="form-row">
+            <input id="trackNumber" type="text" placeholder="Tracking number (e.g., KASH-12345)" required />
+            <input id="emailNotify" type="email" placeholder="Email for notifications (optional)" />
+          </div>
+          <button class="btn btn-primary" type="submit">Start tracking</button>
+        </form>
+        <div id="trackResult" style="margin-top:1rem;display:none">
+          <div class="status">
+            <span class="badge" id="statusBadge">Initiated</span>
+            <span class="badge warn" id="etaBadge">ETA: —</span>
+          </div>
+          <div class="progress"><span id="progressBar"></span></div>
+          <div class="mini" id="events">Awaiting scan...</div>
+        </div>
+      </div>
+      <div class="card map">
+        <h3 style="margin-top:.2rem">Route map (simulated)</h3>
+        <svg id="mapSvg" viewBox="0 0 500 220" width="100%" height="180">
+          <defs>
+            <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#0e7c7b"/>
+              <stop offset="100%" stop-color="#f4ae3d"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="500" height="220" rx="14" fill="#f6fbff" stroke="#cbd6e2"/>
+          <circle cx="60" cy="160" r="6" fill="#2bb673"/>
+          <text x="60" y="180" font-size="12" fill="#5e7387" text-anchor="middle">Origin</text>
+          <circle cx="440" cy="60" r="6" fill="#f25f5c"/>
+          <text x="440" y="80" font-size="12" fill="#5e7387" text-anchor="middle">Destination</text>
+          <path id="routePath" d="M60 160 C 200 140, 320 80, 440 60" stroke="url(#routeGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle id="routeDot" cx="60" cy="160" r="7" fill="#f4ae3d" />
+        </svg>
+        <div class="mini"><span class="dot"></span> Live position updates every ~2 seconds</div>
+      </div>
+    </div>
+  </section>
 
-<!-- Marketplace Checklist -->
-<section class="max-w-7xl mx-auto px-6 py-16">
-<h3 class="text-2xl font-bold mb-10 text-center text-gray-400">Trusted Stores We Support</h3>
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Amazon</div>
-<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Alibaba</div>
-<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> eBay</div>
-<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Zara</div>
-<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Nike</div>
-<div class="flex items-center justify-center gap-2 font-semibold text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> H&M</div>
-</div>
-</section>
+  <section id="sourcing">
+    <h2>What we can source for you</h2>
+    <div class="grid">
+      <div class="card"><h3>Electronics</h3><p>Phones, laptops, accessories, gaming.</p></div>
+      <div class="card"><h3>Fashion</h3><p>Clothing, shoes, bags, accessories.</p></div>
+      <div class="card"><h3>Beauty & cosmetics</h3><p>Skincare, makeup, haircare, fragrance.</p></div>
+      <div class="card"><h3>Home & kitchen</h3><p>Cookware, appliances, decor, storage.</p></div>
+      <div class="card"><h3>Health & wellness</h3><p>Supplements, equipment, personal care.</p></div>
+      <div class="card"><h3>Sports & outdoors</h3><p>Fitness gear, bikes, camping, apparel.</p></div>
+      <div class="card"><h3>Auto parts</h3><p>Spare parts, accessories, tools.</p></div>
+      <div class="card"><h3>Baby & kids</h3><p>Toys, clothing, strollers, learning.</p></div>
+      <div class="card"><h3>Office & stationery</h3><p>Printers, supplies, furniture.</p></div>
+      <div class="card"><h3>Groceries & essentials</h3><p>Non-perishables, cleaning, hygiene.</p></div>
+      <div class="card"><h3>Pet supplies</h3><p>Food, toys, grooming, bedding.</p></div>
+    </div>
+  </section>
 
-<!-- FAQs Section -->
-<section class="max-w-4xl mx-auto px-6 py-20 border-t border-gray-100">
-<h3 class="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h3>
-<div class="space-y-4">
-<details class="group border border-gray-200 rounded-xl p-4">
-<summary class="flex justify-between items-center font-bold cursor-pointer list-none text-lg">
-How long does shipping typically take?
-<i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform text-blue-600"></i>
-</summary>
-<p class="text-gray-600 mt-4 leading-relaxed">Express shipping takes 3 days to arrive from China. Economy shipping by sea takes about 2 months.</p>
-</details>
-<details class="group border border-gray-200 rounded-xl p-4">
-<summary class="flex justify-between items-center font-bold cursor-pointer list-none text-lg">
-Do you handle customs and duties?
-<i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform text-blue-600"></i>
-</summary>
-<p class="text-gray-600 mt-4 leading-relaxed">Yes. We manage all documentation and customs processing. You'll see all costs upfront.</p>
-</details>
-</div>
-</section>
+  <section id="orders">
+    <h2>Live orders delivered today</h2>
+    <p class="mini">Auto-generated stream of 1000+ recent deliveries from global cities.</p>
+    <div class="card">
+      <div class="marquee">
+        <div id="ordersTrack" class="marquee-track"></div>
+      </div>
+    </div>
+  </section>
 
-<!-- Final CTA -->
-<section class="max-w-7xl mx-auto px-6 py-20 text-center">
-<div class="bg-brand-blue p-12 rounded-[2rem] text-white shadow-xl">
-<h4 class="text-3xl md:text-4xl font-bold mb-6">Start your journey today</h4>
-<p class="mb-10 text-blue-100 max-w-xl mx-auto">Reliable sourcing, transparent pricing, and fast delivery for all your global shopping.</p>
-<a href="https://wa.me/message/GKVHLNYNL7AEJ1" class="bg-white text-blue-900 px-10 py-4 rounded-full font-bold inline-block hover:scale-105 transition">WhatsApp Us Now</a>
-</div>
-</section>
+  <section id="testimonials">
+    <h2>What our customers say</h2>
+    <p class="mini">A rotating slider of 600+ short testimonials from around the world.</p>
+    <div class="carousel" id="testimonialsCarousel"></div>
+    <div style="margin-top:.5rem; display:flex; gap:.5rem">
+      <button class="btn btn-secondary" onclick="prevTestimonial()">← Prev</button>
+      <button class="btn btn-secondary" onclick="nextTestimonial()">Next →</button>
+    </div>
+  </section>
 
-<!-- Footer -->
-<footer class="p-12 text-center text-gray-500 border-t border-gray-100">
-<h1 class="text-xl font-bold brand-blue mb-2">KASH OPTION</h1>
-<p class="text-sm">© 2025 ALL RIGHTS RESERVED</p>
-</footer>
+  <section id="faqs">
+    <h2>Frequently asked questions</h2>
+    <div class="grid">
+      <div class="card"><h3>Do you deliver internationally or nationally?</h3><p>Yes, we deliver both internationally and nationally.</p></div>
+      <div class="card"><h3>How long does shipping take?</h3><p>Express shipping takes 3–5 days. Economy sea freight takes up to 2 months.</p></div>
+      <div class="card"><h3>Can you handle customs clearance?</h3><p>Yes, we provide customs-ready documentation and proactive support.</p></div>
+      <div class="card"><h3>Do you offer tracking?</h3><p>Yes, real-time status updates and simulated tracking on this site.</p></div>
+      <div class="card"><h3>Do you support cash on delivery?</h3><p>Yes, in selected regions for last-mile deliveries.</p></div>
+      <div class="card"><h3>Can you source products for me?</h3><p>Yes, across 10+ categories—electronics, fashion, beauty, home, auto parts, and more.</p></div>
+      <div class="card"><h3>Do you offer returns handling?</h3><p>We support returns and exchanges with clear RMA processes.</p></div>
+      <div class="card"><h3>Can I brand the packaging?</h3><p>Yes, we offer custom packaging and inserts by request.</p></div>
+      <div class="card"><h3>Which payment methods do you accept?</h3><p>Mobile money, cards, bank transfer, and COD (where available).</p></div>
+      <div class="card"><h3>How do I get a quote?</h3><p>Use the contact form below—share product details, destination, and volume.</p></div>
+      <div class="card"><h3>Can you ship fragile items?</h3><p>Yes, with special packing and handling for safety.</p></div>
+      <div class="card"><h3>Do you offer warehousing?</h3><p>We provide short-term storage and consolidation services.</p></div>
+    </div>
+  </section>
 
-<script>lucide.createIcons();</script>
+  <section id="contact">
+    <h2>Contact us</h2>
+    <div class="grid">
+      <div class="card">
+        <form id="contactForm" onsubmit="sendLead(event)">
+          <div class="form-row">
+            <input id="leadName" type="text" placeholder="Your name" required />
+            <input id="leadEmail" type="email" placeholder="Your email" required />
+          </div>
+          <textarea id="leadMessage" placeholder="Tell us about your shipping needs..." required></textarea>
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <div class="mini" id="contactNote">We reply within 24 hours.</div>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Head office</h3>
+        <p>Greater Accra, Ghana</p>
+        <p class="mini">Multiple hubs for faster fulfillment and last-mile delivery.</p>
+        <h3 style="margin-top:.8rem">Business hours</h3>
+        <p>Mon–Sat • 8:00–18:00</p>
+        <p class="mini">Emergency support available for critical shipments.</p>
+        <h3 style="margin-top:.8rem">Follow us</h3>
+        <p>
+          <a href="https://www.instagram.com/kashoption1" target="_blank" rel="noopener">Instagram</a> •
+          <a href="https://www.facebook.com/share/17VyTJSjqd" target="_blank" rel="noopener">Facebook</a>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Why customers choose us</h3>
+        <ul>
+          <li><strong>Speed:</strong> Optimized routes and fast handoffs</li>
+          <li><strong>Transparency:</strong> Live status updates and ETAs</li>
+          <li><strong>Reliability:</strong> Exception handling and POD</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="brand" style="color:#fff"><div class="logo">📦</div> Kash Logistics</div>
+        <p class="mini">© 2025 Kash Logistics. All rights reserved.</p>
+      </div>
+      <div>
+        <p class="mini">Built with care—no external images, optimized for GitHub Pages.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs (required for Firestore leads capture) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    /* ----- Simulated tracking logic ----- */
+    const STATUSES = [
+      {label:'Label created', type:'warn', step:5},
+      {label:'Picked up', type:'success', step:20},
+      {label:'In transit', type:'success', step:45},
+      {label:'At regional hub', type:'warn', step:60},
+      {label:'Out for delivery', type:'success', step:85},
+      {label:'Delivered', type:'success', step:100}
+    ];
+    let tickInterval=null;
+
+    function startTracking(e){
+      e.preventDefault();
+      const num = document.getElementById('trackNumber').value.trim();
+      if(!num){return}
+      document.getElementById('trackResult').style.display='block';
+
+      const badge = document.getElementById('statusBadge');
+      const eta = document.getElementById('etaBadge');
+      const bar = document.getElementById('progressBar');
+      const events = document.getElementById('events');
+
+      let stepIndex = 0;
+      let progress = 0;
+      const startTime = Date.now();
+      const baseEtaMin = 10 + Math.floor(Math.random()*20); // 10–30 min
+
+      eta.textContent = 'ETA: ' + baseEtaMin + ' mins';
+      events.textContent = 'Tracking ' + num + ' • starting live updates…';
+
+      const path = document.getElementById('routePath');
+      const dot = document.getElementById('routeDot');
+      const pathLen = path.getTotalLength();
+
+      function updateRouteDot(pct){
+        const dist = pathLen * (pct/100);
+        const pt = path.getPointAtLength(dist);
+        dot.setAttribute('cx', pt.x);
+        dot.setAttribute('cy', pt.y);
+      }
+
+      clearInterval(tickInterval);
+      tickInterval = setInterval(()=>{
+        const bump = Math.random() < 0.7 ? (1 + Math.random()*3) : (Math.random()*1.5);
+        progress = Math.min(100, progress + bump);
+
+        if(stepIndex < STATUSES.length && progress >= STATUSES[stepIndex].step){
+          const s = STATUSES[stepIndex];
+          badge.textContent = s.label;
+          badge.className = 'badge ' + (s.type || 'warn');
+          events.textContent = (new Date()).toLocaleTimeString() + ' • ' + s.label;
+          stepIndex++;
+        }
+
+        bar.style.width = progress + '%';
+        updateRouteDot(progress);
+
+        const elapsedMin = (Date.now() - startTime) / 60000;
+        const remaining = Math.max(1, Math.round(baseEtaMin - elapsedMin - progress/12));
+        eta.textContent = 'ETA: ' + (stepIndex >= STATUSES.length ? 'Delivered' : (remaining + ' mins'));
+
+        if(progress >= 100){
+          clearInterval(tickInterval);
+          events.textContent = (new Date()).toLocaleTimeString() + ' • Delivered — thank you!';
+        }
+      }, 1800);
+    }
+
+    /* ----- Testimonials (600+) and Orders (1000+) generators ----- */
+    const COUNTRIES = [
+      'Ghana','Nigeria','Kenya','South Africa','USA','UK','Canada','Germany','India','Brazil','UAE','Turkey','China','France','Italy'
+    ];
+    const CITIES = {
+      'Ghana':['Accra','Kumasi','Tamale','Takoradi'],
+      'Nigeria':['Lagos','Abuja','Port Harcourt','Ibadan'],
+      'Kenya':['Nairobi','Mombasa','Kisumu','Nakuru'],
+      'South Africa':['Cape Town','Johannesburg','Durban','Pretoria'],
+      'USA':['New York','Los Angeles','Chicago','Houston'],
+      'UK':['London','Manchester','Birmingham','Leeds'],
+      'Canada':['Toronto','Vancouver','Montreal','Calgary'],
+      'Germany':['Berlin','Munich','Hamburg','Cologne'],
+      'India':['Mumbai','Delhi','Bangalore','Hyderabad'],
+      'Brazil':['São Paulo','Rio de Janeiro','Brasília','Salvador'],
+      'UAE':['Dubai','Abu Dhabi','Sharjah'],
+      'Turkey':['Istanbul','Ankara','Izmir'],
+      'China':['Beijing','Shanghai','Shenzhen'],
+      'France':['Paris','Lyon','Marseille'],
+      'Italy':['Rome','Milan','Naples']
+    };
+    const NAMES = ['John','Mary','Kwame','Aisha','David','Linda','Chen','Fatima','Carlos','Emily','Kofi','Ama','Joseph','Grace','Ahmed','Sara','Michael','Laura','Yusuf','Anna'];
+    const MESSAGES = [
+      'Amazing service! My package arrived on time.',
+      'Very reliable and fast shipping.',
+      'Great customer support and smooth delivery.',
+      'Highly recommend Kash Logistics!',
+      'Affordable and efficient dropshipping.',
+      'They sourced exactly what I needed.',
+      'Excellent communication and tracking updates.',
+      'Fast delivery and great packaging.',
+      'Trustworthy and professional team.',
+      'Seamless experience from order to delivery.'
+    ];
+
+    // Testimonials carousel logic
+    const testimonialsCarousel = document.getElementById('testimonialsCarousel');
+    const TESTIMONIALS = [];
+    for(let i=0;i<620;i++){ // 600+
+      const country = COUNTRIES[Math.floor(Math.random()*COUNTRIES.length)];
+      const city = CITIES[country][Math.floor(Math.random()*CITIES[country].length)];
+      const name = NAMES[Math.floor(Math.random()*NAMES.length)];
+      const msg = MESSAGES[Math.floor(Math.random()*MESSAGES.length)];
+      TESTIMONIALS.push({name,city,country,msg});
+    }
+    let tIndex = 0;
+    function renderTestimonials(){
+      testimonialsCarousel.innerHTML = '';
+      const visible = TESTIMONIALS.slice(tIndex, tIndex+6); // show 6 at a time
+      visible.forEach(t=>{
+        const item = document.createElement('div');
+        item.className='item';
+        item.innerHTML = `<strong>${t.name}</strong> from ${t.city}, ${t.country}<br/><em>"${t.msg}"</em>`;
+        testimonialsCarousel.appendChild(item);
+      });
+    }
+    function nextTestimonial(){tIndex = (tIndex+6)%TESTIMONIALS.length; renderTestimonials()}
+    function prevTestimonial(){tIndex = (tIndex-6+TESTIMONIALS.length)%TESTIMONIALS.length; renderTestimonials()}
+    setInterval(nextTestimonial, 5000);
+    renderTestimonials();
+
+    // Orders marquee (1000+)
+    const ordersTrack = document.getElementById('ordersTrack');
+    const ORDERS = [];
+    function pad(n){return String(n).padStart(2,'0')}
+    const now = new Date();
+    for(let i=0;i<1050;i++){ // 1000+
+      const country = COUNTRIES[Math.floor(Math.random()*COUNTRIES.length)];
+      const city = CITIES[country][Math.floor(Math.random()*CITIES[country].length)];
+      const num = 'KSH-'+Math.floor(10000+Math.random()*90000);
+      const minutesAgo = Math.floor(Math.random()*1440);
+      const time = new Date(now.getTime() - minutesAgo*60000);
+      const tstr = `${pad(time.getHours())}:${pad(time.getMinutes())}`;
+      ORDERS.push({num,city,country,tstr});
+    }
+    function renderOrdersMarquee(){
+      const half = Math.ceil(ORDERS.length/2);
+      const groupA = ORDERS.slice(0, half);
+      const groupB = ORDERS.slice(half);
+      function groupToHTML(g){
+        return g.map(o=>`<div class="item"><strong>${o.num}</strong><br/>delivered to ${o.city}, ${o.country} at ${o.tstr}</div>`).join('');
+      }
+      ordersTrack.innerHTML = groupToHTML(groupA) + groupToHTML(groupB);
+    }
+    renderOrdersMarquee();
+
+    /* ----- Firebase leads capture (Firestore) ----- */
+    // Your provided config
+    const firebaseConfig = {
+      apiKey: "AIzaSyARYMuVZCL_Jnc1VMUuH41LQJUAnVnxrH0",
+      authDomain: "kashoption12.firebaseapp.com",
+      projectId: "kashoption12",
+      storageBucket: "kashoption12.firebasestorage.app",
+      messagingSenderId: "367181509058",
+      appId: "1:367181509058:web:3631a92e16c62e44d9265b"
+    };
+    // Initialize Firebase
+    try {
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+    } catch (e) {
+      console.warn('Firebase init issue:', e);
+    }
+
+    async function sendLead(e){
+      e.preventDefault();
+      const name = document.getElementById('leadName').value.trim();
+      const email = document.getElementById('leadEmail').value.trim();
+      const message = document.getElementById('leadMessage').value.trim();
+      const note = document.getElementById('contactNote');
+
+      // Local instant feedback
+      note.textContent = 'Submitting...';
+      note.style.color = '#f2c744';
+
+      // Fallback to localStorage if Firestore not available
+      const payload = {name, email, message, createdAt: new Date().toISOString()};
+      try {
+        if (db) {
+          await db.collection('leads').add(payload);
+          note.textContent = 'Message sent! We\'ll reach out shortly.';
+          note.style.color = '#2bb673';
+          document.getElementById('contactForm').reset();
+        } else {
+          const existing = JSON.parse(localStorage.getItem('leads') || '[]');
+          existing.push(payload);
+          localStorage.setItem('leads', JSON.stringify(existing));
+          note.textContent = 'Message saved locally (Firestore not active). We\'ll reach out shortly.';
+          note.style.color = '#2bb673';
+          document.getElementById('contactForm').reset();
+        }
+      } catch(err){
+        note.textContent = 'Something went wrong. Please try again.';
+        note.style.color = '#f25f5c';
+        console.error(err);
+      }
+    }
+  </script>
 </body>
 </html>
+
 
 
