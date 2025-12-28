@@ -5,464 +5,255 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Kash Logistics & Dropshipping</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
-    body {margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f6fbff;color:#24323f;}
-    header {background:linear-gradient(90deg,#0e7c7b,#084c61);color:#fff;padding:1rem;text-align:center;}
-    nav {background:#084c61;display:flex;justify-content:center;flex-wrap:wrap;}
-    nav a {color:#fff;padding:1rem;font-weight:bold;text-decoration:none;}
-    nav a:hover {background:#0e7c7b;}
+    body {
+      margin:0;
+      font-family:'Segoe UI',Arial,sans-serif;
+      background:#f6fbff;
+      color:#24323f;
+    }
+
+    /* Header + Nav */
+    header {
+      background:linear-gradient(90deg,#0e7c7b,#084c61);
+      color:#fff;
+      padding:1rem;
+    }
+    .nav {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand {
+      font-size:1.5rem;
+      font-weight:bold;
+      color:#fff;
+    }
+    .hamburger {
+      display:none;
+      font-size:2rem;
+      background:none;
+      border:none;
+      color:#fff;
+      cursor:pointer;
+    }
+    .menu {
+      display:flex;
+      gap:1rem;
+    }
+    .menu a {
+      color:#fff;
+      padding:1rem;
+      font-weight:bold;
+      text-decoration:none;
+    }
+    .menu a:hover {background:#0e7c7b;}
+    @media (max-width:768px){
+      .menu {
+        display:none;
+        flex-direction:column;
+        background:#084c61;
+        width:100%;
+      }
+      .menu.active {display:flex;}
+      .hamburger {display:block;}
+    }
+
     section {max-width:1200px;margin:auto;padding:2rem;}
     h2 {color:#084c61;}
-    .btn {background:#0e7c7b;color:#fff;padding:.8rem 1.2rem;border:none;border-radius:8px;font-weight:bold;cursor:pointer;}
+    .btn {
+      background:#0e7c7b;
+      color:#fff;
+      padding:.8rem 1.2rem;
+      border:none;
+      border-radius:8px;
+      font-weight:bold;
+      cursor:pointer;
+    }
     .btn:hover {background:#0e5c5b;}
+
+    /* Hero */
     .hero {
       background:url('https://images.unsplash.com/photo-1581090700227-4c4c2c3f3f3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      color:#fff;text-align:center;padding:6rem 2rem;
+      color:#fff;
+      text-align:center;
+      padding:6rem 2rem;
     }
     .hero h1 {font-size:3rem;margin-bottom:1rem;}
-    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;}
-    .card {background:#fff;border-radius:12px;padding:1rem;box-shadow:0 6px 12px rgba(0,0,0,.08);text-align:center;}
-    .card img {width:100%;border-radius:8px;margin-bottom:.5rem;}
-    .carousel {display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding:1rem;}
-    .carousel::-webkit-scrollbar {display:none;}
-    .carousel-item {flex:0 0 auto;scroll-snap-align:center;background:#fff;border-radius:12px;padding:1rem;box-shadow:0 6px 12px rgba(0,0,0,.08);min-width:280px;}
-    .marquee {display:flex;overflow:hidden;white-space:nowrap;background:#fff;padding:.5rem;border-radius:8px;}
-    .marquee div {display:inline-block;padding:0 1rem;animation:scroll 40s linear infinite;}
-    @keyframes scroll {0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-    footer {background:#06232e;color:#e9f8ff;text-align:center;padding:1rem;margin-top:2rem;}
+
+    /* Catalog */
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:1rem;
+    }
+    .card {
+      background:#fff;
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:0 6px 12px rgba(0,0,0,.08);
+      text-align:center;
+    }
+    .card img {
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      border-radius:8px;
+      margin-bottom:.5rem;
+    }
+
+    /* Orders Marquee */
+    .marquee {
+      overflow:hidden;
+      white-space:nowrap;
+      background:#fff;
+      padding:.5rem;
+      border-radius:8px;
+    }
+    @keyframes scroll {
+      0% {transform:translateX(100%)}
+      100% {transform:translateX(-100%)}
+    }
+
+    /* Testimonials */
+    .carousel {
+      display:flex;
+      gap:1rem;
+      overflow:hidden;
+      scroll-snap-type:x mandatory;
+      padding:1rem;
+    }
+    .carousel-item {
+      flex:0 0 auto;
+      scroll-snap-align:center;
+      background:#fff;
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:0 6px 12px rgba(0,0,0,.08);
+      min-width:280px;
+    }
+
+    /* FAQs */
+    .faq-container {max-width:800px;margin:auto;}
+    .faq-item {border-bottom:1px solid #ddd;}
+    .faq-question {
+      width:100%;text-align:left;padding:1rem;font-size:1rem;font-weight:bold;
+      background:#f6fbff;border:none;cursor:pointer;outline:none;transition:background 0.3s;
+    }
+    .faq-question:hover {background:#e9f2f9;}
+    .faq-answer {
+      max-height:0;overflow:hidden;transition:max-height 0.4s ease;
+      padding:0 1rem;background:#fff;
+    }
+    .faq-answer p {margin:1rem 0;}
+    .faq-item.active .faq-answer {max-height:200px;padding-bottom:1rem;}
+
+    /* Footer */
+    footer {
+      background:#06232e;
+      color:#e9f8ff;
+      text-align:center;
+      padding:1rem;
+      margin-top:2rem;
+    }
+
+    /* WhatsApp Floating Icon */
+    #whatsapp-support {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25D366;
+      color:#fff;
+      font-size:2rem;
+      padding:15px;
+      border-radius:50%;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      z-index:9999;
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #whatsapp-support:hover {
+      transform:scale(1.1);
+      box-shadow:0 6px 16px rgba(0,0,0,0.3);
+    }
   </style>
 </head>
 <body>
+
+  <!-- Header + Hamburger Nav -->
   <header>
-    <h1>Kash Logistics & Dropshipping</h1>
-    <p>Global reach • Reliable service • Transparent tracking</p>
+    <div class="nav">
+      <div class="brand">Kash Logistics</div>
+      <button class="hamburger" onclick="toggleMenu()">☰</button>
+      <nav id="menu" class="menu">
+        <a href="#catalog">Catalog</a>
+        <a href="#orders">Orders</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contact">Contact</a>
+        <a href="#terms">Terms</a>
+        <a href="tracker.html">Track Order</a>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#catalog">Catalog</a>
-    <a href="#orders">Orders</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#faqs">FAQs</a>
-    <a href="#contact">Contact</a>
-    <a href="tracker.html">Track Order</a> <!-- ✅ linked to tracker.html -->
-  </nav>
-
+  <!-- Hero -->
   <section class="hero">
-    <h1>Your Global Logistics Partner</h1>
-    <p>Fast, reliable, and efficient dropshipping solutions worldwide.</p>
-    <button class="btn" onclick="window.location.href='tracker.html'">Track a shipment</button>
+    <h1>Reliable Global Logistics & Dropshipping</h1>
+    <p>Fast, transparent, and world-class service for your business.</p>
+    <button class="btn">Get Started</button>
   </section>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="grid">
-      <div class="card"><i class="fas fa-box fa-2x"></i><h3>Fulfillment</h3><p>Pick, pack, and ship with precision.</p></div>
-      <div class="card"><i class="fas fa-truck fa-2x"></i><h3>Last-mile Delivery</h3><p>Motorbike, van, or truck with proof of delivery.</p></div>
-      <div class="card"><i class="fas fa-plane fa-2x"></i><h3>International Shipping</h3><p>Air, sea, and express couriers with customs support.</p></div>
-    </div>
-  </section>
-
+  <!-- Catalog Showcase -->
   <section id="catalog">
-  <h2>Catalog Showcase</h2>
-  <div class="grid">
-    <!-- Electronics -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Electronics">
-      <h3>Electronics</h3>
+    <h2>Catalog Showcase</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1510557880182-3d4d3c3f3f3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Electronics">
+        <h3>Electronics</h3>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1601979034091-3c6a2a7c8f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pet Supplies">
+        <h3>Pet Supplies</h3>
+      </div>
+      <!-- Add other catalog cards here -->
     </div>
+  </section>
 
-    <!-- Fashion (fixed image) -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fashion">
-      <h3>Fashion</h3>
-    </div>
-
-    <!-- Beauty -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beauty">
-      <h3>Beauty</h3>
-    </div>
-
-    <!-- Home & Kitchen -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Home & Kitchen">
-      <h3>Home & Kitchen</h3>
-    </div>
-
-    <!-- Auto Parts (new) -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1581090700227-4c4c2c3f3f3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Auto Parts">
-      <h3>Auto Parts</h3>
-    </div>
-
-    <!-- Health & Wellness -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1588776814546-1f6c9d8f8f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health & Wellness">
-      <h3>Health & Wellness</h3>
-    </div>
-
-    <!-- Sports & Outdoors -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1599058917212-95e399a097ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sports & Outdoors">
-      <h3>Sports & Outdoors</h3>
-    </div>
-
-    <!-- Baby & Kids -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1601979034091-3c6a2a7c8f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Baby & Kids">
-      <h3>Baby & Kids</h3>
-    </div>
-
-    <!-- Office & Stationery -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Office & Stationery">
-      <h3>Office & Stationery</h3>
-    </div>
-
-    <!-- Groceries & Essentials -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1585325701954-1d1b1f1f1f1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Groceries & Essentials">
-      <h3>Groceries & Essentials</h3>
-    </div>
-
-    <!-- Pet Supplies -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1601979034091-3c6a2a7c8f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pet Supplies">
-      <h3>Pet Supplies</h3>
-    </div>
-  </div>
-</section>
-
-
+  <!-- Orders -->
   <section id="orders">
-  <h2>Live Orders Delivered Today</h2>
-  <div class="marquee" id="ordersMarquee"></div>
-</section>
+    <h2>Live Orders Delivered Today</h2>
+    <div class="marquee" id="ordersMarquee"></div>
+  </section>
 
-<script>
-  // Countries and cities for realism
-  const COUNTRIES = {
-    "Nigeria": ["Lagos","Abuja","Port Harcourt"],
-    "UK": ["London","Manchester","Birmingham"],
-    "Germany": ["Berlin","Munich","Hamburg"],
-    "Ghana": ["Accra","Kumasi","Tamale"],
-    "USA": ["New York","Los Angeles","Chicago"],
-    "India": ["Delhi","Mumbai","Bangalore"],
-    "South Africa": ["Cape Town","Johannesburg","Durban"]
-  };
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="carousel" id="testimonialsCarousel"></div>
+  </section>
 
-  // Generate random order number
-  function randomOrderNum() {
-    return "KSH-" + Math.floor(10000 + Math.random() * 90000);
-  }
-
-  // Pick random country + city
-  function randomLocation() {
-    const countries = Object.keys(COUNTRIES);
-    const country = countries[Math.floor(Math.random() * countries.length)];
-    const cityArr = COUNTRIES[country];
-    const city = cityArr[Math.floor(Math.random() * cityArr.length)];
-    return {city, country};
-  }
-
-  // Generate one order string
-  function generateOrder() {
-    const {city, country} = randomLocation();
-    return `🚚 ${randomOrderNum()} • ${city}, ${country}`;
-  }
-
-  // Fill marquee with random orders
-  function renderOrders() {
-    const marquee = document.getElementById("ordersMarquee");
-    marquee.innerHTML = "";
-    const track = document.createElement("div");
-    track.style.display = "inline-block";
-    track.style.padding = "0 1rem";
-    track.style.animation = "scroll 40s linear infinite";
-
-    // Generate 30 random orders for scrolling
-    let html = "";
-    for (let i=0; i<30; i++) {
-      html += `<div style="display:inline-block;padding:0 1rem">${generateOrder()}</div>`;
-    }
-    track.innerHTML = html;
-    marquee.appendChild(track);
-  }
-
-  // Initial render
-  renderOrders();
-
-  // Regenerate orders every 20 seconds
-  setInterval(renderOrders, 20000);
-</script>
-
-<style>
-  .marquee {
-    overflow:hidden;
-    white-space:nowrap;
-    background:#fff;
-    padding:.5rem;
-    border-radius:8px;
-  }
-  @keyframes scroll {
-    0% {transform:translateX(100%)}
-    100% {transform:translateX(-100%)}
-  }
-</style>
-
-
- <section id="testimonials">
-  <h2>What Our Customers Say</h2>
-  <div class="carousel" id="testimonialsCarousel"></div>
-</section>
-
-<script>
-  // Sample testimonials (you can expand this list)
-  const TESTIMONIALS = [
-    {name:"David",country:"Brazil",msg:"Amazing service! My package arrived on time."},
-    {name:"Emily",country:"UK",msg:"Highly recommend Kash Logistics!"},
-    {name:"John",country:"Nigeria",msg:"Excellent communication and tracking updates."},
-    {name:"Fatima",country:"South Africa",msg:"Trustworthy and professional team."},
-    {name:"Chen",country:"China",msg:"Fast delivery and great packaging."},
-    {name:"Aisha",country:"Ghana",msg:"Affordable and efficient dropshipping."},
-    {name:"Carlos",country:"Mexico",msg:"They sourced exactly what I needed."},
-    {name:"Sara",country:"USA",msg:"Seamless experience from order to delivery."},
-    {name:"Ahmed",country:"UAE",msg:"Professional and reliable logistics partner."},
-    {name:"Grace",country:"Kenya",msg:"My business grew thanks to Kash Logistics."}
-  ];
-
-  let tIndex = 0;
-  const carousel = document.getElementById("testimonialsCarousel");
-
-  function renderTestimonials(){
-    carousel.innerHTML = "";
-    // Show 3 testimonials at a time
-    for(let i=0;i<3;i++){
-      const t = TESTIMONIALS[(tIndex+i)%TESTIMONIALS.length];
-      const item = document.createElement("div");
-      item.className = "carousel-item";
-      item.innerHTML = `<strong>${t.name}</strong> (${t.country}): "${t.msg}"`;
-      carousel.appendChild(item);
-    }
-  }
-
-  // Rotate every 5 seconds
-  setInterval(()=>{
-    tIndex = (tIndex+1)%TESTIMONIALS.length;
-    renderTestimonials();
-  },5000);
-
-  renderTestimonials();
-</script>
-
-<style>
-  .carousel {
-    display:flex;
-    gap:1rem;
-    overflow:hidden;
-    scroll-snap-type:x mandatory;
-    padding:1rem;
-  }
-  .carousel-item {
-    flex:0 0 auto;
-    scroll-snap-align:center;
-    background:#fff;
-    border-radius:12px;
-    padding:1rem;
-    box-shadow:0 6px 12px rgba(0,0,0,.08);
-    min-width:280px;
-  }
-</style>
-
- <section id="faqs">
-  <h2>FAQs</h2>
-  <div class="faq-container">
-    <div class="faq-item">
-      <button class="faq-question">How does Kash Option guarantee the quality of items sourced from China?</button>
-      <div class="faq-answer">
-        <p>We perform a mandatory 3-point inspection at our regional warehouses before any item is cleared for international transit to Ghana.</p>
+  <!-- FAQs -->
+  <section id="faqs">
+    <h2>FAQs</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question">How does Kash Option guarantee quality?</button>
+        <div class="faq-answer"><p>We perform mandatory inspections before international transit.</p></div>
       </div>
+      <!-- Add more FAQ items here -->
     </div>
+  </section>
 
-    <div class="faq-item">
-      <button class="faq-question">Can I source heavy industrial machinery or just consumer goods?</button>
-      <div class="faq-answer">
-        <p>Our logistics network is built for scale. We source everything from luxury consumer electronics to heavy-duty industrial equipment via sea freight.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">What makes your "Pay Locally" model secure?</button>
-      <div class="faq-answer">
-        <p>We eliminate the risk of international card fraud. You pay us securely in GHS, and we handle the global USD/GBP/CNY disbursements via our verified trade channels.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">How do you manage customs clearance at the ports?</button>
-      <div class="faq-answer">
-        <p>Our in-house clearing agents handle all GSA/FDA documentation and duty assessments, ensuring your goods are never stuck in port bottlenecks.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">What is the typical lead time for Express Sourcing?</button>
-      <div class="faq-answer">
-        <p>Express Air Freight typically arrives within 3-5 business days post-warehouse receipt. Sea freight is optimized for 6-8 weeks.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  .faq-container {
-    max-width: 800px;
-    margin: auto;
-  }
-  .faq-item {
-    border-bottom: 1px solid #ddd;
-  }
-  .faq-question {
-    width: 100%;
-    text-align: left;
-    padding: 1rem;
-    font-size: 1rem;
-    font-weight: bold;
-    background: #f6fbff;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    transition: background 0.3s;
-  }
-  .faq-question:hover {
-    background: #e9f2f9;
-  }
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-    padding: 0 1rem;
-    background: #fff;
-  }
-  .faq-answer p {
-    margin: 1rem 0;
-  }
-  .faq-item.active .faq-answer {
-    max-height: 200px; /* enough space for answers */
-    padding-bottom: 1rem;
-  }
-</style>
-
-<script>
-  // FAQ dropdown toggle
-  document.querySelectorAll(".faq-question").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = button.parentElement;
-      item.classList.toggle("active");
-    });
-  });
-</script>
+  <!-- Contact -->
+  <section id="contact" style="background:linear-gradient(135deg,#0e7c7b,#084c61);color:#fff;padding:3rem 2rem;text-align:center;">
+    <h2 style="font-size:2rem;margin-bottom:1rem;">Let’s Work Together</h2>
+    <p style="font-size:1.1rem;margin-bottom:2rem;">Ready to ship smarter? Reach out today and let Kash Logistics handle your global sourcing and delivery.</p>
+    <a href="mailto:info@mrkash.net" style="display:inline-block;background:#f4ae3d;color:#24323
+   
+   
 
 
- <section id="contact" style="background:linear-gradient(135deg,#0e7c7b,#084c61);color:#fff;padding:3rem 2rem;text-align:center;">
-  <h2 style="font-size:2rem;margin-bottom:1rem;">Let’s Work Together</h2>
-  <p style="font-size:1.1rem;margin-bottom:2rem;">Ready to ship smarter? Reach out today and let Kash Logistics handle your global sourcing and delivery.</p>
   
-  <!-- Call to Action Button -->
-  <a href="mailto:info@mrkash.net" 
-     style="display:inline-block;background:#f4ae3d;color:#24323f;padding:1rem 2rem;border-radius:8px;font-weight:bold;text-decoration:none;margin-bottom:2rem;">
-     📧 Email Us: info@mrkash.net
-  </a>
-
-  <!-- Social Media Icons -->
-  <div style="margin-top:2rem;display:flex;justify-content:center;gap:2rem;font-size:2rem;">
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/kashoption1" target="_blank" style="color:#fff;">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <!-- Facebook -->
-    <a href="https://www.facebook.com/share/17VyTJSjqd" target="_blank" style="color:#fff;">
-      <i class="fab fa-facebook"></i>
-    </a>
-    <!-- WhatsApp (optional extra channel) -->
-    <a href="https://wa.me/233XXXXXXXXX" target="_blank" style="color:#fff;">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-  </div>
-</section>
-
-<!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<section id="terms" style="background:#f9fafb;padding:3rem 2rem;">
-  <h2 style="color:#084c61;text-align:center;margin-bottom:1.5rem;">Terms & Conditions</h2>
-  <div style="max-width:900px;margin:auto;line-height:1.6;color:#24323f;">
-    
-    <h3>1. Service Scope</h3>
-    <p>Kash Logistics provides international and domestic dropshipping, sourcing, and delivery services. We act as an intermediary between suppliers and customers, ensuring reliable fulfillment and transparent tracking.</p>
-
-    <h3>2. Quality Assurance</h3>
-    <p>All sourced items undergo mandatory inspection at our regional warehouses before clearance for international transit. Kash Logistics does not manufacture goods and is not liable for inherent product defects from suppliers.</p>
-
-    <h3>3. Payments</h3>
-    <p>Clients agree to pay in Ghanaian Cedi (GHS) under our “Pay Locally” model. Kash Logistics handles global disbursements in USD/GBP/CNY via verified trade channels. Payments must be completed before goods are dispatched.</p>
-
-    <h3>4. Customs & Duties</h3>
-    <p>Our in‑house clearing agents manage GSA/FDA documentation and duty assessments. Clients remain responsible for any applicable import duties, taxes, or regulatory fees.</p>
-
-    <h3>5. Delivery Timelines</h3>
-    <p>Express Air Freight typically arrives within 3–5 business days post‑warehouse receipt. Sea freight is optimized for 6–8 weeks. Timelines may vary due to customs, weather, or supplier delays.</p>
-
-    <h3>6. Liability</h3>
-    <p>Kash Logistics is not liable for delays caused by customs, natural disasters, or supplier errors. Insurance coverage is available upon request for high‑value shipments.</p>
-
-    <h3>7. Returns & Refunds</h3>
-    <p>Returns are accepted only for items damaged in transit or mis‑sourced. Refunds are processed within 14 business days after verification.</p>
-
-    <h3>8. Privacy</h3>
-    <p>Client information is used solely for order processing and logistics coordination. We do not sell or share personal data with third parties.</p>
-
-    <h3>9. Governing Law</h3>
-    <p>These Terms & Conditions are governed by the laws of Ghana. Any disputes shall be resolved under the jurisdiction of Ghanaian courts.</p>
-
-    <h3>10. Updates</h3>
-    <p>Kash Logistics reserves the right to update these Terms & Conditions at any time. Clients will be notified of significant changes via email or website notice.</p>
-
-  </div>
-</section>
-
- <footer>
-  <p>&copy; 2025 Kash Logistics. All rights reserved.</p>
-</footer>
-
-<!-- Floating WhatsApp Support Icon -->
-<a href="https://wa.me/message/GKVHLNYNL7AEJ1" target="_blank" id="whatsapp-support">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<style>
-  #whatsapp-support {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366; /* WhatsApp green */
-    color: #fff;
-    font-size: 2rem;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 9999;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  #whatsapp-support:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-  }
-</style>
-
-<!-- Font Awesome for WhatsApp icon -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-</body>
-</html>
+ 
+   
+  
