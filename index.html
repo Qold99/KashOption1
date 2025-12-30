@@ -178,9 +178,7 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
   
   <!-- Rotating Orders Container -->
   <div id="ordersFeed" style="overflow:hidden;height:150px;position:relative;">
-    <div id="ordersList" style="position:absolute;top:0;left:0;width:100%;animation:scrollOrders 20s linear infinite;">
-      <!-- Orders will be injected here -->
-    </div>
+    <div id="ordersList" style="position:absolute;top:0;left:0;width:100%;"></div>
   </div>
 </section>
 
@@ -195,10 +193,21 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
     font-size:1rem;
     font-weight:500;
     color:#24323f;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
+
+  /* Smooth, immediate scrolling with no start delay */
   @keyframes scrollOrders {
-    0% {top:0;}
-    100% {top:-100%;}
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+  }
+
+  #ordersList {
+    will-change: transform;
+    animation: scrollOrders 12s linear infinite; /* faster start and loop */
+    animation-delay: 0s; /* ensure no delay before starting */
   }
 </style>
 
@@ -206,23 +215,43 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
 <script>
   const cities = ["Accra","Kumasi","Takoradi","Tamale","Tema","Cape Coast","Ho","Bolgatanga","Wa","Sunyani"];
   const packages = ["Electronics","Fashion","Beauty","Home & Kitchen","Auto Parts","Health & Wellness","Sports Gear","Baby Essentials","Office Supplies","Groceries"];
-  
-  function randomPhone(){
-    return "+233 " + Math.floor(200000000 + Math.random()*799999999);
+
+  function randomDigits(len=3) {
+    let s = "";
+    for (let i = 0; i < len; i++) s += Math.floor(Math.random() * 10);
+    return s;
   }
 
-  function generateOrders(count=20){
-    let html="";
-    for(let i=0;i<count;i++){
-      const city = cities[Math.floor(Math.random()*cities.length)];
-      const pkg = packages[Math.floor(Math.random()*packages.length)];
-      const phone = randomPhone();
-      html += `<div class="order-item">📦 ${pkg} delivered to ${city} • ${phone}</div>`;
+  // Masked Ghana number: +233******XYZ (only last digits vary)
+  function maskedPhone() {
+    return "+233******" + randomDigits(3);
+  }
+
+  // Order number like KO-#### or KO-##### for realism
+  function randomOrderId() {
+    const n = Math.floor(10000 + Math.random() * 90000); // 5 digits
+    return "KO-" + n;
+  }
+
+  function generateOrders(count = 30) {
+    let html = "";
+    for (let i = 0; i < count; i++) {
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      const pkg = packages[Math.floor(Math.random() * packages.length)];
+      const phone = maskedPhone();
+      const orderId = randomOrderId();
+      html += `<div class="order-item">#${orderId} • 📦 ${pkg} delivered to ${city} • ${phone}</div>`;
     }
     return html;
   }
 
-  document.getElementById("ordersList").innerHTML = generateOrders(30);
+  // Ensure content is injected immediately on DOM ready so animation starts right away
+  document.addEventListener("DOMContentLoaded", () => {
+    const list = document.getElementById("ordersList");
+    // Create two lists back-to-back for seamless infinite scroll
+    const items = generateOrders(30);
+    list.innerHTML = items + items;
+  });
 </script>
 
 
