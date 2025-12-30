@@ -124,15 +124,121 @@ z-index:9999;
 <p>China • USA • UK • Europe → Ghana</p>
 </header>
 
-<nav>
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#catalog">Catalog</a>
-<a href="#orders">Live Orders</a>
-<a href="#testimonials">Reviews</a>
-<a href="#faqs">FAQs</a>
-<a href="tracker.html">Track Order</a>
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="brand">Kash Option</a>
+    <button class="hamburger" id="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#catalog">Catalog</a>
+      <a href="#orders">Live Orders</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#faqs">FAQs</a>
+      <a href="tracker.html">Track Order</a>
+    </div>
+  </div>
 </nav>
+
+<!-- Styles -->
+<style>
+  .navbar {
+    background:#084c61;
+    padding:1rem;
+    color:#fff;
+  }
+  .nav-container {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1000px;
+    margin:auto;
+  }
+  .brand {
+    font-weight:bold;
+    color:#fff;
+    text-decoration:none;
+  }
+
+  /* Hamburger bars */
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    justify-content:space-between;
+    width:24px;
+    height:18px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+  .bar {
+    height:3px;
+    width:100%;
+    background:#fff;
+    border-radius:2px;
+    transition:all 0.3s ease;
+  }
+
+  .nav-links {
+    display:flex;
+    gap:1rem;
+  }
+  .nav-links a {
+    color:#fff;
+    text-decoration:none;
+    font-weight:500;
+  }
+
+  /* Mobile */
+  @media (max-width:768px) {
+    .hamburger {
+      display:flex;
+    }
+    .nav-links {
+      display:none;
+      flex-direction:column;
+      background:#084c61;
+      position:absolute;
+      top:60px;
+      right:0;
+      width:220px;
+      padding:1rem;
+      border-radius:8px;
+    }
+    .nav-links.show {
+      display:flex;
+    }
+  }
+
+  /* Animate hamburger to X */
+  .hamburger.active .bar:nth-child(1) {
+    transform:rotate(45deg) translate(5px,5px);
+  }
+  .hamburger.active .bar:nth-child(2) {
+    opacity:0;
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform:rotate(-45deg) translate(5px,-5px);
+  }
+</style>
+
+<!-- Script -->
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navLinks.classList.toggle("show");
+  });
+</script>
+
 
 <section id="about">
 <h2>About Kash Option</h2>
