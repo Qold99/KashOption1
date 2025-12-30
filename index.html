@@ -254,45 +254,63 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
   });
 </script>
 
+<section id="testimonials" style="background:linear-gradient(135deg,#f6fbff,#e9f2f9);padding:3rem;text-align:center;position:relative;overflow:hidden;">
+  <h2 style="color:#084c61;margin-bottom:1rem;font-size:2rem;font-weight:800;">What Clients Say</h2>
+  <p style="margin-bottom:2rem;color:#555;">Trusted by individuals and resellers across Ghana and worldwide.</p>
 
-<section id="testimonials" style="background:#f6fbff;padding:2rem;text-align:center;">
-  <h2 style="color:#084c61;margin-bottom:1rem;">What Clients Say</h2>
-  <p style="margin-bottom:2rem;">Trusted by individuals and resellers across Ghana and worldwide.</p>
-
-  <!-- Carousel Container -->
-  <div id="testimonialCarousel" style="display:flex;overflow:hidden;max-width:800px;margin:auto;position:relative;height:180px;">
-    <div id="testimonialList" style="display:flex;animation:scrollTestimonials 30s linear infinite;">
-      <!-- Testimonials will be injected here -->
-    </div>
+  <!-- Testimonial Display -->
+  <div id="testimonialDisplay" style="max-width:700px;margin:auto;position:relative;height:220px;">
+    <!-- Testimonials will be injected here -->
   </div>
 </section>
 
-<!-- Styles -->
 <style>
-  .testimonial-item {
-    flex:0 0 100%;
+  .testimonial-card {
+    position:absolute;
+    top:0;left:0;
+    width:100%;
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity 1s ease, transform 1s ease;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:1.5rem;
     background:#fff;
-    margin:0 1rem;
     padding:1.5rem;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    border-radius:16px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  }
+  .testimonial-card.active {
+    opacity:1;
+    transform:translateY(0);
+  }
+  .avatar {
+    width:70px;height:70px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ccc,#999);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.5rem;
+    font-weight:bold;
+    color:#fff;
+    flex-shrink:0;
+  }
+  .testimonial-text {
     text-align:left;
     font-size:1rem;
     color:#24323f;
+    line-height:1.4;
   }
-  .testimonial-item strong {
+  .testimonial-text strong {
     display:block;
     margin-top:.8rem;
     color:#007BFF;
     font-weight:bold;
   }
-  @keyframes scrollTestimonials {
-    0% {transform:translateX(0);}
-    100% {transform:translateX(-100%);}
-  }
 </style>
 
-<!-- Script -->
 <script>
   const testimonials = [
     {text:"Kash Logistics made my dropshipping business seamless. Orders arrive faster than expected!",author:"Ama • Accra, Ghana"},
@@ -307,18 +325,37 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
     {text:"They handle both small and bulk orders with professionalism.",author:"Joseph • Cape Coast, Ghana"}
   ];
 
-  function generateTestimonials(){
-    let html="";
-    testimonials.forEach(t => {
-      html += `<div class="testimonial-item">“${t.text}”<strong>${t.author}</strong></div>`;
-    });
-    // Duplicate list for infinite scroll effect
-    html += html;
-    return html;
+  // Shuffle testimonials for randomness
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
   }
 
-  document.getElementById("testimonialList").innerHTML = generateTestimonials();
+  const display = document.getElementById("testimonialDisplay");
+  const shuffled = shuffle(testimonials);
+  shuffled.forEach((t,i) => {
+    const card = document.createElement("div");
+    card.className = "testimonial-card";
+    card.innerHTML = `
+      <div class="avatar">${t.author.charAt(0)}</div>
+      <div class="testimonial-text">“${t.text}”<strong>${t.author}</strong></div>
+    `;
+    display.appendChild(card);
+  });
+
+  let index = 0;
+  const cards = document.querySelectorAll(".testimonial-card");
+  function showTestimonial(i){
+    cards.forEach((c,idx) => c.classList.remove("active"));
+    cards[i].classList.add("active");
+  }
+  showTestimonial(index);
+
+  setInterval(() => {
+    index = (index+1) % cards.length;
+    showTestimonial(index);
+  }, 5000); // change testimonial every 5 seconds
 </script>
+
 
 <section id="faqs">
   <h2>Frequently Asked Questions</h2>
