@@ -274,53 +274,55 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
   <p style="margin-bottom:2rem;color:#555;">Trusted by individuals and resellers across Ghana and worldwide.</p>
 
   <!-- Testimonial Display -->
-  <div id="testimonialDisplay" style="max-width:700px;margin:auto;position:relative;height:220px;">
+  <div id="testimonialDisplay" style="max-width:900px;margin:auto;position:relative;min-height:240px;">
     <!-- Testimonials will be injected here -->
   </div>
 </section>
 
 <style>
-  .testimonial-card {
-    position:absolute;
-    top:0;left:0;
-    width:100%;
+  .testimonial-row {
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
     opacity:0;
     transform:translateY(20px);
     transition:opacity 1s ease, transform 1s ease;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:1.5rem;
-    background:#fff;
-    padding:1.5rem;
-    border-radius:16px;
-    box-shadow:0 6px 16px rgba(0,0,0,0.08);
   }
-  .testimonial-card.active {
+  .testimonial-row.active {
     opacity:1;
     transform:translateY(0);
   }
+  .testimonial-card {
+    flex:1;
+    background:#fff;
+    padding:1.2rem;
+    border-radius:16px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.08);
+    display:flex;
+    align-items:flex-start;
+    gap:1rem;
+    text-align:left;
+  }
   .avatar {
-    width:70px;height:70px;
+    width:60px;height:60px;
     border-radius:50%;
     background:linear-gradient(135deg,#ccc,#999);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:1.5rem;
+    font-size:1.2rem;
     font-weight:bold;
     color:#fff;
     flex-shrink:0;
   }
   .testimonial-text {
-    text-align:left;
-    font-size:1rem;
+    font-size:0.95rem;
     color:#24323f;
     line-height:1.4;
   }
   .testimonial-text strong {
     display:block;
-    margin-top:.8rem;
+    margin-top:.6rem;
     color:#007BFF;
     font-weight:bold;
   }
@@ -340,35 +342,40 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
     {text:"They handle both small and bulk orders with professionalism.",author:"Joseph • Cape Coast, Ghana"}
   ];
 
-  // Shuffle testimonials for randomness
+  // Shuffle once per day to avoid repeats
   function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
   }
 
   const display = document.getElementById("testimonialDisplay");
-  const shuffled = shuffle(testimonials);
-  shuffled.forEach((t,i) => {
-    const card = document.createElement("div");
-    card.className = "testimonial-card";
-    card.innerHTML = `
-      <div class="avatar">${t.author.charAt(0)}</div>
-      <div class="testimonial-text">“${t.text}”<strong>${t.author}</strong></div>
-    `;
-    display.appendChild(card);
-  });
-
+  const shuffled = shuffle([...testimonials]); // copy and shuffle
   let index = 0;
-  const cards = document.querySelectorAll(".testimonial-card");
-  function showTestimonial(i){
-    cards.forEach((c,idx) => c.classList.remove("active"));
-    cards[i].classList.add("active");
-  }
-  showTestimonial(index);
 
-  setInterval(() => {
-    index = (index+1) % cards.length;
-    showTestimonial(index);
-  }, 5000); // change testimonial every 5 seconds
+  function showNextThree() {
+    // Clear old
+    display.innerHTML = "";
+    // Get next 3
+    const group = shuffled.slice(index, index+3);
+    const row = document.createElement("div");
+    row.className = "testimonial-row active";
+    group.forEach(t => {
+      const card = document.createElement("div");
+      card.className = "testimonial-card";
+      card.innerHTML = `
+        <div class="avatar">${t.author.charAt(0)}</div>
+        <div class="testimonial-text">“${t.text}”<strong>${t.author}</strong></div>
+      `;
+      row.appendChild(card);
+    });
+    display.appendChild(row);
+    index += 3;
+    if (index >= shuffled.length) index = 0; // loop back after all shown
+  }
+
+  // Initial show
+  showNextThree();
+  // Change every 7 seconds
+  setInterval(showNextThree, 7000);
 </script>
 
 
