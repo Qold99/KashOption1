@@ -173,45 +173,46 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
 </ul>
 </section>
 
-<section id="orders" style="background:#fff;padding:2rem;border-radius:12px;box-shadow:0 6px 12px rgba(0,0,0,.08);max-width:900px;margin:auto;">
+<section id="orders" style="background:linear-gradient(135deg,#f6fbff,#e9f2f9);padding:2rem;border-radius:12px;box-shadow:0 6px 12px rgba(0,0,0,.08);max-width:900px;margin:auto;">
   <h2 style="color:#084c61;text-align:center;margin-bottom:1rem;">Live Orders Delivered Today</h2>
   
-  <!-- Rotating Orders Container -->
-  <div id="ordersFeed" style="overflow:hidden;height:150px;position:relative;">
-    <div id="ordersList" style="position:absolute;top:0;left:0;width:100%;"></div>
+  <!-- Orders Carousel -->
+  <div id="ordersFeed" style="overflow:hidden;max-width:100%;margin:auto;position:relative;height:180px;">
+    <div id="ordersList" style="display:flex;transition:transform 1s ease;">
+      <!-- Orders will be injected here -->
+    </div>
   </div>
 </section>
 
-<!-- Styles for Orders -->
 <style>
   .order-item {
-    background:#f6fbff;
-    margin:.5rem 0;
+    flex:0 0 calc(33.333% - 1rem); /* 3 items per view */
+    background:#fff;
+    margin:0.5rem;
     padding:1rem;
-    border-radius:8px;
-    box-shadow:0 4px 8px rgba(0,0,0,.05);
-    font-size:1rem;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    font-size:0.95rem;
     font-weight:500;
     color:#24323f;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    display:flex;
+    align-items:center;
+    gap:1rem;
   }
-
-  /* Smooth, immediate scrolling with no start delay */
-  @keyframes scrollOrders {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-100%); }
-  }
-
-  #ordersList {
-    will-change: transform;
-    animation: scrollOrders 12s linear infinite; /* faster start and loop */
-    animation-delay: 2s; /* ensure no delay before starting */
+  .order-avatar {
+    width:50px;height:50px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ccc,#999);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    font-weight:bold;
+    color:#fff;
+    flex-shrink:0;
   }
 </style>
 
-<!-- Script for Random Orders -->
 <script>
   const cities = ["Accra","Kumasi","Takoradi","Tamale","Tema","Cape Coast","Ho","Bolgatanga","Wa","Sunyani"];
   const packages = ["Electronics","Fashion","Beauty","Home & Kitchen","Auto Parts","Health & Wellness","Sports Gear","Baby Essentials","Office Supplies","Groceries"];
@@ -222,37 +223,51 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
     return s;
   }
 
-  // Masked Ghana number: +233******XYZ (only last digits vary)
   function maskedPhone() {
     return "+233******" + randomDigits(3);
   }
 
-  // Order number like KO-#### or KO-##### for realism
   function randomOrderId() {
-    const n = Math.floor(10000 + Math.random() * 90000); // 5 digits
+    const n = Math.floor(10000 + Math.random() * 90000);
     return "KO-" + n;
   }
 
-  function generateOrders(count = 4) {
+  function generateOrders(count = 15) {
     let html = "";
     for (let i = 0; i < count; i++) {
       const city = cities[Math.floor(Math.random() * cities.length)];
       const pkg = packages[Math.floor(Math.random() * packages.length)];
       const phone = maskedPhone();
       const orderId = randomOrderId();
-      html += `<div class="order-item">#${orderId} • 📦 ${pkg} delivered to ${city} • ${phone}</div>`;
+      html += `
+        <div class="order-item">
+          <div class="order-avatar">📦</div>
+          <div>
+            <div>#${orderId} • ${pkg}</div>
+            <small>Delivered to ${city} • ${phone}</small>
+          </div>
+        </div>`;
     }
     return html;
   }
 
-  // Ensure content is injected immediately on DOM ready so animation starts right away
   document.addEventListener("DOMContentLoaded", () => {
     const list = document.getElementById("ordersList");
-    // Create two lists back-to-back for seamless infinite scroll
-    const items = generateOrders(500);
-    list.innerHTML = items + items;
+    list.innerHTML = generateOrders(30);
+
+    let index = 0;
+    const step = 100; // percentage per swipe (3 items per view)
+    const total = list.children.length / 3;
+
+    function swipeOrders() {
+      index = (index + 1) % total;
+      list.style.transform = `translateX(-${index * step}%)`;
+    }
+
+    setInterval(swipeOrders, 5000); // every 5 seconds
   });
 </script>
+
 
 <section id="testimonials" style="background:linear-gradient(135deg,#f6fbff,#e9f2f9);padding:3rem;text-align:center;position:relative;overflow:hidden;">
   <h2 style="color:#084c61;margin-bottom:1rem;font-size:2rem;font-weight:800;">What Clients Say</h2>
