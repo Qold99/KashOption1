@@ -1,60 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Kash Option | Shop Globally, Py Locally</title>
-
-<meta name="description" content="Kash Option helps you shop from China, USA, UK and other countries and delivers safely to Ghana. Trusted sourcing, fast shipping, and local payments.">
-
-<meta name="keywords" content="China to Ghana shipping, buy from China Ghana, international shopping Ghana, Kash Option, import from China">
-
-<meta name="author" content="Kash Option">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body{
-margin:0;
-font-family:Segoe UI, Arial, sans-serif;
-background:#f6fbff;
-color:#24323f;
-}
-
-header{
-background:#062c5f;
-color:#fff;
-padding:3rem 1.5rem;
-text-align:center;
-}
-
-header h1{
-font-size:2.6rem;
-margin:0;
-font-weight:700;
-}
-
-header p{
-margin-top:.7rem;
-font-size:1.1rem;
-opacity:.95;
-}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  <meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
   <meta charset="UTF-8">
-  <title>Kash Option</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Kash Option | Shop Globally, Pay Locally</title>
+
+  <meta name="description" content="Kash Option helps you shop from China, USA, UK and other countries and delivers safely to Ghana. Trusted sourcing, fast shipping, and local payments.">
+  <meta name="keywords" content="China to Ghana shipping, buy from China Ghana, international shopping Ghana, Kash Option, import from China">
+  <meta name="author" content="Kash Option">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Styles -->
   <style>
+    body {
+      margin:0;
+      font-family:Segoe UI, Arial, sans-serif;
+      background:#f6fbff;
+      color:#24323f;
+    }
+
+    header {
+      background:#062c5f;
+      color:#fff;
+      padding:3rem 1.5rem;
+      text-align:center;
+    }
+    header h1 {
+      font-size:2.6rem;
+      margin:0;
+      font-weight:700;
+    }
+    header p {
+      margin-top:.7rem;
+      font-size:1.1rem;
+      opacity:.95;
+    }
+
     /* Navigation Bar */
     .navbar {
       background:#000; /* ultra black */
       padding:1rem 2rem;
       color:#fff;
     }
-
     .nav-container {
       display:flex;
       justify-content:space-between;
@@ -62,7 +53,6 @@ opacity:.95;
       max-width:1000px;
       margin:auto;
     }
-
     .brand {
       font-size:1.6rem;
       font-weight:800;
@@ -70,8 +60,6 @@ opacity:.95;
       text-decoration:none;
       letter-spacing:1px;
     }
-
-    /* Hamburger bars */
     .hamburger {
       display:none;
       flex-direction:column;
@@ -90,8 +78,6 @@ opacity:.95;
       border-radius:2px;
       transition:all 0.3s ease;
     }
-
-    /* Links */
     .nav-links {
       display:flex;
       gap:1rem;
@@ -101,8 +87,6 @@ opacity:.95;
       text-decoration:none;
       font-weight:700;
     }
-
-    /* Mobile */
     @media (max-width:768px) {
       .hamburger { display:flex; }
       .nav-links {
@@ -118,8 +102,6 @@ opacity:.95;
       }
       .nav-links.show { display:flex; }
     }
-
-    /* Animate hamburger to X */
     .hamburger.active .bar:nth-child(1) {
       transform:rotate(45deg) translate(5px,5px);
     }
@@ -127,9 +109,86 @@ opacity:.95;
     .hamburger.active .bar:nth-child(3) {
       transform:rotate(-45deg) translate(5px,-5px);
     }
+
+    /* Section backgrounds */
+    #about {
+      background:#f4f4f4;
+      padding:3rem 2rem;
+    }
+    #services {
+      background:linear-gradient(135deg,#e3f2fd,#ffffff);
+      padding:3rem 2rem;
+    }
+
+    /* Headings */
+    section h2 {
+      color:#084c61;
+      font-size:2rem;
+      font-weight:800;
+      text-align:center;
+      margin-bottom:1.5rem;
+      border-bottom:3px solid #00aaff;
+      display:inline-block;
+      padding-bottom:.5rem;
+    }
+
+    /* Cards */
+    .grid {
+      display:flex;
+      gap:2rem;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .card {
+      background:#fff;
+      border-radius:10px;
+      padding:2rem;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      text-align:center;
+      transition:transform .3s ease, box-shadow .3s ease;
+      max-width:280px;
+    }
+    .card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      color:#000;
+      font-weight:700;
+      margin-top:1rem;
+    }
+    .card p {
+      color:#555;
+      font-size:.95rem;
+    }
+
+    footer {
+      background:#06232e;
+      color:#e9f8ff;
+      text-align:center;
+      padding:1.2rem;
+    }
+
+    #whatsapp-support {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25D366;
+      color:#fff;
+      font-size:2rem;
+      padding:15px;
+      border-radius:50%;
+      box-shadow:0 4px 12px rgba(0,0,0,.25);
+      z-index:9999;
+    }
   </style>
 </head>
 <body>
+
+<header>
+  <h1>Shop Globally. Pay Locally.</h1>
+  <p>China • USA • UK • Europe → Ghana</p>
+</header>
 
 <!-- Navigation -->
 <nav class="navbar">
@@ -153,18 +212,53 @@ opacity:.95;
   </div>
 </nav>
 
+<!-- Example Sections -->
+<section id="about">
+  <h2>About Kash Option</h2>
+  <p>Kash Option is a trusted global sourcing and logistics brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.</p>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="grid">
+    <div class="card">
+      <i class="fas fa-search fa-2x"></i>
+      <h3>Product Sourcing</h3>
+      <p>We help you buy original items from trusted suppliers.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-plane fa-2x"></i>
+      <h3>International Shipping</h3>
+      <p>Air & sea shipping from multiple countries.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-truck fa-2x"></i>
+      <h3>Delivery in Ghana</h3>
+      <p>Safe delivery with tracking and support.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Kash Option. All rights reserved.</p>
+</footer>
+
+<!-- WhatsApp Support -->
+<a id="whatsapp-support" href="https://wa.me/233240118846" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Script -->
 <script>
   const hamburger = document.getElementById("hamburger");
   const navLinks = document.getElementById("nav-links");
   const links = navLinks.querySelectorAll("a");
 
-  // Toggle menu when hamburger clicked
   hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     navLinks.classList.toggle("show");
   });
 
-  // Close menu when any link is clicked
   links.forEach(link => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("show");
@@ -175,6 +269,7 @@ opacity:.95;
 
 </body>
 </html>
+
 
 
 
