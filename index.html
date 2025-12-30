@@ -125,26 +125,27 @@ z-index:9999;
 </header>
 
 <!-- Navigation -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="#" class="brand">Kash Option</a>
-    <button class="hamburger" id="hamburger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+<nav class="navbar" style="background-color:#000; padding:1rem 2rem; box-shadow:0 2px 8px rgba(0,0,0,0.6);">
+  <div class="nav-container" style="display:flex; justify-content:space-between; align-items:center;">
+    <a href="#" class="brand" style="font-size:1.6rem; font-weight:800; color:#fff; text-decoration:none; letter-spacing:1px;">Kash Option</a>
+    <button class="hamburger" id="hamburger" style="display:none; flex-direction:column; cursor:pointer;">
+      <span class="bar" style="height:3px; width:25px; background-color:#fff; margin:4px 0; transition:0.3s;"></span>
+      <span class="bar" style="height:3px; width:25px; background-color:#fff; margin:4px 0; transition:0.3s;"></span>
+      <span class="bar" style="height:3px; width:25px; background-color:#fff; margin:4px 0; transition:0.3s;"></span>
     </button>
-    <div class="nav-links" id="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#catalog">Catalog</a>
-      <a href="#orders">Live Orders</a>
-      <a href="#testimonials">Reviews</a>
-      <a href="#faqs">FAQs</a>
-      <a href="tracker.html">Track Order</a>
-      <a href="contacts.html">Contact US</a>
+    <div class="nav-links" id="nav-links" style="display:flex; gap:1.5rem;">
+      <a href="#about" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">About</a>
+      <a href="#services" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">Services</a>
+      <a href="#catalog" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">Catalog</a>
+      <a href="#orders" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">Live Orders</a>
+      <a href="#testimonials" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">Reviews</a>
+      <a href="#faqs" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">FAQs</a>
+      <a href="tracker.html" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">Track Order</a>
+      <a href="contacts.html" style="color:#fff; text-decoration:none; font-size:1rem; font-weight:700;">Contact US</a>
     </div>
   </div>
 </nav>
+
 
 <!-- Styles -->
 <style>
@@ -252,44 +253,115 @@ z-index:9999;
 
 
 
-<section id="about">
-<h2>About Kash Option</h2>
-<p>
-Kash Option is a trusted global sourcing and logistics brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.
-</p>
+/* Section backgrounds */
+#about {
+  background: #f4f4f4; /* light gray */
+  padding: 3rem 2rem;
+}
+#services {
+  background: linear-gradient(135deg, #e3f2fd, #ffffff); /* soft blue gradient */
+  padding: 3rem 2rem;
+}
+
+/* Headings */
+section h2 {
+  color: #084c61; /* deep blue */
+  font-size: 2rem;
+  font-weight: 800; /* extra bold */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #00aaff; /* cyan accent underline */
+  display: inline-block;
+  padding-bottom: .5rem;
+}
+
+/* Cards */
+.grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform .3s ease, box-shadow .3s ease;
+  max-width: 280px;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.card h3 {
+  color: #000;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+.card p {
+  color: #555;
+  font-size: .95rem;
+}
+
+
+<section id="catalog" style="background:linear-gradient(135deg,#e3f2fd,#ffffff); padding:3rem 2rem;">
+  <h2 style="text-align:center; font-size:2.4rem; font-weight:800; color:#084c61; margin-bottom:2rem; border-bottom:3px solid #00aaff; display:inline-block; padding-bottom:.5rem;">
+    What You Can Order
+  </h2>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem; max-width:1100px; margin:auto;">
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-mobile-alt fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Phones & Laptops</h3>
+      <p style="color:#555;">Smartphones, MacBooks, gaming laptops, tablets, and accessories.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-camera fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Cameras & Electronics</h3>
+      <p style="color:#555;">DSLRs, drones, speakers, smart TVs, and home gadgets.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-cogs fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Auto Parts</h3>
+      <p style="color:#555;">Car engines, tires, batteries, and spare parts from trusted suppliers.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-couch fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Home & Office Items</h3>
+      <p style="color:#555;">Furniture, décor, kitchenware, printers, and office supplies.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-boxes fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Wholesale Goods</h3>
+      <p style="color:#555;">Bulk clothing, electronics, accessories, and general merchandise.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-tshirt fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Fashion & Apparel</h3>
+      <p style="color:#555;">Designer wear, sneakers, handbags, and accessories.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-dumbbell fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Sports & Fitness</h3>
+      <p style="color:#555;">Gym equipment, bicycles, sportswear, and accessories.</p>
+    </div>
+
+    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
+      <i class="fas fa-baby fa-3x" style="color:#084c61;"></i>
+      <h3 style="margin-top:1rem; font-weight:700;">Kids & Baby Products</h3>
+      <p style="color:#555;">Toys, strollers, baby clothes, and learning materials.</p>
+    </div>
+  </div>
 </section>
 
-<section id="services">
-<h2>Our Services</h2>
-<div class="grid">
-<div class="card">
-<i class="fas fa-search fa-2x"></i>
-<h3>Product Sourcing</h3>
-<p>We help you buy original items from trusted suppliers.</p>
-</div>
-<div class="card">
-<i class="fas fa-plane fa-2x"></i>
-<h3>International Shipping</h3>
-<p>Air & sea shipping from multiple countries.</p>
-</div>
-<div class="card">
-<i class="fas fa-truck fa-2x"></i>
-<h3>Delivery in Ghana</h3>
-<p>Safe delivery with tracking and support.</p>
-</div>
-</div>
-</section>
-
-<section id="catalog">
-<h2>What You Can Order</h2>
-<ul>
-<li>Phones & Laptops</li>
-<li>Cameras & Electronics</li>
-<li>Auto Parts</li>
-<li>Home & Office Items</li>
-<li>Wholesale Goods</li>
-</ul>
-</section>
 
 <section id="orders" style="background:linear-gradient(135deg,#f6fbff,#e9f2f9);padding:2rem;border-radius:12px;box-shadow:0 6px 12px rgba(0,0,0,.08);max-width:900px;margin:auto;">
   <h2 style="color:#084c61;text-align:center;margin-bottom:1rem;">Live Orders Delivered Today</h2>
