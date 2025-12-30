@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="[suspicious link removed]">
-<!-- Primary Landing Page -->
-<url>
-<loc>https://qold99.github.io/KashOption1/</loc>
-<lastmod>2025-12-29</lastmod>
-<priority>1.0</priority>
-</url>
-<!-- Tracking Page -->
-<url>
-<loc>https://www.google.com/search?q=https://qold99.github.io/KashOption1/tracker.html</loc>
-<lastmod>2025-12-29</lastmod>
-<priority>0.5</priority>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- GitHub Pages (original project) -->
+  <url>
+    <loc>https://qold99.github.io/KashOption1/</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://qold99.github.io/KashOption1/contacts.html</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://qold99.github.io/KashOption1/tracker.html</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Custom Domain (mrkash.net) -->
+  <url>
+    <loc>https://mrkash.net/index.html</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mrkash.net/contacts.html</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mrkash.net/tracker.html</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
+
