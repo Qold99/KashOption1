@@ -170,10 +170,15 @@
   }
 
   function checkPin() {
-    if (pin.value === "767484") {
-      admin-form.classList.remove("hidden");
-      pin-gate.classList.add("hidden");
-    } else alert("Access Denied");
+  const entered = document.getElementById("pin").value.trim();
+
+  if (entered === "767484") {
+    document.getElementById("admin-form").classList.remove("hidden");
+    document.getElementById("pin-gate").classList.add("hidden");
+  } else {
+    alert("Access Denied");
+  }
+}
   }
 
   function updateTrack(e) {
