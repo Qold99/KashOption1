@@ -233,7 +233,7 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
     return "KO-" + n;
   }
 
-  function generateOrders(count = 30) {
+  function generateOrders(count = 500) {
     let html = "";
     for (let i = 0; i < count; i++) {
       const city = cities[Math.floor(Math.random() * cities.length)];
@@ -249,7 +249,7 @@ Kash Option is a trusted global sourcing and logistics brand helping individuals
   document.addEventListener("DOMContentLoaded", () => {
     const list = document.getElementById("ordersList");
     // Create two lists back-to-back for seamless infinite scroll
-    const items = generateOrders(30);
+    const items = generateOrders(500);
     list.innerHTML = items + items;
   });
 </script>
