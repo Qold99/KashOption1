@@ -1,0 +1,160 @@
+<!-- Contact & Socials Widget -->
+<div id="customer-service"></div>
+
+<style>
+  #customer-service {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8rem;
+    font-family: Arial, sans-serif;
+  }
+  .cs-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform .25s ease, box-shadow .25s ease;
+    max-width: 220px;
+  }
+  .cs-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  }
+  .cs-avatar-wrap {
+    width: 72px;
+    height: 72px;
+    margin-bottom: .6rem;
+    position: relative;
+  }
+  .cs-caption {
+    font-size: .9rem;
+    color: #24323f;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: .6rem;
+  }
+  .cs-links {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: .6rem;
+  }
+  .cs-links a {
+    background: #084c61;
+    color: #fff;
+    padding: .44rem .9rem;
+    border-radius: 10px;
+    font-size: .85rem;
+    text-decoration: none;
+    transition: background .25s ease;
+  }
+  .cs-links a:hover {
+    background: #007BFF;
+  }
+  .socials {
+    display: flex;
+    gap: .6rem;
+    margin-bottom: .6rem;
+  }
+  .socials a svg {
+    width: 28px;
+    height: 28px;
+    fill: #084c61;
+    transition: fill .25s ease;
+  }
+  .socials a:hover svg {
+    fill: #007BFF;
+  }
+  .warning {
+    font-size: .75rem;
+    color: #b00020;
+    text-align: center;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  // Create monochrome SVG avatar (headset rep)
+  function createMonochromeAvatarSVG() {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute("width", "72");
+    svg.setAttribute("height", "72");
+
+    const bg = document.createElementNS(svgNS, "circle");
+    bg.setAttribute("cx", "50");
+    bg.setAttribute("cy", "50");
+    bg.setAttribute("r", "48");
+    bg.setAttribute("fill", "#d6d6d6");
+    svg.appendChild(bg);
+
+    const head = document.createElementNS(svgNS, "circle");
+    head.setAttribute("cx", "50");
+    head.setAttribute("cy", "42");
+    head.setAttribute("r", "16");
+    head.setAttribute("fill", "#f3f3f3");
+    head.setAttribute("stroke", "#8a8a8a");
+    head.setAttribute("stroke-width", "2");
+    svg.appendChild(head);
+
+    const torso = document.createElementNS(svgNS, "path");
+    torso.setAttribute("d", "M25,80 C25,65 40,58 50,58 C60,58 75,65 75,80 Z");
+    torso.setAttribute("fill", "#cfcfcf");
+    torso.setAttribute("stroke", "#8a8a8a");
+    torso.setAttribute("stroke-width", "2");
+    svg.appendChild(torso);
+
+    const band = document.createElementNS(svgNS, "path");
+    band.setAttribute("d", "M34,38 C34,28 66,28 66,38");
+    band.setAttribute("fill", "none");
+    band.setAttribute("stroke", "#7a7a7a");
+    band.setAttribute("stroke-width", "3");
+    band.setAttribute("stroke-linecap", "round");
+    svg.appendChild(band);
+
+    return svg;
+  }
+
+  (function initWidget() {
+    const root = document.getElementById("customer-service");
+
+    const card = document.createElement("a");
+    card.href = "https://wa.me/233240118846";
+    card.target = "_blank";
+    card.className = "cs-card";
+
+    const wrap = document.createElement("div");
+    wrap.className = "cs-avatar-wrap";
+    wrap.appendChild(createMonochromeAvatarSVG());
+
+    const caption = document.createElement("div");
+    caption.className = "cs-caption";
+    caption.textContent = "Our customer service is ready to help";
+
+    // Quick links
+    const links = document.createElement("div");
+    links.className = "cs-links";
+    const home = document.createElement("a");
+    home.href = "index.html";
+    home.textContent = "🏠 Home";
+    const track = document.createElement("a");
+    track.href = "tracker.html";
+    track.textContent = "📦 Track Order";
+    links.appendChild(home);
+    links.appendChild(track);
+
+    // Social media icons
+    const socials = document.createElement("div");
+    socials.className = "socials";
+    socials.innerHTML = `
+      <a href="https://www.instagram.com/kashoption1?igsh=MW44M2docDgzN3g0Yg%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.4.3 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.4.2-1.1.3-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.4-.3-1.1-.4-2.3-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .4-.2 1.1-.3 2.3-.4 1.3-.1 1.7-.1 4.9-.1m0-2.2C8.7 0 8.3 0 7 .1 5.7.2 4.7.4 3.9.7c-.9.3-1.6.7-2.3 1.4-.7.7-1.1 1.4-1.4 2.3-.3.8-.5 1.8-.6 3.1C-.1 8.3 0 8.7 0 12s-.1 3.7.1 5c.1 1.3.3 2.3.6 3.1.3.9.7 1.6 1.4 2.3.7.7 1.4 1.1 2.3 1.4.8.3 1.8.5 3.1.6 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.3-.3 3.1-.6.9-.3 1.6-.7 2.3-1.4.7-.7 1.1 
