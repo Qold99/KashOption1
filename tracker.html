@@ -169,7 +169,8 @@
     L.marker(coord).addTo(map).bindPopup("Current checkpoint").openPopup();
   }
 
-  function checkPin() {
+ <script>
+function checkPin() {
   const entered = document.getElementById("pin").value.trim();
 
   if (entered === "767484") {
@@ -179,28 +180,23 @@
     alert("Access Denied");
   }
 }
-  }
 
-  function updateTrack(e) {
-    e.preventDefault();
-    const data = getStore();
-    const id = adm-id.value.toUpperCase().trim();
-    data[id] = {
-      id,
-      clientName: adm-name.value,
-      status: adm-status.value,
-      location: adm-loc.value,
-      eta: adm-eta.value
-    };
-    setStore(data);
-    alert("Tracking info updated!");
-    e.target.reset();
-  }
+function updateTrack(e) {
+  e.preventDefault();
+
+  const data = getStore();
+  const id = document.getElementById("adm-id").value.toUpperCase().trim();
+
+  data[id] = {
+    id: id,
+    clientName: document.getElementById("adm-name").value,
+    status: document.getElementById("adm-status").value,
+    location: document.getElementById("adm-loc").value,
+    eta: document.getElementById("adm-eta").value
+  };
+
+  setStore(data);
+  alert("Tracking info updated!");
+  document.getElementById("admin-form").reset();
+}
 </script>
-
-</body>
-</html>
-
-
-
-
