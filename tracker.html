@@ -169,33 +169,33 @@
     L.marker(coord).addTo(map).bindPopup("Current checkpoint").openPopup();
   }
 
-function checkPin() {
-  const entered = document.getElementById("pin").value.trim();
+  function checkPin() {
+    const entered = document.getElementById("pin").value.trim();
 
-  if (entered === "767484") {
-    document.getElementById("admin-form").classList.remove("hidden");
-    document.getElementById("pin-gate").classList.add("hidden");
-  } else {
-    alert("Access Denied");
+    if (entered === "767484") {
+      document.getElementById("admin-form").classList.remove("hidden");
+      document.getElementById("pin-gate").classList.add("hidden");
+    } else {
+      alert("Access Denied");
+    }
   }
-}
 
-function updateTrack(e) {
-  e.preventDefault();
+  function updateTrack(e) {
+    e.preventDefault();
 
-  const data = getStore();
-  const id = document.getElementById("adm-id").value.toUpperCase().trim();
+    const data = getStore();
+    const id = document.getElementById("adm-id").value.toUpperCase().trim();
 
-  data[id] = {
-    id: id,
-    clientName: document.getElementById("adm-name").value,
-    status: document.getElementById("adm-status").value,
-    location: document.getElementById("adm-loc").value,
-    eta: document.getElementById("adm-eta").value
-  };
+    data[id] = {
+      id: id,
+      clientName: document.getElementById("adm-name").value,
+      status: document.getElementById("adm-status").value,
+      location: document.getElementById("adm-loc").value,
+      eta: document.getElementById("adm-eta").value
+    };
 
-  setStore(data);
-  alert("Tracking info updated!");
-  document.getElementById("admin-form").reset();
-}
+    setStore(data);
+    alert("Tracking info updated!");
+    document.getElementById("admin-form").reset();
+  }
 </script>
