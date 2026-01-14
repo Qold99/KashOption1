@@ -65,14 +65,14 @@
 
 </main>
 
-<!-- ADMIN MODAL (UNCHANGED LOGIC) -->
+<!-- ADMIN MODAL -->
 <div id="staff" class="hidden fixed inset-0 bg-black/95 z-[100] p-6">
-
   <div id="pin-gate" class="max-w-md mx-auto mt-32 text-center">
     <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
       <i class="fas fa-lock text-3xl"></i>
     </div>
     <h3 class="text-3xl font-black mb-6 uppercase italic">Admin Access</h3>
+    <p class="text-slate-400 mb-6 text-sm">To update tracking, please use your Google Sheet database.</p>
     <input id="pin" type="password" placeholder="••••••"
       class="w-full bg-white/5 border p-5 rounded-2xl mb-4 text-center text-2xl tracking-[0.5em] font-bold">
     <button onclick="checkPin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase">
@@ -80,31 +80,14 @@
     </button>
   </div>
 
-  <form id="admin-form" class="hidden max-w-2xl mx-auto mt-10 space-y-6 glass p-10 rounded-[3rem]"
-    onsubmit="updateTrack(event)">
-
-    <h3 class="text-2xl font-black uppercase italic text-blue-500">Update Logistics</h3>
-
-    <div class="grid md:grid-cols-2 gap-6">
-      <input id="adm-id" required placeholder="Tracking ID" class="bg-white/5 p-4 rounded-xl font-bold uppercase">
-      <input id="adm-name" required placeholder="Client Full Name" class="bg-white/5 p-4 rounded-xl font-bold">
-      <select id="adm-status" class="bg-slate-800 p-4 rounded-xl font-bold">
-        <option>In Transit</option>
-        <option>Shipped</option>
-        <option>Arrived at Port</option>
-        <option>Ready for Pickup</option>
-        <option>Delivered</option>
-        <option>Delayed</option>
-      </select>
-      <input id="adm-loc" placeholder="Current City / Port" class="bg-white/5 p-4 rounded-xl font-bold">
-    </div>
-
-    <input id="adm-eta" placeholder="ETA / Arrival Date" class="w-full bg-white/5 p-4 rounded-xl font-bold">
-
-    <button class="w-full bg-blue-600 py-6 rounded-2xl font-black uppercase">
-      Commit to Database
-    </button>
-  </form>
+  <div id="admin-info" class="hidden max-w-2xl mx-auto mt-10 space-y-6 glass p-10 rounded-[3rem] text-center">
+    <h3 class="text-2xl font-black uppercase italic text-blue-500">Logistics Database</h3>
+    <p class="text-slate-300">You are using Google Sheets as your database.</p>
+    <a href="https://docs.google.com/spreadsheets/d/1yA_6uU8uG-z7-p2Nl5XqA6y8H-E-f6S6vN5nUvI3B8o/edit" target="_blank" class="block w-full bg-green-600 py-6 rounded-2xl font-black uppercase text-white">
+      Open Google Sheets to Update
+    </a>
+    <button onclick="document.getElementById('staff').classList.add('hidden')" class="text-slate-500 uppercase text-xs font-bold">Close Portal</button>
+  </div>
 </div>
 
 <footer class="py-10 border-t border-white/5 text-center">
@@ -114,43 +97,78 @@
 </footer>
 
 <script>
-  const demoData = {
-    "KO-992": {
-      id: "KO-992",
-      clientName: "John Doe",
-      status: "In Transit",
-      location: "Shanghai Port",
-      eta: "Dec 28, 2025"
-    }
-  };
+  // YOUR PUBLISHED CSV LINK
+  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS2OUQUgCcQgpu0AeuILp1GCXW4ntv6dYRRB554WtRsmpccw5AUKayNwNeHmHNs_zdF2oXNQNDVfHw3/pub?output=csv";
 
-  const storeKey = "trackingData";
-  const getStore = () => JSON.parse(localStorage.getItem(storeKey)) || demoData;
-  const setStore = (d) => localStorage.setItem(storeKey, JSON.stringify(d));
-
-  function trackPackage(e) {
+  async function trackPackage(e) {
     e.preventDefault();
-    const id = trackId.value.toUpperCase().trim();
-    const data = getStore()[id];
+    const id = document.getElementById('trackId').value.toUpperCase().trim();
+    result.innerHTML = `<div class="p-6 text-center text-blue-400 animate-pulse">Accessing Secure Database...</div>`;
 
-    if (!data) {
-      result.innerHTML = `<div class="p-6 bg-red-500/10 rounded-xl text-center text-red-400">Tracking ID not recognized.</div>`;
-      return;
+    try {
+      const response = await fetch(SHEET_URL);
+      const csvText = await response.text();
+      
+      // Parse CSV
+      const rows = csvText.split('\n').map(row => row.split(','));
+      const headers = rows[0].map(h => h.trim());
+      const dataRows = rows.slice(1).map(row => {
+        let obj = {};
+        row.forEach((cell, i) => {
+          if (headers[i]) obj[headers[i]] = cell.trim();
+        });
+        return obj;
+      });
+
+      const order = dataRows.find(o => o.TrackingID === id);
+
+      if (!order) {
+        result.innerHTML = `<div class="p-6 bg-red-500/10 rounded-xl text-center text-red-400 font-bold uppercase tracking-widest">Tracking ID [${id}] not recognized.</div>`;
+        return;
+      }
+
+      result.innerHTML = `
+        <div class="glass p-8 rounded-[2.5rem] space-y-4 animate-in fade-in duration-500">
+          <div class="flex justify-between items-start">
+            <div>
+               <p class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">Current Status</p>
+               <h4 class="text-3xl font-black uppercase italic">${order.Status}</h4>
+            </div>
+            <div class="bg-blue-600/20 p-3 rounded-2xl">
+              <i class="fas fa-box text-blue-500"></i>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 py-4 border-y border-white/5">
+            <div>
+              <p class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Location</p>
+              <p class="font-bold">${order.Location}</p>
+            </div>
+            <div>
+              <p class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Details</p>
+              <p class="font-bold">${order.Details || 'N/A'}</p>
+            </div>
+          </div>
+
+          <div id="map" class="mt-4"></div>
+          
+          <div class="pt-4 flex items-center gap-4">
+             <div class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-xs">
+                <i class="fas fa-user text-slate-500"></i>
+             </div>
+             <div>
+                <p class="text-[10px] text-slate-500 font-bold uppercase">Consignee</p>
+                <p class="text-sm font-bold">${id}</p>
+             </div>
+          </div>
+        </div>`;
+
+      loadMap(order.Location);
+
+    } catch (err) {
+      console.error(err);
+      result.innerHTML = `<div class="p-6 bg-red-500/10 rounded-xl text-center text-red-400">Database connection error. Try again.</div>`;
     }
-
-    result.innerHTML = `
-      <div class="glass p-6 rounded-3xl space-y-2">
-        <h4 class="text-2xl font-black uppercase">${data.status}</h4>
-        <p><strong>Location:</strong> ${data.location}</p>
-        <p><strong>ETA:</strong> ${data.eta}</p>
-        <p><strong>Consignee:</strong> ${data.clientName}</p>
-        <div id="map"></div>
-        <p class="text-xs text-slate-400 mt-2">
-          Map shows shipment progress based on latest logistics update.
-        </p>
-      </div>`;
-
-    loadMap(data.location);
   }
 
   function loadMap(loc) {
@@ -158,11 +176,12 @@
       "Shanghai": [31.2304, 121.4737],
       "London": [51.5074, -0.1278],
       "New York": [40.7128, -74.0060],
-      "Accra": [5.6037, -0.1870]
+      "Accra": [5.6037, -0.1870],
+      "Guangzhou": [23.1291, 113.2644]
     };
 
     let coord = points["Accra"];
-    Object.keys(points).forEach(k => { if (loc.includes(k)) coord = points[k]; });
+    Object.keys(points).forEach(k => { if (loc && loc.includes(k)) coord = points[k]; });
 
     const map = L.map('map').setView(coord, 4);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -171,31 +190,13 @@
 
   function checkPin() {
     const entered = document.getElementById("pin").value.trim();
-
     if (entered === "767484") {
-      document.getElementById("admin-form").classList.remove("hidden");
+      document.getElementById("admin-info").classList.remove("hidden");
       document.getElementById("pin-gate").classList.add("hidden");
     } else {
       alert("Access Denied");
     }
   }
-
-  function updateTrack(e) {
-    e.preventDefault();
-
-    const data = getStore();
-    const id = document.getElementById("adm-id").value.toUpperCase().trim();
-
-    data[id] = {
-      id: id,
-      clientName: document.getElementById("adm-name").value,
-      status: document.getElementById("adm-status").value,
-      location: document.getElementById("adm-loc").value,
-      eta: document.getElementById("adm-eta").value
-    };
-
-    setStore(data);
-    alert("Tracking info updated!");
-    document.getElementById("admin-form").reset();
-  }
 </script>
+</body>
+</html>
