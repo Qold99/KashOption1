@@ -217,21 +217,24 @@
     align-items: center;
     justify-content: center;
     min-height: 60vh;
-    margin: 20px;
-    padding: 40px;
+    width: 95%; /* Ensures it stays inside screen bounds */
+    max-width: 1200px;
+    margin: 20px auto; /* Centers the section horizontally */
+    padding: 40px 20px;
     border-radius: 24px;
     position: relative;
     overflow: hidden;
     background-image: url('images/aboutpage.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: scroll; /* Better for mobile UI */
+    background-repeat: no-repeat;
+    box-sizing: border-box; /* Prevents padding from pushing width */
 ">
   <!-- Modern Blur Overlay -->
   <div style="
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
   "></div>
@@ -240,22 +243,24 @@
   <div style="
       position: relative;
       z-index: 1;
+      width: 100%;
       max-width: 700px;
       text-align: center;
       color: white;
       font-family: system-ui, -apple-system, sans-serif;
   ">
     <h2 style="
-        font-size: clamp(2rem, 5vw, 3rem);
+        font-size: clamp(1.8rem, 8vw, 3rem);
         font-weight: 800;
         margin-bottom: 1rem;
         letter-spacing: -0.02em;
     ">About Kash Option</h2>
     
     <p style="
-        font-size: clamp(1rem, 3vw, 1.25rem);
+        font-size: clamp(1rem, 4vw, 1.25rem);
         line-height: 1.6;
         opacity: 0.95;
+        margin: 0 auto;
     ">
       Kash Option is a <span style="color: #60a5fa; font-weight: 600;">trusted global sourcing</span> and logistics brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.
     </p>
