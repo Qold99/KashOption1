@@ -23,7 +23,6 @@
 --border: rgba(255, 255, 255, 0.1);
 }
 
-/* 1. Global Reset */
 html { scroll-behavior: smooth; }
 body {
 margin: 0;
@@ -33,7 +32,7 @@ color: var(--text);
 overflow-x: hidden;
 }
 
-/* 2. Modern Navbar */
+/* Navbar & Mobile Menu */
 .navbar {
 background: rgba(0, 0, 0, 0.85);
 backdrop-filter: blur(15px);
@@ -43,6 +42,7 @@ width: 100%;
 top: 0;
 z-index: 2000;
 border-bottom: 1px solid var(--border);
+box-sizing: border-box;
 }
 .nav-container {
 display: flex;
@@ -70,7 +70,6 @@ transition: 0.3s;
 }
 .nav-links a:hover { color: var(--accent); }
 
-/* Hamburger Button */
 .hamburger {
 display: none;
 cursor: pointer;
@@ -84,7 +83,7 @@ display: block;
 width: 25px; height: 2px; background: #fff; transition: 0.4s;
 }
 
-/* 3. Hero Header */
+/* Hero */
 header {
 height: 85vh;
 background: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.85)),
@@ -106,7 +105,7 @@ font-weight: 800;
 }
 header p { color: #94a3b8; font-size: 1.2rem; margin-top: 15px; }
 
-/* 4. Sections & Cards */
+/* Sections */
 section { padding: 80px 5%; max-width: 1200px; margin: auto; }
 .section-title {
 text-align: center; font-size: 2.5rem; margin-bottom: 40px; font-weight: 800;
@@ -128,33 +127,49 @@ background: rgba(255, 255, 255, 0.06);
 transform: translateY(-10px);
 }
 
-.grid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.grid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
 
-/* WhatsApp Support Button */
-#whatsapp-support {
-position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff;
-padding: 12px 25px; border-radius: 50px; z-index: 3000; text-decoration: none;
-display: flex; align-items: center; gap: 10px; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+/* FAQ Styling */
+.faq-card {
+background: var(--glass);
+border: 1px solid var(--border);
+border-radius: 16px;
+margin-bottom: 15px;
+overflow: hidden;
+transition: 0.3s;
 }
+.faq-card summary {
+padding: 20px;
+cursor: pointer;
+list-style: none;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-weight: 700;
+}
+.faq-card summary span { transition: 0.3s; color: var(--accent); }
+.faq-content { padding: 0 20px 20px; color: #94a3b8; line-height: 1.6; font-size: 0.95rem; }
+.faq-card[open] { background: rgba(255, 255, 255, 0.07); border-color: var(--accent); }
+.faq-card[open] summary span { transform: rotate(180deg); }
 
-/* Order Feed Specifics */
+/* Orders Feed */
 .order-item {
 flex: 0 0 300px; background: var(--glass); margin: 10px; padding: 15px;
 border-radius: 15px; border: 1px solid var(--border); display: flex; align-items: center; gap: 15px;
 }
 
-/* FAQ Specifics */
-.faq-card {
-background: var(--glass); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 15px; overflow: hidden;
-}
-.faq-card summary { padding: 20px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; font-weight: 700; }
-.faq-content { padding: 0 20px 20px; color: #94a3b8; line-height: 1.6; }
-.faq-card[open] { border-color: var(--accent); }
-
 /* Testimonials */
-.testimonial-row { display: flex; justify-content: center; gap: 20px; opacity: 0; transform: translateY(20px); transition: 1s ease; }
-.testimonial-row.active { opacity: 1; transform: translateY(0); }
-.testimonial-card { flex: 1; background: var(--glass); padding: 20px; border-radius: 20px; border: 1px solid var(--border); max-width: 350px; }
+.testimonial-row { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+.testimonial-card {
+flex: 1; background: var(--glass); padding: 25px; border-radius: 20px;
+border: 1px solid var(--border); max-width: 350px; text-align: left;
+}
+
+#whatsapp-support {
+position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff;
+padding: 12px 25px; border-radius: 50px; z-index: 3000; text-decoration: none;
+display: flex; align-items: center; gap: 10px; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
 
 @media (max-width: 768px) {
 .hamburger { display: flex; }
@@ -196,8 +211,8 @@ transition: 0.4s ease; border-left: 1px solid var(--border);
 </header>
 
 <section id="about">
-<div class="glass-card" style="padding: 60px 20px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/aboutpage.jpg') center/cover; position: relative; border: none;">
-<h2 class="section-title">About Kash Option</h2>
+<div class="glass-card" style="padding: 60px 20px; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/aboutpage.jpg') center/cover; border: none; overflow: hidden;">
+<h2 class="section-title" style="margin-bottom: 20px;">About Kash Option</h2>
 <p style="max-width: 800px; margin: auto; font-size: 1.2rem; color: #cbd5e1; line-height: 1.8;">
 Kash Option is a <span style="color: var(--accent); font-weight: 700;">trusted global sourcing</span> and logistics brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.
 </p>
@@ -207,35 +222,19 @@ Kash Option is a <span style="color: var(--accent); font-weight: 700;">trusted g
 <section id="catalog">
 <h2 class="section-title">What You Can Order</h2>
 <div class="grid-grid">
-<div class="glass-card">
-<i class="fas fa-mobile-alt fa-3x" style="color:var(--accent)"></i>
-<h3 style="margin-top:15px">Phones & Laptops</h3>
-<p style="color: #94a3b8;">High-end smartphones and MacBooks.</p>
-</div>
-<div class="glass-card">
-<i class="fas fa-car fa-3x" style="color:#ef4444"></i>
-<h3 style="margin-top:15px">Auto Parts</h3>
-<p style="color: #94a3b8;">Engines, tires, and genuine spares.</p>
-</div>
-<div class="glass-card">
-<i class="fas fa-tshirt fa-3x" style="color:#a855f7"></i>
-<h3 style="margin-top:15px">Fashion</h3>
-<p style="color: #94a3b8;">Designer wear and sneakers.</p>
-</div>
-<div class="glass-card">
-<i class="fas fa-couch fa-3x" style="color:#10b981"></i>
-<h3 style="margin-top:15px">Home & Office</h3>
-<p style="color: #94a3b8;">Premium furniture sourcing.</p>
-</div>
+<div class="glass-card"><i class="fas fa-mobile-alt fa-3x" style="color:var(--accent)"></i><h3>Phones & Laptops</h3><p style="color:#94a3b8">Smartphones, MacBooks, and gaming gear.</p></div>
+<div class="glass-card"><i class="fas fa-camera fa-3x" style="color:#f59e0b"></i><h3>Cameras</h3><p style="color:#94a3b8">DSLRs, drones, and gadgets.</p></div>
+<div class="glass-card"><i class="fas fa-cogs fa-3x" style="color:#10b981"></i><h3>Auto Parts</h3><p style="color:#94a3b8">Engines and genuine spare parts.</p></div>
+<div class="glass-card"><i class="fas fa-couch fa-3x" style="color:#a855f7"></i><h3>Furniture</h3><p style="color:#94a3b8">Home & Office equipment.</p></div>
+<div class="glass-card"><i class="fas fa-tshirt fa-3x" style="color:#ef4444"></i><h3>Fashion</h3><p style="color:#94a3b8">Designer wear and sneakers.</p></div>
+<div class="glass-card"><i class="fas fa-boxes fa-3x" style="color:#6366f1"></i><h3>Wholesale</h3><p style="color:#94a3b8">Bulk items and merchandise.</p></div>
 </div>
 </section>
 
 <section id="orders">
 <h2 class="section-title">Live Orders Delivered</h2>
-<div id="ordersFeed" style="overflow:hidden; height:150px;">
-<div id="ordersList" style="display:flex; transition: transform 0.8s ease;">
-<!-- JS Injection -->
-</div>
+<div id="ordersFeed" style="overflow:hidden; height:120px;">
+<div id="ordersList" style="display:flex; transition: transform 0.8s ease;"></div>
 </div>
 </section>
 
@@ -245,20 +244,19 @@ Kash Option is a <span style="color: var(--accent); font-weight: 700;">trusted g
 </section>
 
 <section id="faqs">
-<h2 class="section-title">FAQs</h2>
-<div style="max-width: 800px; margin: auto;">
-<details class="faq-card">
-<summary>What does Kash Option do? <i class="fas fa-chevron-down"></i></summary>
-<div class="faq-content">We help clients source products from abroad and handle purchasing, shipping, and customs clearance to Ghana.</div>
-</details>
-<details class="faq-card">
-<summary>How long does shipping take? <i class="fas fa-chevron-down"></i></summary>
-<div class="faq-content">Air freight takes 3-7 days. Sea freight takes 6-8 weeks.</div>
-</details>
-<details class="faq-card">
-<summary>Are the products original? <i class="fas fa-chevron-down"></i></summary>
-<div class="faq-content">Yes. We only source from verified suppliers and platforms to ensure authenticity.</div>
-</details>
+<h2 class="section-title">Frequently Asked Questions</h2>
+<div style="max-width: 800px; margin: auto; text-align: left;">
+<details class="faq-card"><summary>What does Kash Option do? <span>▼</span></summary><div class="faq-content">Kash Option helps clients source original products from abroad and delivers them safely to Ghana. We handle purchasing, shipping, and customs.</div></details>
+<details class="faq-card"><summary>Which countries do you shop from? <span>▼</span></summary><div class="faq-content">We source from China, USA, UK, Europe, and other approved international markets.</div></details>
+<details class="faq-card"><summary>Are the products original? <span>▼</span></summary><div class="faq-content">Yes. We only source original and verified products from trusted suppliers.</div></details>
+<details class="faq-card"><summary>How long does shipping take? <span>▼</span></summary><div class="faq-content">Air freight takes 3–5 working days. Sea freight takes 6–8 weeks.</div></details>
+<details class="faq-card"><summary>Do I pay import duty separately? <span>▼</span></summary><div class="faq-content">No hidden charges. Shipping quotes include standard clearing unless stated otherwise.</div></details>
+<details class="faq-card"><summary>When do I make payment? <span>▼</span></summary><div class="faq-content">Full payment must be made before items are purchased or shipped.</div></details>
+<details class="faq-card"><summary>Can I reserve an item? <span>▼</span></summary><div class="faq-content">Items cannot be reserved without payment.</div></details>
+<details class="faq-card"><summary>Do you offer wholesale services? <span>▼</span></summary><div class="faq-content">Yes, we offer wholesale pricing for bulk orders. Contact us on WhatsApp.</div></details>
+<details class="faq-card"><summary>How can I track my order? <span>▼</span></summary><div class="faq-content">Tracking details are shared upon shipment. Use our Track Order page for live updates.</div></details>
+<details class="faq-card"><summary>What happens if there is a delay? <span>▼</span></summary><div class="faq-content">Timelines are estimates; delays can occur due to airlines or customs.</div></details>
+<details class="faq-card"><summary>How do I contact Kash Option? <span>▼</span></summary><div class="faq-content">Reach us via the WhatsApp button or our official groups.</div></details>
 </div>
 </section>
 
@@ -270,7 +268,7 @@ Kash Option is a <span style="color: var(--accent); font-weight: 700;">trusted g
 </section>
 
 <footer style="background: #000; padding: 60px 20px; text-align: center; border-top: 1px solid var(--border);">
-<div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px;">
+<div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 25px;">
 <a href="https://www.instagram.com/kashoption1" target="_blank" style="color:#E4405F;"><i class="fab fa-instagram fa-2x"></i></a>
 <a href="https://www.facebook.com/share/1CrwnBxS8W/" target="_blank" style="color:#1877F2;"><i class="fab fa-facebook fa-2x"></i></a>
 <a href="mailto:Info@mrkash.net" style="color:#fff;"><i class="fas fa-envelope fa-2x"></i></a>
@@ -283,58 +281,45 @@ Kash Option is a <span style="color: var(--accent); font-weight: 700;">trusted g
 </a>
 
 <script>
-// Navigation Toggle
+// Navigation
 const hmb = document.getElementById('hamburger');
 const nav = document.getElementById('nav-links');
-hmb.addEventListener('click', () => {
-hmb.classList.toggle('active');
-nav.classList.toggle('active');
-});
+hmb.addEventListener('click', () => { hmb.classList.toggle('active'); nav.classList.toggle('active'); });
 
-// Orders Feed Script
-const cities = ["Accra", "Kumasi", "Tema", "Takoradi", "Ho"];
-const pkgs = ["Electronics", "Fashion", "Beauty", "Auto Parts"];
+// Live Orders
+const cities = ["Accra", "Kumasi", "Tema", "Takoradi", "Ho", "Tamale"];
+const pkgs = ["Electronics", "Fashion", "Beauty", "Auto Parts", "Home Gear"];
 const list = document.getElementById('ordersList');
-
 for(let i=0; i<30; i++) {
 list.innerHTML += `
 <div class="order-item">
 <div style="background:var(--accent); padding:10px; border-radius:50%">📦</div>
-<div>
-<strong>#KO-${Math.floor(10000+Math.random()*90000)}</strong><br>
-<small>${pkgs[Math.floor(Math.random()*4)]} to ${cities[Math.floor(Math.random()*5)]}</small>
-</div>
+<div><strong>#KO-${Math.floor(10000+Math.random()*90000)}</strong><br>
+<small>${pkgs[Math.floor(Math.random()*5)]} • ${cities[Math.floor(Math.random()*6)]}</small></div>
 </div>`;
 }
+let pos = 0; setInterval(() => { pos = (pos + 320) % (30 * 320); list.style.transform = `translateX(-${pos}px)`; }, 3000);
 
-let pos = 0;
-setInterval(() => {
-pos = (pos + 320) % (30 * 320);
-list.style.transform = `translateX(-${pos}px)`;
-}, 3000);
-
-// Testimonials Shuffling
-const testimonials = [
-{text:"Kash Logistics made my dropshipping business seamless. Fast arrivals!", author:"Ama • Accra"},
-{text:"Reliable and transparent. I trust them with all my imports.", author:"Kwame • Kumasi"},
-{text:"Excellent customer support and real-time tracking.", author:"Daniel • Toronto"}
+// Testimonials
+const tests = [
+{t: "Kash Logistics made my dropshipping business seamless!", a: "Ama • Accra"},
+{t: "Reliable and transparent service for all my imports.", a: "Kwame • Kumasi"},
+{t: "Fast shipping and secure payments. 5 stars!", a: "Sarah • London"}
 ];
 const tDisp = document.getElementById('testimonialDisplay');
 let tIdx = 0;
-
 function showT() {
-const item = testimonials[tIdx];
+const item = tests[tIdx];
 tDisp.innerHTML = `
-<div class="testimonial-row active">
+<div class="testimonial-row animate__animated animate__fadeIn">
 <div class="testimonial-card">
-<p>"${item.text}"</p>
-<strong style="color:var(--accent)">- ${item.author}</strong>
+<p style="font-style:italic">"${item.t}"</p>
+<strong style="color:var(--accent)">- ${item.a}</strong>
 </div>
 </div>`;
-tIdx = (tIdx + 1) % testimonials.length;
+tIdx = (tIdx + 1) % tests.length;
 }
 showT(); setInterval(showT, 5000);
 </script>
-
 </body>
 </html>
