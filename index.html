@@ -213,38 +213,55 @@
 </nav>
 
 <section id="about" style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    margin: 20px;
+    padding: 40px;
+    border-radius: 24px;
     position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/aboutpage.jpg');
+    overflow: hidden;
+    background-image: url('images/aboutpage.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    padding: 100px 20px;
-    text-align: center;
-    color: #ffffff;
-    border-radius: 15px;
-    margin: 20px;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-attachment: scroll; /* Better for mobile UI */
 ">
-  <div style="max-width: 800px; margin: 0 auto;">
+  <!-- Modern Blur Overlay -->
+  <div style="
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+  "></div>
+
+  <!-- Content Layer -->
+  <div style="
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      text-align: center;
+      color: white;
+      font-family: system-ui, -apple-system, sans-serif;
+  ">
     <h2 style="
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
+        font-size: clamp(2rem, 5vw, 3rem);
         font-weight: 800;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
     ">About Kash Option</h2>
     
     <p style="
-        font-size: 1.2rem;
-        line-height: 1.8;
-        font-weight: 400;
-        text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        line-height: 1.6;
+        opacity: 0.95;
     ">
-      Kash Option is a <span style="color: #00d4ff; font-weight: bold;">trusted global sourcing and logistics</span> brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.
+      Kash Option is a <span style="color: #60a5fa; font-weight: 600;">trusted global sourcing</span> and logistics brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.
     </p>
   </div>
 </section>
-
+  
 <section id="services">
   <h2>Our Services</h2>
   <div class="grid">
