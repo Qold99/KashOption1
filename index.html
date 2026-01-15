@@ -1,222 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
+    <title>Kash Option | Shop Globally, Pay Locally</title>
+    
+    <meta name="description" content="Kash Option helps you shop from China, USA, UK and delivers safely to Ghana. Trusted sourcing, fast shipping.">
+    
+    <!-- External Assets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <title>Kash Option | Shop Globally, Pay Locally</title>
+    <style>
+        :root {
+            --primary: #062c5f;
+            --accent: #00aaff;
+            --text: #24323f;
+            --light: #f6fbff;
+            --success: #25D366;
+        }
 
-  <!-- Add this to your <head> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        /* 1. Global Reset & Smoothness */
+        html { scroll-behavior: smooth; }
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            background: var(--light); 
+            color: var(--text);
+            overflow-x: hidden;
+        }
 
-<style>
-  /* 1. Smooth Scroll & Global Transition */
-  html { scroll-behavior: smooth; }
-  * { transition: all 0.3s ease-in-out; }
+        /* 2. Modern Navbar */
+        .navbar {
+            background: #000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
 
-  /* 2. Entrance Animations */
-  .fade-in-up {
-    animation: fadeInUp 1s both;
-  }
+        /* 3. Hero Header */
+        header {
+            background: linear-gradient(rgba(6, 44, 95, 0.9), rgba(6, 44, 95, 0.9)), 
+                        url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200') center/cover;
+            color: #fff;
+            padding: 5rem 1.5rem;
+            text-align: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+        header h1 { 
+            font-size: 3.5rem; 
+            margin: 0; 
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  /* 3. Card Hover Effects (Ultra Modern) */
-  .card:hover, .faq-card:hover, #catalog div:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border-color: #60a5fa !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-  }
+        /* 4. World-Class Cards & Animations */
+        .grid {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 4rem 1rem;
+        }
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 300px;
+            border: 1px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--accent);
+        }
+        .card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
 
-  /* 4. Glowing Button Animation */
-  .order-btn {
-    animation: pulse-glow 2s infinite;
-  }
+        /* 5. Custom Utility Animations */
+        .order-btn {
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 2rem;
+            animation: pulse-glow 2s infinite;
+        }
 
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-  }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
 
-  /* 5. Glassmorphism Floating Effect */
-  #about {
-    animation: float 6s ease-in-out infinite;
-  }
+        section { padding: 4rem 2rem; text-align: center; }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            width: 60%;
+            height: 4px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -10px;
+            left: 20%;
+        }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
 
-  /* 6. Text Gradient Shimmer */
-  h2 {
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
-  }
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand">KASH OPTION</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-  @keyframes shine {
-    to { background-position: 200% center; }
-  }
-</style>
-  <meta name="description" content="Kash Option helps you shop from China, USA, UK and other countries and delivers safely to Ghana. Trusted sourcing, fast shipping, and local payments.">
-  <meta name="keywords" content="China to Ghana shipping, buy from China Ghana, international shopping Ghana, Kash Option, import from China">
-  <meta name="author" content="Kash Option">
+    <header>
+        <h1 class="animate__animated animate__fadeInDown">Shop Globally, Pay Locally</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">The bridge between your favorite global stores and your doorstep in Ghana.</p>
+        <a href="#" class="order-btn">Start Shopping Now <i class="fab fa-whatsapp"></i></a>
+    </header>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <section id="services">
+        <h2 class="section-title">Our Premium Services</h2>
+        <div class="grid">
+            <div class="card animate__animated animate__zoomIn">
+                <i class="fas fa-ship"></i>
+                <h3>Fast Shipping</h3>
+                <p>Reliable air and sea freight from China, USA, and UK directly to Ghana.</p>
+            </div>
+            <div class="card animate__animated animate__zoomIn animate__delay-1s">
+                <i class="fas fa-search-dollar"></i>
+                <h3>Product Sourcing</h3>
+                <p>We find the best quality products at factory prices so you don't have to.</p>
+            </div>
+            <div class="card animate__animated animate__zoomIn animate__delay-2s">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Delivery</h3>
+                <p>Your items are handled with care and delivered safely to your warehouse or home.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Styles -->
-  <style>
-    body {
-      margin:0;
-      font-family:Segoe UI, Arial, sans-serif;
-      background:#f6fbff;
-      color:#24323f;
-    }
-
-    header {
-      background:#062c5f;
-      color:#fff;
-      padding:3rem 1.5rem;
-      text-align:center;
-    }
-    header h1 {
-      font-size:2.6rem;
-      margin:0;
-      font-weight:700;
-    }
-    header p {
-      margin-top:.7rem;
-      font-size:1.1rem;
-      opacity:.95;
-    }
-
-    /* Navigation Bar */
-    .navbar {
-      background:#000; /* ultra black */
-      padding:1rem 2rem;
-      color:#fff;
-    }
-    .nav-container {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      max-width:1000px;
-      margin:auto;
-    }
-    .brand {
-      font-size:1.6rem;
-      font-weight:800;
-      color:#fff;
-      text-decoration:none;
-      letter-spacing:1px;
-    }
-    .hamburger {
-      display:none;
-      flex-direction:column;
-      justify-content:space-between;
-      width:24px;
-      height:18px;
-      background:none;
-      border:none;
-      cursor:pointer;
-      padding:0;
-    }
-    .bar {
-      height:3px;
-      width:100%;
-      background:#fff;
-      border-radius:2px;
-      transition:all 0.3s ease;
-    }
-    .nav-links {
-      display:flex;
-      gap:1rem;
-    }
-    .nav-links a {
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-    }
-    @media (max-width:768px) {
-      .hamburger { display:flex; }
-      .nav-links {
-        display:none; /* collapsed by default */
-        flex-direction:column;
-        background:#000;
-        position:absolute;
-        top:60px;
-        right:0;
-        width:220px;
-        padding:1rem;
-        border-radius:8px;
-      }
-      .nav-links.show { display:flex; }
-    }
-    .hamburger.active .bar:nth-child(1) {
-      transform:rotate(45deg) translate(5px,5px);
-    }
-    .hamburger.active .bar:nth-child(2) { opacity:0; }
-    .hamburger.active .bar:nth-child(3) {
-      transform:rotate(-45deg) translate(5px,-5px);
-    }
-
-    /* Section backgrounds */
-    #about {
-      background:#f4f4f4;
-      padding:3rem 2rem;
-    }
-    #services {
-      background:linear-gradient(135deg,#e3f2fd,#ffffff);
-      padding:3rem 2rem;
-    }
-
-    /* Headings */
-    section h2 {
-      color:#084c61;
-      font-size:2rem;
-      font-weight:800;
-      text-align:center;
-      margin-bottom:1.5rem;
-      border-bottom:3px solid #00aaff;
-      display:inline-block;
-      padding-bottom:.5rem;
-    }
-
-    /* Cards */
-    .grid {
-      display:flex;
-      gap:2rem;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .card {
-      background:#fff;
-      border-radius:10px;
-      padding:2rem;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      text-align:center;
-      transition:transform .3s ease, box-shadow .3s ease;
-      max-width:280px;
-    }
-    .card:hover {
-      transform:translateY(-5px);
-      box-shadow:0 8px 20px rgba(0,0,0,0.15);
-    }
-    .card h3 {
-      color:#000;
-      font-weight:700;
-      margin-top:1rem;
-    }
-    .card p {
-      color:#555;
-      font-size:.95rem;
-    }
-
-  <!-- Ensure this is in your <head> section -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <section id="about" style="background: #fff;">
+        <div style="max-width: 800px; margin: auto;">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <p>At Kash Option, we eliminate the stress of international trade. Whether you are a business owner or an individual shopper, we provide the logistics and expertise to make global shopping seamless.</p>
+        </div>
+    </section>
 <footer style="
     background: #06232e;
     color: #e9f8ff;
