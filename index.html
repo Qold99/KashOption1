@@ -387,50 +387,92 @@
 </body>
 </html>
 
-<section id="catalog" style="background:linear-gradient(135deg,#e3f2fd,#ffffff); padding:3rem 2rem;">
-  <h2 style="text-align:center; font-size:2.4rem; font-weight:800; color:#084c61; margin-bottom:2rem; border-bottom:3px solid #00aaff; display:inline-block; padding-bottom:.5rem;">
-    What You Can Order
-  </h2>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem; max-width:1100px; margin:auto;">
-    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-mobile-alt fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Phones & Laptops</h3>
-      <p style="color:#555;">Smartphones, MacBooks, gaming laptops, tablets, and accessories.</p>
+<section id="catalog" style="
+    background: #0a0a0b;
+    padding: 80px 20px;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: white;
+    text-align: center;
+">
+  <h2 style="
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 50px;
+      background: linear-gradient(to right, #ffffff, #64748b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+  ">What You Can Order</h2>
+
+  <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+  ">
+    <!-- Items -->
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px; transition: 0.3s; cursor: pointer;">
+      <div style="background: linear-gradient(135deg, #3b82f6, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <i class="fas fa-mobile-alt fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Phones & Laptops</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">High-end smartphones, MacBooks, and gaming gear.</p>
     </div>
- <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-camera fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Cameras & Electronics</h3>
-      <p style="color:#555;">DSLRs, drones, speakers, smart TVs, and home gadgets.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="background: linear-gradient(135deg, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <i class="fas fa-camera fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Cameras & Electronics</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">DSLRs, drones, and smart home gadgets.</p>
     </div>
-    <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-cogs fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Auto Parts</h3>
-      <p style="color:#555;">Car engines, tires, batteries, and spare parts from trusted suppliers.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="background: linear-gradient(135deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <i class="fas fa-cogs fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Auto Parts</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">Engines, tires, and genuine spare parts.</p>
     </div>
- <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-couch fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Home & Office Items</h3>
-      <p style="color:#555;">Furniture, décor, kitchenware, printers, and office supplies.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="background: linear-gradient(135deg, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <i class="fas fa-couch fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Home & Office</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">Premium furniture and office equipment.</p>
     </div>
- <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-boxes fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Wholesale Goods</h3>
-      <p style="color:#555;">Bulk clothing, electronics, accessories, and general merchandise.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="color: #6366f1;">
+        <i class="fas fa-boxes fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Wholesale Goods</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">Bulk items and general merchandise.</p>
     </div>
- <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-tshirt fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Fashion & Apparel</h3>
-      <p style="color:#555;">Designer wear, sneakers, handbags, and accessories.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="color: #f43f5e;">
+        <i class="fas fa-tshirt fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Fashion & Apparel</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">Designer wear, sneakers, and accessories.</p>
     </div>
- <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-dumbbell fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Sports & Fitness</h3>
-      <p style="color:#555;">Gym equipment, bicycles, sportswear, and accessories.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="color: #0ea5e9;">
+        <i class="fas fa-dumbbell fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Sports & Fitness</h3> <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">Gym equipment and pro sportswear.</p>
     </div>
- <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:.3s;">
-      <i class="fas fa-baby fa-3x" style="color:#084c61;"></i>
-      <h3 style="margin-top:1rem; font-weight:700;">Kids & Baby Products</h3>
-      <p style="color:#555;">Toys, strollers, baby clothes, and learning materials.</p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 20px;">
+      <div style="color: #fbbf24;">
+        <i class="fas fa-baby fa-3x"></i>
+      </div>
+      <h3 style="margin-top: 1.5rem; font-size: 1.3rem;">Kids & Baby</h3>
+      <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">Safety-first products and educational toys.</p>
     </div>
   </div>
 </section>
