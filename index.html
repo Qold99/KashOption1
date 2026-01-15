@@ -81,68 +81,36 @@
         }
 
         /* 4. World-Class Cards & Animations */
-        .grid {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 4rem 1rem;
-        }
         .card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 300px;
-            border: 1px solid transparent;
         }
         .card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             border-color: var(--accent);
         }
-        .card i {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
 
-        /* 5. Custom Utility Animations */
-        .order-btn {
-            background: var(--success);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+        #whatsapp-support {
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            background:#25D366;
+            color:#fff;
+            font-size:2rem;
+            padding:15px;
+            border-radius:50%;
+            box-shadow:0 4px 12px rgba(0,0,0,.25);
+            z-index:9999;
             text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 2rem;
-            animation: pulse-glow 2s infinite;
-        }
-
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        section { padding: 4rem 2rem; text-align: center; }
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: '';
-            width: 60%;
-            height: 4px;
-            background: var(--accent);
-            position: absolute;
-            bottom: -10px;
-            left: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @media (max-width: 768px) {
@@ -153,118 +121,19 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="brand">KASH OPTION</a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <header>
-        <h1 class="animate__animated animate__fadeInDown">Shop Globally, Pay Locally</h1>
-        <p class="animate__animated animate__fadeInUp animate__delay-1s">The bridge between your favorite global stores and your doorstep in Ghana.</p>
-        <a href="#" class="order-btn">Start Shopping Now <i class="fab fa-whatsapp"></i></a>
-    </header>
-
-    <section id="services">
-        <h2 class="section-title">Our Premium Services</h2>
-        <div class="grid">
-            <div class="card animate__animated animate__zoomIn">
-                <i class="fas fa-ship"></i>
-                <h3>Fast Shipping</h3>
-                <p>Reliable air and sea freight from China, USA, and UK directly to Ghana.</p>
-            </div>
-            <div class="card animate__animated animate__zoomIn animate__delay-1s">
-                <i class="fas fa-search-dollar"></i>
-                <h3>Product Sourcing</h3>
-                <p>We find the best quality products at factory prices so you don't have to.</p>
-            </div>
-            <div class="card animate__animated animate__zoomIn animate__delay-2s">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Secure Delivery</h3>
-                <p>Your items are handled with care and delivered safely to your warehouse or home.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" style="background: #fff;">
-        <div style="max-width: 800px; margin: auto;">
-            <h2 class="section-title">Why Choose Us?</h2>
-            <p>At Kash Option, we eliminate the stress of international trade. Whether you are a business owner or an individual shopper, we provide the logistics and expertise to make global shopping seamless.</p>
-        </div>
-    </section>
-<footer style="
-    background: #06232e;
-    color: #e9f8ff;
-    text-align: center;
-    padding: 3rem 1.2rem;
-    font-family: 'Inter', sans-serif;
-">
-  <!-- Brand Name -->
-  <h3 style="margin-bottom: 1.5rem; letter-spacing: 1px;">KASH OPTION</h3>
-
-  <!-- Social Media & Contact Icons -->
-  <div style="display: flex; justify-content: center; gap: 35px; margin-bottom: 2rem;">
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/kashoption1?igsh=MW44M2docDgzN3g0Yg%3D%3D&utm_source=qr" target="_blank" style="text-decoration: none; transition: 0.3s;">
-      <i class="fab fa-instagram" style="font-size: 2.2rem; color: #E4405F;"></i>
-    </a>
-
-    <!-- Facebook -->
-    <a href="https://www.facebook.com/share/1CrwnBxS8W/?mibextid=wwXIfr" target="_blank" style="text-decoration: none; transition: 0.3s;">
-      <i class="fab fa-facebook" style="font-size: 2.2rem; color: #1877F2;"></i>
-    </a>
-
-    <!-- Email Support -->
-    <a href="mailto:Info@mrkash.net" style="text-decoration: none; transition: 0.3s;">
-      <i class="fas fa-envelope" style="font-size: 2.2rem; color: #ffffff;"></i>
-    </a>
-  </div>
-
-  <!-- Contact Text -->
-  <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem;">
-    Support: <a href="mailto:Info@mrkash.net" style="color: #00d4ff; text-decoration: none;">Info@mrkash.net</a>
-  </p>
-
-  <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); width: 50px; margin: 1.5rem auto;">
-
-  <p style="font-size: 0.8rem; opacity: 0.6;">© 2025 KASH OPTION. ALL RIGHTS RESERVED.</p>
-</footer>
-
-    #whatsapp-support {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:#25D366;
-      color:#fff;
-      font-size:2rem;
-      padding:15px;
-      border-radius:50%;
-      box-shadow:0 4px 12px rgba(0,0,0,.25);
-      z-index:9999;
-    }
-  </style>
-</head>
-<body>
+<a href="https://wa.me/YOURNUMBER" id="whatsapp-support" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 <header>
-  <h1>Shop Globally. Pay Locally.</h1>
-  <p>China • USA • UK • Europe → Ghana</p>
+  <h1 class="animate__animated animate__fadeInDown">Shop Globally. Pay Locally.</h1>
+  <p class="animate__animated animate__fadeInUp">China • USA • UK • Europe → Ghana</p>
 </header>
 
 <!-- Navigation -->
 <nav class="navbar">
   <div class="nav-container">
     <a href="#" class="brand">Kash Option</a>
-    <button class="hamburger" id="hamburger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
     <div class="nav-links" id="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -273,7 +142,6 @@
       <a href="#testimonials">Reviews</a>
       <a href="#faqs">FAQs</a>
       <a href="tracker.html">Track Order</a>
-      <!-- Contact Us link removed -->
     </div>
   </div>
 </nav>
@@ -283,18 +151,15 @@
     align-items: center;
     justify-content: center;
     min-height: 60vh;
-    width: 95%; /* Ensures it stays inside screen bounds */
+    width: 95%;
     max-width: 1200px;
-    margin: 20px auto; /* Centers the section horizontally */
-    padding: 40px 20px;
+    margin: 40px auto;
+    padding: 60px 20px;
     border-radius: 24px;
     position: relative;
     overflow: hidden;
-    background-image: url('images/aboutpage.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-sizing: border-box; /* Prevents padding from pushing width */
+    background: url('images/aboutpage.jpg') center/cover no-repeat;
+    box-sizing: border-box;
 ">
   <!-- Modern Blur Overlay -->
   <div style="
@@ -313,89 +178,22 @@
       max-width: 700px;
       text-align: center;
       color: white;
-      font-family: system-ui, -apple-system, sans-serif;
   ">
     <h2 style="
-        font-size: clamp(1.8rem, 8vw, 3rem);
+        font-size: clamp(2rem, 8vw, 3rem);
         font-weight: 800;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         letter-spacing: -0.02em;
     ">About Kash Option</h2>
     
     <p style="
-        font-size: clamp(1rem, 4vw, 1.25rem);
-        line-height: 1.6;
+        font-size: clamp(1.1rem, 4vw, 1.35rem);
+        line-height: 1.8;
         opacity: 0.95;
         margin: 0 auto;
     ">
       Kash Option is a <span style="color: #60a5fa; font-weight: 600;">trusted global sourcing</span> and logistics brand helping individuals and businesses buy goods from abroad and receive them safely in Ghana.
     </p>
-  </div>
-</section>
-  
-<section id="services" style="
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    font-family: 'Inter', system-ui, sans-serif;
-    color: white;
-    text-align: center;
-">
-  <h2 style="
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 50px;
-      background: linear-gradient(to right, #60a5fa, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-  ">Our Services</h2>
-
-  <div style="
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-  ">
-    <!-- Card 1 -->
-    <div style="
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 40px 30px;
-        border-radius: 24px;
-        transition: transform 0.3s ease;
-    ">
-      <div style="color: #60a5fa; margin-bottom: 20px;"><i class="fas fa-search fa-3x"></i></div>
-      <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Product Sourcing</h3>
-      <p style="color: #94a3b8; line-height: 1.6;">We help you buy original items from trusted suppliers worldwide.</p>
-    </div>
-
-    <!-- Card 2 -->
-    <div style="
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 40px 30px;
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    ">
-      <div style="color: #a855f7; margin-bottom: 20px;"><i class="fas fa-plane fa-3x"></i></div>
-      <h3 style="font-size: 1.5rem; margin-bottom: 15px;">International Shipping</h3>
-      <p style="color: #94a3b8; line-height: 1.6;">Fast Air & Sea shipping with real-time tracking from multiple countries.</p>
-    </div>
-
-    <!-- Card 3 -->
-    <div style="
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 40px 30px;
-        border-radius: 24px;
-    ">
-      <div style="color: #2dd4bf; margin-bottom: 20px;"><i class="fas fa-truck fa-3x"></i></div>
-      <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Delivery in Ghana</h3>
-      <p style="color: #94a3b8; line-height: 1.6;">Door-to-door safe delivery with dedicated local support.</p>
-    </div>
   </div>
 </section>
 
