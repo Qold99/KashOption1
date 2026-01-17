@@ -135,7 +135,7 @@ gap: 25px;
 
 /* ============================
    PREMIUM ORDERS FEED UPGRADE
-   Multi‑Card Bento Carousel
+   Two‑Card Responsive Layout
    ============================ */
 
 #ordersFeed {
@@ -156,7 +156,7 @@ gap: 25px;
 
 /* Each order card */
 .order-item {
-  flex: 0 0 260px; /* Smaller width = more cards visible */
+  flex: 0 0 calc(50% - 20px); /* Always show two cards */
   background: var(--glass);
   padding: 1.4rem;
   border-radius: 22px;
@@ -204,9 +204,10 @@ gap: 25px;
 /* Responsive */
 @media (max-width: 768px) {
   .order-item {
-    flex: 0 0 220px;
+    flex: 0 0 calc(50% - 15px); /* Still two cards on mobile */
   }
 }
+
 
 
 .faq-container { max-width: 850px; margin: auto; }
