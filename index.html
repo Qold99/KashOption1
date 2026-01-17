@@ -15,195 +15,211 @@
 
 <style>
 :root {
---primary: #062c5f;
---accent: #00aaff;
---text: #f8fafc;
---dark: #020617;
---glass: rgba(255, 255, 255, 0.03);
---border: rgba(255, 255, 255, 0.1);
+--primary: #0066cc;
+--accent: #5e5ce6;
+--text: #1d1d1f;
+--subtext: #86868b;
+--glass: rgba(255, 255, 255, 0.7);
+--border: rgba(255, 255, 255, 0.3);
+--bg: #f5f5f7;
 }
 
 html { scroll-behavior: smooth; }
+
 body {
 margin: 0;
-font-family: 'Inter', sans-serif;
-background: var(--dark);
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+background: var(--bg);
 color: var(--text);
 overflow-x: hidden;
+line-height: 1.5;
 }
 
-/* Navbar */
+/* Watery Mesh Gradient Background Effect */
+body::before {
+content: "";
+position: fixed;
+top: 0; left: 0; width: 100%; height: 100%;
+background:
+radial-gradient(circle at 0% 0%, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
+radial-gradient(circle at 100% 100%, rgba(94, 92, 230, 0.05) 0%, transparent 50%);
+z-index: -1;
+}
+
+/* Navbar: Apple-style frosted glass */
 .navbar {
-background: rgba(0, 0, 0, 0.95);
-backdrop-filter: blur(15px);
-padding: 1rem 5%;
+background: rgba(255, 255, 255, 0.72);
+backdrop-filter: saturate(180%) blur(20px);
+-webkit-backdrop-filter: saturate(180%) blur(20px);
+padding: 0.8rem 5%;
 position: fixed;
 width: 100%;
 top: 0;
 z-index: 2000;
-border-bottom: 1px solid var(--border);
+border-bottom: 0.5px solid rgba(0,0,0,0.1);
 box-sizing: border-box;
 }
-.nav-container {
-display: flex;
-justify-content: space-between;
-align-items: center;
-max-width: 1200px;
-margin: auto;
-}
+
 .brand {
-font-size: 1.6rem;
-font-weight: 800;
-color: #fff;
+font-size: 1.4rem;
+font-weight: 700;
+color: var(--text);
 text-decoration: none;
-letter-spacing: -1px;
+letter-spacing: -0.5px;
 }
-.brand span { color: var(--accent); }
 
-.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.brand span { color: var(--primary); }
+
 .nav-links a {
-color: #94a3b8;
+color: var(--text);
 text-decoration: none;
-font-weight: 500;
+font-weight: 400;
 font-size: 0.9rem;
-transition: 0.3s;
-}
-.nav-links a:hover { color: var(--accent); }
-
-.hamburger {
-display: none;
-cursor: pointer;
-background: none;
-border: none;
-flex-direction: column;
-gap: 6px;
-z-index: 2100;
-}
-.hamburger span {
-display: block;
-width: 25px; height: 2px; background: #fff; transition: 0.4s;
+padding: 8px 16px;
+border-radius: 20px;
+transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Hero */
+.nav-links a:hover {
+background: rgba(0,0,0,0.05);
+}
+
+/* Hero: Depth and Flow */
 header {
-height: 80vh;
-background: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.9)),
-url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200') center/cover;
+height: 90vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 text-align: center;
 padding: 0 20px;
+background: transparent;
 }
+
 header h1 {
-font-size: clamp(2.5rem, 8vw, 4rem);
+font-size: clamp(3rem, 10vw, 5.5rem);
+font-weight: 800;
+letter-spacing: -0.03em;
 margin: 0;
-background: linear-gradient(to right, #fff, var(--accent));
+background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
-font-weight: 800;
+animation: flowUp 1.2s ease-out;
 }
-header p { color: #94a3b8; font-size: 1.2rem; margin-top: 15px; }
 
-section { padding: 80px 5%; max-width: 1200px; margin: auto; }
+header p {
+color: var(--subtext);
+font-size: 1.4rem;
+margin-top: 20px;
+max-width: 600px;
+font-weight: 400;
+animation: flowUp 1.5s ease-out;
+}
+
+/* Sections & Typography */
+section { padding: 100px 5%; max-width: 1100px; margin: auto; }
+
 .section-title {
-text-align: center; font-size: 2.5rem; margin-bottom: 50px; font-weight: 800;
-background: linear-gradient(to right, #ffffff, #64748b);
--webkit-background-clip: text; -webkit-text-fill-color: transparent;
+text-align: center;
+font-size: 3rem;
+margin-bottom: 60px;
+font-weight: 700;
+letter-spacing: -0.02em;
 }
 
+/* Glass Card: "Liquid" Feel */
 .glass-card {
 background: var(--glass);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
 border: 1px solid var(--border);
-border-radius: 24px;
-padding: 35px;
-transition: 0.4s;
-text-align: center;
+border-radius: 30px;
+padding: 40px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+transition: all 0.5s cubic-bezier(0.15, 0.83, 0.66, 1);
 }
+
 .glass-card:hover {
-border-color: var(--accent);
-background: rgba(255, 255, 255, 0.06);
-transform: translateY(-10px);
+transform: scale(1.02) translateY(-10px);
+background: rgba(255, 255, 255, 0.9);
+box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+border-color: var(--primary);
 }
 
-.catalog-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-gap: 25px;
-}
-
-#ordersFeed { overflow: hidden; height: 160px; position: relative; }
-#ordersList { display: flex; transition: transform 0.8s ease; }
+/* Activity Feed: Fluid Motion */
+#ordersFeed { padding: 20px 0; }
 .order-item {
-flex: 0 0 320px;
-background: var(--glass);
-margin: 10px;
+background: #fff;
+border: 1px solid rgba(0,0,0,0.05);
+border-radius: 24px;
 padding: 1.2rem;
-border-radius: 16px;
-border: 1px solid var(--border);
-display: flex;
-align-items: center;
-gap: 15px;
+margin: 0 12px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
+
 .order-avatar {
-width: 45px; height: 45px; background: var(--accent); border-radius: 50%;
-display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+background: linear-gradient(135deg, var(--primary), var(--accent));
+box-shadow: 0 4px 12px rgba(0,102,204,0.3);
 }
 
-.faq-container { max-width: 850px; margin: auto; }
+/* FAQ: Minimalist Disclosure */
 .faq-card {
-background: var(--glass);
-border: 1px solid var(--border);
-border-radius: 16px;
-margin-bottom: 15px;
-overflow: hidden;
-transition: 0.3s;
+background: #fff;
+border: none;
+border-radius: 20px;
+margin-bottom: 12px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
+
 .faq-card summary {
-padding: 20px;
-cursor: pointer;
-list-style: none;
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-weight: 700;
+padding: 24px;
+font-size: 1.1rem;
 }
-.faq-card summary span { color: var(--accent); transition: 0.3s; }
-.faq-card[open] { border-color: var(--accent); background: rgba(255,255,255,0.08); }
-.faq-card[open] summary span { transform: rotate(180deg); }
-.faq-content { padding: 0 20px 20px; color: #94a3b8; line-height: 1.6; }
 
-.testimonial-container { min-height: 250px; }
-.testimonial-row { display: flex; justify-content: center; gap: 20px; opacity: 0; transform: translateY(20px); transition: 1s ease; }
-.testimonial-row.active { opacity: 1; transform: translateY(0); }
-.t-card { flex: 1; background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid var(--border); max-width: 380px; text-align: left; }
-.t-avatar { width: 50px; height: 50px; border-radius: 50%; background: #444; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 15px; color: #fff; }
+.faq-card[open] {
+box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
 
+/* Testimonials: "Airy" */
+.t-card {
+background: #fff;
+border-radius: 28px;
+border: none;
+padding: 35px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+/* Floating Action Button /
 #whatsapp-support {
-position: fixed; bottom: 25px; right: 25px; background: #25D366; color: #fff;
-padding: 14px 25px; border-radius: 50px; z-index: 3000; text-decoration: none;
-display: flex; align-items: center; gap: 10px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-transition: 0.3s;
+background: #1d1d1f; / Darker more premium feel */
+color: #fff;
+backdrop-filter: blur(10px);
+padding: 18px 30px;
+border-radius: 100px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+transition: 0.4s;
+}
+
+#whatsapp-support:hover {
+transform: translateY(-5px) scale(1.05);
+background: var(--primary);
+}
+
+/* Animations */
+@keyframes flowUp {
+from { opacity: 0; transform: translateY(40px); }
+to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
-.hamburger { display: flex; }
+.navbar { padding: 1rem 20px; }
 .nav-links {
-position: fixed; top: 0; right: -100%; height: 100vh; width: 85%;
-background: rgba(2, 6, 23, 0.98); flex-direction: column; padding: 100px 40px;
-transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border);
-backdrop-filter: blur(20px);
-box-sizing: border-box;
+background: rgba(255,255,255,0.98);
+border-radius: 0 0 30px 30px;
 }
-.nav-links.active { right: 0; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
-.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-.testimonial-row { flex-direction: column; align-items: center; }
-.t-card { width: 100%; }
 }
 </style>
+  
 </head>
 <body>
 
