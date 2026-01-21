@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Secure Tracking | Kash Option Elite</title>
+  <title>Secure Tracking | Kash Option</title>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,28 +19,54 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <style>
-    body { background:#020617; font-family:'Plus Jakarta Sans',sans-serif; color:white; }
-    .glass { background:rgba(255,255,255,0.03); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.08); }
+    body { 
+      background: radial-gradient(circle at top right, #0a192f, #020617);
+      font-family:'Plus Jakarta Sans',sans-serif; 
+      color:white; 
+      overflow-x:hidden;
+    }
+    .liquid-glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.4s ease;
+    }
+    .liquid-glass:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(0,210,255,0.3);
+    }
     #map { height: 300px; border-radius: 1.5rem; margin-top: 1rem; }
   </style>
 </head>
 
-<body class="min-h-screen">
+<body class="min-h-screen selection:bg-cyan-500/30">
 
-<nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
-  <a href="index.html" class="flex items-center gap-2">
-    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-      <i class="fas fa-truck-fast text-xs"></i>
+<!-- NAVIGATION -->
+<nav class="fixed top-0 w-full z-[3000] liquid-glass py-5 px-[5%] border-b border-white/5">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href="index.html" class="text-2xl font-extrabold tracking-tighter uppercase italic">
+      KASH<span class="text-cyan-400">OPTION</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10 text-[10px] font-bold tracking-[0.3em] uppercase text-slate-400">
+      <a href="index.html#about" class="hover:text-cyan-400">About</a>
+      <a href="index.html#catalog" class="hover:text-cyan-400">Catalog</a>
+      <a href="index.html#orders" class="hover:text-cyan-400">Live Orders</a>
+      <a href="index.html#testimonials" class="hover:text-cyan-400">Reviews</a>
+      <a href="index.html#faqs" class="hover:text-cyan-400">FAQs</a>
+      <a href="tracker.html" class="px-5 py-2 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full hover:bg-cyan-500 hover:text-white">
+        Track Order
+      </a>
     </div>
-    <span class="font-black tracking-tighter uppercase italic">Kash Option</span>
-  </a>
+  </div>
 </nav>
 
-<main class="max-w-4xl mx-auto px-6 py-12">
+<!-- MAIN CONTENT -->
+<main class="max-w-4xl mx-auto px-6 pt-40 pb-20">
 
   <div class="text-center mb-12">
     <h2 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-4">
-      Secure <span class="text-blue-500">Tracking</span>
+      Secure <span class="text-cyan-400">Tracking</span>
     </h2>
 
     <p class="text-slate-400 max-w-2xl mx-auto text-sm">
@@ -51,9 +77,9 @@
 
   <form onsubmit="trackPackage(event)" class="relative max-w-xl mx-auto mb-10">
     <input id="trackId" required placeholder="ENTER TRACKING ID"
-      class="w-full bg-white/5 border-2 border-white/10 p-6 rounded-full text-center font-black text-xl uppercase tracking-widest focus:border-blue-500 outline-none">
+      class="w-full bg-white/5 border-2 border-white/10 p-6 rounded-full text-center font-black text-xl uppercase tracking-widest focus:border-cyan-500 outline-none">
     <button type="submit"
-      class="mt-6 w-full bg-blue-600 hover:bg-blue-500 px-10 py-4 rounded-full font-black uppercase">
+      class="mt-6 w-full bg-cyan-500 hover:bg-cyan-400 px-10 py-4 rounded-full font-black uppercase">
       Track Now
     </button>
   </form>
@@ -65,20 +91,20 @@
 <!-- ADMIN MODAL -->
 <div id="staff" class="hidden fixed inset-0 bg-black/95 z-[100] p-6">
   <div id="pin-gate" class="max-w-md mx-auto mt-32 text-center">
-    <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
+    <div class="w-20 h-20 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-8">
       <i class="fas fa-lock text-3xl"></i>
     </div>
     <h3 class="text-3xl font-black mb-6 uppercase italic">Admin Access</h3>
     <p class="text-slate-400 mb-6 text-sm">To update tracking, please use your Google Sheet database.</p>
     <input id="pin" type="password" placeholder="••••••"
       class="w-full bg-white/5 border p-5 rounded-2xl mb-4 text-center text-2xl tracking-[0.5em] font-bold">
-    <button onclick="checkPin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase">
+    <button onclick="checkPin()" class="w-full bg-cyan-500 py-5 rounded-2xl font-black uppercase">
       Verify Authority
     </button>
   </div>
 
-  <div id="admin-info" class="hidden max-w-2xl mx-auto mt-10 space-y-6 glass p-10 rounded-[3rem] text-center">
-    <h3 class="text-2xl font-black uppercase italic text-blue-500">Logistics Database</h3>
+  <div id="admin-info" class="hidden max-w-2xl mx-auto mt-10 space-y-6 liquid-glass p-10 rounded-[3rem] text-center">
+    <h3 class="text-2xl font-black uppercase italic text-cyan-400">Logistics Database</h3>
     <p class="text-slate-300">You are using Google Sheets as your database.</p>
     <a href="https://docs.google.com/spreadsheets/d/1yA_6uU8uG-z7-p2Nl5XqA6y8H-E-f6S6vN5nUvI3B8o/edit" target="_blank" class="block w-full bg-green-600 py-6 rounded-2xl font-black uppercase text-white">
       Open Google Sheets to Update
@@ -87,26 +113,32 @@
   </div>
 </div>
 
-<footer class="py-10 border-t border-white/5 text-center">
-  <p class="text-[10px] font-black text-slate-700 uppercase tracking-[0.5em]">
+<!-- FOOTER -->
+<footer class="pt-20 pb-10 px-[5%] border-t border-white/5 text-center">
+  <p class="text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">
     © 2026 KASH OPTION GLOBAL SYSTEMS
   </p>
 </footer>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/233240118846" target="_blank"
+   class="fixed bottom-6 right-6 bg-green-500 text-white px-5 py-3 rounded-full z-[4000] flex items-center gap-2 font-bold shadow-xl hover:bg-green-600 transition">
+  <i class="fab fa-whatsapp"></i>
+  Support
+</a>
+
 <script>
-  // YOUR PUBLISHED CSV LINK
   const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS2OUQUgCcQgpu0AeuILp1GCXW4ntv6dYRRB554WtRsmpccw5AUKayNwNeHmHNs_zdF2oXNQNDVfHw3/pub?output=csv";
 
   async function trackPackage(e) {
     e.preventDefault();
     const id = document.getElementById('trackId').value.toUpperCase().trim();
-    result.innerHTML = `<div class="p-6 text-center text-blue-400 animate-pulse">Accessing Secure Database...</div>`;
+    result.innerHTML = `<div class="p-6 text-center text-cyan-400 animate-pulse">Accessing Secure Database...</div>`;
 
     try {
       const response = await fetch(SHEET_URL);
       const csvText = await response.text();
       
-      // Parse CSV
       const rows = csvText.split('\n').map(row => row.split(','));
       const headers = rows[0].map(h => h.trim());
       const dataRows = rows.slice(1).map(row => {
@@ -125,14 +157,14 @@
       }
 
       result.innerHTML = `
-        <div class="glass p-8 rounded-[2.5rem] space-y-4 animate-in fade-in duration-500">
+        <div class="liquid-glass p-8 rounded-[2.5rem] space-y-4">
           <div class="flex justify-between items-start">
             <div>
-               <p class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">Current Status</p>
+               <p class="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Current Status</p>
                <h4 class="text-3xl font-black uppercase italic">${order.Status}</h4>
             </div>
-            <div class="bg-blue-600/20 p-3 rounded-2xl">
-              <i class="fas fa-box text-blue-500"></i>
+            <div class="bg-cyan-500/20 p-3 rounded-2xl">
+              <i class="fas fa-box text-cyan-400"></i>
             </div>
           </div>
           
@@ -163,7 +195,6 @@
       loadMap(order.Location);
 
     } catch (err) {
-      console.error(err);
       result.innerHTML = `<div class="p-6 bg-red-500/10 rounded-xl text-center text-red-400">Database connection error. Try again.</div>`;
     }
   }
@@ -195,5 +226,6 @@
     }
   }
 </script>
+
 </body>
 </html>
