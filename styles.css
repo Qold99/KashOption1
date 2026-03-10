@@ -125,8 +125,7 @@ nav.liquid-glass.fixed {
   padding-right: 3.5rem;
 }
 
-#hamburger {
-  display: flex !important; /* override md:hidden so it shows on desktop too */
+.site-brand + #hamburger {
   margin-left: auto;
 }
 
@@ -213,7 +212,7 @@ nav.liquid-glass.fixed {
   height: min(460px, 86vw);
   background: radial-gradient(circle at 30% 30%, rgba(0, 210, 255, 0.20), transparent 55%),
               radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.16), transparent 55%);
-  filter: blur(65px);
+  filter: blur(50px);
   border-radius: 50%;
   z-index: -1;
   animation: blob-float 20s infinite alternate ease-in-out;
