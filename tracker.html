@@ -268,7 +268,8 @@
         return String(v || '').trim().toUpperCase().replace(/\s+/g, '');
       }
       function isValidId(v) {
-        return /^KO-\d{5}$/.test(v);
+        // Accept any non-empty tracking ID so we can match the sheet exactly
+        return String(v || '').trim().length > 0;
       }
 
       var orderIdInput = document.getElementById('orderId');
