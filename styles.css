@@ -114,6 +114,33 @@ nav.liquid-glass.fixed {
   align-items: center;
 }
 
+/* Header layout: bold brand (≈70% width) + hamburger pinned top-right */
+.site-brand {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  max-width: 70%;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  nav.liquid-glass.fixed .max-w-7xl {
+    position: relative;
+  }
+
+  #hamburger {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .site-brand {
+    padding-right: 64px; /* reserve space so it never overlaps hamburger */
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translate3d(0, 22px, 0);
@@ -189,29 +216,7 @@ nav.liquid-glass.fixed {
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(2, 6, 23, 0.85) 100%);
 }
 
-/* Trust badge strip under hero buttons (content via CSS) */
-.hero-wrap .relative.z-10 > div.flex.flex-wrap.justify-center::after {
-  content: "Verified Suppliers • Secure Payments • Door-to-Door Delivery in Ghana";
-  display: block;
-  width: 100%;
-  margin-top: 1.5rem;
-  text-align: center;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(248, 250, 252, 0.65);
-}
-
-/* Optional: use class .hero-trust-strip on an empty element to show the same strip elsewhere */
-.hero-trust-strip::before {
-  content: "Verified Suppliers • Secure Payments • Door-to-Door Delivery in Ghana";
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(248, 250, 252, 0.65);
-}
+/* Trust badges are real HTML now (no CSS-injected duplicate text). */
 
 .blob {
   position: absolute;
@@ -348,6 +353,29 @@ a[href*="wa.me"].fixed:hover {
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Mobile menu: clearer panel while keeping soft bokeh */
+#mobileNav {
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 0.9) 55%, rgba(15, 23, 42, 0.92) 100%) !important;
+  border-right-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 24px 0 80px rgba(0,0,0,0.55);
+  overflow: hidden;
+}
+
+#mobileNav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(520px 360px at 20% 20%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(520px 360px at 80% 70%, rgba(6, 182, 212, 0.10), transparent 60%);
+  opacity: 0.9;
+}
+
+#mobileNav a {
+  position: relative;
 }
 
 #mobileNav.mobile-nav-open {
