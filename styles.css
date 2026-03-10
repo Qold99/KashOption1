@@ -114,20 +114,7 @@ nav.liquid-glass.fixed {
   align-items: center;
 }
 
-/* Header layout: bold brand + hamburger on the right */
-.site-brand {
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  display: inline-flex;
-  align-items: center;
-  max-width: 70%;
-  white-space: nowrap;
-  padding-right: 3.5rem;
-}
-
-.site-brand + #hamburger {
-  margin-left: auto;
-}
+/* Header nav uses original inline layout (logo left, links center, hamburger right). */
 
 .reveal {
   opacity: 0;
