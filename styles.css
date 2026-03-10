@@ -324,18 +324,17 @@ a[href*="wa.me"].fixed:hover {
 #hamburger.open span:nth-child(2) { opacity: 0; }
 #hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+/* Mobile menu panel — ABOVE overlay, links ABOVE bokeh */
 #mobileNav {
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* Mobile menu: clearer panel while keeping soft bokeh */
-#mobileNav {
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 0.9) 55%, rgba(15, 23, 42, 0.92) 100%) !important;
-  border-right-color: rgba(255, 255, 255, 0.12) !important;
+  z-index: 2600;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.95) 55%, rgba(15, 23, 42, 0.96) 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 24px 0 80px rgba(0,0,0,0.55);
   overflow: hidden;
+  position: relative;
 }
 
 #mobileNav::before {
@@ -343,25 +342,32 @@ a[href*="wa.me"].fixed:hover {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 0;
   background:
-    radial-gradient(520px 360px at 20% 20%, rgba(34, 211, 238, 0.12), transparent 60%),
-    radial-gradient(520px 360px at 80% 70%, rgba(6, 182, 212, 0.10), transparent 60%);
-  opacity: 0.9;
-}
-
-#mobileNav a {
-  position: relative;
+    radial-gradient(520px 360px at 20% 20%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(520px 360px at 80% 70%, rgba(6, 182, 212, 0.06), transparent 60%);
+  opacity: 0.85;
 }
 
 #mobileNav.mobile-nav-open {
   transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 #mobileNav a {
+  position: relative;
+  z-index: 2;
   display: block;
   min-height: 44px;
   padding: 12px 0;
   line-height: 1.4;
+  color: rgba(226, 232, 240, 0.95);
+  text-decoration: none;
+}
+
+#mobileNav a:hover {
+  color: #22d3ee;
 }
 
 #mobileNav .nav-active {
@@ -375,7 +381,7 @@ a[href*="wa.me"].fixed:hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
-  z-index: 2400;
+  z-index: 2500;
 }
 
 #overlay.visible {
