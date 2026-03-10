@@ -326,8 +326,11 @@ a[href*="wa.me"].fixed:hover {
 
 /* Mobile menu panel — ABOVE overlay, links ABOVE bokeh */
 #mobileNav {
-  transform: translateX(-100%);
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  /* CLOSED by default */
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s, visibility 0.3s;
   padding-bottom: env(safe-area-inset-bottom);
   z-index: 2600;
   background: linear-gradient(180deg, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.95) 55%, rgba(15, 23, 42, 0.96) 100%);
@@ -379,6 +382,7 @@ a[href*="wa.me"].fixed:hover {
   inset: 0;
   background: rgba(0,0,0,0.6);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s;
   z-index: 2500;
@@ -387,6 +391,7 @@ a[href*="wa.me"].fixed:hover {
 #overlay.visible {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 ::-webkit-scrollbar { width: 6px; }
