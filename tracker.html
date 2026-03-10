@@ -351,17 +351,17 @@
         if (start === -1 || end === -1) return null;
         var data = JSON.parse(jsonText.slice(start, end + 1));
         var cols = (data.table.cols || []).map(function(c) {
-          return (c.label || '').trim().toLowerCase();
+          return (c.label || '').trim().toLowerCase().replace(/\s+/g, '');
         });
         function idx(name) {
-          return cols.indexOf(name.toLowerCase());
+          return cols.indexOf(name.toLowerCase().replace(/\s+/g, ''));
         }
-        var iTrack = idx('tracking id');
-        var iPrev = idx('previous status');
-        var iCurr = idx('current status');
+        // Your sheet headers: TrackingID, Status, Location, ETA, Cosignee
+        var iTrack = idx('trackingid');
+        var iStatus = idx('status');
         var iLoc = idx('location');
         var iEta = idx('eta');
-        var iUpdated = idx('last updated');
+        var iCosignee = idx('cosignee');
 
         var rows = {};
         (data.table.rows || []).forEach(function(r) {
@@ -370,11 +370,12 @@
           if (!id) return;
           rows[id] = {
             trackId: id,
-            previousStatus: iPrev >= 0 ? cell(iPrev) : '',
-            currentStatus: iCurr >= 0 ? cell(iCurr) : '',
+            // With this sheet, we only have one Status column.
+            previousStatus: '',
+            currentStatus: iStatus >= 0 ? cell(iStatus) : '',
             location: iLoc >= 0 ? cell(iLoc) : '',
             eta: iEta >= 0 ? cell(iEta) : '',
-            lastUpdated: iUpdated >= 0 ? cell(iUpdated) : ''
+            lastUpdated: iCosignee >= 0 ? cell(iCosignee) : ''
           };
         });
         return rows;
@@ -404,9 +405,15 @@
         tdCurr.textContent = record.currentStatus || '—';
         tdEta.textContent = record.eta || '—';
 
+        // Show cosignee value from sheet if present, otherwise use per-browser last-checked time
+        var cosigneeValue = record.lastUpdated || '';
         var lastChecked = setLastChecked(nid);
         var lastCheckedDisplay = lastChecked || getLastChecked(nid);
-        tdLastChecked.textContent = lastCheckedDisplay ? ('Last checked: ' + lastCheckedDisplay) : 'Last checked: just now';
+        if (cosigneeValue) {
+          tdLastChecked.textContent = cosigneeValue + ' · Last checked: ' + (lastCheckedDisplay || 'just now');
+        } else {
+          tdLastChecked.textContent = lastCheckedDisplay ? ('Last checked: ' + lastCheckedDisplay) : 'Last checked: just now';
+        }
 
         var stage = inferStageFromStatus(record.currentStatus || record.previousStatus || '');
         if (record.currentStatus) {
