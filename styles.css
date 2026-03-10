@@ -343,21 +343,24 @@ a[href*="wa.me"].fixed:hover {
 
 #mobileNav {
   /* CLOSED by default */
+  position: fixed;
+  top: 0;
+  right: 0;                 /* drawer from the RIGHT */
+  height: 100%;
+  width: 85vw;
+  max-width: 320px;
+
   transform: translateX(100%);
   opacity: 0;
   visibility: hidden;
+
   transition:
     transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
     opacity 0.3s,
     visibility 0.3s;
+
+  z-index: 2600;            /* above overlay (2500) */
   padding-bottom: env(safe-area-inset-bottom);
-  z-index: 2600;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 85vw;
-  max-width: 320px;
 
   /* Panel background (NOT full-page blur) */
   background: linear-gradient(
@@ -366,8 +369,8 @@ a[href*="wa.me"].fixed:hover {
     rgba(2, 6, 23, 0.95) 55%,
     rgba(15, 23, 42, 0.96) 100%
   );
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 24px 0 80px rgba(0, 0, 0, 0.55);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: -24px 0 80px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
 
@@ -415,12 +418,12 @@ a[href*="wa.me"].fixed:hover {
 #overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* dim only, NO blur */
+  background: rgba(0, 0, 0, 0.6);   /* dim only */
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s;
-  z-index: 2500; /* below #mobileNav (2600) */
+  z-index: 2500;                    /* below #mobileNav */
 }
 
 #overlay.visible {
