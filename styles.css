@@ -1,21 +1,23 @@
 /* Kash Option — Global design system (all pages) */
 :root {
-  --bg0: #05070f;
-  --bg1: #070b18;
-  --accent: #00d2ff;
-  --accent2: #7c3aed;
+  --bg0: #020617;
+  --bg1: #0F172A;
+  --accent: #22D3EE;
+  --accent2: #06B6D4;
   --text: rgba(248, 250, 252, 0.96);
   --muted: rgba(148, 163, 184, 0.92);
   --muted2: rgba(148, 163, 184, 0.72);
-  --glass: rgba(255, 255, 255, 0.06);
+  --glass: rgba(255, 255, 255, 0.04);
   --glass2: rgba(255, 255, 255, 0.04);
-  --stroke: rgba(255, 255, 255, 0.12);
-  --stroke2: rgba(255, 255, 255, 0.08);
+  --stroke: rgba(255, 255, 255, 0.08);
+  --stroke2: rgba(255, 255, 255, 0.06);
   --shadow: 0 24px 60px rgba(0,0,0,0.45);
   --shadowSoft: 0 18px 40px rgba(0,0,0,0.32);
-  --accentGlow: rgba(0, 210, 255, 0.22);
+  --accentGlow: rgba(34, 211, 238, 0.2);
   --gold: #eab308;
   --gold-soft: rgba(234, 179, 8, 0.15);
+  --whatsapp: #25D366;
+  --whatsapp-hover: #1EBE5D;
 }
 
 html {
@@ -24,7 +26,7 @@ html {
   overflow-x: hidden;
   overflow-y: scroll;
   overscroll-behavior: none;
-  background-color: var(--bg0);
+  background: linear-gradient(180deg, #0F172A 0%, #020617 100%);
   width: 100%;
   position: relative;
 }
@@ -34,10 +36,7 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--text);
   background-color: var(--bg0);
-  background-image: radial-gradient(1200px 800px at 20% 0%, rgba(0, 210, 255, 0.10), transparent 55%),
-                    radial-gradient(900px 900px at 85% 20%, rgba(124, 58, 237, 0.10), transparent 60%),
-                    radial-gradient(900px 900px at 70% 100%, rgba(34, 197, 94, 0.06), transparent 55%),
-                    linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 100%);
+  background-image: linear-gradient(180deg, #0F172A 0%, #0a0f1a 40%, #020617 100%);
   line-height: 1.65;
   position: relative;
   min-width: 0;
@@ -53,8 +52,8 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-color: var(--bg0);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.028'/%3E%3C/svg%3E");
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: -1;
   backface-visibility: hidden;
@@ -68,12 +67,12 @@ body::after {
 
 .glass {
   position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.5rem;
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  box-shadow: var(--shadowSoft);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
 }
 
 .glass::before {
@@ -82,28 +81,37 @@ body::after {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04), rgba(0,210,255,0.12));
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent, rgba(34, 211, 238, 0.06));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .liquid-glass {
-  background: var(--glass2);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid var(--stroke2);
-  box-shadow: 0 10px 36px rgba(0,0,0,0.28);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .liquid-glass:hover {
-  background: rgba(255,255,255,0.07);
+  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-4px);
-  border-color: rgba(255,255,255,0.16);
-  box-shadow: var(--shadow), 0 0 24px rgba(0, 210, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+}
+
+/* Compact header (~70px) for premium logistics look */
+nav.liquid-glass.fixed {
+  min-height: 70px;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  display: flex;
+  align-items: center;
 }
 
 .reveal {
@@ -121,7 +129,7 @@ body::after {
   display: inline-block;
   width: 54px;
   height: 3px;
-  background: linear-gradient(90deg, var(--accent), rgba(124, 58, 237, 0.6), transparent);
+  background: linear-gradient(90deg, #22D3EE, #06B6D4, transparent);
   border-radius: 999px;
   margin-bottom: 1rem;
 }
@@ -133,6 +141,56 @@ body::after {
   justify-content: center;
   padding-top: 6rem;
   padding-bottom: 4rem;
+}
+
+/* Hero: premium logistics landing — Alibaba/DHL style */
+.hero-wrap {
+  padding-top: 120px !important;
+  padding-bottom: 80px !important;
+}
+
+.hero-wrap h1 {
+  font-weight: 800 !important;
+}
+
+.hero-wrap .text-cyan-400 {
+  background: linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+.hero-media {
+  background-color: #0F172A;
+}
+
+.hero-media::after {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(2, 6, 23, 0.85) 100%);
+}
+
+/* Trust badge strip under hero buttons (content via CSS) */
+.hero-wrap .relative.z-10 > div.flex.flex-wrap.justify-center::after {
+  content: "Verified Suppliers • Secure Payments • Door-to-Door Delivery in Ghana";
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.65);
+}
+
+/* Optional: use class .hero-trust-strip on an empty element to show the same strip elsewhere */
+.hero-trust-strip::before {
+  content: "Verified Suppliers • Secure Payments • Door-to-Door Delivery in Ghana";
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.65);
 }
 
 .blob {
@@ -223,11 +281,25 @@ body::after {
 .btn-glass:hover { background: rgba(255,255,255,0.10); }
 
 .btn-whatsapp {
-  background: linear-gradient(180deg, rgba(34,197,94,0.95), rgba(34,197,94,0.85));
+  background: #25D366;
   color: white;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
 }
 
-.btn-whatsapp:hover { background: linear-gradient(180deg, rgba(34,197,94,1), rgba(34,197,94,0.9)); }
+.btn-whatsapp:hover {
+  background: #1EBE5D;
+  box-shadow: 0 6px 28px rgba(30, 190, 93, 0.4);
+}
+
+a[href*="wa.me"].fixed {
+  background: #25D366 !important;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+}
+
+a[href*="wa.me"].fixed:hover {
+  background: #1EBE5D !important;
+  box-shadow: 0 6px 28px rgba(30, 190, 93, 0.45);
+}
 
 #hamburger {
   background: rgba(255,255,255,0.06);
