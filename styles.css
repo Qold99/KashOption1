@@ -124,21 +124,20 @@ nav.liquid-glass.fixed {
   white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-  nav.liquid-glass.fixed .max-w-7xl {
-    position: relative;
-  }
+nav.liquid-glass.fixed .max-w-7xl {
+  position: relative;
+}
 
-  #hamburger {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+#hamburger {
+  position: absolute;
+  right: max(0.75rem, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex !important; /* override md:hidden so it shows on desktop too */
+}
 
-  .site-brand {
-    padding-right: 64px; /* reserve space so it never overlaps hamburger */
-  }
+.site-brand {
+  padding-right: 64px; /* reserve space so it never overlaps hamburger */
 }
 
 .reveal {
