@@ -114,7 +114,7 @@ nav.liquid-glass.fixed {
   align-items: center;
 }
 
-/* Header layout: bold brand (≈70% width) + hamburger pinned top-right */
+/* Header layout: bold brand + hamburger on the right */
 .site-brand {
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -122,22 +122,12 @@ nav.liquid-glass.fixed {
   align-items: center;
   max-width: 70%;
   white-space: nowrap;
-}
-
-nav.liquid-glass.fixed .max-w-7xl {
-  position: relative;
+  padding-right: 3.5rem;
 }
 
 #hamburger {
-  position: absolute;
-  right: max(0.75rem, env(safe-area-inset-right));
-  top: 50%;
-  transform: translateY(-50%);
   display: flex !important; /* override md:hidden so it shows on desktop too */
-}
-
-.site-brand {
-  padding-right: 64px; /* reserve space so it never overlaps hamburger */
+  margin-left: auto;
 }
 
 .reveal {
