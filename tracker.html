@@ -1,290 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KASH OPTION | Global Logistics Tracker</title>
+  <meta charset="UTF-8">
+  <base href="https://mrkash.net/">
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <!-- Tailwind -->
+  <title>Track Order | Kash Option</title>
+  <meta name="description" content="Track your Kash Option order status. Enter your order ID to view updates and delivery progress to Ghana.">
+  <link rel="canonical" href="https://mrkash.net/tracker.html">
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <!-- Leaflet Map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <style>
-    :root {
-      --accent: #00d2ff;
-    }
-    body { 
-      background: radial-gradient(circle at top right, #0a192f, #020617);
-      font-family: 'Plus Jakarta Sans', sans-serif; 
-      color: white; 
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-    .liquid-glass {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .liquid-glass:hover {
-      border-color: var(--accent);
-      background: rgba(255, 255, 255, 0.05);
-    }
-    #map { 
-      height: 350px; 
-      border-radius: 2rem; 
-      margin-top: 1.5rem; 
-      filter: grayscale(1) invert(1) opacity(0.8);
-      border: 1px solid rgba(0, 210, 255, 0.2);
-    }
-    .tracking-pulse {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
-    }
-    .status-line {
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      position: relative;
-      margin: 2rem 0;
-    }
-    .status-progress {
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      transition: width 1.5s ease;
-    }
-    .timestamp-badge {
-      font-family: 'Courier New', monospace;
-      background: rgba(0, 210, 255, 0.1);
-      color: var(--accent);
-      padding: 2px 10px;
-      border-radius: 5px;
-      font-size: 0.75rem;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="selection:bg-cyan-500/30">
+<body class="selection:bg-cyan-500/30 relative" data-page="tracker">
+  <div class="blob" style="top: 0; right: 0;"></div>
+  <div class="blob" style="bottom: 0; left: 0; animation-delay: -7s;"></div>
+  <div id="overlay"></div>
 
-<!-- NAVIGATION -->
-<nav class="fixed top-0 w-full z-[3000] liquid-glass py-4 px-[5%] border-b border-white/5 bg-black/20">
-  <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <a href="index.html" class="text-2xl font-black tracking-tighter uppercase italic flex items-center gap-2">
-      <span class="text-white">KASH</span><span class="text-cyan-400">OPTION</span>
-    </a>
+  <nav class="fixed top-0 left-0 right-0 z-[3000] liquid-glass py-3 sm:py-4 px-4 sm:px-[5%] border-b border-white/5" style="padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-xl sm:text-2xl font-extrabold tracking-tighter uppercase italic">KASH<span class="text-cyan-400">OPTION</span></a>
+      <div class="hidden md:flex items-center gap-6 lg:gap-8 text-[10px] font-bold tracking-[0.25em] uppercase text-slate-400">
+        <a href="index.html" class="hover:text-cyan-400 transition-all py-2">Home</a>
+        <a href="about.html" class="hover:text-cyan-400 transition-all py-2">About</a>
+        <a href="catalog.html" class="hover:text-cyan-400 transition-all py-2">Catalog</a>
+        <a href="orders.html" class="hover:text-cyan-400 transition-all py-2">Live Orders</a>
+        <a href="testimonials.html" class="hover:text-cyan-400 transition-all py-2">Reviews</a>
+        <a href="faqs.html" class="hover:text-cyan-400 transition-all py-2">FAQs</a>
+        <a href="contact.html" class="hover:text-cyan-400 transition-all py-2">Contact</a>
+        <a href="policy-terms.html" class="hover:text-cyan-400 transition-all py-2">Policy</a>
+        <a href="tracker.html" class="px-5 py-2.5 bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded-full">Track Order</a>
+      </div>
 
-    <div class="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-slate-400">
-      <a href="index.html#catalog" class="hover:text-cyan-400">Catalog</a>
-      <a href="tracker.html" class="px-6 py-2 bg-cyan-500 text-black rounded-full hover:bg-cyan-400 transition-all font-black">
-        Track Order
-      </a>
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 w-10 h-10 items-center justify-center" aria-label="Open menu">
+        <span class="w-5 h-[2px] bg-slate-200"></span>
+        <span class="w-5 h-[2px] bg-slate-200"></span>
+        <span class="w-5 h-[2px] bg-slate-200"></span>
+      </button>
     </div>
-  </div>
-</nav>
 
-<!-- MAIN CONTENT -->
-<main class="max-w-4xl mx-auto px-6 pt-40 pb-20">
-
-  <div class="text-center mb-16 animate-pulse">
-    <h2 class="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-4">
-      Trace <span class="text-cyan-400">Cargo</span>
-    </h2>
-    <p class="text-slate-400 max-w-xl mx-auto text-base">
-      Secure end-to-end logistics tracking for imports from <br>
-      <span class="text-white font-bold italic">China, USA, UK & Europe.</span>
-    </p>
-  </div>
-
-  <form onsubmit="trackPackage(event)" class="relative max-w-2xl mx-auto mb-16">
-    <div class="relative group">
-        <input id="trackId" required placeholder="ENTER TRACKING ID"
-          class="w-full bg-white/5 border-2 border-white/10 p-8 rounded-3xl text-center font-black text-2xl uppercase tracking-widest focus:border-cyan-500 outline-none transition-all">
-        <div class="absolute inset-0 rounded-3xl group-hover:border-cyan-500/50 border border-transparent pointer-events-none"></div>
+    <div id="mobileNav" class="fixed top-0 left-0 h-full w-[85vw] max-w-[320px] bg-slate-950/98 backdrop-blur-xl border-r border-white/10 flex flex-col gap-2 pt-24 px-6 text-sm font-bold tracking-widest uppercase text-slate-300 z-[2500]">
+      <a href="index.html" class="hover:text-cyan-400 transition-all">Home</a>
+      <a href="about.html" class="hover:text-cyan-400 transition-all">About</a>
+      <a href="catalog.html" class="hover:text-cyan-400 transition-all">Catalog</a>
+      <a href="orders.html" class="hover:text-cyan-400 transition-all">Live Orders</a>
+      <a href="testimonials.html" class="hover:text-cyan-400 transition-all">Reviews</a>
+      <a href="faqs.html" class="hover:text-cyan-400 transition-all">FAQs</a>
+      <a href="contact.html" class="hover:text-cyan-400 transition-all">Contact</a>
+      <a href="policy-terms.html" class="hover:text-cyan-400 transition-all">Policy & Terms</a>
+      <a href="tracker.html" class="nav-active">Track Order</a>
+      <a href="https://wa.me/233240118846" target="_blank" class="mt-4 px-5 py-3 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full text-center">WhatsApp</a>
     </div>
-    <button type="submit"
-      class="mt-6 w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 p-6 rounded-3xl font-black uppercase tracking-widest shadow-xl shadow-cyan-900/20 transition-all active:scale-95">
-      Track My Order
-    </button>
-  </form>
+  </nav>
 
-  <div id="result" class="max-w-2xl mx-auto"></div>
+  <main>
+    <header class="page-hero text-center px-4 sm:px-6 relative">
+      <span class="heading-accent mx-auto"></span>
+      <p class="text-cyan-400 font-bold uppercase tracking-[0.35em] text-xs sm:text-sm mb-4">Tracking</p>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-black italic uppercase tracking-tight mb-4">Track Your Order</h1>
+      <p class="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">Enter your Kash Option order ID to view status updates. We share detailed delivery updates directly with you.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-2 text-slate-500 text-sm">
+        <span class="kbd">Try demo IDs</span>
+        <button type="button" class="text-cyan-400 hover:underline" data-demo="KO-12001">KO-12001</button>
+        <button type="button" class="text-cyan-400 hover:underline" data-demo="KO-12002">KO-12002</button>
+        <button type="button" class="text-cyan-400 hover:underline" data-demo="KO-12003">KO-12003</button>
+      </div>
+    </header>
 
-</main>
+    <section class="py-12 sm:py-20 px-4 sm:px-[5%] max-w-5xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 items-start">
+        <div class="reveal liquid-glass rounded-3xl p-6 sm:p-10">
+          <h2 class="text-xl sm:text-2xl font-black uppercase italic mb-2">Order Lookup</h2>
+          <p class="text-slate-400 text-sm mb-6">Your order ID is sent after payment (example: <span class="text-slate-200 font-bold">KO-12345</span>).</p>
 
-<!-- RESULTS INJECTED HERE -->
+          <form id="trackForm" class="inquiry-form space-y-4">
+            <div>
+              <label for="orderId" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Order ID</label>
+              <input id="orderId" name="orderId" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="KO-12345" required>
+              <p class="mt-2 text-xs text-slate-500">Tip: paste directly from WhatsApp to avoid typos.</p>
+            </div>
+            <button type="submit" class="w-full py-4 rounded-xl bg-cyan-500 text-white font-bold text-lg flex items-center justify-center gap-2 hover:bg-cyan-600 transition-colors">
+              <i class="fas fa-magnifying-glass"></i> Track now
+            </button>
+          </form>
 
-<footer class="py-20 px-[5%] border-t border-white/5 text-center">
-  <div class="flex justify-center gap-6 mb-8 text-slate-500">
-    <i class="fab fa-cc-visa text-2xl"></i>
-    <i class="fab fa-cc-mastercard text-2xl"></i>
-    <i class="fas fa-shield-alt text-2xl"></i>
-  </div>
-  <p class="text-[11px] font-black text-slate-600 uppercase tracking-[0.5em]">
-    © 2023 MR KASH | SOURCING EXPERTS
-  </p>
-</footer>
+          <div id="trackHelp" class="mt-6 text-sm text-slate-400">
+            Need help? Send your ID on WhatsApp and we’ll assist.
+            <a id="waHelp" href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20please%20help%20me%20track%20my%20order%20ID%3A%20" target="_blank" class="text-cyan-400 hover:underline font-bold">Open WhatsApp</a>
+          </div>
+        </div>
 
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/233240118846" target="_blank"
-   class="fixed bottom-8 right-8 bg-green-500 text-white w-16 h-16 rounded-full z-[4000] flex items-center justify-center shadow-2xl hover:bg-green-600 transition-all hover:scale-110">
-  <i class="fab fa-whatsapp text-3xl"></i>
-</a>
+        <div class="reveal liquid-glass rounded-3xl p-6 sm:p-10">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h2 class="text-xl sm:text-2xl font-black uppercase italic mb-1">Status</h2>
+              <p id="statusSubtitle" class="text-slate-400 text-sm">Enter an order ID to view updates.</p>
+            </div>
+            <div id="statusChip" class="hidden px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-black uppercase tracking-[0.25em] text-slate-200"></div>
+          </div>
 
-<script>
-  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS2OUQUgCcQgpu0AeuILp1GCXW4ntv6dYRRB554WtRsmpccw5AUKayNwNeHmHNs_zdF2oXNQNDVfHw3/pub?output=csv";
+          <div id="statusBody" class="mt-8 space-y-5">
+            <div class="track-step">
+              <div class="font-black uppercase italic">Payment confirmed</div>
+              <div class="text-slate-400 text-sm">Order is created and queued for sourcing/purchase.</div>
+            </div>
+            <div class="track-step">
+              <div class="font-black uppercase italic">Purchased / received</div>
+              <div class="text-slate-400 text-sm">Supplier confirmation and warehouse receipt.</div>
+            </div>
+            <div class="track-step">
+              <div class="font-black uppercase italic">In transit</div>
+              <div class="text-slate-400 text-sm">Air cargo or sea freight moving toward Ghana.</div>
+            </div>
+            <div class="track-step">
+              <div class="font-black uppercase italic">Customs & clearance</div>
+              <div class="text-slate-400 text-sm">Documentation and clearance coordination.</div>
+            </div>
+            <div class="track-step">
+              <div class="font-black uppercase italic">Out for delivery</div>
+              <div class="text-slate-400 text-sm">Last-mile dispatch within Ghana.</div>
+            </div>
+            <div class="track-step">
+              <div class="font-black uppercase italic">Delivered</div>
+              <div class="text-slate-400 text-sm">Order delivered to the agreed location.</div>
+            </div>
+          </div>
 
-  async function trackPackage(e) {
-    e.preventDefault();
-    const result = document.getElementById('result');
-    const id = document.getElementById('trackId').value.toUpperCase().trim();
-    
-    result.innerHTML = `
-      <div class="p-12 text-center">
-        <div class="inline-block w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p class="text-cyan-400 font-bold tracking-widest uppercase text-xs">Accessing Secure Manifest...</p>
-      </div>`;
+          <div id="statusNote" class="mt-8 text-xs text-slate-500">
+            Timelines are estimates and may vary due to carrier schedules, customs processing, peak seasons, and force majeure events.
+          </div>
+        </div>
+      </div>
+    </section>
 
-    try {
-      const response = await fetch(SHEET_URL);
-      const csvText = await response.text();
-      
-      const rows = csvText.split('\n').map(row => row.split(','));
-      const headers = rows[0].map(h => h.trim());
-      const dataRows = rows.slice(1).map(row => {
-        let obj = {};
-        row.forEach((cell, i) => {
-          if (headers[i]) obj[headers[i]] = cell.trim();
-        });
-        return obj;
-      });
+    <section class="py-16 sm:py-24 px-4 sm:px-[5%] max-w-5xl mx-auto">
+      <div class="reveal grid md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="liquid-glass rounded-3xl p-6 sm:p-8">
+          <div class="text-cyan-300 text-xl mb-3"><i class="fas fa-shield-halved"></i></div>
+          <div class="font-black uppercase italic mb-2">Privacy-first</div>
+          <p class="text-slate-400 text-sm">We share sensitive delivery details directly with the order owner on WhatsApp to reduce fraud.</p>
+        </div>
+        <div class="liquid-glass rounded-3xl p-6 sm:p-8">
+          <div class="text-emerald-300 text-xl mb-3"><i class="fas fa-bell"></i></div>
+          <div class="font-black uppercase italic mb-2">Real updates</div>
+          <p class="text-slate-400 text-sm">We update your status at major handoff points: warehouse receipt, shipment departure, clearance, dispatch.</p>
+        </div>
+        <div class="liquid-glass rounded-3xl p-6 sm:p-8">
+          <div class="text-amber-300 text-xl mb-3"><i class="fas fa-headset"></i></div>
+          <div class="font-black uppercase italic mb-2">Priority support</div>
+          <p class="text-slate-400 text-sm">If anything looks unclear, send your order ID and we’ll assist fast.</p>
+        </div>
+      </div>
+      <div class="mt-12 text-center reveal">
+        <a href="contact.html" class="inline-flex items-center gap-2 bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 px-8 py-4 rounded-full font-bold hover:bg-cyan-500 hover:text-white transition-all">Contact us for help</a>
+      </div>
+    </section>
+  </main>
 
-      const order = dataRows.find(o => o.TrackingID === id);
+  <footer class="pt-16 sm:pt-24 pb-10 px-4 sm:px-[5%] border-t border-white/5">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 sm:gap-12 mb-12 sm:mb-16">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl sm:text-3xl font-black italic uppercase mb-4">KASH OPTION</h2>
+        <p class="text-slate-400 max-w-md text-sm sm:text-base">Verified sourcing and logistics for Ghana. Shop globally, pay locally.</p>
+      </div>
+      <div>
+        <h3 class="font-bold uppercase tracking-widest text-xs mb-4 text-cyan-400">Links</h3>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li><a href="catalog.html" class="hover:text-white">Catalog</a></li>
+          <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+          <li><a href="policy-terms.html" class="hover:text-white">Policy & Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold uppercase tracking-widest text-xs mb-4 text-cyan-400">Connect</h3>
+        <div class="flex gap-3 sm:gap-4 flex-wrap">
+          <a href="https://www.instagram.com/kashoption1" target="_blank" class="w-10 h-10 liquid-glass rounded-full flex items-center justify-center hover:bg-pink-500 min-w-[44px] min-h-[44px]" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/1CrwnBxS8W/" target="_blank" class="w-10 h-10 liquid-glass rounded-full flex items-center justify-center hover:bg-blue-600 min-w-[44px] min-h-[44px]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="mailto:Info@mrkash.net" class="w-10 h-10 liquid-glass rounded-full flex items-center justify-center hover:bg-slate-300 hover:text-slate-900 min-w-[44px] min-h-[44px]" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center border-t border-white/5 pt-6 sm:pt-8">
+      <p class="text-[10px] font-bold tracking-[0.5em] text-slate-600 uppercase">© 2025 KASH OPTION. ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
 
-      if (!order) {
-        result.innerHTML = `
-          <div class="p-10 bg-red-500/10 rounded-[2.5rem] border border-red-500/20 text-center animate-shake">
-            <i class="fas fa-exclamation-triangle text-red-500 text-3xl mb-4"></i>
-            <h3 class="text-xl font-bold uppercase mb-1">Order Not Found</h3>
-            <p class="text-slate-400 text-sm">Tracking ID [${id}] is ivalid.</p>
-          </div>`;
-        return;
+  <a href="https://wa.me/233240118846" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-[2900] w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg hover:bg-green-600 hover:scale-110 transition-transform min-w-[56px] min-h-[56px]" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp text-2xl"></i></a>
+
+  <script>
+    (function() {
+      var h = document.getElementById('hamburger');
+      var nav = document.getElementById('mobileNav');
+      var overlay = document.getElementById('overlay');
+      function closeMenu() { nav.classList.remove('mobile-nav-open'); overlay.classList.remove('visible'); h.classList.remove('open'); }
+      h.addEventListener('click', function(e) { e.stopPropagation(); var open = nav.classList.toggle('mobile-nav-open'); overlay.classList.toggle('visible', open); h.classList.toggle('open', open); });
+      overlay.addEventListener('click', closeMenu);
+      nav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+
+      var demo = {
+        "KO-12001": { label: "Air cargo, In transit", stage: 2, note: "Departed origin hub. Next update after Ghana arrival scan." },
+        "KO-12002": { label: "Sea freight, Customs", stage: 3, note: "Clearance in progress. We’ll update when released for dispatch." },
+        "KO-12003": { label: "Delivered", stage: 5, note: "Delivered successfully. Thank you for choosing Kash Option." }
+      };
+
+      function normalizeId(v) {
+        return String(v || '').trim().toUpperCase().replace(/\s+/g, '');
+      }
+      function isValidId(v) {
+        return /^KO-\d{5}$/.test(v);
       }
 
-      // Progress Calculation
-      let progress = 20;
-      if(order.Status.includes("In Transit")) progress = 50;
-      if(order.Status.includes("Customs")) progress = 75;
-      if(order.Status.includes("Ready") || order.Status.includes("Arrived")) progress = 100;
+      var orderIdInput = document.getElementById('orderId');
+      var form = document.getElementById('trackForm');
+      var subtitle = document.getElementById('statusSubtitle');
+      var chip = document.getElementById('statusChip');
+      var statusBody = document.getElementById('statusBody');
+      var statusNote = document.getElementById('statusNote');
+      var waHelp = document.getElementById('waHelp');
 
-      // Current Timestamp
-      const now = new Date();
-      const timestamp = now.toLocaleDateString() + ' | ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      function setTimeline(stageIndex, noteText) {
+        var steps = statusBody.querySelectorAll('.track-step');
+        steps.forEach(function(s, i) {
+          s.classList.remove('is-active', 'is-current', 'is-locked');
+          if (i < stageIndex) s.classList.add('is-active');
+          if (i === stageIndex) s.classList.add('is-current');
+        });
+        statusNote.textContent = noteText || statusNote.textContent;
+      }
 
-      result.innerHTML = `
-        <div class="liquid-glass p-8 md:p-12 rounded-[3rem] space-y-8 animate-in fade-in duration-700">
-          
-          <div class="flex justify-between items-start">
-            <div>
-               <div class="flex items-center gap-3 mb-2">
-                 <p class="text-[10px] font-black text-cyan-400 uppercase tracking-widest">Official Record</p>
-                 <span class="timestamp-badge">Verified: ${timestamp}</span>
-               </div>
-               <h4 class="text-4xl font-black uppercase italic leading-none">${order.Status}</h4>
-               <p class="text-slate-500 mt-2 font-bold"><i class="fas fa-location-dot mr-2"></i>${order.Location}</p>
-            </div>
-            <div class="bg-cyan-500 text-black p-4 rounded-3xl tracking-pulse">
-              <i class="fas fa-box-open text-2xl"></i>
-            </div>
-          </div>
+      function render(id) {
+        var nid = normalizeId(id);
+        orderIdInput.value = nid;
+        waHelp.href = 'https://wa.me/233240118846?text=' + encodeURIComponent('Hello Kash Option, please help me track my order ID: ' + nid);
 
-          <div class="status-line">
-            <div class="status-progress" style="width: ${progress}%"></div>
-            <div class="flex justify-between mt-4 text-[9px] font-bold uppercase text-slate-500 tracking-tighter">
-               <span class="${progress >= 20 ? 'text-cyan-400' : ''}">Warehouse</span>
-               <span class="${progress >= 50 ? 'text-cyan-400' : ''}">In Transit</span>
-               <span class="${progress >= 75 ? 'text-cyan-400' : ''}">Customs</span>
-               <span class="${progress >= 100 ? 'text-cyan-400' : ''}">Ready</span>
-            </div>
-          </div>
-          
-          <div class="grid grid-cols-2 gap-6 py-6 border-y border-white/5">
-            <div>
-              <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Estimated Arrival</p>
-              <p class="font-bold text-lg text-cyan-400">${order.ETA || 'PROCESSING'}</p>
-            </div>
-            <div class="text-right">
-              <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Consignee ID</p>
-              <p class="font-bold text-lg">#${id.slice(-5)}</p>
-            </div>
-          </div>
+        if (!isValidId(nid)) {
+          chip.classList.add('hidden');
+          subtitle.textContent = 'Please enter a valid ID in the format KO-12345.';
+          setTimeline(-1, 'Timelines are estimates and may vary due to carrier schedules, customs processing, peak seasons, and force majeure events.');
+          return;
+        }
 
-          <div id="map" class="shadow-2xl"></div>
-          
-          <div class="pt-6 flex items-center justify-between border-t border-white/5">
-             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-cyan-500/10 rounded-full flex items-center justify-center">
-                   <i class="fas fa-fingerprint text-cyan-400"></i>
-                </div>
-                <div>
-                   <p class="text-[10px] text-slate-500 font-bold uppercase">System Scan</p>
-                   <p class="text-xs font-bold text-slate-300">Database Footprint Encrypted</p>
-                </div>
-             </div>
-             <button onclick="window.print()" class="text-slate-500 hover:text-white transition">
-                <i class="fas fa-print"></i>
-             </button>
-          </div>
-        </div>`;
+        if (demo[nid]) {
+          chip.textContent = demo[nid].label;
+          chip.classList.remove('hidden');
+          subtitle.textContent = 'Showing demo tracking for ' + nid + '.';
+          setTimeline(demo[nid].stage, demo[nid].note);
+          return;
+        }
 
-      loadMap(order.Location);
+        chip.classList.add('hidden');
+        subtitle.textContent = 'We couldn’t find this ID in our public demo tracker. For secure updates, message us on WhatsApp with your order ID.';
+        setTimeline(0, 'For privacy, detailed coordination is shared directly with the order owner on WhatsApp.');
+      }
 
-    } catch (err) {
-      result.innerHTML = `<div class="p-6 bg-red-500/10 rounded-xl text-center text-red-400">Database connection error. Try again.</div>`;
-    }
-  }
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        render(orderIdInput.value);
+      });
 
-  function loadMap(loc) {
-    const points = {
-      "Shanghai": [31.2304, 121.4737],
-      "London": [51.5074, -0.1278],
-      "New York": [40.7128, -74.0060],
-      "Accra": [5.6037, -0.1870],
-      "Guangzhou": [23.1291, 113.2644],
-      "USA": [37.0902, -95.7129],
-      "China": [35.8617, 104.1954]
-    };
+      document.querySelectorAll('[data-demo]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          render(btn.getAttribute('data-demo'));
+          document.getElementById('statusBody').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
 
-    let coord = points["Accra"];
-    Object.keys(points).forEach(k => { if (loc && loc.includes(k)) coord = points[k]; });
+      var params = new URLSearchParams(window.location.search);
+      var initial = params.get('id') || params.get('order') || '';
+      if (initial) render(initial);
 
-    // Clear existing map instance if any
-    const mapContainer = L.DomUtil.get('map');
-    if (mapContainer != null) { mapContainer._leaflet_id = null; }
-
-    const map = L.map('map', { zoomControl: false }).setView(coord, 4);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
-    
-    const pulseIcon = L.divIcon({
-      className: 'custom-pulse-icon',
-      html: `<div class="w-4 h-4 bg-cyan-500 rounded-full tracking-pulse border-2 border-white"></div>`,
-      iconSize: [16, 16]
-    });
-
-    L.marker(coord, {icon: pulseIcon}).addTo(map).bindPopup("Current checkpoint: " + loc).openPopup();
-  }
-</script>
-
+      var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
 </body>
 </html>
+
