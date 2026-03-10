@@ -107,9 +107,9 @@ body::after {
 
 /* Compact header (~70px) for premium logistics look */
 nav.liquid-glass.fixed {
-  min-height: 70px;
-  padding-top: 0.875rem;
-  padding-bottom: 0.875rem;
+  min-height: 56px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   display: flex;
   align-items: center;
 }
@@ -159,6 +159,26 @@ nav.liquid-glass.fixed {
   background-clip: text;
   color: transparent;
   font-weight: 800;
+}
+
+.hero-trustline {
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero-trust-badges {
+  padding-left: 0;
+  list-style: none;
+}
+
+.hero-shipping-icons > div {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 420px) {
+  .hero-shipping-icons > div {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .hero-media {
