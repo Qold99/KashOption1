@@ -341,7 +341,7 @@ a[href*="wa.me"].fixed:hover {
 
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s, visibility 0.3s;
 
-  z-index: 2600;
+  z-index: 2600 !important; /* above #overlay (2500); overrides Tailwind z-[2500] */
   padding-bottom: env(safe-area-inset-bottom);
 
   background: linear-gradient(180deg, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.95) 55%, rgba(15, 23, 42, 0.96) 100%);
@@ -376,13 +376,16 @@ a[href*="wa.me"].fixed:hover {
   min-height: 44px;
   padding: 12px 16px;
   line-height: 1.4;
-  color: rgba(226, 232, 240, 0.95) !important;
+  /* Temporary: red/white to confirm links render; remove or replace after testing */
+  background: red;
+  color: white !important;
   text-decoration: none !important;
   pointer-events: auto;
   cursor: pointer;
 }
 
 #mobileNav a:hover {
+  background: rgba(34, 211, 238, 0.15);
   color: #22d3ee !important;
 }
 
@@ -398,7 +401,7 @@ a[href*="wa.me"].fixed:hover {
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s;
-  z-index: 2500;
+  z-index: 2500; /* must stay below #mobileNav (2600) so overlay never covers menu */
 }
 
 #overlay.visible {
