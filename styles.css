@@ -65,14 +65,13 @@ body::after {
   margin: 3rem 0;
 }
 
-/* Glass components — local, reduced blur */
 .glass {
   position: relative;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.5rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
 }
 
@@ -92,8 +91,8 @@ body::after {
 
 .liquid-glass {
   background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s, background 0.2s, box-shadow 0.2s;
@@ -115,15 +114,8 @@ nav.liquid-glass.fixed {
   align-items: center;
 }
 
-/* Force nav, header, hero to always be sharp (no global blur) */
-nav,
-header,
-.hero-wrap {
-  filter: none !important;
-  backdrop-filter: none !important;
-}
+/* Header nav uses original inline layout (logo left, links center, hamburger right). */
 
-/* Reveal animation */
 .reveal {
   opacity: 0;
   transform: translate3d(0, 22px, 0);
@@ -199,15 +191,15 @@ header,
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(2, 6, 23, 0.85) 100%);
 }
 
-/* Decorative blobs — smaller and behind content only */
+/* Trust badges are real HTML now (no CSS-injected duplicate text). */
+
 .blob {
   position: absolute;
-  width: min(360px, 70vw);
-  height: min(360px, 70vw);
-  background:
-    radial-gradient(circle at 30% 30%, rgba(0, 210, 255, 0.20), transparent 55%),
-    radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.16), transparent 55%);
-  filter: blur(40px);
+  width: min(460px, 86vw);
+  height: min(460px, 86vw);
+  background: radial-gradient(circle at 30% 30%, rgba(0, 210, 255, 0.20), transparent 55%),
+              radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.16), transparent 55%);
+  filter: blur(50px);
   border-radius: 50%;
   z-index: -1;
   animation: blob-float 20s infinite alternate ease-in-out;
@@ -244,7 +236,6 @@ header,
   pointer-events: none;
 }
 
-/* Pill — reduced local blur */
 .pill {
   display: inline-flex;
   align-items: center;
@@ -253,8 +244,8 @@ header,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: rgba(248,250,252,0.92);
   font-weight: 800;
   font-size: 12px;
@@ -279,13 +270,12 @@ header,
 
 .btn-primary:hover { box-shadow: 0 18px 40px rgba(0,0,0,0.34); }
 
-/* Local glass button blur */
 .btn-glass {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
   color: rgba(248,250,252,0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .btn-glass:hover { background: rgba(255,255,255,0.10); }
@@ -311,11 +301,10 @@ a[href*="wa.me"].fixed:hover {
   box-shadow: 0 6px 28px rgba(30, 190, 93, 0.45);
 }
 
-/* Hamburger — local reduced blur */
 #hamburger {
   background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   min-width: 44px;
   min-height: 44px;
   border-radius: 999px;
@@ -335,15 +324,13 @@ a[href*="wa.me"].fixed:hover {
 #hamburger.open span:nth-child(2) { opacity: 0; }
 #hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* =========================
-   Mobile navigation drawer
-   ========================= */
-
+/* Mobile menu panel — ABOVE overlay, links ABOVE gradient */
 #mobileNav {
   /* CLOSED by default */
-  position: fixed;
-  top: 0;
-  right: 0;                 /* drawer from the RIGHT */
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
   height: 100%;
   width: 85vw;
   max-width: 320px;
@@ -352,24 +339,16 @@ a[href*="wa.me"].fixed:hover {
   opacity: 0;
   visibility: hidden;
 
-  transition:
-    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-    opacity 0.3s,
-    visibility 0.3s;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s, visibility 0.3s;
 
-  z-index: 2600;            /* above overlay (2500) */
+  z-index: 2600;
   padding-bottom: env(safe-area-inset-bottom);
 
-  /* Panel background (NOT full-page blur) */
-  background: linear-gradient(
-    180deg,
-    rgba(2, 6, 23, 0.98) 0%,
-    rgba(2, 6, 23, 0.95) 55%,
-    rgba(15, 23, 42, 0.96) 100%
-  );
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.98) 0%, rgba(2, 6, 23, 0.95) 55%, rgba(15, 23, 42, 0.96) 100%);
   border-left: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: -24px 0 80px rgba(0, 0, 0, 0.55);
+  box-shadow: -24px 0 80px rgba(0,0,0,0.55);
   overflow: hidden;
+  isolation: isolate;
 }
 
 #mobileNav::before {
@@ -397,50 +376,46 @@ a[href*="wa.me"].fixed:hover {
   min-height: 44px;
   padding: 12px 16px;
   line-height: 1.4;
-  color: rgba(226, 232, 240, 0.95);
-  text-decoration: none;
+  color: rgba(226, 232, 240, 0.95) !important;
+  text-decoration: none !important;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 #mobileNav a:hover {
-  color: #22d3ee;
+  color: #22d3ee !important;
 }
 
 #mobileNav .nav-active {
   color: #22d3ee !important;
 }
 
-/* =========================
-   Dim overlay behind drawer
-   ========================= */
-
 #overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);   /* dim only */
+  background: rgba(0,0,0,0.6);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s;
-  z-index: 2500;                    /* below #mobileNav */
+  z-index: 2500;
 }
 
 #overlay.visible {
   opacity: 1;
-  visibility: visible;
   pointer-events: auto;
+  visibility: visible;
 }
 
-/* Extra safety: overlay never blocks clicks when not visible */
+/* Extra safety: when not .visible, overlay must never block clicks */
 #overlay:not(.visible) {
   pointer-events: none;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.24); border-radius: 10px; }
 
-/* Form controls */
 .inquiry-form input:not([type="checkbox"]):not([type="radio"]),
 .inquiry-form select,
 .inquiry-form textarea {
@@ -509,16 +484,9 @@ a[href*="wa.me"].fixed:hover {
   color: rgba(248,250,252,0.96);
 }
 
-/* Layout containment */
 section { contain: layout paint; }
 
-/* Catalog cards and thumbs — NO inherited blur */
-.catalog-card {
-  overflow: hidden;
-  border-radius: 1.5rem;
-  filter: none !important;
-  backdrop-filter: none !important;
-}
+.catalog-card { overflow: hidden; border-radius: 1.5rem; }
 
 .catalog-card .card-img-wrap {
   aspect-ratio: 16 / 10;
@@ -574,8 +542,6 @@ section { contain: layout paint; }
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  filter: none !important;
-  backdrop-filter: none !important;
 }
 
 .product-thumb:hover {
@@ -609,7 +575,6 @@ section { contain: layout paint; }
   line-height: 1.3;
 }
 
-/* Ticker */
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
@@ -624,14 +589,6 @@ section { contain: layout paint; }
 #ordersList {
   will-change: transform;
   transform: translateZ(0);
-}
-
-/* Policy cards & explore cards — safety: no blur inheritance */
-.policy-card,
-.explore-card,
-.story-img {
-  filter: none !important;
-  backdrop-filter: none !important;
 }
 
 .policy-card {
@@ -666,7 +623,6 @@ section { contain: layout paint; }
   display: block;
 }
 
-/* Kicker text */
 .kicker {
   color: rgba(0, 210, 255, 0.92);
   font-weight: 900;
