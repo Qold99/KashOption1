@@ -199,8 +199,6 @@ header,
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(2, 6, 23, 0.85) 100%);
 }
 
-/* Trust badges are real HTML now (no CSS-injected duplicate text). */
-
 /* Decorative blobs — smaller and behind content only */
 .blob {
   position: absolute;
@@ -397,7 +395,7 @@ a[href*="wa.me"].fixed:hover {
   z-index: 2;
   display: block;
   min-height: 44px;
-  padding: 12px 0;
+  padding: 12px 16px;
   line-height: 1.4;
   color: rgba(226, 232, 240, 0.95);
   text-decoration: none;
