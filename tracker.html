@@ -103,6 +103,35 @@
             <div id="statusChip" class="hidden px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-black uppercase tracking-[0.25em] text-slate-200"></div>
           </div>
 
+          <div id="trackDetails" class="mt-6 hidden">
+            <div class="grid gap-4 text-sm sm:grid-cols-2">
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Tracking ID</p>
+                <p id="tdId" class="font-semibold text-slate-100 break-all"></p>
+              </div>
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Location</p>
+                <p id="tdLocation" class="font-semibold text-slate-100"></p>
+              </div>
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Previous status</p>
+                <p id="tdPrev" class="font-semibold text-slate-100"></p>
+              </div>
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Current status</p>
+                <p id="tdCurr" class="font-semibold text-emerald-300"></p>
+              </div>
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">ETA</p>
+                <p id="tdEta" class="font-semibold text-slate-100"></p>
+              </div>
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.18em] text-slate-400 mb-1">Consignee last checked</p>
+                <p id="tdLastChecked" class="font-semibold text-slate-100"></p>
+              </div>
+            </div>
+          </div>
+
           <div id="statusBody" class="mt-8 space-y-5">
             <div class="track-step">
               <div class="font-black uppercase italic">Payment confirmed</div>
@@ -133,6 +162,7 @@
           <div id="statusNote" class="mt-8 text-xs text-slate-500">
             Timelines are estimates and may vary due to carrier schedules, customs processing, peak seasons, and force majeure events.
           </div>
+          <div id="trackError" class="mt-3 text-xs text-amber-300 hidden"></div>
         </div>
       </div>
     </section>
@@ -207,6 +237,33 @@
         "KO-12003": { label: "Delivered", stage: 5, note: "Delivered successfully. Thank you for choosing Kash Option." }
       };
 
+      var SHEET_ID = '1btTjXG_7gYVgI8y1Zdlht08IvRmSfWpiXZDSY-R0Ybc';
+      var SHEET_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&headers=1';
+      var sheetCache = null;
+
+      var CITY_MAP = {
+        'guangzhou': 'Guangzhou, China',
+        'shenzhen': 'Shenzhen, China',
+        'shanghai': 'Shanghai, China',
+        'beijing': 'Beijing, China',
+        'hong kong': 'Hong Kong, China',
+        'new york': 'New York, USA',
+        'los angeles': 'Los Angeles, USA',
+        'chicago': 'Chicago, USA',
+        'houston': 'Houston, USA',
+        'london': 'London, UK',
+        'manchester': 'Manchester, UK',
+        'birmingham': 'Birmingham, UK',
+        'accra': 'Accra, Ghana',
+        'tema': 'Tema, Ghana',
+        'kumasi': 'Kumasi, Ghana',
+        'takoradi': 'Takoradi, Ghana',
+        'dubai': 'Dubai, UAE',
+        'abu dhabi': 'Abu Dhabi, UAE',
+        'istanbul': 'Istanbul, Turkey',
+        'doha': 'Doha, Qatar'
+      };
+
       function normalizeId(v) {
         return String(v || '').trim().toUpperCase().replace(/\s+/g, '');
       }
@@ -220,6 +277,14 @@
       var chip = document.getElementById('statusChip');
       var statusBody = document.getElementById('statusBody');
       var statusNote = document.getElementById('statusNote');
+      var trackDetails = document.getElementById('trackDetails');
+      var trackError = document.getElementById('trackError');
+      var tdId = document.getElementById('tdId');
+      var tdLocation = document.getElementById('tdLocation');
+      var tdPrev = document.getElementById('tdPrev');
+      var tdCurr = document.getElementById('tdCurr');
+      var tdEta = document.getElementById('tdEta');
+      var tdLastChecked = document.getElementById('tdLastChecked');
       var waHelp = document.getElementById('waHelp');
 
       function setTimeline(stageIndex, noteText) {
@@ -232,7 +297,146 @@
         statusNote.textContent = noteText || statusNote.textContent;
       }
 
-      function render(id) {
+      function mapLocation(raw) {
+        if (!raw) return '';
+        var key = String(raw).trim().toLowerCase();
+        return CITY_MAP[key] || raw;
+      }
+
+      function formatDateTime(dt) {
+        try {
+          var d = dt instanceof Date ? dt : new Date(dt);
+          if (isNaN(d.getTime())) return '';
+          return d.toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        } catch (e) {
+          return '';
+        }
+      }
+
+      function getLastChecked(id) {
+        var key = 'kash_track_lastChecked_' + id;
+        var v = localStorage.getItem(key);
+        return v ? formatDateTime(v) : '';
+      }
+
+      function setLastChecked(id) {
+        var key = 'kash_track_lastChecked_' + id;
+        var now = new Date().toISOString();
+        localStorage.setItem(key, now);
+        return formatDateTime(now);
+      }
+
+      function inferStageFromStatus(status) {
+        if (!status) return -1;
+        var s = status.toLowerCase();
+        if (s.indexOf('delivered') !== -1) return 5;
+        if (s.indexOf('out for delivery') !== -1 || s.indexOf('dispatch') !== -1) return 4;
+        if (s.indexOf('customs') !== -1 || s.indexOf('clearance') !== -1) return 3;
+        if (s.indexOf('in transit') !== -1 || s.indexOf('departed') !== -1 || s.indexOf('shipment') !== -1) return 2;
+        if (s.indexOf('purchased') !== -1 || s.indexOf('received') !== -1 || s.indexOf('warehouse') !== -1) return 1;
+        if (s.indexOf('payment') !== -1 || s.indexOf('created') !== -1) return 0;
+        return -1;
+      }
+
+      function parseSheet(jsonText) {
+        if (!jsonText) return null;
+        var start = jsonText.indexOf('{');
+        var end = jsonText.lastIndexOf('}');
+        if (start === -1 || end === -1) return null;
+        var data = JSON.parse(jsonText.slice(start, end + 1));
+        var cols = (data.table.cols || []).map(function(c) {
+          return (c.label || '').trim().toLowerCase();
+        });
+        function idx(name) {
+          return cols.indexOf(name.toLowerCase());
+        }
+        var iTrack = idx('tracking id');
+        var iPrev = idx('previous status');
+        var iCurr = idx('current status');
+        var iLoc = idx('location');
+        var iEta = idx('eta');
+        var iUpdated = idx('last updated');
+
+        var rows = {};
+        (data.table.rows || []).forEach(function(r) {
+          function cell(i) { return (r.c[i] && (r.c[i].formattedValue || r.c[i].v)) || ''; }
+          var id = String(cell(iTrack) || '').trim().toUpperCase();
+          if (!id) return;
+          rows[id] = {
+            trackId: id,
+            previousStatus: iPrev >= 0 ? cell(iPrev) : '',
+            currentStatus: iCurr >= 0 ? cell(iCurr) : '',
+            location: iLoc >= 0 ? cell(iLoc) : '',
+            eta: iEta >= 0 ? cell(iEta) : '',
+            lastUpdated: iUpdated >= 0 ? cell(iUpdated) : ''
+          };
+        });
+        return rows;
+      }
+
+      function loadSheet() {
+        if (sheetCache) return Promise.resolve(sheetCache);
+        return fetch(SHEET_URL, { cache: 'no-store' })
+          .then(function(resp) { return resp.text(); })
+          .then(function(text) {
+            sheetCache = parseSheet(text) || {};
+            return sheetCache;
+          });
+      }
+
+      function getRecordFromCache(id) {
+        if (!sheetCache) return null;
+        return sheetCache[id] || null;
+      }
+
+      function renderRecord(record, nid) {
+        trackError.classList.add('hidden');
+        trackDetails.classList.remove('hidden');
+        tdId.textContent = record.trackId || nid;
+        tdLocation.textContent = mapLocation(record.location || '');
+        tdPrev.textContent = record.previousStatus || '—';
+        tdCurr.textContent = record.currentStatus || '—';
+        tdEta.textContent = record.eta || '—';
+
+        var lastChecked = setLastChecked(nid);
+        var lastCheckedDisplay = lastChecked || getLastChecked(nid);
+        tdLastChecked.textContent = lastCheckedDisplay ? ('Last checked: ' + lastCheckedDisplay) : 'Last checked: just now';
+
+        var stage = inferStageFromStatus(record.currentStatus || record.previousStatus || '');
+        if (record.currentStatus) {
+          chip.textContent = record.currentStatus;
+          chip.classList.remove('hidden');
+          subtitle.textContent = 'Showing live tracking for ' + nid + '.';
+        }
+        setTimeline(stage, statusNote.textContent);
+      }
+
+      function renderDemo(nid) {
+        var d = demo[nid];
+        trackDetails.classList.add('hidden');
+        trackError.classList.add('hidden');
+        chip.textContent = d.label;
+        chip.classList.remove('hidden');
+        subtitle.textContent = 'Showing demo tracking for ' + nid + '.';
+        setTimeline(d.stage, d.note);
+      }
+
+      function renderNotFound(nid) {
+        trackDetails.classList.add('hidden');
+        chip.classList.add('hidden');
+        subtitle.textContent = 'We couldn’t find this ID in the public tracker. For secure updates, message us on WhatsApp with your order ID.';
+        setTimeline(0, 'For privacy, detailed coordination is shared directly with the order owner on WhatsApp.');
+        trackError.textContent = 'No tracking record found for ' + nid + '.';
+        trackError.classList.remove('hidden');
+      }
+
+      async function render(id) {
         var nid = normalizeId(id);
         orderIdInput.value = nid;
         waHelp.href = 'https://wa.me/233240118846?text=' + encodeURIComponent('Hello Kash Option, please help me track my order ID: ' + nid);
@@ -241,20 +445,32 @@
           chip.classList.add('hidden');
           subtitle.textContent = 'Please enter a valid ID in the format KO-12345.';
           setTimeline(-1, 'Timelines are estimates and may vary due to carrier schedules, customs processing, peak seasons, and force majeure events.');
+          trackDetails.classList.add('hidden');
+          trackError.classList.add('hidden');
           return;
+        }
+
+        subtitle.textContent = 'Looking up tracking information for ' + nid + '...';
+        chip.classList.add('hidden');
+        trackError.classList.add('hidden');
+
+        try {
+          var cache = await loadSheet();
+          var record = cache[nid];
+          if (record && (record.currentStatus || record.previousStatus || record.location || record.eta)) {
+            renderRecord(record, nid);
+            return;
+          }
+        } catch (e) {
+          // fall back to demo / generic message
         }
 
         if (demo[nid]) {
-          chip.textContent = demo[nid].label;
-          chip.classList.remove('hidden');
-          subtitle.textContent = 'Showing demo tracking for ' + nid + '.';
-          setTimeline(demo[nid].stage, demo[nid].note);
+          renderDemo(nid);
           return;
         }
 
-        chip.classList.add('hidden');
-        subtitle.textContent = 'We couldn’t find this ID in our public demo tracker. For secure updates, message us on WhatsApp with your order ID.';
-        setTimeline(0, 'For privacy, detailed coordination is shared directly with the order owner on WhatsApp.');
+        renderNotFound(nid);
       }
 
       form.addEventListener('submit', function(e) {
