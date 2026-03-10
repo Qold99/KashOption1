@@ -394,6 +394,11 @@ a[href*="wa.me"].fixed:hover {
   visibility: visible;
 }
 
+/* Extra safety: when not .visible, overlay must never block clicks */
+#overlay:not(.visible) {
+  pointer-events: none;
+}
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.24); border-radius: 10px; }
