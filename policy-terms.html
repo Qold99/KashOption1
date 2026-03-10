@@ -13,6 +13,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .policy-toc a, .policy-toc-link { font-weight: 900; font-size: 1.125rem; color: #f8fafc; text-decoration: none; display: inline-block; -webkit-font-smoothing: antialiased; }
+    .policy-toc a:hover, .policy-toc-link:hover { color: rgb(34 211 238); }
+    .policy-bokeh { position: relative; overflow: hidden; border-radius: 1.5rem; min-height: 240px; display: flex; align-items: center; justify-content: center; padding: 2rem; background: rgba(0,0,0,0.2); }
+    .policy-bokeh::before { content: ''; position: absolute; inset: -20%; background: radial-gradient(circle 40% at 15% 20%, rgba(0,210,255,0.35) 0%, transparent 45%), radial-gradient(circle 35% at 85% 25%, rgba(124,58,237,0.3) 0%, transparent 45%), radial-gradient(circle 30% at 50% 85%, rgba(34,197,94,0.2) 0%, transparent 45%), radial-gradient(circle 25% at 75% 70%, rgba(0,210,255,0.2) 0%, transparent 40%); filter: blur(40px); pointer-events: none; opacity: 0.9; }
+    .policy-bokeh .policy-bokeh-img { position: relative; z-index: 1; width: 100%; max-width: 640px; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
+    .policy-bokeh .policy-bokeh-img img { width: 100%; height: auto; display: block; object-fit: cover; max-height: 280px; }
+  </style>
 </head>
 <body class="selection:bg-cyan-500/30 relative" data-page="policy">
   <div class="blob" style="top: 0; right: 0;"></div>
@@ -63,26 +71,32 @@
     <section class="py-12 sm:py-20 px-4 sm:px-[5%] max-w-4xl mx-auto">
       <nav class="reveal liquid-glass rounded-3xl p-6 sm:p-8 mb-10" aria-label="Policy sections">
         <h2 class="text-sm font-bold uppercase tracking-widest text-slate-500 mb-4">On this page</h2>
-        <ol class="policy-toc space-y-2 text-slate-300">
-          <li><a href="#what-we-do">What We Do</a></li>
-          <li><a href="#how-order-works">How Your Order Works</a></li>
-          <li><a href="#inventory">Inventory and Sourcing</a></li>
-          <li><a href="#quotes">1) Quotes & pricing</a></li>
-          <li><a href="#payments">2) Payments & cancellations</a></li>
-          <li><a href="#sourcing">3) Sourcing & product condition</a></li>
-          <li><a href="#prohibited">4) Prohibited items</a></li>
-          <li><a href="#shipping">5) Shipping & delivery</a></li>
-          <li><a href="#customs">6) Customs & duties</a></li>
-          <li><a href="#damage">7) Damage, loss & liability</a></li>
-          <li><a href="#returns">8) Returns & refunds</a></li>
-          <li><a href="#disputes">9) Disputes</a></li>
-          <li><a href="#chargebacks">10) Chargebacks & fraud</a></li>
-          <li><a href="#abuse">11) Acceptable use</a></li>
-          <li><a href="#warranty">12) Warranty disclaimer</a></li>
-          <li><a href="#governing">13) Governing law</a></li>
-          <li><a href="#agreement">14) Entire agreement</a></li>
+        <ol class="policy-toc space-y-3 text-slate-300">
+          <li><a href="#what-we-do" class="policy-toc-link">What We Do</a></li>
+          <li><a href="#how-order-works" class="policy-toc-link">How Your Order Works</a></li>
+          <li><a href="#inventory" class="policy-toc-link">Inventory and Sourcing</a></li>
+          <li><a href="#quotes" class="policy-toc-link">1) Quotes & pricing</a></li>
+          <li><a href="#payments" class="policy-toc-link">2) Payments & cancellations</a></li>
+          <li><a href="#sourcing" class="policy-toc-link">3) Sourcing & product condition</a></li>
+          <li><a href="#prohibited" class="policy-toc-link">4) Prohibited items</a></li>
+          <li><a href="#shipping" class="policy-toc-link">5) Shipping & delivery</a></li>
+          <li><a href="#customs" class="policy-toc-link">6) Customs & duties</a></li>
+          <li><a href="#damage" class="policy-toc-link">7) Damage, loss & liability</a></li>
+          <li><a href="#returns" class="policy-toc-link">8) Returns & refunds</a></li>
+          <li><a href="#disputes" class="policy-toc-link">9) Disputes</a></li>
+          <li><a href="#chargebacks" class="policy-toc-link">10) Chargebacks & fraud</a></li>
+          <li><a href="#abuse" class="policy-toc-link">11) Acceptable use</a></li>
+          <li><a href="#warranty" class="policy-toc-link">12) Warranty disclaimer</a></li>
+          <li><a href="#governing" class="policy-toc-link">13) Governing law</a></li>
+          <li><a href="#agreement" class="policy-toc-link">14) Entire agreement</a></li>
         </ol>
       </nav>
+
+      <div class="reveal liquid-glass rounded-3xl p-8 sm:p-10 mb-10 policy-bokeh">
+        <div class="policy-bokeh-img">
+          <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200&q=80" alt="Trusted logistics and global shipping" loading="lazy">
+        </div>
+      </div>
 
       <div id="what-we-do" class="reveal liquid-glass rounded-3xl p-6 sm:p-10 mb-10 scroll-mt-24">
         <h2 class="text-lg sm:text-xl font-black uppercase italic mb-3 text-cyan-300">What We Do</h2>
@@ -103,7 +117,7 @@
       <div class="space-y-4">
         <details id="quotes" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">1) Quotes, pricing & exchange rates</span>
+            <span class="min-w-0">1) Quotes & pricing</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -134,7 +148,7 @@
 
         <details id="sourcing" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">3) Sourcing, verification & product condition</span>
+            <span class="min-w-0">3) Sourcing & product condition</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -149,7 +163,7 @@
 
         <details id="prohibited" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">4) Prohibited & restricted items</span>
+            <span class="min-w-0">4) Prohibited items</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -164,7 +178,7 @@
 
         <details id="shipping" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">5) Shipping timelines, delivery & storage</span>
+            <span class="min-w-0">5) Shipping & delivery</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -179,7 +193,7 @@
 
         <details id="customs" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">6) Customs, duties & documentation</span>
+            <span class="min-w-0">6) Customs & duties</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -193,7 +207,7 @@
 
         <details id="damage" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">7) Damage, loss, claims & limitation of liability</span>
+            <span class="min-w-0">7) Damage, loss & liability</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -209,7 +223,7 @@
 
         <details id="returns" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">8) Returns, refunds & exchanges</span>
+            <span class="min-w-0">8) Returns & refunds</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -224,7 +238,7 @@
 
         <details id="disputes" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">9) Disputes and complaints</span>
+            <span class="min-w-0">9) Disputes</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -234,7 +248,7 @@
 
         <details id="chargebacks" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">10) Chargebacks, fraud and abuse</span>
+            <span class="min-w-0">10) Chargebacks & fraud</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -249,7 +263,7 @@
 
         <details id="abuse" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">11) Acceptable use & abuse of service</span>
+            <span class="min-w-0">11) Acceptable use</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -281,7 +295,7 @@
 
         <details id="governing" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">13) Governing law & jurisdiction</span>
+            <span class="min-w-0">13) Governing law</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -291,7 +305,7 @@
 
         <details id="agreement" class="reveal policy-section liquid-glass rounded-3xl overflow-hidden group scroll-mt-24">
           <summary class="p-6 sm:p-7 cursor-pointer list-none flex justify-between items-center font-black text-base sm:text-lg italic gap-4">
-            <span class="min-w-0">14) Entire agreement & changes</span>
+            <span class="min-w-0">14) Entire agreement</span>
             <i class="fas fa-plus text-cyan-400 text-sm shrink-0 transition-transform group-open:rotate-45"></i>
           </summary>
           <div class="px-6 sm:px-7 pb-6 sm:pb-7 text-slate-300 text-sm sm:text-base border-t border-white/5 pt-4 space-y-3">
@@ -356,6 +370,14 @@
       h.addEventListener('click', function(e) { e.stopPropagation(); var open = nav.classList.toggle('mobile-nav-open'); overlay.classList.toggle('visible', open); h.classList.toggle('open', open); });
       overlay.addEventListener('click', closeMenu);
       nav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+      document.querySelectorAll('.policy-toc a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var id = this.getAttribute('href').slice(1);
+          if (!id) return;
+          var el = document.getElementById(id);
+          if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+      });
       var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
     })();
