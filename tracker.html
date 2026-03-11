@@ -33,7 +33,7 @@
         <a href="faqs.html" class="hover:text-cyan-400 transition-all py-2">FAQs</a>
         <a href="contact.html" class="hover:text-cyan-400 transition-all py-2">Contact</a>
         <a href="policy-terms.html" class="hover:text-cyan-400 transition-all py-2">Policy</a>
-        <a href="tracker.html" class="px-5 py-2.5 bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded-full">Track Order</a>
+        <a href="tracker.html" class="text-cyan-400 font-semibold py-2">Track Order</a>
       </div>
 
       <button id="hamburger" class="md:hidden flex flex-col gap-1.5 w-10 h-10 items-center justify-center" aria-label="Open menu">
@@ -350,35 +350,56 @@
         var start = jsonText.indexOf('{');
         var end = jsonText.lastIndexOf('}');
         if (start === -1 || end === -1) return null;
+
         var data = JSON.parse(jsonText.slice(start, end + 1));
+
+        // Normalize header names once
         var cols = (data.table.cols || []).map(function(c) {
           return (c.label || '').trim().toLowerCase().replace(/\s+/g, '');
         });
-        function idx(name) {
-          return cols.indexOf(name.toLowerCase().replace(/\s+/g, ''));
+
+        function firstIndex(name) {
+          name = name.toLowerCase().replace(/\s+/g, '');
+          return cols.indexOf(name);
         }
-        // Your sheet headers: TrackingID, Status, Location, ETA, Cosignee
-        var iTrack = idx('trackingid');
-        var iStatus = idx('status');
-        var iLoc = idx('location');
-        var iEta = idx('eta');
-        var iCosignee = idx('cosignee');
+
+        // Sheet headers (in any order, but exact names):
+        // TrackingID, Status, Eta, Location, Eta
+        var iTrack = firstIndex('trackingid');
+        var iStatus = firstIndex('status');
+        var iLoc = firstIndex('location');
+
+        // Handle the fact that Eta appears twice. We respect both:
+        // - first Eta -> ETA field shown in the UI
+        // - second Eta -> optional \"last updated\" style field (if present)
+        var etaIndexes = [];
+        cols.forEach(function(name, idx) {
+          if (name === 'eta') etaIndexes.push(idx);
+        });
+        var iEta = etaIndexes.length > 0 ? etaIndexes[0] : -1;
+        var iEta2 = etaIndexes.length > 1 ? etaIndexes[1] : -1;
 
         var rows = {};
         (data.table.rows || []).forEach(function(r) {
-          function cell(i) { return (r.c[i] && (r.c[i].formattedValue || r.c[i].v)) || ''; }
+          function cell(i) {
+            return (i >= 0 && r.c[i] && (r.c[i].formattedValue || r.c[i].v)) || '';
+          }
+
           var id = String(cell(iTrack) || '').trim().toUpperCase();
           if (!id) return;
+
           rows[id] = {
             trackId: id,
-            // With this sheet, we only have one Status column.
+            // Only use Status from the sheet; no extra status columns.
             previousStatus: '',
             currentStatus: iStatus >= 0 ? cell(iStatus) : '',
             location: iLoc >= 0 ? cell(iLoc) : '',
             eta: iEta >= 0 ? cell(iEta) : '',
-            lastUpdated: iCosignee >= 0 ? cell(iCosignee) : ''
+            // Second Eta column is optional and used only if present.
+            lastUpdated: iEta2 >= 0 ? cell(iEta2) : ''
           };
         });
+
         return rows;
       }
 
