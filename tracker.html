@@ -347,13 +347,15 @@
 
       function parseSheet(jsonText) {
         if (!jsonText) return null;
+
         var start = jsonText.indexOf('{');
         var end = jsonText.lastIndexOf('}');
         if (start === -1 || end === -1) return null;
 
         var data = JSON.parse(jsonText.slice(start, end + 1));
 
-        // Normalize header names once
+        // Normalize header names once – we only care about:
+        // TrackingID, Status, Eta, Location (Eta may appear twice)
         var cols = (data.table.cols || []).map(function(c) {
           return (c.label || '').trim().toLowerCase().replace(/\s+/g, '');
         });
@@ -363,15 +365,12 @@
           return cols.indexOf(name);
         }
 
-        // Sheet headers (in any order, but exact names):
-        // TrackingID, Status, Eta, Location, Eta
+        // Required headers
         var iTrack = firstIndex('trackingid');
         var iStatus = firstIndex('status');
         var iLoc = firstIndex('location');
 
-        // Handle the fact that Eta appears twice. We respect both:
-        // - first Eta -> ETA field shown in the UI
-        // - second Eta -> optional \"last updated\" style field (if present)
+        // Eta can appear once or twice; both have header \"Eta\"
         var etaIndexes = [];
         cols.forEach(function(name, idx) {
           if (name === 'eta') etaIndexes.push(idx);
@@ -379,26 +378,45 @@
         var iEta = etaIndexes.length > 0 ? etaIndexes[0] : -1;
         var iEta2 = etaIndexes.length > 1 ? etaIndexes[1] : -1;
 
-        var rows = {};
-        (data.table.rows || []).forEach(function(r) {
-          function cell(i) {
-            return (i >= 0 && r.c[i] && (r.c[i].formattedValue || r.c[i].v)) || '';
-          }
+        // Helper: get a clean string from a cell (strip spaces / hidden chars)
+        function cleanCellValue(v) {
+          if (v == null) return '';
+          return String(v)
+            .replace(/\u00A0/g, ' ') // non‑breaking spaces
+            .trim();
+        }
 
-          var id = String(cell(iTrack) || '').trim().toUpperCase();
-          if (!id) return;
+        function cell(r, i) {
+          if (i < 0 || !r.c || !r.c[i]) return '';
+          var c = r.c[i];
+          var raw = c.formattedValue != null ? c.formattedValue : c.v;
+          return cleanCellValue(raw);
+        }
+
+        var rows = {};
+
+        (data.table.rows || []).forEach(function(r) {
+          // Normalize TrackingID exactly the same way we normalize user input
+          var rawId = cell(r, iTrack);
+          var id = normalizeId(rawId);
+          if (!id) {
+            return; // skip truly empty rows only
+          }
 
           rows[id] = {
             trackId: id,
-            // Only use Status from the sheet; no extra status columns.
             previousStatus: '',
-            currentStatus: iStatus >= 0 ? cell(iStatus) : '',
-            location: iLoc >= 0 ? cell(iLoc) : '',
-            eta: iEta >= 0 ? cell(iEta) : '',
-            // Second Eta column is optional and used only if present.
-            lastUpdated: iEta2 >= 0 ? cell(iEta2) : ''
+            currentStatus: iStatus >= 0 ? cell(r, iStatus) : '',
+            location: iLoc >= 0 ? cell(r, iLoc) : '',
+            eta: iEta >= 0 ? cell(r, iEta) : '',
+            lastUpdated: iEta2 >= 0 ? cell(r, iEta2) : ''
           };
         });
+
+        // Debug: see exactly what we parsed and which IDs are available
+        try {
+          console.log('[Kash Tracker] Parsed rows from sheet:', Object.keys(rows).length, 'records', rows);
+        } catch (e) {}
 
         return rows;
       }
