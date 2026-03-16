@@ -5,62 +5,453 @@
   <base href="https://mrkash.net/">
   <link rel="icon" type="image/png" href="logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
   <title>Catalog | Kash Option. What You Can Order</title>
   <meta name="description" content="Browse Kash Option catalog: phones, electronics, auto parts, fashion, wholesale & more. Source from China, USA, UK, Europe to Ghana.">
   <link rel="canonical" href="https://mrkash.net/catalog.html">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #0a0a0f;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1rem 5%;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-style: italic;
+      letter-spacing: -0.05em;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #22d3ee;
+    }
+
+    /* Desktop Menu */
+    .desktop-menu {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .desktop-menu {
+        display: flex;
+      }
+    }
+
+    .desktop-menu a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .desktop-menu a:hover,
+    .desktop-menu a.active {
+      color: #22d3ee;
+    }
+
+    .track-btn {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      border-radius: 9999px;
+      padding: 0.75rem 1.5rem;
+      color: #22d3ee !important;
+    }
+
+    .track-btn:hover {
+      background: #22d3ee;
+      color: white !important;
+    }
+
+    /* Hamburger Button */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: white;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Overlay */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 85%;
+      max-width: 340px;
+      height: 100vh;
+      background: #0f0f1a;
+      z-index: 999;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 80px 1.5rem 2rem;
+    }
+
+    .mobile-menu.active {
+      left: 0;
+    }
+
+    .mobile-menu a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 1rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-menu a i {
+      width: 24px;
+      font-size: 1.2rem;
+      color: #22d3ee;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      background: rgba(34, 211, 238, 0.1);
+      color: #22d3ee;
+    }
+
+    .mobile-menu .track-mobile {
+      margin-top: 1rem;
+      background: rgba(34, 211, 238, 0.15);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      color: #22d3ee;
+      border-radius: 9999px;
+      justify-content: center;
+    }
+
+    .mobile-menu .track-mobile:hover {
+      background: #22d3ee;
+      color: white;
+    }
+
+    .mobile-menu .track-mobile:hover i {
+      color: white;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 80px;
+    }
+
+    /* Catalog Styles */
+    .blob {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: rgba(34, 211, 238, 0.15);
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: -1;
+      animation: blobMove 20s infinite alternate;
+    }
+
+    @keyframes blobMove {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(100px, 100px) scale(1.2); }
+    }
+
+    .page-hero {
+      padding: 4rem 1rem 2rem;
+    }
+
+    .heading-accent {
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #22d3ee;
+      border-radius: 2px;
+      margin: 1rem auto;
+    }
+
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+    }
+
+    .catalog-card {
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(34, 211, 238, 0.3);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 24px 24px 0 0;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .catalog-card:hover .card-img-wrap img {
+      transform: scale(1.1);
+    }
+
+    .card-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: white;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .inquiry-form input:focus,
+    .inquiry-form select:focus,
+    .inquiry-form textarea:focus {
+      outline: none;
+      border-color: #22d3ee;
+      background: rgba(34, 211, 238, 0.05);
+    }
+
+    .inquiry-form input::placeholder,
+    .inquiry-form textarea::placeholder {
+      color: #4b5563;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 997;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      background: #128C7E;
+    }
+  </style>
 </head>
-<body class="selection:bg-cyan-500/30 relative" data-page="catalog">
+<body>
   <div class="blob" style="top: 0; right: 0;"></div>
   <div class="blob" style="bottom: 0; left: 0; animation-delay: -7s;"></div>
-  <div id="overlay"></div>
 
-  <nav class="fixed top-0 left-0 right-0 z-[3000] liquid-glass py-3 sm:py-4 px-4 sm:px-[5%] border-b border-white/5" style="padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <a href="index.html" class="text-xl sm:text-2xl font-extrabold tracking-tighter uppercase italic">KASH<span class="text-cyan-400">OPTION</span></a>
-      <div class="hidden md:flex items-center gap-6 lg:gap-8 text-[10px] font-bold tracking-[0.25em] uppercase text-slate-400">
-        <a href="index.html" class="hover:text-cyan-400 transition-all py-2">Home</a>
-        <a href="about.html" class="hover:text-cyan-400 transition-all py-2">About</a>
-        <a href="catalog.html" class="text-cyan-400 font-semibold py-2">Catalog</a>
-        <a href="orders.html" class="hover:text-cyan-400 transition-all py-2">Live Orders</a>
-        <a href="testimonials.html" class="hover:text-cyan-400 transition-all py-2">Reviews</a>
-        <a href="faqs.html" class="hover:text-cyan-400 transition-all py-2">FAQs</a>
-        <a href="contact.html" class="hover:text-cyan-400 transition-all py-2">Contact</a>
-        <a href="policy-terms.html" class="hover:text-cyan-400 transition-all py-2">Policy</a>
-        <a href="tracker.html" class="px-5 py-2.5 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full hover:bg-cyan-500 hover:text-white transition-all">Track Order</a>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">KASH<span>OPTION</span></a>
+      
+      <!-- Desktop Menu -->
+      <div class="desktop-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="catalog.html" class="active">Catalog</a>
+        <a href="orders.html">Live Orders</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact.html">Contact</a>
+        <a href="policy-terms.html">Policy</a>
+        <a href="tracker.html" class="track-btn">Track Order</a>
       </div>
-      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 w-10 h-10 items-center justify-center" aria-label="Open menu">
-        <span class="w-5 h-[2px] bg-slate-200"></span>
-        <span class="w-5 h-[2px] bg-slate-200"></span>
-        <span class="w-5 h-[2px] bg-slate-200"></span>
+
+      <!-- Hamburger Button -->
+      <button class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-    </div>
-    <div id="mobileNav" class="fixed top-0 left-0 h-full w-[85vw] max-w-[320px] bg-slate-950/98 backdrop-blur-xl border-r border-white/10 flex flex-col gap-2 pt-24 px-6 text-sm font-bold tracking-widest uppercase text-slate-300 z-[2500]">
-      <a href="index.html" class="hover:text-cyan-400 transition-all">Home</a>
-      <a href="about.html" class="hover:text-cyan-400 transition-all">About</a>
-      <a href="catalog.html" class="nav-active">Catalog</a>
-      <a href="orders.html" class="hover:text-cyan-400 transition-all">Live Orders</a>
-      <a href="testimonials.html" class="hover:text-cyan-400 transition-all">Reviews</a>
-      <a href="faqs.html" class="hover:text-cyan-400 transition-all">FAQs</a>
-      <a href="contact.html" class="hover:text-cyan-400 transition-all">Contact</a>
-      <a href="policy-terms.html" class="hover:text-cyan-400 transition-all">Policy & Terms</a>
-      <a href="tracker.html" class="mt-4 px-5 py-3 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full text-center">Track Order</a>
     </div>
   </nav>
 
-  <main>
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">
+      <i class="fas fa-home"></i> Home
+    </a>
+    <a href="about.html">
+      <i class="fas fa-info-circle"></i> About
+    </a>
+    <a href="catalog.html" class="active">
+      <i class="fas fa-store"></i> Catalog
+    </a>
+    <a href="orders.html">
+      <i class="fas fa-truck"></i> Live Orders
+    </a>
+    <a href="testimonials.html">
+      <i class="fas fa-star"></i> Reviews
+    </a>
+    <a href="faqs.html">
+      <i class="fas fa-question-circle"></i> FAQs
+    </a>
+    <a href="contact.html">
+      <i class="fas fa-envelope"></i> Contact
+    </a>
+    <a href="policy-terms.html">
+      <i class="fas fa-file-contract"></i> Policy & Terms
+    </a>
+    <a href="tracker.html" class="track-mobile">
+      <i class="fas fa-search-location"></i> Track Order
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
     <header class="page-hero text-center px-4 sm:px-6 relative">
       <span class="heading-accent mx-auto"></span>
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-black italic uppercase tracking-tight mb-4">What You Can Order</h1>
-      <p class="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg mb-2">We source from China, USA, UK, and Europe. Choose a category below, then send an inquiry—we’ll quote you and guide you through the process.</p>
+      <p class="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg mb-2">We source from China, USA, UK, and Europe. Choose a category below, then send an inquiry—we'll quote you and guide you through the process.</p>
       <p class="text-slate-500 text-sm">All items are original and verified. No minimum order for most categories; wholesale available.</p>
     </header>
 
     <section class="py-12 sm:py-20 px-4 sm:px-[5%] max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Phones & Laptops -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Premium phones and laptops" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=80">
@@ -72,6 +463,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Cameras & Electronics -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Cameras and premium electronics" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&q=80">
@@ -83,6 +476,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Auto Parts -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Auto parts and tools" src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200&q=80">
@@ -94,6 +489,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Home & Office -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Home and office furniture" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80">
@@ -105,6 +502,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Wholesale Goods -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Wholesale boxes and logistics" src="https://images.unsplash.com/photo-1558769132-cb1aea913002?w=1200&q=80">
@@ -116,6 +515,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Fashion & Apparel -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Fashion and apparel" src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&q=80">
@@ -127,6 +528,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Sports & Fitness -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Sports and fitness gear" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80">
@@ -138,6 +541,8 @@
             <a href="contact.html" class="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 font-bold text-sm hover:bg-cyan-500 hover:text-white transition-all">Get a quote</a>
           </div>
         </article>
+
+        <!-- Kids & Baby -->
         <article class="reveal catalog-card liquid-glass rounded-[1.5rem] flex flex-col">
           <div class="card-img-wrap">
             <img loading="lazy" decoding="async" alt="Kids and baby products" src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=1200&q=80">
@@ -152,6 +557,7 @@
       </div>
     </section>
 
+    <!-- Inquiry Form -->
     <section id="inquiry" class="reveal py-16 sm:py-24 px-4 sm:px-[5%]">
       <div class="max-w-2xl mx-auto">
         <div class="liquid-glass rounded-3xl p-6 sm:p-10">
@@ -159,7 +565,7 @@
             <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400"><i class="fab fa-whatsapp text-2xl"></i></div>
             <div>
               <h2 class="text-2xl sm:text-3xl font-black italic uppercase">Send an Inquiry</h2>
-              <p class="text-slate-400 text-sm">We’ll reply on WhatsApp with a quote and next steps.</p>
+              <p class="text-slate-400 text-sm">We'll reply on WhatsApp with a quote and next steps.</p>
             </div>
           </div>
           <form id="inquiryForm" class="inquiry-form space-y-4">
@@ -209,8 +615,9 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 
+  <!-- Footer -->
   <footer class="pt-16 sm:pt-24 pb-10 px-4 sm:px-[5%] border-t border-white/5">
     <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 sm:gap-12 mb-12 sm:mb-16">
       <div class="md:col-span-2">
@@ -240,30 +647,57 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/233240118846" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-[2900] w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg hover:bg-green-600 hover:scale-110 transition-transform min-w-[56px] min-h-[56px]" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp text-2xl"></i></a>
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/233240118846" target="_blank" rel="noopener" class="whatsapp-float">
+    <i class="fab fa-whatsapp text-2xl"></i>
+  </a>
 
   <script>
     (function() {
-      var h = document.getElementById('hamburger');
-      var nav = document.getElementById('mobileNav');
-      var overlay = document.getElementById('overlay');
-      function closeMenu() { nav.classList.remove('mobile-nav-open'); overlay.classList.remove('visible'); h.classList.remove('open'); }
-      h.addEventListener('click', function(e) { e.stopPropagation(); var open = nav.classList.toggle('mobile-nav-open'); overlay.classList.toggle('visible', open); h.classList.toggle('open', open); });
-      overlay.addEventListener('click', closeMenu);
-      nav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+      // Mobile Menu
+      const hamburger = document.getElementById('hamburgerBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      
+      function toggleMenu() {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      function closeMenu() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      hamburger.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', closeMenu);
+      
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Inquiry Form
       document.getElementById('inquiryForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        var email = document.getElementById('inqEmail').value.trim();
-        var phone = document.getElementById('inqPhone').value.trim();
-        var category = document.getElementById('inqCategory').value;
-        var product = document.getElementById('inqProduct').value.trim();
-        var units = document.getElementById('inqUnits').value.trim();
-        var specs = document.getElementById('inqSpecs').value.trim();
-        var agree = document.getElementById('inqAgree').checked;
+        
+        const email = document.getElementById('inqEmail').value.trim();
+        const phone = document.getElementById('inqPhone').value.trim();
+        const category = document.getElementById('inqCategory').value;
+        const product = document.getElementById('inqProduct').value.trim();
+        const units = document.getElementById('inqUnits').value.trim();
+        const specs = document.getElementById('inqSpecs').value.trim();
+        const agree = document.getElementById('inqAgree').checked;
 
-        if (!agree) return;
+        if (!agree) {
+          alert('Please agree to the Policy & Terms');
+          return;
+        }
 
-        var lines = [
+        const lines = [
           'Hello Kash Option!',
           '',
           'Email: ' + email,
@@ -279,8 +713,26 @@
 
         window.open('https://wa.me/233240118846?text=' + encodeURIComponent(lines.join('\n')), '_blank');
       });
-      var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+      // Intersection Observer
+      const obs = new IntersectionObserver(function(entries) { 
+        entries.forEach(function(e) { 
+          if (e.isIntersecting) e.target.classList.add('active'); 
+        }); 
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.reveal').forEach(function(el) { 
+        obs.observe(el); 
+      });
+
+      // Set active menu item
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('.desktop-menu a, .mobile-menu a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPath) {
+          link.classList.add('active');
+        }
+      });
     })();
   </script>
 </body>
