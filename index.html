@@ -593,108 +593,95 @@
       }
     }
   </style>
-<header class="hero-wrap min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 relative pt-20 sm:pt-24 pb-16">
-  <div class="hero-media" aria-hidden="true"></div>
-  <div class="relative z-10 max-w-4xl mx-auto">
+<header class="fixed w-full top-0 left-0 z-50 bg-slate-900/80 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 py-4">
     
-    <div class="flex justify-center mb-6">
-      <span class="pill">
-        <i class="fas fa-shield-check" style="color: rgba(0,210,255,0.95)"></i>
-        Verified Sourcing & Logistics
-      </span>
-    </div>
+    <!-- Logo -->
+    <a href="index.html" class="text-2xl font-bold text-cyan-400">KashOption</a>
+    
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex space-x-6 text-slate-200 font-semibold uppercase tracking-wider">
+      <a href="#how-it-works" class="hover:text-cyan-400">How it Works</a>
+      <a href="#services" class="hover:text-cyan-400">Services</a>
+      <a href="#contact" class="hover:text-cyan-400">Contact</a>
+    </nav>
 
-    <span class="heading-accent mx-auto mb-6"></span>
-
-    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter italic uppercase leading-tight mb-4 sm:mb-6 animate__animated animate__fadeInDown">
-      Shop Globally.<span class="text-cyan-400"> Pay Locally.</span>
-    </h1>
-
-    <p class="text-xs sm:text-sm md:text-base text-slate-300/90 font-light tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-3 sm:mb-4 animate__animated animate__fadeInUp">
-      China • USA • UK • Europe → Ghana
-    </p>
-
-    <p class="hero-trustline text-slate-300/70 text-[11px] sm:text-xs md:text-sm font-semibold tracking-[0.25em] uppercase mb-6 sm:mb-8 animate__animated animate__fadeInUp">
-      Trusted Import & Logistics Service in Ghana
-    </p>
-
-    <!-- ✅ CLEAN CTA (ONLY 2 BUTTONS) -->
-    <div class="hero-cta-row flex flex-wrap gap-4 justify-center animate__animated animate__fadeInUp mb-6">
-      
-      <a href="tracker.html" class="btn btn-primary px-8 sm:px-10 py-3.5 sm:py-4 text-sm sm:text-base inline-flex items-center gap-2">
-        <i class="fas fa-search-location"></i> Track Order
-      </a>
-
-      <a href="https://wa.me/c/233240118846" target="_blank" class="btn btn-whatsapp px-8 sm:px-10 py-3.5 sm:py-4 text-sm sm:text-base inline-flex items-center gap-2">
-        <i class="fab fa-whatsapp"></i> Order via WhatsApp
-      </a>
-
-    </div>
-
-    <!-- TRUST BADGES -->
-    <ul class="hero-trust-badges flex flex-wrap justify-center gap-x-6 gap-y-2 text-[11px] sm:text-xs text-slate-200/70 font-semibold mb-10">
-      <li class="inline-flex items-center gap-2"><i class="fas fa-check text-emerald-300"></i> Verified Suppliers</li>
-      <li class="inline-flex items-center gap-2"><i class="fas fa-check text-emerald-300"></i> Secure Payments</li>
-      <li class="inline-flex items-center gap-2"><i class="fas fa-check text-emerald-300"></i> Door-to-Door Delivery</li>
-    </ul>
-
-    <!-- ✅ HORIZONTAL SHIPPING ROW -->
-    <div class="hero-shipping-icons flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-slate-200/80 mb-6">
-      
-      <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full liquid-glass min-w-[220px] justify-center">
-        <span class="text-base">✈</span>
-        <span class="text-xs sm:text-sm font-bold">Air Cargo</span>
-        <span class="text-xs text-slate-300/70">3–5 Days</span>
-      </div>
-
-      <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full liquid-glass min-w-[220px] justify-center">
-        <span class="text-base">🚢</span>
-        <span class="text-xs sm:text-sm font-bold">Sea Freight</span>
-        <span class="text-xs text-slate-300/70">6–8 Weeks</span>
-      </div>
-
-      <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full liquid-glass min-w-[220px] justify-center">
-        <span class="text-base">🚚</span>
-        <span class="text-xs sm:text-sm font-bold">Ghana Delivery</span>
-        <span class="text-xs text-slate-300/70">Door-to-Door</span>
-      </div>
-
-    </div>
-
-    <!-- HOW IT WORKS -->
-    <section class="mt-8 sm:mt-10 text-left">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-base sm:text-lg font-black uppercase tracking-[0.3em] text-slate-300 mb-4">
-          How KashOption Works
-        </h2>
-
-        <ol class="grid sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-200/80">
-          <li class="liquid-glass rounded-2xl px-4 py-3 flex items-start gap-3">
-            <span class="text-sm sm:text-base font-black">1️⃣</span>
-            <span><strong>Send Product Link</strong><br>Share what you want from China, USA, UK, or Europe.</span>
-          </li>
-
-          <li class="liquid-glass rounded-2xl px-4 py-3 flex items-start gap-3">
-            <span class="text-sm sm:text-base font-black">2️⃣</span>
-            <span><strong>We Pay Supplier</strong><br>We handle secure payment and confirmation for you.</span>
-          </li>
-
-          <li class="liquid-glass rounded-2xl px-4 py-3 flex items-start gap-3">
-            <span class="text-sm sm:text-base font-black">3️⃣</span>
-            <span><strong>We Ship to Ghana</strong><br>Air cargo or sea freight with tracking and updates.</span>
-          </li>
-
-          <li class="liquid-glass rounded-2xl px-4 py-3 flex items-start gap-3">
-            <span class="text-sm sm:text-base font-black">4️⃣</span>
-            <span><strong>Door-to-Door Delivery</strong><br>Your order is delivered safely across Ghana.</span>
-          </li>
-        </ol>
-      </div>
-    </section>
-
+    <!-- Hamburger Button -->
+    <button id="hamburgerBtn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 relative">
+      <span class="block w-8 h-0.5 bg-slate-200 mb-1 transition-all"></span>
+      <span class="block w-8 h-0.5 bg-slate-200 mb-1 transition-all"></span>
+      <span class="block w-8 h-0.5 bg-slate-200 transition-all"></span>
+    </button>
   </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-40"></div>
+
+  <!-- Mobile Menu -->
+  <nav id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-slate-900 text-slate-200 transform translate-x-full transition-transform z-50 flex flex-col p-6 space-y-6">
+    <a href="#how-it-works" class="hover:text-cyan-400">How it Works</a>
+    <a href="#services" class="hover:text-cyan-400">Services</a>
+    <a href="#contact" class="hover:text-cyan-400">Contact</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-wrap min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 relative pt-20 sm:pt-24 pb-16">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+      
+      <div class="flex justify-center mb-6">
+        <span class="pill">
+          <i class="fas fa-shield-check" style="color: rgba(0,210,255,0.95)"></i>
+          Verified Sourcing & Logistics
+        </span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter italic uppercase leading-tight mb-4 sm:mb-6 animate__animated animate__fadeInDown">
+        Shop Globally.<span class="text-cyan-400"> Pay Locally.</span>
+      </h1>
+
+      <p class="text-xs sm:text-sm md:text-base text-slate-300/90 font-light tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-3 sm:mb-4 animate__animated animate__fadeInUp">
+        China • USA • UK • Europe → Ghana
+      </p>
+
+      <p class="hero-trustline text-slate-300/70 text-[11px] sm:text-xs md:text-sm font-semibold tracking-[0.25em] uppercase mb-6 sm:mb-8 animate__animated animate__fadeInUp">
+        Trusted Import & Logistics Service in Ghana
+      </p>
+
+      <div class="hero-cta-row flex flex-wrap gap-4 justify-center animate__animated animate__fadeInUp mb-6">
+        <a href="tracker.html" class="btn btn-primary px-8 sm:px-10 py-3.5 sm:py-4 text-sm sm:text-base inline-flex items-center gap-2">
+          <i class="fas fa-search-location"></i> Track Order
+        </a>
+        <a href="https://wa.me/c/233240118846" target="_blank" class="btn btn-whatsapp px-8 sm:px-10 py-3.5 sm:py-4 text-sm sm:text-base inline-flex items-center gap-2">
+          <i class="fab fa-whatsapp"></i> Order via WhatsApp
+        </a>
+      </div>
+
+      <ul class="hero-trust-badges flex flex-wrap justify-center gap-x-6 gap-y-2 text-[11px] sm:text-xs text-slate-200/70 font-semibold mb-10">
+        <li class="inline-flex items-center gap-2"><i class="fas fa-check text-emerald-300"></i> Verified Suppliers</li>
+        <li class="inline-flex items-center gap-2"><i class="fas fa-check text-emerald-300"></i> Secure Payments</li>
+        <li class="inline-flex items-center gap-2"><i class="fas fa-check text-emerald-300"></i> Door-to-Door Delivery</li>
+      </ul>
+    </div>
+  </section>
 </header>
 
+<script>
+  // Hamburger toggle
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+
+  hamburgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('translate-x-full');
+    mobileOverlay.classList.toggle('hidden');
+  });
+
+  mobileOverlay.addEventListener('click', () => {
+    mobileMenu.classList.add('translate-x-full');
+    mobileOverlay.classList.add('hidden');
+  });
+</script>
     <section id="services" class="reveal py-12 sm:py-16 px-4 sm:px-[5%] max-w-7xl mx-auto">
       <div class="text-center mb-14" id="how-it-works">
         <span class="heading-accent mx-auto"></span>
