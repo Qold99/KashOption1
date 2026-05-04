@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Track Order | Kash Option - Global Logistics</title>
+  <title>Elite Tracking | Kash Option Ghana</title>
   
   <meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
   <link rel="icon" type="image/png" href="https://mrkash.net/logo.png">
@@ -41,86 +41,47 @@
     }
     .island-logo { font-weight: 800; font-size: 0.95rem; padding: 0 15px; color: #fff; text-decoration: none; font-style: italic; }
     .island-logo span { color: var(--accent); }
-
     .island-nav { display: none; align-items: center; gap: 4px; }
     @media (min-width: 1024px) { .island-nav { display: flex; } }
-
-    .island-nav a {
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 10px 16px;
-      border-radius: 40px;
-      transition: 0.3s;
-    }
+    .island-nav a { color: #94a3b8; text-decoration: none; font-size: 0.75rem; font-weight: 700; padding: 10px 16px; border-radius: 40px; transition: 0.3s; }
     .island-nav a:hover, .island-nav a.active { color: #fff; background: rgba(255,255,255,0.08); }
-
     .menu-trigger { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
 
     /* --- TRACKER UI --- */
     .hero-title { font-size: clamp(2.2rem, 8vw, 4.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
-    
-    .search-container {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 30px;
-      padding: 8px;
-      transition: 0.4s;
-    }
+    .search-container { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 30px; padding: 8px; transition: 0.4s; }
     .search-container:focus-within { border-color: var(--accent); background: rgba(34, 211, 238, 0.05); }
+    .btn-track { background: var(--accent); color: #000; padding: 12px 35px; border-radius: 25px; font-weight: 800; font-style: italic; transition: 0.3s; cursor: pointer; }
 
-    .btn-track {
-      background: var(--accent);
-      color: #000;
-      padding: 12px 35px;
-      border-radius: 25px;
-      font-weight: 800;
-      font-style: italic;
-      transition: 0.3s;
-    }
-    .btn-track:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent); }
-
-    .result-card {
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 30px;
-      margin-bottom: 1.2rem;
-      transition: 0.4s;
-    }
-    .result-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-
-    .status-pill { padding: 6px 16px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; }
+    /* --- WORLD CLASS PROGRESS BAR --- */
+    .dashboard-ready { background: var(--card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 30px; padding: 60px 40px; text-align: center; }
+    .progress-bar-wrap { width: 100%; max-width: 320px; height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; margin: 30px auto; position: relative; overflow: hidden; }
+    .progress-fill { position: absolute; width: 45%; height: 100%; background: linear-gradient(90deg, transparent, var(--accent), transparent); filter: drop-shadow(0 0 10px var(--accent)); animation: progressSlide 2s infinite ease-in-out; }
+    @keyframes progressSlide { 0% { left: -50%; } 100% { left: 100%; } }
 
     /* --- SMART SUPPORT BUBBLE --- */
     #supportBubble { position: fixed; bottom: 30px; right: 30px; z-index: 10000; display: none; }
-    .bubble-main {
-      width: 70px; height: 70px; background: var(--accent); border-radius: 50%; display: flex; 
-      align-items: center; justify-content: center; color: #000; font-size: 1.8rem; cursor: pointer;
-      border: 4px solid #fff; box-shadow: 0 10px 30px rgba(34, 211, 238, 0.5);
-    }
-    .bubble-pop {
-      position: absolute; bottom: 85px; right: 0; background: #fff; color: #000; padding: 18px;
-      border-radius: 25px; width: 260px; font-size: 0.85rem; font-weight: 800; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-    }
+    .bubble-main { width: 70px; height: 70px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 1.8rem; cursor: pointer; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(34, 211, 238, 0.5); }
+    .bubble-pop { position: absolute; bottom: 85px; right: 0; background: #fff; color: #000; padding: 18px; border-radius: 25px; width: 260px; font-size: 0.85rem; font-weight: 800; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+
+    /* --- CARDS --- */
+    .result-card { background: var(--card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 30px; margin-bottom: 1.2rem; transition: 0.4s; overflow: hidden;}
+    .result-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .status-pill { padding: 6px 16px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; }
 
     /* --- MOBILE NAV --- */
-    #mobileNav {
-      position: fixed; inset: 0; background: #050508; z-index: 10001; display: none;
-      flex-direction: column; align-items: center; justify-content: center; padding: 2rem;
-    }
+    #mobileNav { position: fixed; inset: 0; background: #050508; z-index: 10001; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
     #mobileNav.active { display: flex; }
     #mobileNav a { font-size: 1.8rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; }
 
     .liquid-glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; }
-    
-    /* Global Semi-Caps / Sentence Case Override */
+    footer { padding: 80px 6%; background: #07070a; border-top: 1px solid rgba(255,255,255,0.05); }
     h1, h2, h3, h4, a, button, p, span { text-transform: none; }
   </style>
 </head>
 <body>
 
-  <audio id="popSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+  <audio id="popSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
 
   <!-- Dynamic Island Nav -->
   <div class="nav-wrapper">
@@ -134,6 +95,7 @@
         <a href="testimonials.html">Reviews</a>
         <a href="faqs.html">FAQs</a>
         <a href="contact.html">Contact</a>
+        <a href="policy-terms.html">Policy</a>
         <a href="tracker.html" class="active">Tracker</a>
       </div>
       <button class="menu-trigger" onclick="toggleMenu()">
@@ -147,17 +109,17 @@
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="catalog.html">Catalog</a>
+    <a href="orders.html">Live Orders</a>
     <a href="tracker.html" class="text-cyan-400">Track Order</a>
     <a href="faqs.html">FAQs</a>
     <a href="contact.html">Contact</a>
     <button onclick="toggleMenu()" class="mt-10 w-12 h-12 rounded-full border border-white/20"><i class="fas fa-times"></i></button>
   </div>
 
-  <main class="pt-32 px-6 max-w-5xl mx-auto">
-    <!-- Search Header -->
+  <main class="pt-32 px-6 max-w-5xl mx-auto pb-20">
     <header class="text-center mb-12">
       <h1 class="hero-title italic mb-6">Track your <span class="text-cyan-400">Packages</span></h1>
-      <p class="text-gray-500 font-bold mb-10 text-sm md:text-base">Enter one or more tracking IDs separated by commas for instant updates.</p>
+      <p class="text-gray-500 font-bold mb-10 text-sm md:text-base">Enter your tracking IDs separated by commas for instant status audio and data.</p>
       
       <div class="search-container max-w-2xl mx-auto flex items-center gap-3">
         <i class="fas fa-search ml-4 text-gray-700"></i>
@@ -167,10 +129,17 @@
     </header>
 
     <!-- Multi-Result Container -->
-    <section id="multiResults" class="min-h-[100px] mb-20">
-      <div id="emptyState" class="text-center py-20 opacity-20">
-        <i class="fas fa-box-open text-6xl mb-4"></i>
-        <p class="text-[11px] font-bold tracking-[0.3em] uppercase">Ready for tracking</p>
+    <section id="multiResults" class="min-h-[300px] mb-20">
+      <div id="emptyState" class="dashboard-ready">
+        <div class="w-16 h-16 bg-cyan-400/10 rounded-full flex items-center justify-center text-cyan-400 mx-auto mb-6">
+            <i class="fas fa-signal animate-pulse"></i>
+        </div>
+        <h3 class="text-xl font-bold italic mb-2">System online</h3>
+        <p class="text-gray-500 text-sm font-semibold max-w-sm mx-auto">Your live tracking details will display here as soon as your tracking number is received.</p>
+        <div class="progress-bar-wrap">
+            <div class="progress-fill"></div>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.3em] text-cyan-400 font-bold">Scanning Global Logistics Database</p>
       </div>
     </section>
 
@@ -196,7 +165,7 @@
 
   <!-- World Class Footer -->
   <footer class="py-20 border-t border-white/5 bg-[#07070a]">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-left">
       <div class="md:col-span-2">
         <h2 class="text-3xl font-black italic mb-4">Kash <span>Option</span></h2>
         <p class="text-gray-500 max-w-sm text-sm font-semibold">Ghana's premier portal for international shopping. We bridge China, USA, and UK stores to your doorstep.</p>
@@ -225,7 +194,7 @@
   <!-- Smart Chat Support Bubble -->
   <div id="supportBubble">
     <div class="bubble-pop animate__animated animate__fadeInUp" id="bubbleMsg">
-      Having trouble with your package? 🚚 Tap to chat with a warehouse agent!
+      Issue with your tracking ID? 🚚 Tap to chat with a warehouse agent now!
       <button onclick="contactSupport()" class="block w-full mt-4 bg-black text-white py-3 rounded-xl text-[11px] font-bold italic uppercase">Open Support Chat</button>
     </div>
     <div class="bubble-main animate__animated animate__pulse animate__infinite" onclick="contactSupport()">
@@ -236,96 +205,127 @@
   <script>
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1btTjXG_7gYVgI8y1Zdlht08IvRmSfWpiXZDSY-R0Ybc/export?format=csv';
     let database = [];
-    let currentSearch = "";
+    let lastQuery = "";
 
     function toggleMenu() { document.getElementById('mobileNav').classList.toggle('active'); }
 
+    // Fetch Database on Load
     async function loadDB() {
       try {
         const response = await fetch(SHEET_URL);
         const csv = await response.text();
-        Papa.parse(csv, { header: true, complete: (res) => { database = res.data; } });
-      } catch (e) { console.error("Database offline"); }
+        Papa.parse(csv, { 
+            header: true, 
+            skipEmptyLines: true,
+            complete: (res) => { database = res.data; } 
+        });
+      } catch (e) { console.error("Database connection failed"); }
     }
     loadDB();
+
+    // AI Voice Function
+    function speakStatus(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        msg.volume = 1;
+        msg.rate = 0.9; 
+        msg.pitch = 1;
+        // Search for a high-quality human-like voice (English UK or US)
+        const voices = window.speechSynthesis.getVoices();
+        msg.voice = voices.find(v => v.lang.includes('en-GB')) || voices.find(v => v.lang.includes('en-US'));
+        window.speechSynthesis.speak(msg);
+      }
+    }
 
     function trackNow() {
       const input = document.getElementById('trackingInput').value.trim();
       const resultsSection = document.getElementById('multiResults');
       if (!input) return;
-      currentSearch = input;
+      lastQuery = input;
 
-      resultsSection.innerHTML = `<div class="flex justify-center py-20"><div class="w-10 h-10 border-4 border-cyan-400/20 border-t-cyan-400 rounded-full animate-spin"></div></div>`;
+      // Classy Fetching UI with Progress Bar
+      resultsSection.innerHTML = `
+        <div class="dashboard-ready animate__animated animate__fadeIn">
+            <div class="progress-bar-wrap" style="max-width: 100px; height: 30px; background: transparent;">
+                <div class="w-10 h-10 border-4 border-cyan-400/20 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
+            </div>
+            <p class="text-xs uppercase tracking-[0.3em] text-gray-400 font-bold">Accessing Secure Records...</p>
+        </div>`;
 
       setTimeout(() => {
         const ids = input.split(',').map(i => i.trim().toLowerCase());
         let html = '';
-        let hasErrors = false;
+        let fullVoiceScript = "";
 
         ids.forEach(id => {
-          const row = database.find(item => item.TrackingID && item.TrackingID.toLowerCase() === id);
+          const row = database.find(item => {
+              const trackingValue = item['TrackingID'] || item['Tracking ID'] || item['tracking_id'];
+              return trackingValue && trackingValue.toString().toLowerCase().trim() === id;
+          });
+
           if (row) {
+            const status = row.Status || 'Processing';
+            const location = row.Location || 'International Hub';
+            const idVal = row.TrackingID || row['Tracking ID'];
+            const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+
             html += generateCard(row);
+            fullVoiceScript += `Your Kash Option Order ${idVal} is ${status}. Current location is ${location}. Today is ${today}. `;
           } else {
-            html += `<div class="result-card p-8 border-red-500/20 bg-red-500/5 text-center animate__animated animate__shakeX"><h4 class="text-sm font-bold text-red-400 italic">No record found for: ${id}</h4></div>`;
-            hasErrors = true;
+            html += `<div class="result-card p-8 border-red-500/20 bg-red-500/5 text-center animate__animated animate__shakeX">
+                      <h4 class="text-sm font-bold text-red-400 italic">Tracking ID "${id.toUpperCase()}" not found.</h4>
+                    </div>`;
+            fullVoiceScript += `Tracking ID ${id} was not found in our live database. `;
           }
         });
 
         resultsSection.innerHTML = html;
+        
+        // Finalize Voice Script
+        fullVoiceScript += "Please tap the chat bubble for live support and inquiry about your tracking I D.";
+        speakStatus(fullVoiceScript);
+        
+        // Show Chat Bubble
         triggerBubble(input);
-      }, 800);
+      }, 1200);
     }
 
     function generateCard(data) {
       const timeStamp = new Date().toLocaleString('en-GB', { hour12: true });
-      const statusStyle = {
-        'Delivered': 'bg-emerald-500/10 text-emerald-400',
-        'In Transit': 'bg-cyan-500/10 text-cyan-400',
-        'Arrived': 'bg-purple-500/10 text-purple-400',
-        'Processing': 'bg-amber-500/10 text-amber-400'
-      };
-      const pillClass = statusStyle[data.Status] || 'bg-white/10 text-white';
+      const statusValue = data.Status || 'Processing';
+      const statusStyle = { 'Delivered': 'bg-emerald-500/10 text-emerald-400', 'In Transit': 'bg-cyan-500/10 text-cyan-400', 'Processing': 'bg-amber-500/10 text-amber-400' };
+      const pillClass = statusStyle[statusValue] || 'bg-white/10 text-white';
 
       return `
         <div class="result-card animate__animated animate__fadeInUp">
           <div class="p-8">
             <div class="flex justify-between items-start mb-8">
-              <div>
-                <p class="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-1">Live status</p>
-                <h3 class="text-2xl font-black italic">${data.TrackingID}</h3>
-              </div>
-              <span class="status-pill ${pillClass}">${data.Status}</span>
+              <div><p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Package verified</p><h3 class="text-2xl font-black italic">${data.TrackingID || data['Tracking ID']}</h3></div>
+              <span class="status-pill ${pillClass}">${statusValue}</span>
             </div>
-            
             <div class="grid grid-cols-2 gap-8">
-              <div>
-                <p class="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-2">Location</p>
-                <p class="text-base font-black">${data.Location}</p>
-              </div>
-              <div>
-                <p class="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-2">ETA</p>
-                <p class="text-base font-black">${data.ETA}</p>
-              </div>
+              <div><p class="text-[10px] text-gray-500 font-bold uppercase mb-2">Location</p><p class="text-base font-black">${data.Location || 'Logistics Hub'}</p></div>
+              <div><p class="text-[10px] text-gray-500 font-bold uppercase mb-2">Estimated Arrival</p><p class="text-base font-black">${data.ETA || 'Calculating'}</p></div>
             </div>
-
             <div class="mt-10 pt-6 border-t border-white/5 flex justify-between items-center">
-              <p class="text-[10px] text-gray-600 font-bold italic"><i class="fas fa-clock mr-1"></i> Verified: ${timeStamp}</p>
-              <button onclick="contactSupport('${data.TrackingID}')" class="text-cyan-400 text-[10px] font-black italic">Report issue</button>
+              <p class="text-[10px] text-gray-600 font-bold italic"><i class="fas fa-clock mr-1"></i> Live Status: ${timeStamp}</p>
+              <button onclick="contactSupport('${data.TrackingID}')" class="text-cyan-400 text-[10px] font-black italic hover:underline">Request Manual Update</button>
             </div>
           </div>
-        </div>
-      `;
+        </div>`;
     }
 
     function triggerBubble(id) {
       document.getElementById('supportBubble').style.display = 'block';
-      document.getElementById('popSound').play();
-      document.getElementById('bubbleMsg').innerHTML = `Tracking <b>${id}</b>? Our warehouse team is active! Tap here to get a detailed status on WhatsApp.`;
+      const sound = document.getElementById('popSound');
+      sound.play().catch(e => {});
+      document.getElementById('bubbleMsg').innerHTML = `Tracking issues with <b>${id}</b>? Our warehouse team is online! Tap to check the manual log.`;
     }
 
-    function contactSupport(id = currentSearch) {
-      const msg = `Hi Kash Option, I am checking the status of my package ID: ${id}. Please help me track its exact position.`;
+    function contactSupport(id = lastQuery) {
+      const msg = `Hi Kash Option, I need a live status update for Tracking ID: ${id}. I'm searching from the website.`;
       window.open(`https://wa.me/233240118846?text=${encodeURIComponent(msg)}`, '_blank');
     }
   </script>
