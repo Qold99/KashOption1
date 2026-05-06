@@ -25,7 +25,7 @@
     }
 
     /* --- DYNAMIC ISLAND NAVIGATION --- */
-    .nav-wrapper { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; }
+    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; }
     .dynamic-island {
       background: rgba(10, 10, 15, 0.75);
       backdrop-filter: blur(30px) saturate(180%);
@@ -37,8 +37,9 @@
       justify-content: space-between;
       box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
-    .island-logo { font-weight: 800; font-size: 0.95rem; padding: 0 15px; color: #fff; text-decoration: none; font-style: italic; }
-    .island-logo span { color: var(--accent); }
+    .logo-text { font-weight: 800; font-style: italic; font-size: 1.1rem; letter-spacing: -0.05em; color: #fff; text-decoration: none; }
+    .logo-option { color: var(--accent); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
+    
     .island-nav { display: none; align-items: center; gap: 4px; }
     @media (min-width: 1024px) { .island-nav { display: flex; } }
     .island-nav a { color: #94a3b8; text-decoration: none; font-size: 0.75rem; font-weight: 600; padding: 10px 16px; border-radius: 40px; transition: 0.3s; }
@@ -53,34 +54,25 @@
       padding: 24px;
       margin-bottom: 16px;
       transition: all 0.5s ease;
-      animation: slideIn 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      animation: slideIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
       box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
     
     @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: translateY(-30px) scale(0.98); filter: blur(10px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
     }
 
     .live-dot {
-      width: 8px;
-      height: 8px;
-      background: #22c55e;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-      box-shadow: 0 0 10px #22c55e;
-      animation: pulse 1.5s infinite;
+      width: 8px; height: 8px; background: #22c55e; border-radius: 50%;
+      display: inline-block; margin-right: 8px; box-shadow: 0 0 10px #22c55e;
+      animation: pulse 2s infinite;
     }
 
-    @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-    .order-id { font-family: monospace; letter-spacing: 1px; color: var(--accent); }
-    .mask-text { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+    .order-id { font-family: monospace; letter-spacing: 1px; color: var(--accent); font-weight: 800; }
+    .mask-text { color: rgba(255,255,255,0.3); font-size: 0.8rem; font-weight: 600; }
 
     /* --- MOBILE OVERLAY --- */
     #mobileMenu {
@@ -95,6 +87,13 @@
       width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #000; 
       display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; 
     }
+
+    /* --- DIRECTORY FOOTER STYLES --- */
+    .directory-link { color: rgba(255,255,255,0.4); transition: 0.3s; font-size: 0.85rem; display: block; margin-bottom: 8px; font-weight: 600; }
+    .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.19, 1, 0.22, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -102,7 +101,7 @@
   <!-- Dynamic Island Navigation -->
   <div class="nav-wrapper">
     <nav class="dynamic-island">
-      <a href="index.html" class="island-logo">Kash <span>Option</span></a>
+      <a href="index.html" class="logo-text">KASH <span class="logo-option">OPTION</span></a>
       <div class="island-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -131,44 +130,76 @@
   </div>
 
   <main class="pt-44 pb-32 px-6">
-    <!-- Header -->
-    <header class="text-center max-w-4xl mx-auto mb-20">
+    <header class="text-center max-w-4xl mx-auto mb-20 reveal active">
       <h1 class="text-4xl md:text-6xl font-black italic mb-6 leading-[1.1]">
         Live global procurement
       </h1>
       <p class="text-gray-500 font-medium text-lg md:text-xl">
-        Real-time updates from our sourcing hubs across Ghana.
+        Real-time updates from our sourcing hubs. Validating authenticity across the globe.
       </p>
     </header>
 
     <!-- Infinite Feed Container -->
-    <section id="orderFeed" class="max-w-2xl mx-auto min-h-[600px]">
-      <!-- Orders will be injected here by JS -->
+    <section id="orderFeed" class="max-w-2xl mx-auto min-h-[600px] mb-40">
+      <!-- Orders injected by JS -->
     </section>
   </main>
 
-  <footer class="py-20 text-center border-t border-white/5">
-    <div class="text-2xl font-black italic mb-8">Kash <span>Option</span></div>
-    <div class="flex justify-center gap-10 mb-10 text-[10px] font-bold uppercase tracking-widest text-slate-600">
-      <a href="tracker.html" class="hover:text-white">Track shipment</a>
-      <a href="policy-terms.html" class="hover:text-white">Service policy</a>
-      <a href="faqs.html" class="hover:text-white">Support hub</a>
+  <!-- Apple Style Directory Footer (Restored from Index) -->
+  <footer class="pt-32 pb-12 px-6 bg-[#030305] border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-24 text-left">
+        <div class="col-span-2">
+            <h2 class="logo-text text-2xl mb-6">KASH <span class="logo-option">OPTION</span></h2>
+            <p class="text-slate-500 max-w-sm font-semibold text-sm leading-relaxed mb-8">Ghana's #1 premier sourcing and logistics hub. Bridging global excellence with local convenience since 2020.</p>
+            <div class="flex gap-4">
+                <a href="https://www.instagram.com/kashoption1" class="text-xl text-white/40 hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1CrwnBxS8W/" class="text-xl text-white/40 hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Directory</h4>
+          <a href="index.html" class="directory-link">Home</a>
+          <a href="about.html" class="directory-link">Our Story</a>
+          <a href="testimonials.html" class="directory-link">Client Reviews</a>
+          <a href="orders.html" class="directory-link">Live Feed</a>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Business</h4>
+          <a href="catalog.html" class="directory-link">Showroom</a>
+          <a href="contact.html" class="directory-link">Partner with us</a>
+          <a href="policy-terms.html" class="directory-link">Privacy Policy</a>
+          <a href="policy-terms.html" class="directory-link">Service Terms</a>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Support</h4>
+          <a href="tracker.html" class="directory-link">Track Shipment</a>
+          <a href="faqs.html" class="directory-link">Help Center</a>
+          <a href="mailto:Info@mrkash.net" class="directory-link">Legal Inquiries</a>
+          <a href="https://wa.me/233240118846" class="directory-link">WhatsApp Sales</a>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-12 text-center">
+        <p class="text-[10px] font-black text-slate-800 tracking-[0.5em] uppercase">© 2026 Kash Option • Elite Logistics Protocol</p>
+      </div>
     </div>
-    <p class="text-[9px] text-gray-800 font-bold tracking-[0.5em] uppercase">© 2026 Kash Option • Accra • Ghana</p>
   </footer>
 
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/233240118846" target="_blank" class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-2xl shadow-2xl hover:scale-110 transition-transform">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
   <script>
-    // Config Data
     const categories = ["High-end computing", "Auto engineering", "Luxury apparel", "Professional electronics", "Industrial design", "Wholesale logistics", "Health & Wellness", "Kids & Baby"];
-    const cities = ["Accra", "Kumasi", "Takoradi", "Tamale", "Tema", "Cape Coast", "Sekondi", "Obuasi", "Bolgatanga", "Koforidua", "Sunyani", "Ho", "Bawku", "Wa"];
+    const cities = ["Accra", "Kumasi", "Takoradi", "Tamale", "Tema", "Cape Coast", "Sekondi", "Bolgatanga", "Koforidua", "Sunyani", "Ho", "Bawku", "Wa"];
     const container = document.getElementById('orderFeed');
     let generatedIDs = new Set();
 
     function generateUniqueID() {
       let id;
-      do {
-        id = 'KO-' + Math.floor(10000 + Math.random() * 90000);
-      } while (generatedIDs.has(id));
+      do { id = 'KO-' + Math.floor(10000 + Math.random() * 90000); } 
+      while (generatedIDs.has(id));
       generatedIDs.add(id);
       return id;
     }
@@ -183,41 +214,34 @@
       card.className = 'order-card';
       card.innerHTML = `
         <div class="flex justify-between items-start mb-4">
-          <span class="order-id font-bold text-sm underline underline-offset-4 decoration-cyan-500/30">${id}</span>
+          <span class="order-id text-sm underline underline-offset-4 decoration-cyan-500/30">${id}</span>
           <div class="flex items-center text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-            <span class="live-dot"></span> Live • Just now
+            <span class="live-dot"></span> Live • Verified
           </div>
         </div>
-        <div class="text-lg font-bold text-white mb-2">
+        <div class="text-xl font-bold text-white mb-2">
           ${cat} <span class="text-gray-600 mx-2">→</span> ${city}
         </div>
-        <div class="mask-text font-medium">Customer: ${mask}</div>
+        <div class="mask-text font-medium italic">Sourced for client: ${mask}</div>
       `;
 
-      // Prepend to container
       container.insertBefore(card, container.firstChild);
-
-      // Keep DOM lean: Limit to 15-20 items
-      if (container.children.length > 15) {
-        container.removeChild(container.lastChild);
-      }
+      if (container.children.length > 20) { container.removeChild(container.lastChild); }
     }
 
-    // Toggle Mobile Menu
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('active');
-    }
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
 
-    // Initial batch
-    for(let i=0; i<5; i++) {
-      setTimeout(createOrderCard, i * 300);
-    }
+    // Initial load batch
+    for(let i=0; i<6; i++) { setTimeout(createOrderCard, i * 400); }
 
-    // Infinite Pulse Loop
-    setInterval(createOrderCard, 3500);
+    // HUMAN SPEED: New order every 20 seconds
+    setInterval(createOrderCard, 20000);
 
-    // Initial reveal
-    document.body.classList.add('reveal-active');
+    // Reveal Effect
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
 </body>
 </html>
