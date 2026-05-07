@@ -339,12 +339,10 @@
     </div>
   </footer>
 
-  <div id="scrollSentinel" class="h-1 w-full"></div>
-
-  <div id="kashAI" class="animate__animated fixed bottom-6 right-6 z-[9999] cursor-pointer hidden flex flex-col items-end" onclick="window.open('https://wa.me/c/233240118846', '_blank')">
+  <div id="kashAI" class="fixed bottom-6 right-6 z-[9999] cursor-pointer hidden flex-col items-end animate__animated" onclick="window.open('https://wa.me/c/233240118846', '_blank')">
     
     <div class="bg-black/95 backdrop-blur-2xl border-2 border-cyan-400/50 p-4 rounded-2xl mb-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] max-w-[260px] text-right">
-      <p class="text-white text-[13px] font-extrabold leading-snug">
+      <p class="text-white text-[13px] font-[900] leading-snug">
         <span class="text-cyan-400 uppercase tracking-tighter block mb-1">Kash AI Agent:</span> 
         Ready to order? Browse our elite catalog for the best deals from USA, UK, and China!
       </p>
@@ -364,15 +362,13 @@
     .animate-spin-slow { animation: spin-slow 6s linear infinite; }
   </style>
 
- <script>
-    // Navigation Toggle
+  <script>
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('active');
       document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
     }
 
-    // Advanced KASH AI Logic: 20% Threshold + Directional Toggle
     const kashAI = document.getElementById('kashAI');
     let lastScrollTop = 0;
 
@@ -381,32 +377,27 @@
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
 
-      // 1. Check if user has scrolled at least 20%
+      // Threshold: 20% Scroll Depth
       if (scrollPercent >= 20) {
-        
-        // 2. Detect Direction: Scrolling Down
+        // Downward scroll: Show Agent
         if (scrollTop > lastScrollTop) {
           kashAI.classList.remove('hidden', 'animate__fadeOutDown');
           kashAI.classList.add('flex', 'animate__fadeInUp');
         } 
-        // 3. Detect Direction: Scrolling Up
+        // Upward scroll: Hide Agent
         else {
           kashAI.classList.remove('animate__fadeInUp');
           kashAI.classList.add('animate__fadeOutDown');
-          // Optional: hide completely after animation
-          setTimeout(() => {
-            if (kashAI.classList.contains('animate__fadeOutDown')) kashAI.classList.add('hidden');
-          }, 500);
         }
       } else {
-        // Hide if user scrolls back to the very top (less than 20%)
+        // Hide if at top of page
         kashAI.classList.add('hidden');
       }
       
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
     }, { passive: true });
 
-    // Global Reveal Observer for section animations
+    // Global Section Reveal Logic
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     }, { threshold: 0.1 });
