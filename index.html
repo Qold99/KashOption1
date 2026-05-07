@@ -364,27 +364,49 @@
     .animate-spin-slow { animation: spin-slow 6s linear infinite; }
   </style>
 
-  <script>
+ <script>
+    // Navigation Toggle
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('active');
       document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
     }
 
+    // Advanced KASH AI Logic: 20% Threshold + Directional Toggle
     const kashAI = document.getElementById('kashAI');
-    const sentinel = document.getElementById('scrollSentinel');
+    let lastScrollTop = 0;
 
-    const aiObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            kashAI.classList.remove('hidden');
-            kashAI.classList.add('animate__fadeInUp');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+
+      // 1. Check if user has scrolled at least 20%
+      if (scrollPercent >= 20) {
+        
+        // 2. Detect Direction: Scrolling Down
+        if (scrollTop > lastScrollTop) {
+          kashAI.classList.remove('hidden', 'animate__fadeOutDown');
+          kashAI.classList.add('flex', 'animate__fadeInUp');
+        } 
+        // 3. Detect Direction: Scrolling Up
+        else {
+          kashAI.classList.remove('animate__fadeInUp');
+          kashAI.classList.add('animate__fadeOutDown');
+          // Optional: hide completely after animation
+          setTimeout(() => {
+            if (kashAI.classList.contains('animate__fadeOutDown')) kashAI.classList.add('hidden');
+          }, 500);
         }
-      });
-    }, { threshold: 0.1 });
+      } else {
+        // Hide if user scrolls back to the very top (less than 20%)
+        kashAI.classList.add('hidden');
+      }
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+    }, { passive: true });
 
-    if(sentinel) aiObserver.observe(sentinel);
-
+    // Global Reveal Observer for section animations
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     }, { threshold: 0.1 });
