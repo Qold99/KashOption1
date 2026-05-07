@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="google-site-verification" content="4S5CfgSapiMri3H9hrZAMW-SLzm_N8JxD9vIdPVGL4A" />
   
-  <!-- Maintained Titles and Meta -->
   <title>Reviews & Testimonials | Kash Option - Ghana's #1 Global Sourcing Agency</title>
   <meta name="description" content="Verified feedback from individuals and businesses across Ghana who trust Kash Option for global trade and logistics.">
   
@@ -28,7 +27,7 @@
       overflow-x: hidden;
     }
 
-    /* --- NAVIGATION (FIXED MATCHING TRACKER) --- */
+    /* --- NAVIGATION --- */
     .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1200px; transition: 0.3s; }
     .dynamic-island {
       background: rgba(10, 10, 15, 0.85);
@@ -74,11 +73,42 @@
     /* --- DIRECTORY FOOTER --- */
     .directory-link { color: rgba(255,255,255,0.4); transition: 0.3s; font-size: 0.85rem; display: block; margin-bottom: 8px; font-weight: 600; }
     .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--cyan); }
+
+    /* --- KASH AI WIDGET --- */
+    #kashAI {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+      display: none; cursor: pointer;
+    }
+    .ai-avatar {
+      width: 64px; height: 64px; background: #000; border: 2px solid var(--cyan);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      position: relative; box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+    }
+    .ai-orbit {
+      position: absolute; inset: -4px; border-radius: 50%;
+      border: 1px solid rgba(34, 211, 238, 0.5);
+      animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    .ai-glow {
+      position: absolute; inset: 0; border-radius: 50%;
+      box-shadow: 0 0 15px var(--cyan);
+      animation: pulse 2s infinite;
+      opacity: 0.3;
+    }
+    .ai-bubble {
+      position: absolute; bottom: 80px; right: 0; width: 280px;
+      background: rgba(15, 15, 20, 0.9); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px;
+      border-radius: 20px 20px 4px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
 
-  <!-- Dynamic Island Nav -->
+  <!-- Scroll Depth Sentinel (20%) -->
+  <div id="scrollSentinel" style="position: absolute; top: 20%; left: 0; width: 1px; height: 1px;"></div>
+
+  <!-- Navigation -->
   <div class="nav-wrapper" id="islandWrapper">
     <nav class="dynamic-island">
       <a href="index.html" class="logo-text">KASH <span class="logo-option">OPTION</span></a>
@@ -99,7 +129,7 @@
     </nav>
   </div>
 
-  <!-- Mobile Nav Overlay -->
+  <!-- Mobile Menu -->
   <div id="mobileMenu">
     <button onclick="toggleMenu()" class="absolute top-10 right-10 text-white text-3xl"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
@@ -115,7 +145,7 @@
   <main class="pt-48 pb-20 px-6 max-w-6xl mx-auto">
     <header class="text-center mb-24 reveal active">
       <div class="w-16 h-1 bg-cyan-400 mx-auto mb-8 rounded-full"></div>
-      <h1 class="text-5xl md:text-8xl font-black italic mb-6 leading-none">The gold standard</h1>
+      <h1 class="text-5xl md:text-8xl font-black italic mb-6 leading-none">What clients say</h1>
       <p class="text-gray-400 font-bold max-w-2xl mx-auto text-lg md:text-xl uppercase tracking-widest">Why we are Ghana's number one sourcing and logistics partner.</p>
     </header>
 
@@ -170,17 +200,26 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/233240118846" target="_blank" class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-2xl shadow-2xl hover:scale-110 transition-transform">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+  <!-- KASH AI REVIEW CONVERTER -->
+  <div id="kashAI" class="animate__animated" onclick="window.open('https://g.page/r/Cddgqpko0aV_EAE/review', '_blank')">
+    <div class="ai-bubble">
+      <p class="text-white text-xs font-bold leading-relaxed">
+        <span class="text-cyan-400">KASH AI:</span> I see you're checking out our success stories! Want to join the wall of fame? Leave us a review and I’ll instantly sync it to our platform.
+      </p>
+    </div>
+    <div class="ai-avatar">
+      <div class="ai-orbit"></div>
+      <div class="ai-glow"></div>
+      <img src="https://mrkash.net/logo.png" class="w-10 h-10 object-contain relative z-10" alt="Kash Logo">
+    </div>
+  </div>
 
   <script>
-    // FIXED MENU FUNCTION
+    // Navigation Toggle
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       const island = document.getElementById('islandWrapper');
       menu.classList.toggle('active');
-      
       if (menu.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
         island.style.opacity = '0';
@@ -190,6 +229,26 @@
       }
     }
 
+    // Scroll Observer for Kash AI
+    const kashAI = document.getElementById('kashAI');
+    const sentinel = document.getElementById('scrollSentinel');
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          // User has scrolled past 20% mark
+          kashAI.style.display = 'block';
+          kashAI.classList.add('animate__fadeInUp');
+        } else {
+          kashAI.classList.remove('animate__fadeInUp');
+          kashAI.style.display = 'none';
+        }
+      });
+    }, { threshold: 0 });
+
+    scrollObserver.observe(sentinel);
+
+    // Reviews Logic
     const eliteReviews = [
       {author:"Nana Kwame", loc:"Accra", text:"Kash Option is the only company in Ghana I trust for $10,000+ orders. They are the true market leaders.", time:"2 days ago"},
       {author:"Grace O.", loc:"Kumasi", text:"While others make excuses, Kash Option delivers. My business grew 300% after switching to them.", time:"1 week ago"},
@@ -204,7 +263,7 @@
       const shuffled = eliteReviews.sort(() => 0.5 - Math.random());
       
       display.innerHTML = shuffled.map(r => `
-        <article class="reveal liquid-glass p-8 flex flex-col h-full active">
+        <article class="reveal liquid-glass p-8 flex flex-col h-full active review-card">
           <div class="flex items-center gap-5 mb-8 text-left">
             <div class="w-12 h-12 bg-cyan-400 rounded-full flex items-center justify-center font-black text-black text-lg">${r.author[0]}</div>
             <div>
