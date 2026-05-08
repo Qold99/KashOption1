@@ -26,8 +26,8 @@
       overflow-x: hidden;
     }
 
-    /* --- DYNAMIC ISLAND --- */
-    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; }
+    /* --- DYNAMIC ISLAND (BRAND MATCH) --- */
+    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; transition: 0.3s; }
     .dynamic-island {
       background: rgba(10, 10, 15, 0.75);
       backdrop-filter: blur(30px) saturate(180%);
@@ -39,46 +39,77 @@
       justify-content: space-between;
       box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
-    .logo-text { font-weight: 800; font-style: italic; font-size: 1.1rem; letter-spacing: -0.05em; }
+    .logo-text { font-weight: 800; font-style: italic; font-size: 1.1rem; letter-spacing: -0.05em; color: #fff; text-decoration: none; }
     .logo-option { color: var(--cyan); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
 
     .island-nav a { color: #94a3b8; text-decoration: none; font-size: 0.7rem; font-weight: 700; padding: 10px 16px; border-radius: 40px; transition: 0.3s; }
     .island-nav a:hover, .island-nav a.active { color: #fff; background: rgba(255,255,255,0.05); }
 
-    /* --- AERO-LANDING ENGINE --- */
-    @keyframes aeroLanding {
-      0% { transform: translateY(-300px) scale(1.5); opacity: 0; filter: blur(20px); }
-      100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+    .menu-trigger { width: 36px; height: 36px; border-radius: 50%; background: var(--cyan); color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+
+    /* --- MOBILE NAV OVERLAY --- */
+    #mobileMenu {
+      position: fixed; inset: 0; background: #050508; z-index: 10001; 
+      display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem;
+      backdrop-filter: blur(20px);
     }
-    .hero-animate { animation: aeroLanding 1.2s cubic-bezier(0.23, 1, 0.32, 1) both; }
+    #mobileMenu.active { display: flex; }
+    #mobileMenu a { font-size: 2rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; border-bottom: 1px solid rgba(255,255,255,0.05); width: 80%; text-align: center; padding-bottom: 10px; }
 
     /* --- UI COMPONENTS --- */
     .liquid-glass { 
       background: var(--glass); 
       backdrop-filter: blur(15px); 
-      border: 1px solid rgba(255,255,255,0.08); 
+      border: 1px solid rgba(255, 255, 255, 0.08); 
       border-radius: 32px; 
       transition: 0.4s ease;
     }
+    .liquid-glass:hover { border-color: var(--cyan); transform: translateY(-5px); }
     
     .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.19, 1, 0.22, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
+    /* --- TIMELINE --- */
     .timeline-item { position: relative; padding-left: 40px; border-left: 2px solid rgba(34, 211, 238, 0.2); margin-bottom: 30px; }
     .timeline-dot { position: absolute; left: -7px; top: 0; width: 12px; height: 12px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 10px var(--cyan); }
 
+    /* --- DIRECTORY FOOTER --- */
     .directory-link { color: rgba(255,255,255,0.4); transition: 0.3s; font-size: 0.85rem; display: block; margin-bottom: 8px; font-weight: 600; }
     .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--cyan); }
 
-    #mobileMenu { position: fixed; inset: 0; background: #050508; z-index: 10001; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
-    #mobileMenu.active { display: flex; }
-    #mobileMenu a { font-size: 2rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; }
+    /* --- KASH AI SALES CLOSER (WIDGET) --- */
+    #kashAI {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+      display: none; cursor: pointer;
+    }
+    .ai-avatar {
+      width: 64px; height: 64px; background: #000; border: 2px solid var(--cyan);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      position: relative; box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+    }
+    .ai-orbit {
+      position: absolute; inset: -4px; border-radius: 50%;
+      border: 1px solid rgba(34, 211, 238, 0.5);
+      animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    .ai-glow {
+      position: absolute; inset: 0; border-radius: 50%;
+      box-shadow: 0 0 15px var(--cyan);
+      animation: pulse 2s infinite;
+      opacity: 0.3;
+    }
+    .ai-bubble {
+      position: absolute; bottom: 80px; right: 0; width: 260px;
+      background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px;
+      border-radius: 20px 20px 4px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
 
   <!-- Dynamic Island Nav -->
-  <div class="nav-wrapper">
+  <div class="nav-wrapper" id="islandWrapper">
     <nav class="dynamic-island">
       <a href="index.html" class="logo-text">KASH <span class="logo-option">OPTION</span></a>
       <div class="island-nav hidden lg:flex gap-1">
@@ -92,7 +123,7 @@
         <a href="policy-terms.html">Policy</a>
         <a href="tracker.html">Tracker</a>
       </div>
-      <button class="lg:hidden text-cyan-400 text-xl p-2" onclick="toggleMenu()">
+      <button class="menu-trigger" onclick="toggleMenu()">
         <i class="fas fa-bars-staggered"></i>
       </button>
     </nav>
@@ -102,14 +133,12 @@
   <div id="mobileMenu">
     <button onclick="toggleMenu()" class="absolute top-10 right-10 text-white text-3xl"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
+    <a href="about.html" class="text-cyan-400">About Us</a>
     <a href="catalog.html">Catalog</a>
+    <a href="orders.html">Live Feed</a>
     <a href="tracker.html">Track Order</a>
-    <a href="orders.html">Today's Orders</a>
-    <a href="testimonials.html">Testimonials</a>
-    <a href="faqs.html">FAQs</a>
     <a href="contact.html">Contact Us</a>
-    <a href="policy-terms.html">Policy & Terms</a>
+    <button onclick="toggleMenu()" class="mt-10 w-12 h-12 rounded-full border border-white/20"><i class="fas fa-times"></i></button>
   </div>
 
   <main>
@@ -117,7 +146,7 @@
     <section class="min-h-[70vh] flex flex-col justify-center items-center text-center px-6 pt-32">
       <div class="hero-animate">
         <h1 class="text-5xl sm:text-7xl md:text-8xl font-black italic leading-none tracking-tighter mb-8">
-            Your bridge to<br><span class="text-cyan-400">global markets</span>
+            The bridge to<br><span class="text-cyan-400">global markets</span>
         </h1>
         <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 font-medium leading-relaxed">
             Since 2020, we have been eliminating the barriers of international trade. We source, we pay, we ship—you simply enjoy the best products the world has to offer.
@@ -206,9 +235,9 @@
         </div>
     </section>
 
-    <!-- Final CTA - Optimized for Mobile -->
+    <!-- Final CTA - Optimized for Mobile Padding/Size -->
     <section class="py-20 px-6 text-center">
-        <div class="reveal liquid-glass p-8 md:p-16 max-w-2xl mx-auto border-cyan-400/20">
+        <div class="reveal liquid-glass p-10 md:p-16 max-w-2xl mx-auto border-cyan-400/20">
             <h2 class="text-3xl md:text-4xl font-black italic mb-8 leading-tight">Ready to experience the<br>Kash Option standard?</h2>
             <a href="https://wa.me/233240118846" target="_blank" class="inline-flex items-center gap-3 bg-cyan-400 text-black px-10 py-4 rounded-full font-black text-base hover:scale-105 transition-transform shadow-2xl">
                 Start shopping now <i class="fab fa-whatsapp"></i>
@@ -216,6 +245,20 @@
         </div>
     </section>
   </main>
+
+  <!-- KASH AI - INFORMATION & WHATSAPP REDIRECT -->
+  <div id="kashAI" class="animate__animated" onclick="window.open('https://wa.me/233240118846?text=Hi%20Kash%20Option%2C%20I%20am%20on%20the%20About%20Us%20page%20and%20need%20more%20information.', '_blank')">
+    <div class="ai-bubble">
+      <p class="text-white text-xs font-bold leading-relaxed">
+        <span class="text-cyan-400">KASH AI:</span> Curious about our global network? If you need more information or a custom sourcing strategy, I'm here to help! 👋
+      </p>
+    </div>
+    <div class="ai-avatar">
+      <div class="ai-orbit"></div>
+      <div class="ai-glow"></div>
+      <img src="https://mrkash.net/logo.png" class="w-10 h-10 object-contain relative z-10" alt="Kash Logo">
+    </div>
+  </div>
 
   <!-- Apple Style Directory Footer -->
   <footer class="pt-32 pb-12 px-6 bg-[#030305] border-t border-white/5">
@@ -258,9 +301,33 @@
   </footer>
 
   <script>
+    // Navigation Toggle
     function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('active');
+      const menu = document.getElementById('mobileMenu');
+      const island = document.getElementById('islandWrapper');
+      menu.classList.toggle('active');
+      if (menu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+        island.style.opacity = '0';
+      } else {
+        document.body.style.overflow = '';
+        island.style.opacity = '1';
+      }
     }
+
+    // Scroll Logic for AI Agent
+    window.addEventListener('scroll', () => {
+      const kashAI = document.getElementById('kashAI');
+      const threshold = document.documentElement.scrollHeight * 0.20; // 20% scroll
+      if (window.scrollY > threshold) {
+        kashAI.style.display = 'block';
+        if (!kashAI.classList.contains('animate__fadeInUp')) {
+            kashAI.classList.add('animate__fadeInUp');
+        }
+      } else {
+        kashAI.style.display = 'none';
+      }
+    });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
