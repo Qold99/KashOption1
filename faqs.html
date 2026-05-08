@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-x: hidden;">
 <head>
   <meta charset="UTF-8">
   <base href="https://mrkash.net/">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    :root { --accent: #22d3ee; --bg: #050508; --card: #0f0f15; }
+    :root { --accent: #22d3ee; --bg: #050508; --card: #0f0f15; --glass: rgba(255, 255, 255, 0.03); }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; text-transform: none !important; }
     
     body {
@@ -25,184 +25,161 @@
       background: var(--bg);
       color: #fff;
       overflow-x: hidden;
-      font-weight: 700;
     }
 
     /* --- DYNAMIC ISLAND (TWO-TONE) --- */
-    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; }
+    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; transition: 0.3s; }
     .dynamic-island {
       background: rgba(10, 10, 15, 0.75);
       backdrop-filter: blur(30px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 60px;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      border-radius: 60px; padding: 8px 12px;
+      display: flex; align-items: center; justify-content: space-between;
       box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .logo-text { font-weight: 800; font-style: italic; font-size: 1.1rem; letter-spacing: -0.05em; color: #fff; text-decoration: none; }
     .logo-option { color: var(--accent); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
 
     .island-nav { display: none; align-items: center; gap: 4px; }
     @media (min-width: 1024px) { .island-nav { display: flex; } }
-    .island-nav a {
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 10px 16px;
-      border-radius: 40px;
-      transition: 0.3s;
-    }
+    .island-nav a { color: #94a3b8; text-decoration: none; font-size: 0.75rem; font-weight: 700; padding: 10px 16px; border-radius: 40px; transition: 0.3s; }
     .island-nav a:hover, .island-nav a.active { color: #fff; background: rgba(255,255,255,0.05); }
-
     .menu-trigger { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
 
-    /* --- MOBILE MENU FIX --- */
+    /* --- MOBILE MENU --- */
     #mobileMenu {
-      position: fixed; inset: 0; background: #050508; 
-      z-index: 10001; display: none;
-      flex-direction: column; align-items: center; justify-content: center; padding: 2rem;
+      position: fixed; inset: 0; background: #050508; z-index: 10001; 
+      display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem;
       backdrop-filter: blur(20px);
     }
     #mobileMenu.active { display: flex; animation: fadeIn 0.3s ease-in-out; }
-    #mobileMenu a { font-size: 2rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; }
-    #mobileMenu a:hover { color: var(--accent); }
-
+    #mobileMenu a { font-size: 1.8rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; border-bottom: 1px solid rgba(255,255,255,0.05); width: 80%; text-align: center; padding-bottom: 10px; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- FAQ CONTENT UI --- */
-    .liquid-glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; }
+    /* --- FAQ UI --- */
+    .liquid-glass { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 32px; transition: 0.4s ease; }
+    .liquid-glass:hover { border-color: var(--accent); }
     .category-label { color: var(--accent); font-size: 0.75rem; font-weight: 800; text-transform: uppercase !important; letter-spacing: 0.3em; margin-bottom: 1.5rem; display: block; border-left: 3px solid var(--accent); padding-left: 1rem; }
+    
+    details > summary { list-style: none; padding: 25px; font-weight: 800; font-style: italic; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    details > summary::-webkit-details-marker { display: none; }
+    .faq-content { padding: 0 25px 25px; color: #94a3b8; font-size: 0.95rem; line-height: 1.6; }
 
-    details > summary { list-style: none; }
-    details summary::-webkit-details-marker { display: none; }
+    /* --- KASH AI & MODAL --- */
+    #kashAI { position: fixed; bottom: 24px; right: 24px; z-index: 9998; display: none; cursor: pointer; }
+    .ai-avatar { width: 64px; height: 64px; background: #000; border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
+    .ai-orbit { position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(34, 211, 238, 0.5); animation: ping 2s infinite; }
+    .ai-bubble { position: absolute; bottom: 80px; right: 0; width: 260px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; border-radius: 20px 20px 4px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
-    /* --- DIRECTORY FOOTER --- */
+    #aiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); z-index: 10002; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-content { background: #08080a; border: 1px solid rgba(255,255,255,0.05); border-radius: 40px; width: 100%; max-width: 480px; padding: 40px; box-shadow: 0 50px 120px -30px rgba(0,0,0,0.9); }
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+    
+    .desk-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0; color: #fff; font-size: 1.1rem; outline: none; transition: 0.3s; margin-bottom: 20px; }
+    .desk-input:focus { border-bottom-color: var(--accent); }
+    .btn-action { background: var(--accent); color: #000; width: 100%; padding: 20px; border-radius: 100px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; border:none; cursor:pointer; }
+    
     .directory-link { color: rgba(255,255,255,0.4); transition: 0.3s; font-size: 0.85rem; display: block; margin-bottom: 8px; font-weight: 600; }
     .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
-
-    .whatsapp-float { 
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 997; width: 60px; height: 60px; 
-      background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-      font-size: 1.8rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); transition: 0.3s; color: white; text-decoration: none;
-    }
-    .whatsapp-float:hover { transform: scale(1.1); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: 1s cubic-bezier(0.19, 1, 0.22, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
-  <!-- Dynamic Island Navigation -->
-  <div class="nav-wrapper">
+  <!-- Navigation -->
+  <div class="nav-wrapper" id="islandWrapper">
     <nav class="dynamic-island">
       <a href="index.html" class="logo-text">KASH <span class="logo-option">OPTION</span></a>
       <div class="island-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="catalog.html">Catalog</a>
-        <a href="orders.html">Live orders</a>
+        <a href="orders.html">Orders</a>
         <a href="testimonials.html">Reviews</a>
         <a href="faqs.html" class="active">FAQs</a>
         <a href="contact.html">Contact</a>
-        <a href="policy-terms.html">Policy</a>
         <a href="tracker.html">Tracker</a>
       </div>
-      <button class="menu-trigger" onclick="toggleMenu()">
-        <i class="fas fa-bars-staggered"></i>
-      </button>
+      <button class="menu-trigger" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></button>
     </nav>
   </div>
 
   <!-- Mobile Nav Overlay -->
   <div id="mobileMenu">
     <button onclick="toggleMenu()" class="absolute top-10 right-10 text-white text-3xl"><i class="fas fa-times"></i></button>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="catalog.html">Catalog</a>
-    <a href="tracker.html">Track Order</a>
-    <a href="orders.html">Today's Orders</a>
-    <a href="testimonials.html">Testimonials</a>
-    <a href="faqs.html">FAQs</a>
-    <a href="contact.html">Contact Us</a>
-    <a href="policy-terms.html">Policy & Terms</a>
+    <a href="index.html" onclick="toggleMenu()">Home</a>
+    <a href="about.html" onclick="toggleMenu()">About us</a>
+    <a href="catalog.html" onclick="toggleMenu()">Catalog</a>
+    <a href="orders.html" onclick="toggleMenu()">Live orders</a>
+    <a href="tracker.html" onclick="toggleMenu()" style="color: var(--accent);">Track order</a>
+    <a href="faqs.html" onclick="toggleMenu()">FAQs</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
   </div>
 
-  <main class="pt-40 pb-20 px-4 sm:px-6 max-w-4xl mx-auto">
-    <header class="text-center mb-16 reveal">
-      <h1 class="text-4xl sm:text-6xl font-black italic mb-4 leading-tight">Elite <span class="text-cyan-400">support</span></h1>
-      <p class="text-slate-400 text-sm sm:text-base font-semibold uppercase tracking-widest">Global Sourcing Answered</p>
+  <main class="pt-44 pb-32 px-6 max-w-4xl mx-auto">
+    <header class="text-center mb-20 reveal active">
+      <h1 class="text-4xl md:text-7xl font-black italic mb-6 leading-tight">Expert <span class="text-cyan-400">support</span></h1>
+      <p class="text-gray-500 font-bold max-w-2xl mx-auto text-lg">Everything you need to know about the bridge between global stores and your doorstep.</p>
     </header>
 
-    <!-- Sourcing & Payments -->
+  <section class="mb-16">
+  <span class="category-label">Sourcing and payments</span>
+  <div class="space-y-4">
+    <details class="reveal liquid-glass group">
+      <summary>How does the procurement process work? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+      <div class="faq-content">We act as your elite bridge. Simply provide the link to an item from China, USA, or UK. We verify the supplier, manage the currency conversion, and facilitate the purchase for you.</div>
+    </details>
+    <details class="reveal liquid-glass group">
+      <summary>What is your payment policy? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+      <div class="faq-content">To secure your items and lock in international logistics rates, full payment (product cost and shipping) is required upfront via MoMo, Bank Transfer, or authorized cards. We do not offer reservations without payment.</div>
+    </details>
+    <details class="reveal liquid-glass group">
+      <summary>Can I pay in GHS for items priced in USD or RMB? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+      <div class="faq-content">Yes. We provide real-time currency conversion based on the current market rate. This allows you to pay in Ghana Cedis while we settle the international suppliers in their local currency, saving you the stress of looking for forex.</div>
+    </details>
+  </div>
+</section>
+
+<section class="mb-16">
+  <span class="category-label">Shipping and logistics</span>
+  <div class="space-y-4">
+    <details class="reveal liquid-glass group">
+      <summary>What are your delivery timelines? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+      <div class="faq-content"><strong>Air Cargo:</strong> 3 to 5 working days from warehouse receipt. <br><strong>Sea Freight:</strong> 6 to 8 weeks. All shipments are tracked end-to-end for your peace of mind.</div>
+    </details>
+    <details class="reveal liquid-glass group">
+      <summary>How do you handle customs clearing? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+      <div class="faq-content">Our <strong>99.8% customs success rate</strong> ensures a seamless entry into Ghana. All clearing paperwork and initial duties are handled within your provided quote, so there are no hidden fees upon delivery.</div>
+    </details>
+    <details class="reveal liquid-glass group">
+      <summary>What happens if my item is damaged during transit? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+      <div class="faq-content">Kash Option provides a <strong>Secure Transit Guarantee</strong>. We inspect items at our global warehouses before shipping. If an item is damaged due to our handling, we facilitate the insurance claim and replacement process immediately.</div>
+    </details>
+  </div>
+</section>
     <section class="mb-16">
-      <span class="category-label">Sourcing & Payments</span>
+      <span class="category-label">Returns and Warranties</span>
       <div class="space-y-4">
-        <details class="reveal liquid-glass rounded-2xl overflow-hidden group">
-          <summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-base italic gap-4">
-            How does Kash Option work?
-            <i class="fas fa-plus text-cyan-400 text-xs transition-transform group-open:rotate-45"></i>
-          </summary>
-          <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-            We act as your premium bridge to international stores. We source authentic products from China, USA, and UK, manage secure currency payments to your suppliers, and provide seamless delivery across Ghana.
+        <details class="reveal liquid-glass group">
+          <summary>What is your return policy for international orders? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+          <div class="faq-content">
+            Due to the complexities and high costs of international cross-border logistics, <strong>all sales are final</strong> once items leave the origin country (USA, UK, or China). We do not support returns for "change of mind" or sizing errors. We strongly recommend verifying all specifications before payment is finalized.
+          </div>
+        </details>
+        
+        <details class="reveal liquid-glass group">
+          <summary>Do items come with a warranty in Ghana? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+          <div class="faq-content">
+            Most international manufacturers do not provide global warranty coverage in Ghana. All items are procured <strong>"As-Is"</strong> from the supplier. While we ensure the item reaches you in its original condition, any internal technical faults or manufacturer defects must be taken up with the brand directly in their home market.
           </div>
         </details>
 
-        <details class="reveal liquid-glass rounded-2xl overflow-hidden group">
-          <summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-base italic gap-4">
-            What is your payment policy?
-            <i class="fas fa-plus text-cyan-400 text-xs transition-transform group-open:rotate-45"></i>
-          </summary>
-          <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-            Orders are processed on a strict first-pay basis. To secure items and lock in international logistics rates, <span class="text-white font-bold">full payment (Product + Shipping)</span> is required upfront. We accept MoMo, Bank Transfer, and authorized Cards.
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- Shipping & Logistics -->
-    <section class="mb-16">
-      <span class="category-label">Shipping & Logistics</span>
-      <div class="space-y-4">
-        <details class="reveal liquid-glass rounded-2xl overflow-hidden group">
-          <summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-base italic gap-4">
-            What are your delivery timelines?
-            <i class="fas fa-plus text-cyan-400 text-xs transition-transform group-open:rotate-45"></i>
-          </summary>
-          <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-            <span class="text-white font-bold">Air Cargo:</span> 3 to 5 working days after warehouse receipt. <br>
-            <span class="text-white font-bold">Sea Freight:</span> 6 to 8 weeks. <br>
-            All shipments are tracked end-to-end with real-time updates.
-          </div>
-        </details>
-
-        <details class="reveal liquid-glass rounded-2xl overflow-hidden group">
-          <summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-base italic gap-4">
-            Do I pay separate import duty?
-            <i class="fas fa-plus text-cyan-400 text-xs transition-transform group-open:rotate-45"></i>
-          </summary>
-          <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-            No. Our service quotes are all-inclusive. We leverage our <span class="text-white font-bold">99.8% customs success rate</span> to handle all clearing paperwork and charges—delivering directly to your door with no hidden costs.
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- Returns & Support -->
-    <section class="mb-20">
-      <span class="category-label">Returns & Support</span>
-      <div class="space-y-4">
-        <details class="reveal liquid-glass rounded-2xl overflow-hidden group">
-          <summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-base italic gap-4">
-            What is your return policy?
-            <i class="fas fa-plus text-cyan-400 text-xs transition-transform group-open:rotate-45"></i>
-          </summary>
-          <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-            All sales are final once items enter Ghana. Exchanges are strictly limited to <span class="text-white font-bold">factory defects reported within 48 hours</span> of delivery. Please refer to our Policy & Terms page.
+        <details class="reveal liquid-glass group">
+          <summary>How do you ensure I get exactly what I ordered? <i class="fas fa-chevron-down text-xs text-cyan-400 transition-transform group-open:rotate-180"></i></summary>
+          <div class="faq-content">
+            To protect your investment, our agents perform a <strong>Visual Integrity Check</strong> at our global transit hubs. We verify the product model, color, and physical condition against your order invoice before it is crated for shipping to Ghana. This significantly reduces the risk of receiving incorrect items.
           </div>
         </details>
       </div>
@@ -210,68 +187,104 @@
   </main>
 
   <!-- Global Directory Footer -->
-  <footer class="pt-24 pb-12 px-6 bg-[#050508] border-t border-white/5">
+  <footer class="pt-32 pb-12 px-6 bg-[#030305] border-t border-white/5">
     <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20 text-left">
-        <div>
-          <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Kash Option</h4>
-          <a href="about.html" class="directory-link">Our Story</a>
-          <a href="testimonials.html" class="directory-link">Client Reviews</a>
-          <a href="orders.html" class="directory-link">Live Feed</a>
-          <a href="faqs.html" class="directory-link">Help Center</a>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-24 text-left">
+        <div class="col-span-2">
+            <h2 class="logo-text text-2xl mb-6">KASH <span class="logo-option">OPTION</span></h2>
+            <p class="text-slate-500 max-w-sm font-semibold text-sm leading-relaxed mb-8">Ghana's #1 premier sourcing and logistics hub. Bridging global excellence with local convenience since 2020.</p>
+            <div class="flex gap-4">
+                <a href="https://www.instagram.com/kashoption1" class="text-xl text-white/40 hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1CrwnBxS8W/" class="text-xl text-white/40 hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+            </div>
         </div>
         <div>
-          <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Services</h4>
-          <a href="catalog.html" class="directory-link">Browse Catalog</a>
-          <a href="contact.html" class="directory-link">Sourcing Request</a>
-          <a href="policy-terms.html" class="directory-link">Shipping Policy</a>
-          <a href="policy-terms.html" class="directory-link">Refund Terms</a>
+          <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Directory</h4>
+          <a href="index.html" class="directory-link">Home</a>
+          <a href="about.html" class="directory-link">Our story</a>
+          <a href="catalog.html" class="directory-link">Showroom</a>
+          <a href="orders.html" class="directory-link">Live feed</a>
         </div>
         <div>
-          <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Support</h4>
-          <a href="tracker.html" class="directory-link">Track Your Order</a>
-          <a href="contact.html" class="directory-link">Contact Sales</a>
-          <a href="https://wa.me/233240118846" class="directory-link">WhatsApp Concierge</a>
-          <a href="mailto:Info@mrkash.net" class="directory-link">Email Direct</a>
+          <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Business</h4>
+          <a href="catalog.html" class="directory-link">Partner</a>
+          <a href="policy-terms.html" class="directory-link">Privacy</a>
+          <a href="policy-terms.html" class="directory-link">Service terms</a>
+          <a href="contact.html" class="directory-link">Contact</a>
         </div>
         <div>
-          <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Connect</h4>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com/kashoption1" class="text-xl text-slate-500 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1CrwnBxS8W/" class="text-xl text-slate-500 hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
-          </div>
-          <p class="mt-6 text-[10px] font-bold text-slate-600 uppercase tracking-widest leading-relaxed">
-            Kash Option HQ<br>Accra, Ghana
-          </p>
+          <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Support</h4>
+          <a href="tracker.html" class="directory-link">Track shipment</a>
+          <a href="faqs.html" class="directory-link">Help center</a>
+          <a href="mailto:Info@mrkash.net" class="directory-link">Email direct</a>
+          <a href="https://wa.me/233240118846" class="directory-link">WhatsApp concierge</a>
         </div>
       </div>
-      <div class="border-t border-white/5 pt-10 text-center">
-        <p class="text-[10px] font-bold text-slate-700 tracking-[0.5em] uppercase">© 2026 KASH OPTION • GHANA'S #1 IMPORT HUB</p>
+      <div class="border-t border-white/5 pt-12 text-center text-[10px] font-black text-slate-800 uppercase">
+        © 2026 Kash Option • Elite Logistics Protocol
       </div>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/233240118846" target="_blank" class="whatsapp-float">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+  <!-- KASH AI -->
+  <div id="kashAI" class="animate__animated" onclick="openAIModal()">
+    <div class="ai-bubble"><p class="text-white text-xs font-bold leading-relaxed"><span class="text-cyan-400">KASH AI:</span> Unable to find your answer? Tap me to connect with our elite support team instantly. 👋</p></div>
+    <div class="ai-avatar"><div class="ai-orbit"></div><img src="https://mrkash.net/logo.png" class="w-10 h-10 object-contain relative z-10" alt="Kash Logo"></div>
+  </div>
+
+  <!-- AI MODAL QUESTIONNAIRE -->
+  <div id="aiModal" onclick="closeAIModal()">
+    <div class="modal-content animate__animated animate__zoomIn" onclick="event.stopPropagation()">
+      <div id="step1" class="form-step active text-center">
+        <h2 class="text-2xl font-black italic mb-6">What do you need answers to?</h2>
+        <input type="text" id="qPrimary" class="desk-input" placeholder="Enter your main question here..." required>
+        <button onclick="nextStep()" class="btn-action">Continue <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div id="step2" class="form-step">
+        <h2 class="text-2xl font-black italic mb-6">Anything else?</h2>
+        <textarea id="qSecondary" class="desk-input" rows="3" placeholder="Provide any other details or questions..."></textarea>
+        <button onclick="sendToWhatsApp()" class="btn-action">Send to Support <i class="fab fa-whatsapp text-2xl"></i></button>
+        <button onclick="prevStep()" class="w-full text-[10px] text-gray-600 font-bold uppercase mt-6">Go back</button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // --- HAMBURGER MENU FIX ---
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('active');
-      
-      if (menu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
     }
 
-    // --- REVEAL ON SCROLL ---
+    // Scroll Logic for AI
+    window.addEventListener('scroll', () => {
+      const kashAI = document.getElementById('kashAI');
+      if (window.scrollY > 400) { kashAI.style.display = 'block'; kashAI.classList.add('animate__fadeInUp'); }
+    });
+
+    // AI Modal Logic
+    function openAIModal() { document.getElementById('aiModal').style.display = 'flex'; }
+    function closeAIModal() { document.getElementById('aiModal').style.display = 'none'; }
+    function nextStep() {
+      if(!document.getElementById('qPrimary').value) return alert("Please enter your question.");
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+    }
+    function prevStep() {
+      document.getElementById('step2').classList.remove('active');
+      document.getElementById('step1').classList.add('active');
+    }
+
+    function sendToWhatsApp() {
+      const q1 = document.getElementById('qPrimary').value;
+      const q2 = document.getElementById('qSecondary').value || "No secondary questions.";
+      const msg = `*ELITE SUPPORT INQUIRY*%0A%0A*Main Question:* ${q1}%0A*Additional Details:* ${q2}%0A%0A_Sent via Kash AI Support Agent_`;
+      window.open(`https://wa.me/233240118846?text=${msg}`, '_blank');
+      closeAIModal();
+    }
+
     const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
