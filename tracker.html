@@ -281,7 +281,7 @@
             const idVal = row.TrackingID || row['Tracking ID'];
             const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
             html += generateCard(row);
-            voiceScript += `Your Kash Option Order ${idVal} is ${status}. Current location is ${loc}. Today is ${date}. `;
+            voiceScript += `Your Order ${idVal} is ${status}. Current location is ${loc}. Today is ${date}. `;
           } else {
             html += `<div class="premium-glass-card p-10 text-center mb-6 border-red-500/20">
                       <h4 class="text-sm font-bold text-red-400 italic">Tracking ID "${id.toUpperCase()}" not found.</h4>
@@ -291,7 +291,7 @@
         });
 
         resultsSection.innerHTML = html;
-        voiceScript += "Please tap the chat bubble for live support.";
+        voiceScript += "Please tap the chat button for instant support.";
         speakStatus(voiceScript);
         
         const ai = document.getElementById('kashAI');
