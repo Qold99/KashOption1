@@ -45,6 +45,11 @@
 
     .menu-trigger { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
 
+    /* --- MOBILE MENU --- */
+    #mobileMenu { position: fixed; inset: 0; background: #050508; z-index: 10001; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+    #mobileMenu.active { display: flex; }
+    #mobileMenu a { font-size: 1.8rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; }
+
     /* --- CATALOG GRID --- */
     .catalog-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 24px; }
     @media (min-width: 768px) { .catalog-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -67,9 +72,9 @@
 
     /* --- KASH AI WIDGET --- */
     #kashAI { position: fixed; bottom: 24px; right: 24px; z-index: 9998; display: none; cursor: pointer; }
-    .ai-avatar { width: 64px; height: 64px; background: #000; border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 20px rgba(34, 211, 238, 0.2); }
+    .ai-avatar { width: 64px; height: 64px; background: #000; border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
     .ai-orbit { position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(34, 211, 238, 0.5); animation: ping 2s infinite; }
-    .ai-bubble { position: absolute; bottom: 80px; right: 0; width: 260px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; border-radius: 20px 20px 4px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .ai-bubble { position: absolute; bottom: 80px; right: 0; width: 260px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; border-radius: 20px; }
 
     /* --- MODAL --- */
     #aiModal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 10002; display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -79,17 +84,13 @@
     .desk-label { display: block; font-size: 0.7rem; font-weight: 800; color: #4b5563; text-transform: uppercase !important; letter-spacing: 2px; margin-top: 20px; }
     .desk-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0; color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
     .desk-input:focus { border-bottom-color: var(--accent); }
-    .btn-action { background: #fff; color: #000; width: 100%; padding: 20px; border-radius: 100px; font-weight: 800; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; border:none; cursor:pointer; }
+    .btn-action { background: #fff; color: #000; width: 100%; padding: 20px; border-radius: 100px; font-weight: 800; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
     .btn-action:hover { background: var(--accent); transform: translateY(-2px); }
 
     /* --- FOOTER (APPLE STYLE) --- */
     .directory-link { color: rgba(255,255,255,0.4); transition: 0.3s; font-size: 0.85rem; display: block; margin-bottom: 10px; font-weight: 600; text-decoration: none; }
     .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
     
-    #mobileMenu { position: fixed; inset: 0; background: #050508; z-index: 10001; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
-    #mobileMenu.active { display: flex; }
-    #mobileMenu a { font-size: 1.8rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; }
-
     .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
   </style>
@@ -106,8 +107,10 @@
         <a href="catalog.html" class="active">Catalog</a>
         <a href="orders.html">Orders</a>
         <a href="testimonials.html">Reviews</a>
-        <a href="faqs.html">Support</a>
+        <a href="faqs.html">FAQs</a>
         <a href="contact.html">Contact</a>
+        <a href="policy-terms.html">Policy</a>
+        <a href="tracker.html">Tracker</a>
       </div>
       <button class="menu-trigger" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></button>
     </nav>
@@ -117,10 +120,14 @@
   <div id="mobileMenu">
     <button onclick="toggleMenu()" class="absolute top-10 right-10 text-white text-3xl"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
+    <a href="about.html">About Us</a>
     <a href="catalog.html">Catalog</a>
-    <a href="tracker.html" style="color: var(--accent);">Track order</a>
-    <a href="contact.html">Contact</a>
+    <a href="tracker.html" style="color: var(--cyan);">Track Order</a>
+    <a href="orders.html">Today's Orders</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="faqs.html">FAQs</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="policy-terms.html">Policy & Terms</a>
   </div>
 
   <main class="pt-40 pb-32 px-6">
@@ -265,7 +272,7 @@
     function goToStep1() { document.getElementById('step2').classList.remove('active'); document.getElementById('step1').classList.add('active'); }
     function chatSales() { window.open('https://wa.me/233240118846?text=Hi%20Kash%20Option%2C%20I%20have%20some%20questions%20about%20your%20services.', '_blank'); }
     function sendOrder() {
-      const msg = `*NEW PROCUREMENT REQUEST*%0A%0A*Item:* ${document.getElementById('qItem').value}%0A*Quantity:* ${document.getElementById('qQty').value}%0A*Size/Color:* ${document.getElementById('qSize').value}%0A*Description:* ${document.getElementById('qDesc').value}`;
+      const msg = `*NEW PROCUREMENT REQUEST*%0A%0A*Item:* ${document.getElementById('qItem').value}%0A*Quantity:* ${document.getElementById('qQty').value}%0A*Size/Color:* ${document.getElementById('qSize').value}%0A*Description:* ${document.getElementById('qDesc').value}%0A%0A_Sent via Kash AI Procurement Agent_`;
       window.open(`https://wa.me/233240118846?text=${msg}`, '_blank');
       closeAIModal();
     }
