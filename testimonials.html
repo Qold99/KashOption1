@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-x: hidden;">
 <head>
   <meta charset="UTF-8">
   <base href="https://mrkash.net/">
@@ -14,38 +14,37 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    :root { --cyan: #22d3ee; --dark: #050508; --glass: rgba(255, 255, 255, 0.03); }
+    :root { --accent: #22d3ee; --bg: #050508; --card: #0f0f15; --glass: rgba(255, 255, 255, 0.03); }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; text-transform: none !important; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--dark);
+      background: var(--bg);
       color: #fff;
       overflow-x: hidden;
     }
 
-    /* --- NAVIGATION --- */
-    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1200px; transition: 0.3s; }
+    /* --- DYNAMIC ISLAND (TWO-TONE) --- */
+    .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; transition: 0.3s; }
     .dynamic-island {
-      background: rgba(10, 10, 15, 0.85);
-      backdrop-filter: blur(25px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 60px; padding: 6px 12px;
+      background: rgba(10, 10, 15, 0.75);
+      backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 60px; padding: 8px 12px;
       display: flex; align-items: center; justify-content: space-between;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
     .logo-text { font-weight: 800; font-style: italic; font-size: 1.1rem; letter-spacing: -0.05em; color: #fff; text-decoration: none; }
-    .logo-option { color: var(--cyan); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
+    .logo-option { color: var(--accent); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
 
     .island-nav { display: none; align-items: center; gap: 4px; }
     @media (min-width: 1024px) { .island-nav { display: flex; } }
     .island-nav a { color: #94a3b8; text-decoration: none; font-size: 0.75rem; font-weight: 700; padding: 10px 16px; border-radius: 40px; transition: 0.3s; }
     .island-nav a:hover, .island-nav a.active { color: #fff; background: rgba(255,255,255,0.05); }
-
-    .menu-trigger { width: 36px; height: 36px; border-radius: 50%; background: var(--cyan); color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+    .menu-trigger { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
 
     /* --- MOBILE MENU --- */
     #mobileMenu {
@@ -53,26 +52,27 @@
       display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem;
       backdrop-filter: blur(20px);
     }
-    #mobileMenu.active { display: flex; }
-    #mobileMenu a { font-size: 1.8rem; font-weight: 800; margin: 0.8rem 0; color: #fff; text-decoration: none; font-style: italic; border-bottom: 1px solid rgba(255,255,255,0.05); width: 80%; text-align: center; padding-bottom: 10px; }
+    #mobileMenu.active { display: flex; animation: fadeIn 0.3s ease-in-out; }
+    #mobileMenu a { font-size: 1rem; font-weight: 600; margin: 0.5rem 0; color: #fff; text-decoration: none; font-style: italic; border-bottom: 1px solid rgba(255,255,255,0.05); width: 80%; text-align: center; padding: 0.6rem 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* --- UI COMPONENTS --- */
     .liquid-glass { 
       background: var(--glass); 
       backdrop-filter: blur(15px); 
-      border: 1px solid rgba(255, 255, 255, 0.08); 
+      border: 1px solid rgba(255, 255, 255, 0.05); 
       border-radius: 32px; 
       transition: 0.4s ease;
     }
-    .liquid-glass:hover { border-color: var(--cyan); transform: translateY(-5px); }
-    .verified-badge { background: rgba(34, 211, 238, 0.1); color: var(--cyan); padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; border: 1px solid rgba(34, 211, 238, 0.2); letter-spacing: 1px; }
+    .liquid-glass:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .verified-badge { background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; border: 1px solid rgba(34, 211, 238, 0.2); letter-spacing: 1px; }
     
     .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.19, 1, 0.22, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
     /* --- DIRECTORY FOOTER --- */
     .directory-link { color: rgba(255,255,255,0.4); transition: 0.3s; font-size: 0.85rem; display: block; margin-bottom: 8px; font-weight: 600; }
-    .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--cyan); }
+    .directory-link:hover { color: #fff; text-shadow: 0 0 10px var(--accent); }
 
     /* --- KASH AI WIDGET --- */
     #kashAI {
@@ -80,33 +80,24 @@
       display: none; cursor: pointer;
     }
     .ai-avatar {
-      width: 64px; height: 64px; background: #000; border: 2px solid var(--cyan);
+      width: 64px; height: 64px; background: #000; border: 2px solid var(--accent);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      position: relative; box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+      position: relative;
     }
     .ai-orbit {
       position: absolute; inset: -4px; border-radius: 50%;
       border: 1px solid rgba(34, 211, 238, 0.5);
-      animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-    .ai-glow {
-      position: absolute; inset: 0; border-radius: 50%;
-      box-shadow: 0 0 15px var(--cyan);
-      animation: pulse 2s infinite;
-      opacity: 0.3;
+      animation: ping 2s infinite;
     }
     .ai-bubble {
-      position: absolute; bottom: 80px; right: 0; width: 280px;
-      background: rgba(15, 15, 20, 0.9); backdrop-filter: blur(12px);
+      position: absolute; bottom: 80px; right: 0; width: 260px;
+      background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px;
-      border-radius: 20px 20px 4px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border-radius: 20px;
     }
   </style>
 </head>
 <body>
-
-  <!-- Scroll Depth Sentinel (20%) -->
-  <div id="scrollSentinel" style="position: absolute; top: 20%; left: 0; width: 1px; height: 1px;"></div>
 
   <!-- Navigation -->
   <div class="nav-wrapper" id="islandWrapper">
@@ -129,17 +120,18 @@
     </nav>
   </div>
 
-  <!-- Mobile Menu -->
+  <!-- Mobile Nav Overlay -->
   <div id="mobileMenu">
     <button onclick="toggleMenu()" class="absolute top-10 right-10 text-white text-3xl"><i class="fas fa-times"></i></button>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="catalog.html">Catalog</a>
-    <a href="orders.html">Orders</a>
-    <a href="testimonials.html" class="text-cyan-400">Reviews</a>
-    <a href="tracker.html">Track Order</a>
-    <a href="contact.html">Contact</a>
-    <button onclick="toggleMenu()" class="mt-10 w-12 h-12 rounded-full border border-white/20"><i class="fas fa-times"></i></button>
+    <a href="tracker.html" style="color: var(--accent);">Track Order</a>
+    <a href="orders.html">Today's Orders</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="faqs.html">FAQs</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="policy-terms.html">Policy & Terms</a>
   </div>
 
   <main class="pt-48 pb-20 px-6 max-w-6xl mx-auto">
@@ -175,78 +167,52 @@
         <div>
           <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Directory</h4>
           <a href="index.html" class="directory-link">Home</a>
-          <a href="about.html" class="directory-link">Our Story</a>
-          <a href="testimonials.html" class="directory-link">Client Reviews</a>
-          <a href="orders.html" class="directory-link">Live Feed</a>
+          <a href="about.html" class="directory-link">Our story</a>
+          <a href="catalog.html" class="directory-link">Showroom</a>
+          <a href="orders.html" class="directory-link">Live feed</a>
         </div>
         <div>
           <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Business</h4>
-          <a href="catalog.html" class="directory-link">Showroom</a>
-          <a href="contact.html" class="directory-link">Partner with us</a>
-          <a href="policy-terms.html" class="directory-link">Privacy Policy</a>
-          <a href="policy-terms.html" class="directory-link">Service Terms</a>
+          <a href="catalog.html" class="directory-link">Partner</a>
+          <a href="policy-terms.html" class="directory-link">Privacy</a>
+          <a href="policy-terms.html" class="directory-link">Service terms</a>
+          <a href="contact.html" class="directory-link">Contact</a>
         </div>
         <div>
           <h4 class="text-[10px] font-black text-white uppercase tracking-widest mb-8">Support</h4>
-          <a href="tracker.html" class="directory-link">Track Shipment</a>
-          <a href="faqs.html" class="directory-link">Help Center</a>
-          <a href="mailto:Info@mrkash.net" class="directory-link">Legal Inquiries</a>
-          <a href="https://wa.me/233240118846" class="directory-link">WhatsApp Sales</a>
+          <a href="tracker.html" class="directory-link">Track shipment</a>
+          <a href="faqs.html" class="directory-link">Help center</a>
+          <a href="mailto:Info@mrkash.net" class="directory-link">Email direct</a>
+          <a href="https://wa.me/233240118846" class="directory-link">WhatsApp concierge</a>
         </div>
       </div>
-      <div class="border-t border-white/5 pt-12 text-center">
-        <p class="text-[10px] font-black text-slate-800 tracking-[0.5em] uppercase">© 2026 Kash Option • Elite Logistics Protocol</p>
+      <div class="border-t border-white/5 pt-12 text-center text-[10px] font-black text-slate-800 uppercase">
+        © 2026 Kash Option • Elite Logistics Protocol
       </div>
     </div>
   </footer>
 
-  <!-- KASH AI REVIEW CONVERTER -->
-  <div id="kashAI" class="animate__animated" onclick="window.open('https://g.page/r/Cddgqpko0aV_EAE/review', '_blank')">
-    <div class="ai-bubble">
-      <p class="text-white text-xs font-bold leading-relaxed">
-        <span class="text-cyan-400">KASH AI:</span> I see you're checking out our success stories! Want to join the wall of fame? Leave us a review and I’ll instantly sync it to our platform.
-      </p>
-    </div>
-    <div class="ai-avatar">
-      <div class="ai-orbit"></div>
-      <div class="ai-glow"></div>
-      <img src="https://mrkash.net/logo.png" class="w-10 h-10 object-contain relative z-10" alt="Kash Logo">
-    </div>
+  <!-- KASH AI -->
+  <div id="kashAI" class="animate__animated" onclick="openAIModal()">
+    <div class="ai-bubble"><p class="text-white text-xs font-bold leading-relaxed"><span class="text-cyan-400">KASH AI:</span> Leave us a review and join the wall of fame! 👋</p></div>
+    <div class="ai-avatar"><div class="ai-orbit"></div><img src="https://mrkash.net/logo.png" class="w-10 h-10 object-contain relative z-10" alt="Kash Logo"></div>
   </div>
 
   <script>
     // Navigation Toggle
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
-      const island = document.getElementById('islandWrapper');
       menu.classList.toggle('active');
-      if (menu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-        island.style.opacity = '0';
-      } else {
-        document.body.style.overflow = '';
-        island.style.opacity = '1';
-      }
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
     }
 
-    // Scroll Observer for Kash AI
-    const kashAI = document.getElementById('kashAI');
-    const sentinel = document.getElementById('scrollSentinel');
+    // Scroll Logic for AI
+    window.addEventListener('scroll', () => {
+      const kashAI = document.getElementById('kashAI');
+      if (window.scrollY > 400) { kashAI.style.display = 'block'; kashAI.classList.add('animate__fadeInUp'); }
+    });
 
-    const scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          // User has scrolled past 20% mark
-          kashAI.style.display = 'block';
-          kashAI.classList.add('animate__fadeInUp');
-        } else {
-          kashAI.classList.remove('animate__fadeInUp');
-          kashAI.style.display = 'none';
-        }
-      });
-    }, { threshold: 0 });
-
-    scrollObserver.observe(sentinel);
+    function openAIModal() { window.open('https://g.page/r/Cddgqpko0aV_EAE/review', '_blank'); }
 
     // Reviews Logic
     const eliteReviews = [
