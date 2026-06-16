@@ -11,19 +11,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root { --accent: #22d3ee; --bg: #050508; --glass: rgba(255, 255, 255, 0.02); }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; text-transform: none !important; }
     
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: #fff;
-      overflow-x: hidden;
-      font-weight: 500;
-    }
+     body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Remove all italic text from the entire website */
+.italic,
+.logo-text,
+i,
+em {
+  font-style: normal !important;
+}
+
 
     /* --- DYNAMIC ISLAND --- */
     .nav-wrapper { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 95%; max-width: 1100px; transition: 0.3s; }
@@ -35,7 +42,7 @@
       display: flex; align-items: center; justify-content: space-between;
       box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
-    .logo-text { font-weight: 800; font-style: italic; font-size: 1.1rem; letter-spacing: -0.05em; color: #fff; text-decoration: none; }
+    .logo-text { font-weight: 800; font-style: normal; font-size: 1.1rem; letter-spacing: -0.05em; color: #fff; text-decoration: none; }
     .logo-option { color: var(--accent); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
     
     .island-nav { display: none; align-items: center; gap: 4px; }
