@@ -223,6 +223,54 @@
       transform: scale(0.985) translate3d(0, 0, 0);
     }
 
+    /* Smoked glass rim lighting, ambient crimson glow & hairline border across non-landing sub-pages ONLY */
+    .page-view:not(#home) .liquid-glass,
+    .page-view:not(#home) .porsche-card {
+      background-color: rgba(16, 16, 20, 0.65);
+      background-image: radial-gradient(circle at top left, rgba(229, 9, 20, 0.07), transparent 60%);
+      border-color: rgba(229, 9, 20, 0.28);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 18px rgba(229, 9, 20, 0.06);
+      transition:
+        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 350ms ease;
+    }
+    .page-view:not(#home) .liquid-glass:hover,
+    .page-view:not(#home) .porsche-card:hover {
+      border-color: rgba(229, 9, 20, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 26px 60px rgba(0, 0, 0, 0.8), 0 0 28px rgba(229, 9, 20, 0.14);
+    }
+
+    /* Precision 5px glowing crimson eyebrow dot & architectural step watermarks (sub-pages only) */
+    .page-view:not(#home) .oem-eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background-color: #E50914;
+      box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+      margin-right: 0.45rem;
+      vertical-align: middle;
+      transform: translateY(-0.5px);
+    }
+    .page-view:not(#home) .step-watermark {
+      position: absolute;
+      right: 0.85rem;
+      bottom: -0.65rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 5.5rem;
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      color: rgba(255, 255, 255, 0.03);
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+      z-index: 0;
+    }
+
     /* Technical Specification Table Row */
     .spec-item {
       display: flex;
@@ -405,6 +453,9 @@
       pointer-events: none;
       user-select: none;
     }
+    body.sales-chat-open {
+      overflow: hidden;
+    }
     #salesChatBackdrop {
       opacity: 0;
       visibility: hidden;
@@ -438,6 +489,10 @@
       transform: translate3d(0, 0, 0) scale(1);
     }
     .sales-chat-avatar-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 38px;
       height: 38px;
       min-width: 38px;
@@ -445,6 +500,8 @@
       border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
+      border: 1.5px solid rgba(229, 9, 20, 0.55);
+      box-shadow: 0 0 12px rgba(229, 9, 20, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.14);
     }
     .sales-chat-avatar-img {
       width: 100%;
@@ -453,6 +510,152 @@
       object-fit: cover;
       object-position: center 20%;
       display: block;
+    }
+    .sales-ko-fallback {
+      display: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top left, rgba(229, 9, 20, 0.22), transparent 65%), linear-gradient(145deg, #1A1A20, #0A0A0D);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .sales-status-dot {
+      position: relative;
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 9999px;
+      background-color: #E50914;
+      box-shadow: 0 0 8px rgba(229, 9, 20, 0.9);
+      flex-shrink: 0;
+    }
+    .sales-status-dot::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(229, 9, 20, 0.7);
+      animation: salesStatusPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      pointer-events: none;
+    }
+    @keyframes salesStatusPulse {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.85;
+      }
+      70%,
+      100% {
+        transform: scale(1.75);
+        opacity: 0;
+      }
+    }
+    @keyframes salesMsgEnter {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    .sales-msg-enter {
+      animation: salesMsgEnter 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .sales-bubble-meta {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #A1A1AA;
+      padding-left: 2px;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .sales-bubble-assistant {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px 18px 18px 4px;
+      background: linear-gradient(145deg, rgba(28, 28, 34, 0.85), rgba(16, 16, 20, 0.92));
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 8px 24px rgba(0, 0, 0, 0.45);
+      padding: 11px 14px 11px 16px;
+    }
+    .sales-bubble-assistant::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2.5px;
+      background: #E50914;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.45);
+    }
+    .sales-bubble-user {
+      border-radius: 18px 18px 4px 18px;
+      background: linear-gradient(135deg, #E50914 0%, #A8050D 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 6px 20px rgba(229, 9, 20, 0.28);
+      padding: 10px 14px;
+    }
+    .sales-typing-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: 16px;
+    }
+    .sales-typing-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background-color: #D4D4D8;
+      animation: conciergeDotPulse 900ms ease-in-out infinite;
+    }
+    .sales-typing-dots span:nth-child(2) {
+      animation-delay: 140ms;
+    }
+    .sales-typing-dots span:nth-child(3) {
+      animation-delay: 280ms;
+      background-color: #E50914;
+    }
+    @keyframes conciergeDotPulse {
+      0%, 80%, 100% {
+        opacity: 0.35;
+        transform: translate3d(0, 0, 0) scale(0.85);
+      }
+      40% {
+        opacity: 1;
+        transform: translate3d(0, -2px, 0) scale(1);
+      }
+    }
+    .sales-chat-input {
+      background: rgba(10, 10, 12, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+    }
+    .sales-chat-input:focus {
+      outline: none;
+      border-color: rgba(229, 9, 20, 0.7);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55), 0 0 0 3px rgba(229, 9, 20, 0.18);
+    }
+    .sales-chat-send-btn {
+      background: linear-gradient(135deg, #E50914 0%, #A8050D 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 6px 20px rgba(229, 9, 20, 0.28);
+      transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), filter 200ms ease, box-shadow 200ms ease;
+    }
+    .sales-chat-send-btn:hover {
+      filter: brightness(1.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 8px 24px rgba(229, 9, 20, 0.42);
+    }
+    .sales-chat-send-btn:active {
+      transform: scale(0.97);
     }
     #salesChatMessages::-webkit-scrollbar {
       width: 5px;
@@ -479,6 +682,11 @@
       #salesRepWidget.is-visible,
       #salesRepChat.is-open {
         transform: none;
+      }
+      .sales-msg-enter,
+      .sales-status-dot::after,
+      .sales-typing-dots span {
+        animation: none;
       }
     }
   </style>
@@ -742,7 +950,7 @@
               <a href="mailto:info@mrkash.net" class="text-xs font-semibold text-silverMuted hover:text-white transition-colors">info@mrkash.net</a>
             </div>
           </div>
-          <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." target="_blank" rel="noopener noreferrer" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg flex items-center gap-2 whitespace-nowrap">
+          <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg flex items-center gap-2 whitespace-nowrap">
             <span>Chat with Sales Experts</span>
             <i class="fas fa-arrow-right text-[11px]"></i>
           </a>
@@ -805,7 +1013,7 @@
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 max-w-md">
               <!-- Primary CTA Button: ORDER ON WHATSAPP -->
-              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20am%20ready%20to%20order%20genuine%20OEM%20spark%20plugs%20for%20my%20vehicle." target="_blank" rel="noopener noreferrer" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-extrabold uppercase tracking-widest px-8 py-4 rounded-lg text-center flex items-center justify-center gap-2.5">
+              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20am%20ready%20to%20order%20genuine%20OEM%20spark%20plugs%20for%20my%20vehicle." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-extrabold uppercase tracking-widest px-8 py-4 rounded-lg text-center flex items-center justify-center gap-2.5">
                 <span>GET PRICE ON WHATSAPP</span>
               </a>
 
@@ -943,7 +1151,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Toyota OEM &bull; Denso Japan</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Toyota OEM &bull; Denso Japan</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: SC20HR11</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Toyota Corolla &bull; Auris &bull; Matrix 1.8L</h3>
@@ -973,7 +1181,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Toyota OEM &bull; Denso Japan</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Toyota OEM &bull; Denso Japan</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: SK20R11</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Toyota Camry &bull; RAV4 &bull; Highlander 2.4L</h3>
@@ -1003,7 +1211,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Toyota OEM &bull; Denso Japan</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Toyota OEM &bull; Denso Japan</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: FK20HR11</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Toyota Prado &bull; Land Cruiser &bull; V6 4.0L</h3>
@@ -1033,7 +1241,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Honda OEM &bull; NGK Japan</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Honda OEM &bull; NGK Japan</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: IZFR6K11</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Honda Accord &bull; CR-V 2.4L i-VTEC</h3>
@@ -1063,7 +1271,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Honda OEM &bull; NGK Japan</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Honda OEM &bull; NGK Japan</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: ILZKR7B11</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Honda Civic &bull; HR-V 1.8L i-VTEC</h3>
@@ -1093,7 +1301,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Honda OEM &bull; NGK Japan</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Honda OEM &bull; NGK Japan</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: DILZKR7B11GS</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Honda 1.5L Turbo Earth Dreams</h3>
@@ -1123,7 +1331,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Hyundai OEM &bull; Mobis Korea</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Hyundai OEM &bull; Mobis Korea</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: 18846-10060</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Hyundai Elantra &bull; Accent 1.6L - 1.8L</h3>
@@ -1153,7 +1361,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Hyundai OEM &bull; Mobis Korea</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Hyundai OEM &bull; Mobis Korea</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: 18846-11070</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Hyundai Sonata &bull; Tucson 2.0L - 2.4L</h3>
@@ -1183,7 +1391,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Kia OEM &bull; Mobis Korea</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Kia OEM &bull; Mobis Korea</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: 18846-10060</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Kia Forte &bull; Cerato &bull; Soul 1.6L - 2.0L</h3>
@@ -1213,7 +1421,7 @@
                 </div>
               </div>
               <div class="flex justify-between items-center text-xs text-silverMuted mb-2">
-                <span class="font-bold text-white uppercase tracking-wider">Kia OEM &bull; Mobis Korea</span>
+                <span class="oem-eyebrow font-bold text-white uppercase tracking-wider">Kia OEM &bull; Mobis Korea</span>
                 <span class="text-porscheRed font-bold text-[10px] uppercase">Part: 18846-11070</span>
               </div>
               <h3 class="text-lg font-bold uppercase text-white mt-0.5 mb-2">Kia Sportage &bull; Optima / K5 &bull; Sorento</h3>
@@ -1334,7 +1542,7 @@
           <!-- Right: Authentic Studio Display featuring the hosted image -->
           <div class="lg:col-span-5 scroll-reveal" data-reveal="fade-up" data-reveal-delay="120">
             <div class="liquid-glass liquid-glass-interactive p-8 rounded-2xl relative overflow-hidden text-center">
-              <span class="text-[10px] font-extrabold uppercase tracking-widest text-porscheRed block mb-2">Direct Authorized Supply</span>
+              <span class="oem-eyebrow text-[10px] font-extrabold uppercase tracking-widest text-porscheRed block mb-2">Direct Authorized Supply</span>
               <h3 class="text-lg font-bold uppercase text-white mb-4">Precision OEM Spark Plugs</h3>
 
               <!-- Prominent Product Image Feature -->
@@ -1380,7 +1588,7 @@
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="0">
             <div class="liquid-glass liquid-glass-interactive p-6 rounded-2xl flex flex-col justify-between h-full">
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-1">Tier 01 &bull; Retail Maintenance</span>
+                <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-1">Tier 01 &bull; Retail Maintenance</span>
                 <h3 class="text-xl font-bold uppercase text-white mb-2">Engine Pack (Set of 4 / 6)</h3>
                 <p class="text-xs text-silverMuted leading-relaxed mb-4">
                   Exact factory quantity for standard tune-ups. Pre-gapped to OEM specification for immediate installation.
@@ -1401,7 +1609,7 @@
             <div class="liquid-glass liquid-glass-interactive p-6 rounded-2xl border-porscheRed/40 relative flex flex-col justify-between shadow-[0_20px_50px_rgba(229,9,20,0.14)] h-full">
               <span class="absolute -top-2.5 right-6 bg-porscheRed text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md shadow-md">Most Popular with Garages</span>
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-1">Tier 02 &bull; Workshop Pack</span>
+                <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-1">Tier 02 &bull; Workshop Pack</span>
                 <h3 class="text-xl font-bold uppercase text-white mb-2">Carton of 40 Plugs</h3>
                 <p class="text-xs text-silverMuted leading-relaxed mb-4">
                   10 engine sets of fast-moving Toyota (SC20HR11/SK20R11), Honda (IZFR6K11), or Hyundai (SILZKR6B10E). Preferential trade pricing.
@@ -1421,7 +1629,7 @@
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="200">
             <div class="liquid-glass liquid-glass-interactive p-6 rounded-2xl flex flex-col justify-between h-full">
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-1">Tier 03 &bull; Distributor Master Case</span>
+                <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-1">Tier 03 &bull; Distributor Master Case</span>
                 <h3 class="text-xl font-bold uppercase text-white mb-2">Master Case of 200 Plugs</h3>
                 <p class="text-xs text-silverMuted leading-relaxed mb-4">
                   Designed for retail auto-parts stores and commercial fleet maintenance depots. Maximum margin protection with guaranteed authenticity.
@@ -1443,7 +1651,7 @@
         <!-- Interactive Wholesale Quotation Form -->
         <div class="scroll-reveal" data-reveal="fade-up" data-reveal-delay="100">
           <div class="liquid-glass p-6 sm:p-8 rounded-2xl">
-            <h3 class="text-lg font-bold uppercase text-white mb-1">Instant Trade Quotation Request</h3>
+            <h3 class="oem-eyebrow text-lg font-bold uppercase text-white mb-1">Instant Trade Quotation Request</h3>
             <p class="text-xs text-silverMuted mb-6">Select your required volume and brands. We provide instant trade availability and tiered pricing directly to your WhatsApp.</p>
 
             <form onsubmit="handleWholesaleRequest(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1509,35 +1717,35 @@
       <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
 
         <div class="scroll-reveal liquid-glass liquid-glass-interactive p-5 rounded-xl" data-reveal="fade-up" data-reveal-delay="0">
-          <span class="text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Genuine OEM Products</span>
+          <span class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Genuine OEM Products</span>
           <p class="text-xs text-silverMuted leading-relaxed">
             Zero re-boxed generic spark plugs. Factory-sealed manufacturer packaging from Denso, NGK, and Mobis.
           </p>
         </div>
 
         <div class="scroll-reveal liquid-glass liquid-glass-interactive p-5 rounded-xl" data-reveal="fade-up" data-reveal-delay="100">
-          <span class="text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Chassis Fitment</span>
+          <span class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Chassis Fitment</span>
           <p class="text-xs text-silverMuted leading-relaxed">
             Chassis and VIN verification cross-referenced against factory repair manuals to eliminate guesswork.
           </p>
         </div>
 
         <div class="scroll-reveal liquid-glass liquid-glass-interactive p-5 rounded-xl" data-reveal="fade-up" data-reveal-delay="200">
-          <span class="text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Japan &amp; USA Sourcing</span>
+          <span class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Japan &amp; USA Sourcing</span>
           <p class="text-xs text-silverMuted leading-relaxed">
             Imported directly through verified distribution pipelines, avoiding dubious intermediary stockists.
           </p>
         </div>
 
         <div class="scroll-reveal liquid-glass liquid-glass-interactive p-5 rounded-xl" data-reveal="fade-up" data-reveal-delay="300">
-          <span class="text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Competitive Pricing</span>
+          <span class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Competitive Pricing</span>
           <p class="text-xs text-silverMuted leading-relaxed">
             Direct international freight allows us to offer honest pricing for both retail sets and trade cartons.
           </p>
         </div>
 
         <div class="scroll-reveal liquid-glass liquid-glass-interactive p-5 rounded-xl" data-reveal="fade-up" data-reveal-delay="0">
-          <span class="text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Nationwide Delivery</span>
+          <span class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-white block mb-1.5">Nationwide Delivery</span>
           <p class="text-xs text-silverMuted leading-relaxed">
             Reliable, tracked delivery across Greater Accra, Kumasi, Takoradi, Tamale, and all 16 regions.
           </p>
@@ -1548,7 +1756,7 @@
       <!-- Comparison: Marketplace Listings vs Specialist Sourcing -->
       <div class="liquid-glass p-8 sm:p-10 rounded-2xl">
         <div class="max-w-2xl mb-8 scroll-reveal" data-reveal="headline">
-          <h3 class="text-xl font-bold uppercase text-white mb-2">Understanding Marketplace Listings vs Specialist Suppliers in Ghana</h3>
+          <h3 class="oem-eyebrow text-xl font-bold uppercase text-white mb-2">Understanding Marketplace Listings vs Specialist Suppliers in Ghana</h3>
           <p class="text-xs text-silverMuted leading-relaxed">
             Customers frequently compare online marketplace listings (such as Jiji or informal street stalls) with specialist suppliers. Counterfeiters use cheap, standard copper cores disguised with spray paint and stamped with Denso, NGK, or Mobis logos.
           </p>
@@ -1558,7 +1766,7 @@
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="0">
             <div class="liquid-glass liquid-glass-interactive p-6 rounded-xl space-y-3 h-full">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-porscheRed">Marketplace Imitation Risks</h4>
+              <h4 class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-porscheRed">Marketplace Imitation Risks</h4>
               <p class="text-silverMuted leading-relaxed">
                 Standard copper electrodes fail within 10,000 km, causing persistent misfires under heavy air-conditioning load.
               </p>
@@ -1572,8 +1780,8 @@
           </div>
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="100">
-            <div class="liquid-glass liquid-glass-interactive p-6 rounded-xl border-white/20 space-y-3 h-full">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-white">KASH OPTION Specialist Guarantee</h4>
+            <div class="liquid-glass liquid-glass-interactive p-6 rounded-xl space-y-3 h-full">
+              <h4 class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-white">KASH OPTION Specialist Guarantee</h4>
               <p class="text-silverMuted leading-relaxed">
                 Genuine 0.7mm laser-welded fine-wire Iridium center tip with platinum ground disc rated for 100,000 km service intervals.
               </p>
@@ -1609,42 +1817,54 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="0">
-            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full">
-              <span class="text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 01</span>
-              <h3 class="text-sm font-bold uppercase text-white mb-2">Identify Your Vehicle</h3>
-              <p class="text-xs text-silverMuted leading-relaxed">
-                Choose your vehicle make, model, and year, or share your chassis number/VIN directly via WhatsApp.
-              </p>
+            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full relative overflow-hidden">
+              <span aria-hidden="true" class="step-watermark">01</span>
+              <div class="relative z-10">
+                <span class="oem-eyebrow text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 01</span>
+                <h3 class="text-sm font-bold uppercase text-white mb-2">Identify Your Vehicle</h3>
+                <p class="text-xs text-silverMuted leading-relaxed">
+                  Choose your vehicle make, model, and year, or share your chassis number/VIN directly via WhatsApp.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="100">
-            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full">
-              <span class="text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 02</span>
-              <h3 class="text-sm font-bold uppercase text-white mb-2">Verify Your Part</h3>
-              <p class="text-xs text-silverMuted leading-relaxed">
-                Our technical desk cross-references factory manuals to confirm the exact OEM part number for your engine.
-              </p>
+            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full relative overflow-hidden">
+              <span aria-hidden="true" class="step-watermark">02</span>
+              <div class="relative z-10">
+                <span class="oem-eyebrow text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 02</span>
+                <h3 class="text-sm font-bold uppercase text-white mb-2">Verify Your Part</h3>
+                <p class="text-xs text-silverMuted leading-relaxed">
+                  Our technical desk cross-references factory manuals to confirm the exact OEM part number for your engine.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="200">
-            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full">
-              <span class="text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 03</span>
-              <h3 class="text-sm font-bold uppercase text-white mb-2">Get Your Price</h3>
-              <p class="text-xs text-silverMuted leading-relaxed">
-                Receive live stock availability and confirmed wholesale or retail pricing on WhatsApp.
-              </p>
+            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full relative overflow-hidden">
+              <span aria-hidden="true" class="step-watermark">03</span>
+              <div class="relative z-10">
+                <span class="oem-eyebrow text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 03</span>
+                <h3 class="text-sm font-bold uppercase text-white mb-2">Get Your Price</h3>
+                <p class="text-xs text-silverMuted leading-relaxed">
+                  Receive live stock availability and confirmed wholesale or retail pricing on WhatsApp.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="300">
-            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full">
-              <span class="text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 04</span>
-              <h3 class="text-sm font-bold uppercase text-white mb-2">Order and Receive</h3>
-              <p class="text-xs text-silverMuted leading-relaxed">
-                Confirm your order for same-day dispatch in Accra or fast, secured parcel transit across Ghana.
-              </p>
+            <div class="p-6 rounded-2xl liquid-glass liquid-glass-interactive h-full relative overflow-hidden">
+              <span aria-hidden="true" class="step-watermark">04</span>
+              <div class="relative z-10">
+                <span class="oem-eyebrow text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 04</span>
+                <h3 class="text-sm font-bold uppercase text-white mb-2">Order and Receive</h3>
+                <p class="text-xs text-silverMuted leading-relaxed">
+                  Confirm your order for same-day dispatch in Accra or fast, secured parcel transit across Ghana.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -1678,7 +1898,7 @@
               <div class="flex items-center gap-4 mb-4">
                 <img src="https://iili.io/oHVNlFS.png" alt="Spark Plug Authenticity Inspection" class="h-12 w-auto object-contain">
                 <div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 01 &bull; Anti-Counterfeit</span>
+                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 01 &bull; Anti-Counterfeit</span>
                   <h3 class="text-base font-bold uppercase text-white">How to Spot Counterfeit Spark Plugs in Ghana</h3>
                 </div>
               </div>
@@ -1700,7 +1920,7 @@
               <div class="flex items-center gap-4 mb-4">
                 <img src="https://iili.io/oHVNlFS.png" alt="Iridium vs Copper Plugs" class="h-12 w-auto object-contain">
                 <div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 02 &bull; Metallurgy &amp; Performance</span>
+                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 02 &bull; Metallurgy &amp; Performance</span>
                   <h3 class="text-base font-bold uppercase text-white">Iridium vs Standard Copper Spark Plugs</h3>
                 </div>
               </div>
@@ -1722,7 +1942,7 @@
               <div class="flex items-center gap-4 mb-4">
                 <img src="https://iili.io/oHVNlFS.png" alt="Spark Plug Heat Range Physics" class="h-12 w-auto object-contain">
                 <div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 03 &bull; Combustion Physics</span>
+                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 03 &bull; Combustion Physics</span>
                   <h3 class="text-base font-bold uppercase text-white">Why Incorrect Heat Ranges Destroy Coils</h3>
                 </div>
               </div>
@@ -1744,7 +1964,7 @@
               <div class="flex items-center gap-4 mb-4">
                 <img src="https://iili.io/oHVNlFS.png" alt="Chassis Number VIN Verification Protocol" class="h-12 w-auto object-contain">
                 <div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 04 &bull; Fitment Precision</span>
+                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 04 &bull; Fitment Precision</span>
                   <h3 class="text-base font-bold uppercase text-white">The Chassis Number (VIN) Matching Protocol</h3>
                 </div>
               </div>
@@ -1782,35 +2002,35 @@
         <div class="space-y-4 text-xs">
 
           <div class="scroll-reveal liquid-glass liquid-glass-interactive p-6 rounded-2xl" data-reveal="fade-up" data-reveal-delay="0">
-            <h3 class="font-bold uppercase text-white text-sm mb-2">How can I be 100% certain I am getting the right spark plug?</h3>
+            <h3 class="oem-eyebrow font-bold uppercase text-white text-sm mb-2">How can I be 100% certain I am getting the right spark plug?</h3>
             <p class="text-silverMuted leading-relaxed">
               Simply send your vehicle chassis number (VIN) or frame number via our fitment tool or WhatsApp. Our technicians verify the exact engine code and cross-reference factory parts catalogues before fulfilling your order.
             </p>
           </div>
 
           <div class="scroll-reveal liquid-glass liquid-glass-interactive p-6 rounded-2xl" data-reveal="fade-up" data-reveal-delay="100">
-            <h3 class="font-bold uppercase text-white text-sm mb-2">Why are prices not displayed publicly on the website?</h3>
+            <h3 class="oem-eyebrow font-bold uppercase text-white text-sm mb-2">Why are prices not displayed publicly on the website?</h3>
             <p class="text-silverMuted leading-relaxed">
               We serve both wholesale trade buyers (workshops, parts retailers) and retail car owners. Because trade discounts vary with volume and international exchange rates fluctuate, we quote current pricing directly via our active WhatsApp catalogue.
             </p>
           </div>
 
           <div class="scroll-reveal liquid-glass liquid-glass-interactive p-6 rounded-2xl" data-reveal="fade-up" data-reveal-delay="200">
-            <h3 class="font-bold uppercase text-white text-sm mb-2">How fast is delivery to locations outside Accra?</h3>
+            <h3 class="oem-eyebrow font-bold uppercase text-white text-sm mb-2">How fast is delivery to locations outside Accra?</h3>
             <p class="text-silverMuted leading-relaxed">
               Greater Accra deliveries arrive same-day. For regional orders to Kumasi, Takoradi, Sunyani, Tamale, and other regional hubs, parcels are dispatched same-day via secure transit services for next-morning pickup or doorstep drop-off.
             </p>
           </div>
 
           <div class="scroll-reveal liquid-glass liquid-glass-interactive p-6 rounded-2xl" data-reveal="fade-up" data-reveal-delay="300">
-            <h3 class="font-bold uppercase text-white text-sm mb-2">Do you sell genuine Denso, NGK, and Mobis plugs?</h3>
+            <h3 class="oem-eyebrow font-bold uppercase text-white text-sm mb-2">Do you sell genuine Denso, NGK, and Mobis plugs?</h3>
             <p class="text-silverMuted leading-relaxed">
               Yes. Every spark plug we distribute is sourced directly from authorized Tier-1 supply lines in Japan and the USA. We maintain a zero-tolerance policy for imitation parts.
             </p>
           </div>
 
           <div class="scroll-reveal liquid-glass liquid-glass-interactive p-6 rounded-2xl" data-reveal="fade-up" data-reveal-delay="0">
-            <h3 class="font-bold uppercase text-white text-sm mb-2">What is your policy if an item has a factory defect?</h3>
+            <h3 class="oem-eyebrow font-bold uppercase text-white text-sm mb-2">What is your policy if an item has a factory defect?</h3>
             <p class="text-silverMuted leading-relaxed">
               In the unlikely event of an authentic factory defect reported within 48 hours of receipt prior to installation damage, our technical desk will immediately review and facilitate an exchange or store credit.
             </p>
@@ -1841,11 +2061,11 @@
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="0">
             <div class="liquid-glass liquid-glass-interactive p-8 rounded-2xl flex flex-col justify-between h-full">
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-2">Direct Sales Desk</span>
+                <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-2">Direct Sales Desk</span>
                 <h3 class="text-lg font-bold uppercase text-white mb-3">Fast Customer Assistance</h3>
                 <p class="text-silverMuted leading-relaxed mb-6">Send your car model or chassis VIN directly to our active order desk. We provide instant availability, pricing quotes, and courier dispatch arrangements.</p>
               </div>
-              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20inquire%20about%20spark%20plugs." target="_blank" rel="noopener noreferrer" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-3 px-6 rounded-lg text-center font-bold uppercase tracking-wider block">
+              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20inquire%20about%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-3 px-6 rounded-lg text-center font-bold uppercase tracking-wider block">
                 Chat with Sales Experts: 024 011 8846
               </a>
             </div>
@@ -1854,7 +2074,7 @@
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="100">
             <div class="liquid-glass liquid-glass-interactive p-8 rounded-2xl flex flex-col justify-between h-full">
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-white block mb-2">Operational Details</span>
+                <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-widest text-white block mb-2">Operational Details</span>
                 <h3 class="text-lg font-bold uppercase text-white mb-3">Operating Hours &amp; Channels</h3>
                 <ul class="text-silverMuted space-y-2 mb-6">
                   <li><strong class="text-white">Desk Hours:</strong> 7:00 AM &ndash; 5:00 PM, Monday&ndash;Saturday</li>
@@ -1895,18 +2115,18 @@
           <p class="text-xs text-silverMuted max-w-sm leading-relaxed mb-6 font-normal">
             Ghana's trusted destination for genuine OEM spark plugs and automotive parts. Primary focus on Toyota, Honda, Hyundai, and Kia with direct sourcing from Japan and the USA.
           </p>
-          <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs text-silverMuted">
-            <a href="https://www.instagram.com/Kashoption_" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2" aria-label="Instagram Kashoption_">
-              <i class="fab fa-instagram text-sm text-white/80"></i>
-              <span>Kashoption_</span>
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-silverMuted">
+            <a href="https://www.instagram.com/KashOption_/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap shrink-0" aria-label="Follow us on Instagram">
+              <i class="fab fa-instagram text-sm text-white/80 shrink-0"></i>
+              <span>Follow us on Instagram</span>
             </a>
-            <a href="https://www.tiktok.com/@kashoption_" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2" aria-label="TikTok @kashoption_">
-              <i class="fab fa-tiktok text-sm text-white/80"></i>
-              <span>@kashoption_</span>
+            <a href="https://www.tiktok.com/@kashoption_" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap shrink-0" aria-label="Follow us on TikTok">
+              <i class="fab fa-tiktok text-sm text-white/80 shrink-0"></i>
+              <span>Follow us on TikTok</span>
             </a>
-            <a href="mailto:info@mrkash.net" class="hover:text-white transition-colors flex items-center gap-2" aria-label="Email info@mrkash.net">
-              <i class="fas fa-envelope text-sm text-white/80"></i>
-              <span>info@mrkash.net</span>
+            <a href="mailto:info@mrkash.net" class="hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap shrink-0" aria-label="Email Support">
+              <i class="fas fa-envelope text-sm text-white/80 shrink-0"></i>
+              <span>Email Support</span>
             </a>
           </div>
         </div>
@@ -1934,7 +2154,7 @@
             <p>Fulfillment: Nationwide Delivery Across Ghana</p>
             <p class="text-[11px] text-silverMuted/70">Delivery arrangements available outside normal hours subject to confirmation.</p>
           </div>
-          <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." target="_blank" rel="noopener noreferrer" class="inline-block liquid-glass-btn hover:bg-porscheRed hover:text-white text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg">
+          <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="inline-block liquid-glass-btn hover:bg-porscheRed hover:text-white text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg">
             Chat with Sales Experts
           </a>
         </div>
@@ -1957,7 +2177,8 @@
   <aside id="salesRepWidget" aria-label="Sales Representative Quick Fitment Assistant" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-30 max-w-[268px] sm:max-w-[292px]">
     <button type="button" onclick="openSalesChat()" aria-haspopup="dialog" aria-controls="salesRepChat" aria-expanded="false" id="salesRepTriggerBtn" class="w-full text-left liquid-glass liquid-glass-interactive rounded-xl px-3.5 py-2.5 flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-porscheRed">
       <div class="sales-rep-avatar-box bg-[#18181C] border border-white/15 group-hover:border-porscheRed/70 flex items-center justify-center transition-colors">
-        <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="40" height="40" class="sales-rep-avatar-img">
+        <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="40" height="40" class="sales-rep-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+        <span class="sales-ko-fallback" aria-hidden="true">K<span class="text-[#E50914]">O</span></span>
       </div>
       <div class="min-w-0 flex-1">
         <span class="block text-xs font-bold text-white leading-snug whitespace-nowrap">
@@ -1979,13 +2200,14 @@
       <!-- Chat Header -->
       <div class="px-4 py-3.5 bg-[#121216]/85 border-b border-white/10 flex items-center justify-between gap-3">
         <div class="flex items-center gap-2.5 min-w-0">
-          <div class="sales-chat-avatar-box bg-[#18181C] border border-white/25 ring-1 ring-[#E50914]/35">
-            <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="38" height="38" class="sales-chat-avatar-img">
+          <div class="sales-chat-avatar-box bg-[#18181C]">
+            <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="38" height="38" class="sales-chat-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+            <span class="sales-ko-fallback" aria-hidden="true">K<span class="text-[#E50914]">O</span></span>
           </div>
           <div class="min-w-0">
             <h2 id="salesChatTitle" class="text-xs font-extrabold text-white tracking-tight truncate">KASH OPTION Fitment Desk</h2>
-            <p class="text-[11px] text-zinc-300 flex items-center gap-1.5 mt-0.5">
-              <span class="w-2 h-2 rounded-full bg-[#E50914] shadow-[0_0_8px_rgba(229,9,20,0.85)] inline-block shrink-0" aria-hidden="true"></span>
+            <p class="text-[11px] text-zinc-300 flex items-center gap-2 mt-0.5">
+              <span class="sales-status-dot" aria-hidden="true"></span>
               <span class="truncate">OEM Spark Plug Specialist</span>
             </p>
           </div>
@@ -2061,6 +2283,235 @@
       });
     }
 
+    /* ================= LUXURY SOFT GLASS WEB AUDIO ENGINE ================= */
+    let luxuryAudioCtx = null;
+    let luxuryAudioUnlocked = false;
+    let salesRevealChimePlayed = false;
+
+    try {
+      salesRevealChimePlayed = window.sessionStorage.getItem('kash_sales_chime_played') === '1';
+    } catch (e) {
+      salesRevealChimePlayed = false;
+    }
+
+    function getLuxuryAudioContext() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
+        if (!luxuryAudioCtx) {
+          luxuryAudioCtx = new AudioCtx();
+        }
+        return luxuryAudioCtx;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    const unlockEventNames = ['touchstart', 'pointerdown', 'click'];
+
+    function removeAudioUnlockListeners() {
+      try {
+        unlockEventNames.forEach(evtName => {
+          window.removeEventListener(evtName, unlockLuxuryAudio, { passive: true, capture: true });
+        });
+      } catch (e) {}
+    }
+
+    function playSilentUnlockBuffer(ctx) {
+      try {
+        if (!ctx || typeof ctx.createBuffer !== 'function') return;
+        const buffer = ctx.createBuffer(1, 1, 22050);
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        if (typeof source.start === 'function') {
+          source.start(0);
+        }
+      } catch (e) {}
+    }
+
+    function unlockLuxuryAudio() {
+      if (luxuryAudioUnlocked) {
+        removeAudioUnlockListeners();
+        return;
+      }
+      try {
+        const ctx = getLuxuryAudioContext();
+        if (!ctx) return;
+
+        playSilentUnlockBuffer(ctx);
+
+        if (ctx.state === 'running') {
+          luxuryAudioUnlocked = true;
+          removeAudioUnlockListeners();
+        } else if (ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+          const p = ctx.resume();
+          if (p && typeof p.then === 'function') {
+            p.then(() => {
+              if (ctx.state === 'running') {
+                luxuryAudioUnlocked = true;
+                removeAudioUnlockListeners();
+              }
+            }).catch(() => {});
+          }
+        }
+      } catch (e) {}
+    }
+
+    unlockEventNames.forEach(evtName => {
+      try {
+        window.addEventListener(evtName, unlockLuxuryAudio, { passive: true, capture: true });
+      } catch (e) {}
+    });
+
+    function renderSoftGlassChime(ctx) {
+      try {
+        if (!ctx || ctx.state !== 'running') return false;
+        const now = ctx.currentTime;
+
+        const master = ctx.createGain();
+        master.gain.setValueAtTime(1.0, now);
+        master.connect(ctx.destination);
+
+        // Crisp two-note luxury arrival chime: C6 (1046.5 Hz) -> E6 (1318.5 Hz) 110ms later, ~0.35 gain, 400ms decay
+        const notes = [
+          { freq: 1046.5, start: 0.005, decay: 0.4, sinePeak: 0.28, triPeak: 0.07 },
+          { freq: 1318.5, start: 0.115, decay: 0.4, sinePeak: 0.28, triPeak: 0.07 }
+        ];
+
+        notes.forEach(note => {
+          const tStart = now + note.start;
+          const tEnd = tStart + note.decay;
+
+          const sineOsc = ctx.createOscillator();
+          const sineGain = ctx.createGain();
+          sineOsc.type = 'sine';
+          sineOsc.frequency.setValueAtTime(note.freq, tStart);
+          sineGain.gain.setValueAtTime(0.0001, tStart);
+          sineGain.gain.linearRampToValueAtTime(note.sinePeak, tStart + 0.01);
+          sineGain.gain.exponentialRampToValueAtTime(0.0001, tEnd);
+          sineOsc.connect(sineGain);
+          sineGain.connect(master);
+          sineOsc.start(tStart);
+          sineOsc.stop(tEnd + 0.015);
+
+          const triOsc = ctx.createOscillator();
+          const triGain = ctx.createGain();
+          triOsc.type = 'triangle';
+          triOsc.frequency.setValueAtTime(note.freq, tStart);
+          triGain.gain.setValueAtTime(0.0001, tStart);
+          triGain.gain.linearRampToValueAtTime(note.triPeak, tStart + 0.008);
+          triGain.gain.exponentialRampToValueAtTime(0.0001, tStart + note.decay * 0.78);
+          triOsc.connect(triGain);
+          triGain.connect(master);
+          triOsc.start(tStart);
+          triOsc.stop(tEnd + 0.015);
+        });
+
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function markSalesChimePlayed() {
+      salesRevealChimePlayed = true;
+      try {
+        window.sessionStorage.setItem('kash_sales_chime_played', '1');
+      } catch (e) {}
+    }
+
+    function playSalesRevealChimeOnce() {
+      if (salesRevealChimePlayed) return;
+      try {
+        const hasActivation =
+          luxuryAudioUnlocked ||
+          (window.navigator.userActivation && window.navigator.userActivation.hasBeenActive) ||
+          (luxuryAudioCtx && luxuryAudioCtx.state === 'running');
+        if (!hasActivation) return;
+
+        const ctx = getLuxuryAudioContext();
+        if (!ctx) return;
+
+        if (ctx.state === 'running') {
+          luxuryAudioUnlocked = true;
+          removeAudioUnlockListeners();
+          if (renderSoftGlassChime(ctx)) {
+            markSalesChimePlayed();
+          }
+        } else if (ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+          const resumedAt = Date.now();
+          ctx.resume().then(() => {
+            if (Date.now() - resumedAt <= 180 && ctx.state === 'running' && !salesRevealChimePlayed) {
+              luxuryAudioUnlocked = true;
+              removeAudioUnlockListeners();
+              if (renderSoftGlassChime(ctx)) {
+                markSalesChimePlayed();
+              }
+            }
+          }).catch(() => {});
+        }
+      } catch (e) {}
+    }
+
+    function renderMicroTap(ctx) {
+      try {
+        if (!ctx || ctx.state !== 'running') return;
+        const now = ctx.currentTime;
+        const tEnd = now + 0.095;
+
+        // Crisp, audible 880 Hz short sine/triangle pop (~0.25 combined gain, 90ms decay)
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(660, now + 0.075);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.19, now + 0.004);
+        gain.gain.exponentialRampToValueAtTime(0.0001, tEnd);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(tEnd + 0.01);
+
+        const bodyOsc = ctx.createOscillator();
+        const bodyGain = ctx.createGain();
+        bodyOsc.type = 'triangle';
+        bodyOsc.frequency.setValueAtTime(880, now);
+        bodyGain.gain.setValueAtTime(0.0001, now);
+        bodyGain.gain.linearRampToValueAtTime(0.06, now + 0.004);
+        bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+
+        bodyOsc.connect(bodyGain);
+        bodyGain.connect(ctx.destination);
+        bodyOsc.start(now);
+        bodyOsc.stop(tEnd + 0.01);
+      } catch (e) {}
+    }
+
+    function playLuxuryMicroTap() {
+      try {
+        const ctx = getLuxuryAudioContext();
+        if (!ctx) return;
+
+        if (ctx.state === 'running') {
+          luxuryAudioUnlocked = true;
+          removeAudioUnlockListeners();
+          renderMicroTap(ctx);
+        } else if (ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+          ctx.resume().then(() => {
+            if (ctx.state === 'running') {
+              luxuryAudioUnlocked = true;
+              removeAudioUnlockListeners();
+              renderMicroTap(ctx);
+            }
+          }).catch(() => {});
+        }
+      } catch (e) {}
+    }
+
     function updateSalesRepVisibility() {
       const widget = document.getElementById('salesRepWidget');
       if (!widget) return;
@@ -2085,7 +2536,11 @@
         : false;
 
       if (progress >= 0.75 || nearFooter) {
+        const wasVisible = widget.classList.contains('is-visible');
         widget.classList.add('is-visible');
+        if (!wasVisible) {
+          playSalesRevealChimeOnce();
+        }
       } else if (progress < 0.70 && !nearFooter) {
         widget.classList.remove('is-visible');
       }
@@ -2101,6 +2556,7 @@
     };
 
     function openSalesChat() {
+      if (typeof closeMenu === 'function') closeMenu();
       const chatEl = document.getElementById('salesRepChat');
       const backdropEl = document.getElementById('salesChatBackdrop');
       const widgetEl = document.getElementById('salesRepWidget');
@@ -2109,6 +2565,7 @@
       if (!chatEl) return;
 
       salesChatState.isOpen = true;
+      playLuxuryMicroTap();
       if (messagesEl && messagesEl.children.length === 0) {
         resetSalesChat();
       }
@@ -2140,19 +2597,83 @@
       if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'false');
     }
 
+    let salesTypingTimer = null;
+    let salesChatTurnToken = 0;
+
+    function clearSalesTypingIndicator() {
+      if (salesTypingTimer) {
+        window.clearTimeout(salesTypingTimer);
+        salesTypingTimer = null;
+      }
+      const existingTyping = document.getElementById('salesTypingRow');
+      if (existingTyping) existingTyping.remove();
+    }
+
+    function showSalesTypingIndicator() {
+      const messagesEl = document.getElementById('salesChatMessages');
+      if (!messagesEl) return;
+      clearSalesTypingIndicator();
+
+      const row = document.createElement('div');
+      row.id = 'salesTypingRow';
+      row.className = 'flex flex-col items-start sales-msg-enter';
+
+      const meta = document.createElement('div');
+      meta.className = 'sales-bubble-meta';
+      meta.textContent = 'KASH OPTION DESK';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'sales-bubble-assistant text-zinc-100';
+      bubble.setAttribute('aria-label', 'KASH OPTION Fitment Desk is typing');
+
+      const dots = document.createElement('div');
+      dots.className = 'sales-typing-dots';
+      dots.innerHTML = '<span></span><span></span><span></span>';
+
+      bubble.appendChild(dots);
+      row.appendChild(meta);
+      row.appendChild(bubble);
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function scheduleAssistantReply(onReady) {
+      const token = ++salesChatTurnToken;
+      const controlsEl = document.getElementById('salesChatControls');
+      if (controlsEl) {
+        controlsEl.querySelectorAll('button, input').forEach(el => {
+          el.disabled = true;
+        });
+      }
+      showSalesTypingIndicator();
+      salesTypingTimer = window.setTimeout(() => {
+        salesTypingTimer = null;
+        if (token !== salesChatTurnToken) return;
+        clearSalesTypingIndicator();
+        onReady();
+      }, 280);
+    }
+
     function appendSalesChatMessage(sender, text, detailsObj) {
       const messagesEl = document.getElementById('salesChatMessages');
       if (!messagesEl) return;
 
       const row = document.createElement('div');
-      row.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+      row.className = sender === 'user'
+        ? 'flex justify-end sales-msg-enter'
+        : 'flex flex-col items-start sales-msg-enter';
 
       const bubble = document.createElement('div');
       if (sender === 'user') {
-        bubble.className = 'max-w-[85%] bg-[#E50914] text-white text-xs leading-relaxed px-3.5 py-2.5 rounded-xl rounded-br-sm font-medium shadow-sm';
+        bubble.className = 'max-w-[85%] sales-bubble-user text-white text-xs leading-relaxed font-medium';
         bubble.textContent = text;
       } else {
-        bubble.className = 'max-w-[88%] bg-[#1A1A1E] border border-[#E50914]/35 shadow-[0_6px_20px_rgba(229,9,20,0.08)] text-zinc-100 text-xs leading-relaxed px-3.5 py-2.5 rounded-xl rounded-bl-sm';
+        const meta = document.createElement('div');
+        meta.className = 'sales-bubble-meta';
+        meta.textContent = 'KASH OPTION DESK';
+        row.appendChild(meta);
+
+        bubble.className = 'max-w-[88%] sales-bubble-assistant text-zinc-100 text-xs leading-relaxed';
 
         if (detailsObj && detailsObj.summaryLines && detailsObj.summaryLines.length > 0) {
           const card = document.createElement('div');
@@ -2231,7 +2752,7 @@
         input.type = 'text';
         input.required = true;
         input.autocomplete = 'off';
-        input.className = 'flex-1 min-w-0 bg-[#1A1A1E] border border-white/20 focus:border-[#E50914] rounded-lg px-3 py-2.5 text-base text-white placeholder-zinc-400 placeholder:text-xs focus:outline-none transition-colors';
+        input.className = 'sales-chat-input flex-1 min-w-0 rounded-lg px-3.5 py-2.5 text-base text-white placeholder-zinc-400 placeholder:text-xs';
 
         if (salesChatState.step === 'model') {
           const examples = salesBrandModelExamples[salesChatState.brand] || 'Corolla, Civic, Elantra, Sportage';
@@ -2245,7 +2766,7 @@
 
         const sendBtn = document.createElement('button');
         sendBtn.type = 'submit';
-        sendBtn.className = 'shrink-0 bg-[#E50914] hover:bg-[#B30017] liquid-cta-primary text-white text-xs font-bold px-4 py-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
+        sendBtn.className = 'sales-chat-send-btn shrink-0 text-white text-xs font-bold px-4 py-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
         sendBtn.textContent = 'Send';
 
         form.addEventListener('submit', e => {
@@ -2278,7 +2799,7 @@
       if (salesChatState.step === 'confirm') {
         const waBtn = document.createElement('button');
         waBtn.type = 'button';
-        waBtn.className = 'w-full bg-[#E50914] hover:bg-[#B30017] liquid-cta-primary text-white text-xs font-bold tracking-wide py-2.5 px-4 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
+        waBtn.className = 'sales-chat-send-btn w-full text-white text-xs font-bold tracking-wide py-2.5 px-4 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
         waBtn.textContent = 'Send Order to WhatsApp »';
         waBtn.addEventListener('click', sendSalesChatOrderToWhatsApp);
         controlsEl.appendChild(waBtn);
@@ -2286,6 +2807,8 @@
     }
 
     function resetSalesChat() {
+      salesChatTurnToken++;
+      clearSalesTypingIndicator();
       const messagesEl = document.getElementById('salesChatMessages');
       if (messagesEl) messagesEl.innerHTML = '';
 
@@ -2307,25 +2830,31 @@
     };
 
     function handleSalesBrandSelect(brand) {
+      playLuxuryMicroTap();
       salesChatState.brand = brand;
       salesChatState.step = 'model';
       const examples = salesBrandModelExamples[brand] || 'Corolla, Civic, Elantra, Sportage';
       appendSalesChatMessage('user', brand);
-      appendSalesChatMessage(
-        'assistant',
-        `Got it. What is your ${brand} model? (e.g., ${examples})`
-      );
-      renderSalesChatControls();
+      scheduleAssistantReply(() => {
+        appendSalesChatMessage(
+          'assistant',
+          `Got it. What is your ${brand} model? (e.g., ${examples})`
+        );
+        renderSalesChatControls();
+      });
     }
 
     function handleSalesSwitchToChassis() {
+      playLuxuryMicroTap();
       salesChatState.step = 'chassis';
       appendSalesChatMessage('user', 'Enter Chassis Number Instead');
-      appendSalesChatMessage(
-        'assistant',
-        'Please enter your 17-character Chassis / VIN number for 100% fitment verification:'
-      );
-      renderSalesChatControls();
+      scheduleAssistantReply(() => {
+        appendSalesChatMessage(
+          'assistant',
+          'Please enter your 17-character Chassis / VIN number for 100% fitment verification:'
+        );
+        renderSalesChatControls();
+      });
     }
 
     function showSalesChatConfirmation() {
@@ -2345,28 +2874,36 @@
     }
 
     function handleSalesTextSubmit(value) {
+      playLuxuryMicroTap();
       if (salesChatState.step === 'model') {
         salesChatState.model = value;
         salesChatState.step = 'engineYear';
         appendSalesChatMessage('user', value);
-        appendSalesChatMessage(
-          'assistant',
-          'What is the engine capacity and year? (e.g., 1.8L 2016) - or tap below to enter your chassis number instead.'
-        );
-        renderSalesChatControls();
+        scheduleAssistantReply(() => {
+          appendSalesChatMessage(
+            'assistant',
+            'What is the engine capacity and year? (e.g., 1.8L 2016) - or tap below to enter your chassis number instead.'
+          );
+          renderSalesChatControls();
+        });
       } else if (salesChatState.step === 'engineYear') {
         salesChatState.engineYear = value;
         appendSalesChatMessage('user', value);
-        showSalesChatConfirmation();
+        scheduleAssistantReply(() => {
+          showSalesChatConfirmation();
+        });
       } else if (salesChatState.step === 'chassis') {
         const formattedChassis = value.toUpperCase();
         salesChatState.chassis = formattedChassis;
         appendSalesChatMessage('user', formattedChassis);
-        showSalesChatConfirmation();
+        scheduleAssistantReply(() => {
+          showSalesChatConfirmation();
+        });
       }
     }
 
     function sendSalesChatOrderToWhatsApp() {
+      playLuxuryMicroTap();
       const lines = ['*KASH OPTION OEM SPARK PLUG ORDER*'];
       if (salesChatState.brand) lines.push(`*Brand:* ${salesChatState.brand}`);
       if (salesChatState.model) lines.push(`*Model:* ${salesChatState.model}`);
