@@ -227,6 +227,33 @@
       transform: scale(0.985) translate3d(0, 0, 0);
     }
 
+    /* Avoid nested backdrop-filter recalculations on buttons inside cards */
+    .liquid-glass .liquid-glass-btn,
+    .porsche-card .liquid-glass-btn {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(22, 22, 28, 0.88);
+    }
+
+    /* Mobile / iOS Safari 60fps scroll paint optimization: avoid stacked backdrop-filter over large scrolling containers */
+    @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+      main .liquid-glass,
+      main .porsche-card,
+      footer .liquid-glass,
+      .page-view:not(#home) .liquid-glass,
+      .page-view:not(#home) .porsche-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background-color: rgba(16, 16, 20, 0.92);
+      }
+      main .liquid-glass-btn,
+      footer .liquid-glass-btn {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background-color: rgba(22, 22, 28, 0.92);
+      }
+    }
+
     /* Smoked glass rim lighting, ambient crimson glow & hairline border across non-landing sub-pages ONLY */
     .page-view:not(#home) .liquid-glass,
     .page-view:not(#home) .porsche-card {
@@ -325,40 +352,40 @@
       overflow-x: clip;
     }
 
-    /* ================= GLOBAL CHOREOGRAPHED SCROLL-TRIGGERED REVEAL ANIMATIONS ================= */
+    /* ================= GLOBAL FAST-SCROLL GPU REVEAL ANIMATIONS ================= */
     .scroll-reveal {
       opacity: 0;
-      transform: translate3d(0, 42px, 0) scale(0.985);
-      will-change: transform, opacity;
+      transform: translate3d(0, 14px, 0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transition:
-        opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
-        filter 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 340ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
       transition-delay: 0ms;
     }
-    .scroll-reveal[data-reveal="fade-up"] {
-      transform: translate3d(0, 42px, 0) scale(0.985);
-    }
+    .scroll-reveal[data-reveal="fade-up"],
     .scroll-reveal[data-reveal="hero"],
     .scroll-reveal[data-reveal="headline"] {
-      transform: translate3d(0, 32px, 0) scale(0.97);
-      filter: blur(6px);
-      will-change: transform, opacity, filter;
+      transform: translate3d(0, 14px, 0);
     }
     .scroll-reveal.is-revealed {
       opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
-      filter: blur(0);
+      transform: translate3d(0, 0, 0);
       transition-delay: var(--reveal-delay, 0ms);
-      will-change: auto;
+    }
+    @media (max-width: 767px), (hover: none) and (pointer: coarse) {
+      .scroll-reveal.is-revealed {
+        transition-delay: 0ms !important;
+      }
+      [data-parallax] {
+        transition: none !important;
+        will-change: auto;
+      }
     }
     [data-parallax] {
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      will-change: transform;
       transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
     }
     @media (prefers-reduced-motion: reduce) {
@@ -2280,12 +2307,12 @@
 
   <!-- ================= JAVASCRIPT: ROUTING, LIVE SEARCH, FITMENT, OVERLAY & SCROLL REVEAL ================= -->
   <script>
-    /* ================= GLOBAL SCROLL-TRIGGERED REVEAL CONTROLLER ================= */
+    /* ================= GLOBAL FAST-SCROLL REVEAL CONTROLLER ================= */
     const revealConfig = {
-      once: false,
-      duration: 1200,
-      offset: 42,
-      triggerMargin: 16,
+      once: true,
+      duration: 340,
+      offset: 14,
+      triggerMargin: 260,
     };
 
     let activeRevealObserver = null;
@@ -2295,40 +2322,29 @@
     let revealRaf1 = 0;
     let revealRaf2 = 0;
 
-    function getCurrentTranslateY(el) {
-      const transform = window.getComputedStyle(el).transform;
-      if (!transform || transform === 'none') return 0;
-      if (transform.startsWith('matrix3d(')) {
-        const parts = transform.slice(9, -1).split(',');
-        return parseFloat(parts[13]) || 0;
-      }
-      if (transform.startsWith('matrix(')) {
-        const parts = transform.slice(7, -1).split(',');
-        return parseFloat(parts[5]) || 0;
-      }
-      return 0;
-    }
-
     function evaluateScrollReveals() {
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      const margin = revealConfig.triggerMargin;
+      const cutoff = vh + revealConfig.triggerMargin;
+      const toReveal = [];
 
-      activeRevealTargets.forEach(el => {
-        if (el.offsetParent === null) return;
+      // Batch all layout reads before DOM writes to prevent mobile layout thrashing
+      for (let i = 0; i < activeRevealTargets.length; i++) {
+        const el = activeRevealTargets[i];
+        if (el.classList.contains('is-revealed')) continue;
+        if (el.offsetParent === null) continue;
         const rect = el.getBoundingClientRect();
-        const ty = getCurrentTranslateY(el);
-        const naturalTop = rect.top - ty;
-        const naturalBottom = rect.bottom - ty;
-
-        const isVisible = naturalTop < vh - margin && naturalBottom > margin;
-        const isOutOfViewport = naturalBottom <= 0 || naturalTop >= vh;
-
-        if (isVisible) {
-          el.classList.add('is-revealed');
-        } else if (!revealConfig.once && isOutOfViewport) {
-          el.classList.remove('is-revealed');
+        if (rect.top <= cutoff) {
+          toReveal.push(el);
         }
-      });
+      }
+
+      for (let i = 0; i < toReveal.length; i++) {
+        const el = toReveal[i];
+        el.classList.add('is-revealed');
+        if (activeRevealObserver) {
+          activeRevealObserver.unobserve(el);
+        }
+      }
     }
 
     /* ================= LUXURY SOFT GLASS WEB AUDIO ENGINE ================= */
@@ -2965,13 +2981,16 @@
     function updateScrollParallax() {
       const prefersReducedMotion =
         window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobileOrTouch =
+        window.innerWidth < 768 ||
+        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
       const activeView = document.querySelector('.page-view:not([hidden])');
       if (!activeView) return;
 
       const parallaxEls = activeView.querySelectorAll('[data-parallax]');
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion || isMobileOrTouch) {
         parallaxEls.forEach(el => {
-          el.style.transform = '';
+          if (el.style.transform) el.style.transform = '';
         });
         return;
       }
@@ -3028,11 +3047,12 @@
 
       activeRevealTargets = targets;
 
-      // Apply optional per-element stagger delay
+      // Apply optional per-element stagger delay (capped for instant visibility)
       targets.forEach(el => {
         const delayAttr = el.getAttribute('data-reveal-delay');
         if (delayAttr) {
-          el.style.setProperty('--reveal-delay', `${delayAttr}ms`);
+          const cappedDelay = Math.min(120, Math.max(0, parseInt(delayAttr, 10) || 0));
+          el.style.setProperty('--reveal-delay', `${cappedDelay}ms`);
         }
       });
 
@@ -3058,34 +3078,37 @@
       window.cancelAnimationFrame(revealRaf1);
       window.cancelAnimationFrame(revealRaf2);
 
+      // Reveal above-the-fold and preload-zone elements immediately so nothing flashes blank
+      evaluateScrollReveals();
+      updateScrollParallax();
+
       revealRaf1 = window.requestAnimationFrame(() => {
-        revealRaf2 = window.requestAnimationFrame(() => {
-          activeRevealObserver = new IntersectionObserver(
-            entries => {
-              evaluateScrollReveals();
-              updateScrollParallax();
-              if (revealConfig.once && activeRevealObserver) {
-                entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                    activeRevealObserver.unobserve(entry.target);
-                  }
-                });
+        activeRevealObserver = new IntersectionObserver(
+          entries => {
+            let needsBatchEval = false;
+            entries.forEach(entry => {
+              if (entry.isIntersecting || entry.boundingClientRect.top <= (window.innerHeight || document.documentElement.clientHeight) + revealConfig.triggerMargin) {
+                entry.target.classList.add('is-revealed');
+                if (activeRevealObserver) {
+                  activeRevealObserver.unobserve(entry.target);
+                }
+                needsBatchEval = true;
               }
-            },
-            {
-              threshold: [0, 0.04],
-              rootMargin: '0px 0px 0px 0px',
+            });
+            if (needsBatchEval) {
+              evaluateScrollReveals();
             }
-          );
+          },
+          {
+            threshold: 0,
+            rootMargin: '260px 0px 260px 0px',
+          }
+        );
 
-          targets.forEach(el => {
-            if (el.offsetParent !== null) {
-              activeRevealObserver.observe(el);
-            }
-          });
-
-          evaluateScrollReveals();
-          updateScrollParallax();
+        targets.forEach(el => {
+          if (!el.classList.contains('is-revealed') && el.offsetParent !== null) {
+            activeRevealObserver.observe(el);
+          }
         });
       });
     }
