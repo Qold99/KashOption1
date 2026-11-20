@@ -144,7 +144,7 @@
       display: inline-block;
     }
 
-    /* ================= LIQUID GLASS SYSTEM ================= */
+    /* ================= UNIVERSAL 3D HARDWARE CARD & BUTTON SYSTEM ================= */
     .liquid-glass {
       background: rgba(16, 16, 20, 0.65);
       backdrop-filter: blur(24px) saturate(160%);
@@ -153,23 +153,75 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 20px 50px rgba(0, 0, 0, 0.65);
     }
 
+    main .liquid-glass,
+    main .porsche-card,
+    footer .liquid-glass {
+      position: relative;
+      background-color: #070709;
+      background-image:
+        linear-gradient(122deg, rgba(255, 255, 255, 0.055) 0%, transparent 40%, rgba(227, 24, 24, 0.04) 100%),
+        linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+        radial-gradient(circle at top right, rgba(227, 24, 24, 0.22), #0D0D10 55%, #070709 100%);
+      background-size: 100% 100%, 24px 24px, 24px 24px, 100% 100%;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: 1px solid rgba(227, 24, 24, 0.28);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(227, 24, 24, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition:
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    main .liquid-glass::before,
+    main .porsche-card::before,
+    footer .liquid-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(227, 24, 24, 0.72) 0%,
+        rgba(255, 255, 255, 0.22) 36%,
+        rgba(255, 255, 255, 0.06) 70%,
+        rgba(227, 24, 24, 0.52) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     .liquid-glass-interactive {
       transition:
-        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
-        background-color 350ms ease;
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1);
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
-    .liquid-glass-interactive:hover {
-      border-color: rgba(255, 31, 31, 0.42);
+    main .liquid-glass-interactive:hover,
+    main .porsche-card:hover {
+      border-color: rgba(227, 24, 24, 0.62);
       transform: translate3d(0, -3px, 0);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 24px 56px rgba(0, 0, 0, 0.78), 0 0 26px rgba(255, 31, 31, 0.14);
+      box-shadow:
+        0 34px 72px rgba(0, 0, 0, 0.95),
+        0 0 48px rgba(227, 24, 24, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
-    .liquid-glass-interactive:active {
-      transform: scale(0.98) translate3d(0, 0, 0);
+    main .liquid-glass-interactive:active,
+    main .porsche-card:active {
+      transform: scale(0.985) translate3d(0, 0, 0);
     }
 
     .liquid-glass-btn {
@@ -179,11 +231,12 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 12px 30px rgba(0, 0, 0, 0.45);
       transition:
-        transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 280ms ease,
-        background-color 280ms ease,
-        color 280ms ease,
-        box-shadow 280ms ease;
+        transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 240ms ease,
+        background-color 240ms ease,
+        color 240ms ease,
+        box-shadow 240ms ease,
+        filter 240ms ease;
       transform: translate3d(0, 0, 0);
     }
     .liquid-glass-btn:hover {
@@ -191,93 +244,125 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 31, 31, 0.18);
     }
     .liquid-glass-btn:active {
-      transform: scale(0.98) translate3d(0, 0, 0);
+      transform: translate3d(0, 1px, 0) scale(0.985);
     }
 
-    .liquid-cta-primary {
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 16px 34px rgba(255, 31, 31, 0.28);
-      transition:
-        transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-        background-color 260ms ease,
-        box-shadow 280ms ease;
-      transform: translate3d(0, 0, 0);
-    }
-    .liquid-cta-primary:hover {
-      transform: translate3d(0, -2px, 0);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 20px 42px rgba(255, 31, 31, 0.4);
-    }
-    .liquid-cta-primary:active {
-      transform: scale(0.98) translate3d(0, 0, 0);
-    }
-
-    /* Porsche Minimalist Liquid Glass Cards */
-    .porsche-card {
-      background: rgba(16, 16, 20, 0.65);
-      backdrop-filter: blur(24px) saturate(160%);
-      -webkit-backdrop-filter: blur(24px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 20px 50px rgba(0, 0, 0, 0.65);
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transition:
-        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .porsche-card:hover {
-      border-color: rgba(255, 31, 31, 0.45);
-      transform: translate3d(0, -4px, 0);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 26px 60px rgba(0, 0, 0, 0.8), 0 0 26px rgba(255, 31, 31, 0.14);
-    }
-    .porsche-card:active {
-      transform: scale(0.985) translate3d(0, 0, 0);
-    }
-
-    /* Avoid nested backdrop-filter recalculations on buttons inside cards */
-    .liquid-glass .liquid-glass-btn,
-    .porsche-card .liquid-glass-btn {
+    /* Tactile 3D Metallic Obsidian Secondary Buttons (Hero Shortcuts, Filter Chips, Footer CTA) */
+    main .liquid-glass-btn,
+    footer .liquid-glass-btn {
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
-      background: rgba(22, 22, 28, 0.88);
+      background: linear-gradient(180deg, #1E1E24 0%, #111116 100%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.45),
+        0 8px 20px rgba(0, 0, 0, 0.55);
+    }
+    main .liquid-glass-btn:hover,
+    footer .liquid-glass-btn:hover {
+      transform: translate3d(0, -1.5px, 0);
+      border-color: rgba(227, 24, 24, 0.58);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.48),
+        0 12px 26px rgba(0, 0, 0, 0.68),
+        0 0 18px rgba(227, 24, 24, 0.2);
+    }
+    main .liquid-glass-btn:active,
+    footer .liquid-glass-btn:active {
+      transform: translate3d(0, 1px, 0) scale(0.985);
     }
 
-    /* Mobile / iOS Safari 60fps scroll paint optimization: avoid stacked backdrop-filter over large scrolling containers */
+    /* Tactile 3D Elevated White Primary/Light Card Buttons */
+    main .liquid-glass a.liquid-glass-btn,
+    #plugDetailDrawer button.liquid-glass-btn,
+    main .liquid-glass .filter-btn.active {
+      background: linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 100%);
+      color: #050505;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+        0 10px 24px rgba(255, 255, 255, 0.14),
+        0 4px 12px rgba(0, 0, 0, 0.65);
+      transform: translate3d(0, 0, 0);
+    }
+    main .liquid-glass a.liquid-glass-btn:hover,
+    #plugDetailDrawer button.liquid-glass-btn:hover,
+    main .liquid-glass .filter-btn.active:hover {
+      background: linear-gradient(180deg, #FFFFFF 0%, #ECECF0 100%);
+      color: #050505;
+      border-color: #FFFFFF;
+      transform: translate3d(0, -1.5px, 0);
+      filter: brightness(1.03);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+        0 14px 30px rgba(255, 255, 255, 0.2),
+        0 6px 16px rgba(0, 0, 0, 0.72);
+    }
+    main .liquid-glass a.liquid-glass-btn:active,
+    #plugDetailDrawer button.liquid-glass-btn:active,
+    main .liquid-glass .filter-btn.active:active {
+      transform: translate3d(0, 1px, 0) scale(0.985);
+      box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.22),
+        0 4px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Tactile 3D Crimson Gradient Action Buttons */
+    .liquid-cta-primary,
+    main a.liquid-cta-primary,
+    main button.liquid-cta-primary,
+    #plugDetailDrawer a.liquid-cta-primary {
+      background: linear-gradient(180deg, #FF2A2A 0%, #E31818 55%, #B80F0F 100%);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 70, 70, 0.55);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.34),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.32),
+        0 12px 28px rgba(227, 24, 24, 0.38),
+        0 4px 12px rgba(0, 0, 0, 0.65);
+      transition:
+        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 220ms ease,
+        filter 220ms ease;
+      transform: translate3d(0, 0, 0);
+    }
+    .liquid-cta-primary:hover,
+    main a.liquid-cta-primary:hover,
+    main button.liquid-cta-primary:hover,
+    #plugDetailDrawer a.liquid-cta-primary:hover {
+      background: linear-gradient(180deg, #FF3838 0%, #EB1B1B 55%, #C21212 100%);
+      transform: translate3d(0, -1.5px, 0);
+      filter: brightness(1.06);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.34),
+        0 16px 34px rgba(255, 31, 31, 0.48),
+        0 6px 16px rgba(0, 0, 0, 0.72);
+    }
+    .liquid-cta-primary:active,
+    main a.liquid-cta-primary:active,
+    main button.liquid-cta-primary:active,
+    #plugDetailDrawer a.liquid-cta-primary:active {
+      transform: translate3d(0, 1px, 0) scale(0.985);
+      box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.4),
+        0 6px 14px rgba(227, 24, 24, 0.3);
+    }
+
+    /* Mobile / iOS Safari 60fps scroll paint optimization (cards already use GPU-friendly layered backgrounds) */
     @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
       main .liquid-glass,
       main .porsche-card,
       footer .liquid-glass,
-      .page-view:not(#home) .liquid-glass,
-      .page-view:not(#home) .porsche-card {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background-color: rgba(16, 16, 20, 0.92);
-      }
       main .liquid-glass-btn,
       footer .liquid-glass-btn {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        background-color: rgba(22, 22, 28, 0.92);
       }
-    }
-
-    /* Smoked glass rim lighting, ambient crimson glow & hairline border across non-landing sub-pages ONLY */
-    .page-view:not(#home) .liquid-glass,
-    .page-view:not(#home) .porsche-card {
-      background-color: rgba(16, 16, 20, 0.65);
-      background-image: radial-gradient(circle at top left, rgba(255, 31, 31, 0.08), transparent 60%);
-      border-color: rgba(255, 31, 31, 0.34);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 18px rgba(255, 31, 31, 0.08);
-      transition:
-        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
-        background-color 350ms ease;
-    }
-    .page-view:not(#home) .liquid-glass:hover,
-    .page-view:not(#home) .porsche-card:hover {
-      border-color: rgba(255, 31, 31, 0.5);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 26px 60px rgba(0, 0, 0, 0.8), 0 0 26px rgba(255, 31, 31, 0.16);
     }
 
     /* Precision 5px glowing crimson eyebrow dot & architectural step watermarks (sub-pages only) */
@@ -880,11 +965,36 @@
     .sales-msg-enter {
       animation: salesMsgEnter 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
     }
+    .sales-msg-assistant-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+    }
+    .sales-msg-bot-avatar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      min-height: 28px;
+      margin-top: 14px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1.5px solid #E31818;
+      background: #18181C;
+      box-shadow: 0 0 10px rgba(227, 24, 24, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+    .sales-msg-bot-avatar .sales-ko-fallback {
+      font-size: 9px;
+    }
     .sales-bubble-meta {
       font-size: 10px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       color: #A1A1AA;
       padding-left: 2px;
       margin-bottom: 4px;
@@ -1079,13 +1189,18 @@
       transform: translate3d(0, 0, 0);
     }
     .plug-drawer-panel {
-      background: linear-gradient(165deg, rgba(16, 16, 20, 0.98) 0%, rgba(7, 7, 10, 0.99) 100%);
-      background-image: radial-gradient(circle at top left, rgba(255, 31, 31, 0.12), transparent 52%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      background-color: #070709;
+      background-image:
+        linear-gradient(122deg, rgba(255, 255, 255, 0.045) 0%, transparent 40%, rgba(227, 24, 24, 0.04) 100%),
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        radial-gradient(circle at top right, rgba(227, 24, 24, 0.22), #0D0D10 55%, #070709 100%);
+      background-size: 100% 100%, 24px 24px, 24px 24px, 100% 100%;
+      border: 1px solid rgba(227, 24, 24, 0.34);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.16),
-        0 28px 80px rgba(0, 0, 0, 0.85),
-        0 0 36px rgba(255, 31, 31, 0.12);
+        0 28px 60px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(227, 24, 24, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
     }
     .plug-drawer-scroll {
       -webkit-overflow-scrolling: touch;
@@ -1118,21 +1233,162 @@
       background: #2A2A2E;
       border-radius: 9999px;
     }
-    .plug-more-card {
-      background: rgba(18, 18, 24, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    .plug-more-card,
+    #plugDetailDrawer .plug-spec-card {
+      position: relative;
+      background-color: #070709;
+      background-image:
+        linear-gradient(122deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%, rgba(227, 24, 24, 0.04) 100%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at top right, rgba(227, 24, 24, 0.22), #0D0D10 55%, #070709 100%);
+      background-size: 100% 100%, 24px 24px, 24px 24px, 100% 100%;
+      border: 1px solid rgba(227, 24, 24, 0.3);
+      box-shadow:
+        0 20px 44px rgba(0, 0, 0, 0.85),
+        0 0 28px rgba(227, 24, 24, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      transform: translate3d(0, 0, 0);
       transition:
-        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 220ms ease,
-        background-color 220ms ease,
-        box-shadow 220ms ease;
+        transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 240ms ease,
+        box-shadow 300ms ease;
+    }
+    .plug-more-card::before,
+    #plugDetailDrawer .plug-spec-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(227, 24, 24, 0.72) 0%,
+        rgba(255, 255, 255, 0.2) 36%,
+        rgba(255, 255, 255, 0.05) 70%,
+        rgba(227, 24, 24, 0.5) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 1;
     }
     .plug-more-card:hover {
-      transform: translate3d(0, -2px, 0);
-      border-color: rgba(255, 31, 31, 0.55);
-      background: rgba(26, 26, 34, 0.92);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 12px 26px rgba(0, 0, 0, 0.55);
+      transform: translate3d(0, -3px, 0);
+      border-color: rgba(227, 24, 24, 0.62);
+      box-shadow:
+        0 26px 56px rgba(0, 0, 0, 0.92),
+        0 0 38px rgba(227, 24, 24, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+    /* ================= 3D FLAGSHIP COMMERCIAL RELIABILITY SHOWCASE CARD ================= */
+    .flagship-showcase-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      background: radial-gradient(circle at top right, rgba(227, 24, 24, 0.22), #0D0D10 55%, #070709 100%);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(227, 24, 24, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition:
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .flagship-showcase-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(227, 24, 24, 0.78) 0%,
+        rgba(255, 255, 255, 0.24) 36%,
+        rgba(255, 255, 255, 0.06) 70%,
+        rgba(227, 24, 24, 0.58) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .flagship-showcase-card:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow:
+        0 34px 72px rgba(0, 0, 0, 0.95),
+        0 0 48px rgba(227, 24, 24, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+    .flagship-microgrid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(122deg, rgba(255, 255, 255, 0.06) 0%, transparent 40%, rgba(227, 24, 24, 0.04) 100%);
+      background-size: 24px 24px, 24px 24px, 100% 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .flagship-pill-white {
+      background: linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 100%);
+      color: #050505;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+        0 10px 24px rgba(255, 255, 255, 0.14),
+        0 4px 12px rgba(0, 0, 0, 0.65);
+      transform: translate3d(0, 0, 0);
+      transition:
+        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 220ms ease,
+        filter 220ms ease;
+    }
+    .flagship-pill-white:hover {
+      transform: translate3d(0, -1.5px, 0);
+      filter: brightness(1.03);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+        0 14px 30px rgba(255, 255, 255, 0.2),
+        0 6px 16px rgba(0, 0, 0, 0.72);
+    }
+    .flagship-pill-white:active {
+      transform: translate3d(0, 1px, 0) scale(0.985);
+    }
+    .flagship-pill-crimson {
+      background: linear-gradient(180deg, #FF2A2A 0%, #E31818 55%, #B80F0F 100%);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 70, 70, 0.55);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.34),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.32),
+        0 12px 28px rgba(227, 24, 24, 0.38),
+        0 4px 12px rgba(0, 0, 0, 0.65);
+      transform: translate3d(0, 0, 0);
+      transition:
+        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 220ms ease,
+        filter 220ms ease;
+    }
+    .flagship-pill-crimson:hover {
+      transform: translate3d(0, -1.5px, 0);
+      filter: brightness(1.07);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.34),
+        0 16px 34px rgba(255, 31, 31, 0.48),
+        0 6px 16px rgba(0, 0, 0, 0.72);
+    }
+    .flagship-pill-crimson:active {
+      transform: translate3d(0, 1px, 0) scale(0.985);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1335,21 +1591,19 @@
           <!-- Primary Two Pages & Manufacturer Lines -->
           <div class="md:col-span-6 space-y-5">
             <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block">Primary Destinations</span>
-            <div class="space-y-3.5">
-              <a href="#catalogue" onclick="closeMenu()" class="block group">
+            <div class="divide-y divide-white/10">
+              <a href="#catalogue" onclick="closeMenu()" class="block group py-3 rounded-lg transition-colors hover:bg-white/[0.03] px-1 -mx-1">
                 <span class="text-lg sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-porscheRed transition-colors flex items-center justify-between gap-3">
-                  <span>Shop All Spark Plugs</span>
-                  <i class="fas fa-arrow-right text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0"></i>
+                  <span>SHOP ALL SPARK PLUGS</span>
+                  <i class="fas fa-arrow-right text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0" aria-hidden="true"></i>
                 </span>
-                <span class="text-xs text-silverMuted font-normal mt-1 block">Browse verified OEM stock for Toyota, Honda, Hyundai, and Kia</span>
               </a>
 
-              <a href="#fitment-finder" onclick="closeMenu()" class="block group pt-3.5 border-t border-white/10">
+              <a href="#fitment-finder" onclick="closeMenu()" class="block group py-3 rounded-lg transition-colors hover:bg-white/[0.03] px-1 -mx-1">
                 <span class="text-lg sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-porscheRed transition-colors flex items-center justify-between gap-3">
-                  <span>Chassis Fitment Finder</span>
-                  <i class="fas fa-arrow-right text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0"></i>
+                  <span>CHASSIS FITMENT FINDER</span>
+                  <i class="fas fa-arrow-right text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0" aria-hidden="true"></i>
                 </span>
-                <span class="text-xs text-silverMuted font-normal mt-1 block">Instant vehicle and VIN verification with our technical desk</span>
               </a>
             </div>
 
@@ -1533,14 +1787,21 @@
 
       </section>
 
-      <!-- Concise Commercial Overview & Direct Entry (Generous Breathing Room) -->
+      <!-- 3D Flagship Commercial Overview Showcase Card -->
       <section class="py-24 sm:py-36 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="liquid-glass liquid-glass-interactive p-8 sm:p-14 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
-          <div class="scroll-reveal flex items-center gap-7 z-10 max-w-2xl" data-reveal="fade-up">
-            <img src="https://iili.io/oHVNlFS.png" alt="KASH OPTION Spark Plugs Dealer" class="h-20 w-auto object-contain hidden sm:block filter drop-shadow-[0_10px_20px_rgba(255,31,31,0.28)]">
+        <div class="flagship-showcase-card p-8 sm:p-14 flex flex-col md:flex-row items-center justify-between gap-10">
+          <div class="flagship-microgrid" aria-hidden="true"></div>
+          <div class="scroll-reveal relative z-10 flex items-center gap-7 max-w-2xl" data-reveal="fade-up">
+            <div class="hidden sm:flex items-center justify-center shrink-0 relative">
+              <div class="absolute inset-0 rounded-full bg-[#E31818]/25 blur-xl pointer-events-none" aria-hidden="true"></div>
+              <img src="https://iili.io/oHVNlFS.png" alt="KASH OPTION Spark Plugs Dealer" class="relative h-24 w-auto object-contain filter drop-shadow-[0_14px_24px_rgba(227,24,24,0.34)]">
+            </div>
             <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-1.5">Commercial Reliability</span>
-              <h2 class="text-xl sm:text-2xl font-extrabold uppercase text-white mb-2.5">
+              <div class="inline-flex items-center gap-2 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#E31818] shadow-[0_0_8px_rgba(227,24,24,0.85)]" aria-hidden="true"></span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed">COMMERCIAL RELIABILITY</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl lg:text-[26px] font-extrabold uppercase tracking-tight text-white mb-2.5 leading-snug">
                 ORIGINAL DENSO AND NGK SPARK PLUGS IN ACCRA - GHANA
               </h2>
               <p class="text-xs sm:text-sm text-silverMuted leading-relaxed">
@@ -1548,12 +1809,12 @@
               </p>
             </div>
           </div>
-          <div class="scroll-reveal flex items-center gap-3.5 z-10" data-reveal="fade-up" data-reveal-delay="100">
-            <a href="#catalogue" class="bg-white hover:bg-metallicSilver text-porscheBlack text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all active:scale-[0.98] whitespace-nowrap shadow-[0_10px_25px_rgba(255,255,255,0.12)]">
-              Open Catalogue
+          <div class="scroll-reveal relative z-10 flex flex-wrap sm:flex-nowrap items-center gap-3.5 w-full md:w-auto" data-reveal="fade-up" data-reveal-delay="100">
+            <a href="#catalogue" class="flagship-pill-white text-xs font-extrabold uppercase tracking-wider px-7 py-3.5 rounded-full whitespace-nowrap text-center flex-1 sm:flex-initial">
+              OPEN CATALOGUE
             </a>
-            <a href="#fitment-finder" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl whitespace-nowrap">
-              Verify Fitment
+            <a href="#fitment-finder" class="flagship-pill-crimson text-xs font-extrabold uppercase tracking-wider px-7 py-3.5 rounded-full whitespace-nowrap text-center flex-1 sm:flex-initial">
+              VERIFY FITMENT
             </a>
           </div>
         </div>
@@ -2614,10 +2875,10 @@
             <span class="sales-ko-fallback" aria-hidden="true">K<span class="text-[#FF1F1F]">O</span></span>
           </div>
           <div class="min-w-0">
-            <h2 id="salesChatTitle" class="text-sm font-extrabold text-white tracking-tight truncate">KASH OPTION Fitment Desk</h2>
+            <h2 id="salesChatTitle" class="text-sm font-extrabold text-white tracking-tight truncate">Kash Auto Bot</h2>
             <p class="text-[11px] text-zinc-300 flex items-center gap-2 mt-0.5">
               <span class="sales-status-dot" aria-hidden="true"></span>
-              <span class="truncate">Kash Auto Bot &bull; OEM Spark Plug Specialist</span>
+              <span class="truncate">Spark Plug Robot</span>
             </p>
           </div>
         </div>
@@ -3060,6 +3321,7 @@
       engineYear: '',
       chassis: '',
       qaHistory: [],
+      topicCounts: {},
       lastFallbackIdx: -1
     };
 
@@ -3139,6 +3401,31 @@
       if (existingTyping) existingTyping.remove();
     }
 
+    function createBotMsgAvatar() {
+      const avatarBox = document.createElement('div');
+      avatarBox.className = 'sales-msg-bot-avatar';
+      avatarBox.setAttribute('aria-hidden', 'true');
+
+      const img = document.createElement('img');
+      img.src = './salesrep.png';
+      img.alt = '';
+      img.width = 28;
+      img.height = 28;
+      img.className = 'sales-chat-avatar-img';
+      img.onerror = function () {
+        this.style.display = 'none';
+        if (this.nextElementSibling) this.nextElementSibling.style.display = 'flex';
+      };
+
+      const fallback = document.createElement('span');
+      fallback.className = 'sales-ko-fallback';
+      fallback.innerHTML = 'K<span class="text-[#FF1F1F]">O</span>';
+
+      avatarBox.appendChild(img);
+      avatarBox.appendChild(fallback);
+      return avatarBox;
+    }
+
     function showSalesTypingIndicator(customLabel) {
       const messagesEl = document.getElementById('salesChatMessages');
       if (!messagesEl) return;
@@ -3146,11 +3433,14 @@
 
       const row = document.createElement('div');
       row.id = 'salesTypingRow';
-      row.className = 'flex flex-col items-start sales-msg-enter';
+      row.className = 'sales-msg-assistant-row sales-msg-enter';
+
+      const contentCol = document.createElement('div');
+      contentCol.className = 'flex-1 min-w-0 flex flex-col items-start';
 
       const meta = document.createElement('div');
       meta.className = 'sales-bubble-meta';
-      meta.textContent = 'KASH OPTION DESK';
+      meta.textContent = 'Kash Auto Bot';
 
       const bubble = document.createElement('div');
       bubble.className = 'sales-bubble-assistant text-zinc-100';
@@ -3170,8 +3460,10 @@
       typingWrap.appendChild(typingText);
       typingWrap.appendChild(dots);
       bubble.appendChild(typingWrap);
-      row.appendChild(meta);
-      row.appendChild(bubble);
+      contentCol.appendChild(meta);
+      contentCol.appendChild(bubble);
+      row.appendChild(createBotMsgAvatar());
+      row.appendChild(contentCol);
       messagesEl.appendChild(row);
       messagesEl.scrollTop = messagesEl.scrollHeight;
     }
@@ -3184,20 +3476,25 @@
       }
 
       const row = document.createElement('div');
-      row.className = 'flex flex-col items-start sales-msg-enter';
+      row.className = 'sales-msg-assistant-row sales-msg-enter';
+
+      const contentCol = document.createElement('div');
+      contentCol.className = 'flex-1 min-w-0 flex flex-col items-start';
 
       const meta = document.createElement('div');
       meta.className = 'sales-bubble-meta';
-      meta.textContent = 'KASH OPTION DESK';
-      row.appendChild(meta);
+      meta.textContent = 'Kash Auto Bot';
+      contentCol.appendChild(meta);
 
       const bubble = document.createElement('div');
-      bubble.className = 'max-w-[90%] sm:max-w-[82%] sales-bubble-assistant text-zinc-100 text-[13px] sm:text-sm leading-relaxed';
+      bubble.className = 'max-w-[92%] sm:max-w-[84%] sales-bubble-assistant text-zinc-100 text-[13px] sm:text-sm leading-relaxed';
 
       const msgPara = document.createElement('p');
       msgPara.className = 'whitespace-pre-line';
       bubble.appendChild(msgPara);
-      row.appendChild(bubble);
+      contentCol.appendChild(bubble);
+      row.appendChild(createBotMsgAvatar());
+      row.appendChild(contentCol);
       messagesEl.appendChild(row);
       messagesEl.scrollTop = messagesEl.scrollHeight;
 
@@ -3246,19 +3543,23 @@
       const row = document.createElement('div');
       row.className = sender === 'user'
         ? 'flex justify-end sales-msg-enter'
-        : 'flex flex-col items-start sales-msg-enter';
+        : 'sales-msg-assistant-row sales-msg-enter';
 
       const bubble = document.createElement('div');
       if (sender === 'user') {
         bubble.className = 'max-w-[82%] sales-bubble-user text-white text-[13px] sm:text-sm leading-relaxed font-medium';
         bubble.textContent = text;
+        row.appendChild(bubble);
       } else {
+        const contentCol = document.createElement('div');
+        contentCol.className = 'flex-1 min-w-0 flex flex-col items-start';
+
         const meta = document.createElement('div');
         meta.className = 'sales-bubble-meta';
-        meta.textContent = 'KASH OPTION DESK';
-        row.appendChild(meta);
+        meta.textContent = 'Kash Auto Bot';
+        contentCol.appendChild(meta);
 
-        bubble.className = 'max-w-[90%] sm:max-w-[82%] sales-bubble-assistant text-zinc-100 text-[13px] sm:text-sm leading-relaxed';
+        bubble.className = 'max-w-[92%] sm:max-w-[84%] sales-bubble-assistant text-zinc-100 text-[13px] sm:text-sm leading-relaxed';
 
         if (detailsObj && detailsObj.summaryLines && detailsObj.summaryLines.length > 0) {
           const card = document.createElement('div');
@@ -3315,9 +3616,12 @@
           ctaWrap.appendChild(waInlineBtn);
           bubble.appendChild(ctaWrap);
         }
+
+        contentCol.appendChild(bubble);
+        row.appendChild(createBotMsgAvatar());
+        row.appendChild(contentCol);
       }
 
-      row.appendChild(bubble);
       messagesEl.appendChild(row);
       messagesEl.scrollTop = messagesEl.scrollHeight;
     }
@@ -3661,6 +3965,7 @@
       salesChatState.engineYear = '';
       salesChatState.chassis = '';
       salesChatState.qaHistory = [];
+      salesChatState.topicCounts = {};
       salesChatState.lastFallbackIdx = -1;
 
       const welcomeCopy =
@@ -4017,17 +4322,34 @@
       };
     }
 
+    function bumpTopicCount(topicKey) {
+      if (!salesChatState.topicCounts) salesChatState.topicCounts = {};
+      const nextCount = (salesChatState.topicCounts[topicKey] || 0) + 1;
+      salesChatState.topicCounts[topicKey] = nextCount;
+      return nextCount;
+    }
+
+    function getSelectedVehicleLabel() {
+      const parts = [salesChatState.brand, salesChatState.year, salesChatState.model, salesChatState.engineYear].filter(Boolean);
+      return parts.length ? parts.join(' ') : '';
+    }
+
     function generateKashAutoBotReply(rawQuery) {
       const intent = detectKashIntent(rawQuery);
       const q = intent.q;
       const ql = intent.ql;
       const index = getKashKnowledgeIndex();
       const contact = index.contact;
+      const selectedVehicle = getSelectedVehicleLabel();
 
       // 1. Human / Sales Agent Handoff -> Trigger direct WhatsApp chat + clickable button
       if (intent.isHumanHandoff) {
+        const handoffTurn = bumpTopicCount('handoff');
+        const handoffText = handoffTurn === 1
+          ? `Connecting you directly to our Kash Option sales desk on WhatsApp (${contact.phone}). Tap the button below if WhatsApp doesn't open automatically.`
+          : `Our Community 18 desk is live on WhatsApp (${contact.phone}) right now. Tap below to message a representative directly with your car details.`;
         return {
-          text: `Connecting you directly to our Kash Option sales desk on WhatsApp (${contact.phone}). Tap the button below if WhatsApp doesn't open automatically.`,
+          text: handoffText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           autoOpenWhatsApp: true,
@@ -4038,8 +4360,12 @@
 
       // 2. Identity Questions
       if (intent.isIdentity) {
+        const idTurn = bumpTopicCount('identity');
+        const idText = idTurn === 1
+          ? "I'm Kash Auto Bot, your Spark Plug Robot for the Kash Option OEM Catalog Directory. Pick a car brand, enter your VIN, or ask anything about genuine spark plugs below."
+          : "I'm Kash Auto Bot—built to match 100% original Denso, NGK, and Mobis spark plugs to Toyota, Honda, Hyundai, and Kia vehicles across Ghana. What car are we checking today?";
         return {
-          text: "I'm Kash Auto Bot, built in 2026 for the Kash Option OEM Catalog Directory. Pick a car brand, enter your VIN, or ask anything about genuine spark plugs below.",
+          text: idText,
           nextStep: 'qa',
           showWhatsAppCta: false
         };
@@ -4047,8 +4373,12 @@
 
       // 3. Shop Location Knowledge (Community 18)
       if (intent.isLocation) {
+        const locTurn = bumpTopicCount('location');
+        const locText = locTurn === 1
+          ? `Kash Option is located at Community 18, with fast nationwide delivery across Ghana. Reach our desk at ${contact.phone} or on WhatsApp for directions or express dispatch.`
+          : `You can visit our hub at Community 18 (Tema/Spintex corridor) Mon–Sat ${contact.hours}, or skip the drive—we dispatch riders across Accra/Tema in 30–45 minutes. Tap WhatsApp for a live pin.`;
         return {
-          text: `Kash Option is located at Community 18, with fast nationwide delivery across Ghana. Reach our desk at ${contact.phone} or on WhatsApp for directions or express dispatch.`,
+          text: locText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappLabel: 'Directions & Orders on WhatsApp',
@@ -4059,19 +4389,44 @@
       const matchedProducts = matchCatalogueProducts(ql, index);
       const matchedModel = matchVehicleRegistryModel(ql);
 
-      // 4. Pricing Questions
+      // 4. Pricing Questions (Multi-Turn Anti-Repetition & Actionable Quote Guidance)
       if (intent.isPricing) {
-        const partHint = matchedProducts.length > 0
-          ? `${matchedProducts[0].title} uses ${matchedProducts[0].partLabel}. `
+        const pricingTurn = bumpTopicCount('pricing');
+        const contextVehicle = matchedProducts.length > 0
+          ? `${matchedProducts[0].title} (${matchedProducts[0].partLabel})`
           : matchedModel
-            ? `For ${matchedModel.brand} ${matchedModel.model}, exact `
-            : 'Exact ';
+            ? `${matchedModel.brand} ${matchedModel.model}`
+            : selectedVehicle;
+
+        if (pricingTurn === 1) {
+          const intro = contextVehicle
+            ? `For ${contextVehicle}, genuine `
+            : 'Genuine ';
+          return {
+            text: `${intro}OEM Denso, NGK, and Mobis Ghana Cedi pricing depends on your exact engine code, 4-cylinder vs. V6 set size (4 or 6 plugs), and whether you're ordering a single retail set or a wholesale carton. Select your vehicle below or tap WhatsApp for today's live stock quote.`,
+            nextStep: 'pricing',
+            showWhatsAppCta: true,
+            whatsappLabel: `Get Live Quote (${contact.phone})`,
+            whatsappPrefill: `Hello Kash Option, please confirm exact Ghana Cedi pricing for my ${contextVehicle || 'vehicle'} (${q}).`
+          };
+        }
+
+        if (pricingTurn === 2) {
+          return {
+            text: `Got it—let's lock in an exact figure for you. Share your specific car make, model, and year (1990–2026) below so we match the OEM part number first, or tap the WhatsApp quote button (${contact.phone}) for instant live Community 18 stock pricing.`,
+            nextStep: 'pricing',
+            showWhatsAppCta: true,
+            whatsappLabel: `WhatsApp Quote (${contact.phone})`,
+            whatsappPrefill: `Hello Kash Option, I'm following up on live Community 18 stock pricing for ${contextVehicle || 'my vehicle'} (${q}).`
+          };
+        }
+
         return {
-          text: `${partHint}Ghana Cedi pricing depends on engine size, chassis/VIN, and retail vs. wholesale carton quantity. Pick your car below or tap WhatsApp for live today pricing.`,
+          text: `Since live Cedi totals follow daily Community 18 import batches, confirming your car brand and year (1990–2026) below—or tapping Toyota, Honda, Hyundai, or Kia—pins down the exact OEM code, and our WhatsApp desk (${contact.phone}) replies immediately with your set or carton price.`,
           nextStep: 'pricing',
           showWhatsAppCta: true,
-          whatsappLabel: 'Get Price on WhatsApp',
-          whatsappPrefill: `Hello Kash Option, please confirm exact Ghana Cedi pricing for my vehicle (${q}).`
+          whatsappLabel: `Tap for Instant Quote (${contact.phone})`,
+          whatsappPrefill: `Hello Kash Option, please send today's Cedi price for ${contextVehicle || 'my OEM spark plugs'} (${q}).`
         };
       }
 
@@ -4082,8 +4437,12 @@
 
       // 6. Support Hours & Contact Info
       if (intent.isHoursContact) {
+        const hoursTurn = bumpTopicCount('hours');
+        const hoursText = hoursTurn === 1
+          ? `We are based at Community 18 and open ${contact.hours} (after-hours delivery by confirmation). Call or WhatsApp ${contact.phone}, or email ${contact.email}.`
+          : `Our Community 18 technical desk answers calls and WhatsApp messages on ${contact.phone} from ${contact.hours}. Need after-hours dispatch? Message us on WhatsApp to arrange ahead.`;
         return {
-          text: `We are based at Community 18 and open ${contact.hours} (after-hours delivery by confirmation). Call or WhatsApp ${contact.phone}, or email ${contact.email}.`,
+          text: hoursText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I would like to speak with the orders desk (${q}).`
@@ -4092,8 +4451,17 @@
 
       // 7. Delivery & Nationwide Fulfillment
       if (intent.isDelivery) {
+        const delTurn = bumpTopicCount('delivery');
+        let delText;
+        if (delTurn === 1) {
+          delText = 'Accra and Tema riders deliver in 30–45 minutes from our Community 18 hub; regional orders (Kumasi, Takoradi, Tamale, Sunyani, and nationwide) dispatch same-day via VIP/STC. Pick your car below or message WhatsApp to book dispatch.';
+        } else if (delTurn === 2) {
+          delText = `Yes—riders deliver straight to your mechanic's workshop or your doorstep across Accra and Tema (with MoMo or Cash on Delivery), and regional buyers get VIP/STC parcel waybills the same afternoon. Tap WhatsApp (${contact.phone}) to drop your delivery pin.`;
+        } else {
+          delText = `Ready to send a rider? Share your vehicle model below to confirm the plug set, or message your delivery area on WhatsApp (${contact.phone}) for immediate dispatch.`;
+        }
         return {
-          text: 'Accra and Tema riders deliver in 30–45 minutes from our Community 18 hub; regional orders (Kumasi, Takoradi, Tamale, Sunyani, and nationwide) dispatch same-day via VIP/STC. Pick your car below or message WhatsApp to book dispatch.',
+          text: delText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I want to arrange delivery for genuine OEM spark plugs (${q}).`
@@ -4102,8 +4470,12 @@
 
       // 8. Payment Options
       if (intent.isPayment) {
+        const payTurn = bumpTopicCount('payment');
+        const payText = payTurn === 1
+          ? 'We accept Mobile Money (MTN & Telecel), Bank Wire, and Cash on Delivery (COD). Pick your car below or tap WhatsApp to order.'
+          : 'Accra and Tema buyers can pay cash or MoMo on inspection when the rider arrives, while regional and wholesale orders support MTN/Telecel MoMo and bank transfers before waybill dispatch.';
         return {
-          text: 'We accept Mobile Money (MTN & Telecel), Bank Wire, and Cash on Delivery (COD). Pick your car below or tap WhatsApp to order.',
+          text: payText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I would like to place an order and confirm payment (${q}).`
@@ -4112,8 +4484,17 @@
 
       // 9. Wholesale & Trade Supply
       if (intent.isWholesale) {
+        const tradeTurn = bumpTopicCount('wholesale');
+        let tradeText;
+        if (tradeTurn === 1) {
+          tradeText = 'We supply 40-plug Workshop Cartons (10 sets, VAT invoices included) and 200-plug Master Cases for garages and dealers across Ghana. Tap WhatsApp for live trade rates.';
+        } else if (tradeTurn === 2) {
+          tradeText = `We stock fast-moving Denso, NGK, and Mobis SKUs in bulk for Abossey Okai, Suame Magazine, workshops, and fleet managers—you can mix top Toyota, Honda, Hyundai, and Kia codes in a trade order. Message ${contact.phone} on WhatsApp for today's carton sheet.`;
+        } else {
+          tradeText = `Let us know which OEM codes or workshop volumes you run weekly on WhatsApp (${contact.phone}) so our trade desk can lock in dealer carton rates for you.`;
+        }
         return {
-          text: 'We supply 40-plug Workshop Cartons (10 sets, VAT invoices included) and 200-plug Master Cases for garages and dealers across Ghana. Tap WhatsApp for live trade rates.',
+          text: tradeText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I would like wholesale trade pricing (${q}).`
@@ -4122,8 +4503,12 @@
 
       // 10. Factory Defect & Returns Policy
       if (intent.isDefectReturn) {
+        const retTurn = bumpTopicCount('defect');
+        const retText = retTurn === 1
+          ? `Authentic factory defects reported within 48 hours of receipt prior to installation damage qualify for immediate review and exchange or store credit. Reach our desk at ${contact.phone} or on WhatsApp.`
+          : `To keep every fitment risk-free, always verify the OEM part number with our Chassis/VIN check before breaking seal—and if anything arrives damaged in transit, contact ${contact.phone} within 48 hours for fast exchange.`;
         return {
-          text: `Authentic factory defects reported within 48 hours of receipt prior to installation damage qualify for immediate review and exchange or store credit. Reach our desk at ${contact.phone} or on WhatsApp.`,
+          text: retText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I have an inquiry regarding your ordering/defect policy (${q}).`
@@ -4132,16 +4517,21 @@
 
       // 11. Symptoms, Misfires, Fuel Economy, Iridium vs Copper & Heat Range
       if (intent.isSymptomTech && !/\b(fake|fakes|counterfeit|imitation)\b/i.test(ql)) {
+        const techTurn = bumpTopicCount('tech');
         if (/heat|detonation|fouling/i.test(ql)) {
           return {
-            text: 'Spark plug tips must run between 450°C and 870°C—wrong heat ranges cause pre-ignition pinging or carbon fouling that burns ignition coils. Share your car model or VIN to match the factory spec.',
+            text: techTurn === 1
+              ? 'Spark plug tips must run between 450°C and 870°C—wrong heat ranges cause pre-ignition pinging or carbon fouling that burns ignition coils. Share your car model or VIN to match the factory spec.'
+              : 'Matching the OEM heat range number (e.g., Denso 20 vs. NGK 6/7) prevents knock under Accra traffic heat. Tap your car brand below or enter your VIN so we confirm the exact heat code.',
             nextStep: 'qa',
             showWhatsAppCta: true,
             whatsappPrefill: `Hello Kash Option, I want to verify the correct OEM heat range for my vehicle (${q}).`
           };
         }
         return {
-          text: "Iridium withstands 2,466°C vs. copper's 1,085°C—standard copper or weak plugs cause misfires, high fuel burn, and coil failure. Our OEM laser-welded Iridium plugs last up to 100,000 km; pick your car below for the exact fit.",
+          text: techTurn === 1
+            ? "Iridium withstands 2,466°C vs. copper's 1,085°C—standard copper or weak plugs cause misfires, high fuel burn, and coil failure. Our OEM laser-welded Iridium plugs last up to 100,000 km; pick your car below for the exact fit."
+            : "Rough idling, hard morning starts, and sudden fuel spikes usually trace back to worn gaps or counterfeit plugs overloading your ignition coils. Pick your car brand below or verify your VIN to switch back to factory Iridium spec.",
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I need genuine OEM spark plugs to solve ignition/fuel issues (${q}).`
@@ -4150,8 +4540,17 @@
 
       // 12. Authenticity, Counterfeit & Brand Lines
       if (intent.isAuthFake) {
+        const authTurn = bumpTopicCount('auth');
+        let authText;
+        if (authTurn === 1) {
+          authText = 'Every Denso, NGK, and Mobis plug is imported directly from Japan and the USA—zero re-boxed or imitation parts. Authentic plugs carry 0.7mm laser-welded Iridium tips, crisp ceramic print, and a 5.0 kΩ internal resistor.';
+        } else if (authTurn === 2) {
+          authText = 'You can inspect your plugs right on delivery before your mechanic fits them: check for sharp, smudge-free ceramic lettering, a fine laser-welded iridium tip (not thick cut wire), and clean crush-washer threading.';
+        } else {
+          authText = `Unlike open-market mixed stalls, every carton we stock comes from verified OEM supply lines and carries our 48-hour factory-defect guarantee. Pick your car below or message ${contact.phone} on WhatsApp to order with confidence.`;
+        }
         return {
-          text: 'Every Denso, NGK, and Mobis plug is imported directly from Japan and the USA—zero re-boxed or imitation parts. Authentic plugs carry 0.7mm laser-welded Iridium tips, crisp ceramic print, and a 5.0 kΩ internal resistor.',
+          text: authText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I want to verify and order 100% genuine OEM spark plugs (${q}).`
@@ -4160,8 +4559,17 @@
 
       // 13. Chassis / VIN Verification Protocol
       if (intent.isVin) {
+        const vinTurn = bumpTopicCount('vin');
+        let vinText;
+        if (vinTurn === 1) {
+          vinText = 'Identical car models can need different thread reach (19mm vs. 26.5mm) depending on assembly market, so your 17-character chassis/VIN guarantees 100% fitment. Tap Chassis / VIN below to verify yours.';
+        } else if (vinTurn === 2) {
+          vinText = 'You can find your 17-character VIN/chassis number on the bottom corner of your windshield, on the driver-side door jamb sticker, or on your registration card. Tap Chassis / VIN below to type or paste it in.';
+        } else {
+          vinText = `No VIN handy right now? No problem—pick Toyota, Honda, Hyundai, or Kia below with your model and year (1990–2026), or snap a photo of your door-jamb sticker to ${contact.phone} on WhatsApp.`;
+        }
         return {
-          text: 'Identical car models can need different thread reach (19mm vs. 26.5mm) depending on assembly market, so your 17-character chassis/VIN guarantees 100% fitment. Tap Chassis / VIN below to verify yours.',
+          text: vinText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I want to verify fitment with my chassis/VIN number (${q}).`
@@ -4187,8 +4595,12 @@
       if (/\b(toyota|honda|hyundai|kia)\b/i.test(ql)) {
         const brandHit = ql.match(/\b(toyota|honda|hyundai|kia)\b/i)[1];
         const capBrand = brandHit.charAt(0).toUpperCase() + brandHit.slice(1).toLowerCase();
+        const brandTurn = bumpTopicCount(`brand_${capBrand.toLowerCase()}`);
+        const brandText = brandTurn === 1
+          ? `We stock genuine OEM plugs for ${capBrand} (Denso, NGK, or Mobis) with fast delivery across Ghana. Tap ${capBrand} below to choose your model, year, and engine size.`
+          : `Ready to narrow down your ${capBrand}? Tap the ${capBrand} chip right below to pick your exact model and year (1990–2026), or share your 17-character VIN for instant matching.`;
         return {
-          text: `We stock genuine OEM plugs for ${capBrand} (Denso, NGK, or Mobis) with fast delivery across Ghana. Tap ${capBrand} below to choose your model, year, and engine size.`,
+          text: brandText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, I am inquiring about genuine ${capBrand} OEM spark plugs (${q}).`
@@ -4196,8 +4608,12 @@
       }
 
       if (/\b(nissan|ford|mercedes|benz|bmw|audi|volkswagen|vw|mazda|subaru|mitsubishi|suzuki|lexus|infiniti|acura|peugeot|renault|chevrolet|gmc|dodge|jeep|land rover|range rover|engine|ignition|spark plug|sparkplug|plugs|automobile|automotive|auto parts|mechanic|tune-up|tuneup)\b/i.test(ql)) {
+        const otherTurn = bumpTopicCount('other_make');
+        const otherText = otherTurn === 1
+          ? `We specialize in Toyota (Denso), Honda (NGK), Hyundai (Mobis), and Kia (Mobis) genuine OEM plugs. Message your chassis/VIN on WhatsApp (${contact.phone}) so our technical desk can check stock for your vehicle.`
+          : `For cross-reference or non-standard makes, send your 17-character VIN or old spark plug code directly to ${contact.phone} on WhatsApp so our specialists confirm availability before dispatch.`;
         return {
-          text: `We specialize in Toyota (Denso), Honda (NGK), Hyundai (Mobis), and Kia (Mobis) genuine OEM plugs. Message your chassis/VIN on WhatsApp (${contact.phone}) so our technical desk can check stock for your vehicle.`,
+          text: otherText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           whatsappPrefill: `Hello Kash Option, can you check genuine OEM spark plug availability for my vehicle (${q})?`
@@ -4233,18 +4649,21 @@
             showWhatsAppCta: false
           };
         }
+        const hiTurn = bumpTopicCount('casual_hi');
         return {
-          text: "Hi—I'm Kash Auto Bot. Select Toyota, Honda, Hyundai, or Kia below to find your exact OEM spark plugs, or ask me about pricing, delivery, or our Community 18 location.",
+          text: hiTurn === 1
+            ? "Hi—I'm Kash Auto Bot. Select Toyota, Honda, Hyundai, or Kia below to find your exact OEM spark plugs, or ask me about pricing, delivery, or our Community 18 location."
+            : "Hey there! Just tap your car make below, paste your 17-character VIN, or ask me about live Cedi quotes, authenticity, or nationwide delivery.",
           nextStep: 'qa',
           showWhatsAppCta: false
         };
       }
 
-      // 19. Genuinely Unrelated Topics (Sports, Politics, Food, Weather, Jokes, etc.) & Context-Aware Non-Repetitive Guidance
+      // 19. Genuinely Unrelated Topics & Context-Aware Non-Repetitive Guidance
       const offTopicPattern = /\b(football|soccer|premier league|champions league|messi|ronaldo|chelsea|arsenal|man u|black stars|politics|election|president|parliament|government|weather|rain|sunny|movie|music|song|recipe|food|jollof|waakye|crypto|bitcoin|betting|casino|relationship|love|joke|poem)\b/i;
       const offTopicReplies = [
         `I focus specifically on Kash Option genuine OEM spark plugs and vehicle fitment rather than topics like "${q}". Tap Toyota, Honda, Hyundai, or Kia below—or ask about delivery and our Community 18 shop.`,
-        `Haha, I'm purely an ignition & OEM spark plug specialist! Share your car make, model, or 17-character VIN below so I can find your factory plug.`,
+        `I'm purely an ignition & OEM spark plug specialist! Share your car make, model, or 17-character VIN below so I can find your factory plug.`,
         `I don't cover that topic, but I can match the exact genuine Denso, NGK, or Mobis plug for your car in seconds—just pick a brand below or message a live rep on WhatsApp.`
       ];
       const generalClarifyReplies = [
@@ -5765,7 +6184,7 @@
 
       // Specs Card (Thread Size, Reach, Hex Size, Electrode Material explicitly broken out)
       const specCard = document.createElement('div');
-      specCard.className = 'rounded-2xl bg-[#0D0D12] border border-white/10 p-4 sm:p-5 space-y-3';
+      specCard.className = 'plug-spec-card rounded-2xl p-4 sm:p-5 space-y-3';
       const specHeader = document.createElement('h4');
       specHeader.className = 'text-xs font-extrabold uppercase tracking-widest text-[#FF1F1F]';
       specHeader.textContent = 'Technical OEM Specifications';
@@ -5799,7 +6218,7 @@
 
       // Compatible Vehicles & Genuine OEM Verification Details Card
       const fitmentCard = document.createElement('div');
-      fitmentCard.className = 'rounded-2xl bg-[#0D0D12] border border-white/10 p-4 sm:p-5 space-y-4';
+      fitmentCard.className = 'plug-spec-card rounded-2xl p-4 sm:p-5 space-y-4';
 
       const fitHeader = document.createElement('h4');
       fitHeader.className = 'text-xs font-extrabold uppercase tracking-widest text-[#FF1F1F]';
