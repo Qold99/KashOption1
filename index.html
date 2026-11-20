@@ -224,6 +224,38 @@
       transform: scale(0.985) translate3d(0, 0, 0);
     }
 
+    /* Recessed Matte Dark Inset Container for Nested Comparison Cards (No Competing Red Glow/Grid) */
+    main .risk-inset-card {
+      position: relative;
+      background: rgba(5, 5, 8, 0.75);
+      background-image: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid #E31818;
+      box-shadow: none;
+      transform: translate3d(0, 0, 0);
+      transition:
+        border-color 240ms ease,
+        background-color 240ms ease;
+    }
+    main .risk-inset-card::before {
+      content: none;
+      display: none;
+    }
+    main .risk-inset-card:hover,
+    main .risk-inset-card:active {
+      background: rgba(5, 5, 8, 0.85);
+      border-color: rgba(255, 255, 255, 0.14);
+      border-left-color: #E31818;
+      transform: translate3d(0, 0, 0);
+      box-shadow: none;
+    }
+
+    footer#contact {
+      padding-bottom: 100px;
+    }
+
     .liquid-glass-btn {
       background: rgba(16, 16, 20, 0.65);
       backdrop-filter: blur(24px) saturate(160%);
@@ -313,8 +345,10 @@
 
     /* Tactile 3D Crimson Gradient Action Buttons */
     .liquid-cta-primary,
+    header a.liquid-cta-primary,
     main a.liquid-cta-primary,
     main button.liquid-cta-primary,
+    footer a.liquid-cta-primary,
     #plugDetailDrawer a.liquid-cta-primary {
       background: linear-gradient(180deg, #FF2A2A 0%, #E31818 55%, #B80F0F 100%);
       color: #FFFFFF;
@@ -331,10 +365,13 @@
       transform: translate3d(0, 0, 0);
     }
     .liquid-cta-primary:hover,
+    header a.liquid-cta-primary:hover,
     main a.liquid-cta-primary:hover,
     main button.liquid-cta-primary:hover,
+    footer a.liquid-cta-primary:hover,
     #plugDetailDrawer a.liquid-cta-primary:hover {
       background: linear-gradient(180deg, #FF3838 0%, #EB1B1B 55%, #C21212 100%);
+      color: #FFFFFF;
       transform: translate3d(0, -1.5px, 0);
       filter: brightness(1.06);
       box-shadow:
@@ -344,13 +381,58 @@
         0 6px 16px rgba(0, 0, 0, 0.72);
     }
     .liquid-cta-primary:active,
+    header a.liquid-cta-primary:active,
     main a.liquid-cta-primary:active,
     main button.liquid-cta-primary:active,
+    footer a.liquid-cta-primary:active,
     #plugDetailDrawer a.liquid-cta-primary:active {
       transform: translate3d(0, 1px, 0) scale(0.985);
       box-shadow:
         inset 0 2px 5px rgba(0, 0, 0, 0.4),
         0 6px 14px rgba(227, 24, 24, 0.3);
+    }
+
+    /* Tactile 3D Elevated White Pill Buttons (border-radius: 999px) */
+    a.pill-white-3d,
+    header a.pill-white-3d,
+    main a.pill-white-3d {
+      border-radius: 999px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #E6E6EA 100%);
+      color: #050505;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.98),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+        0 10px 24px rgba(255, 255, 255, 0.14),
+        0 4px 12px rgba(0, 0, 0, 0.65);
+      transition:
+        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 220ms ease,
+        filter 220ms ease,
+        background 220ms ease;
+      transform: translate3d(0, 0, 0);
+    }
+    a.pill-white-3d:hover,
+    header a.pill-white-3d:hover,
+    main a.pill-white-3d:hover {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F2F2F5 100%);
+      color: #050505;
+      border-color: #FFFFFF;
+      transform: translate3d(0, -1.5px, 0);
+      filter: brightness(1.03);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+        0 14px 30px rgba(255, 255, 255, 0.22),
+        0 6px 16px rgba(0, 0, 0, 0.72);
+    }
+    a.pill-white-3d:active,
+    header a.pill-white-3d:active,
+    main a.pill-white-3d:active {
+      transform: translate3d(0, 1px, 0) scale(0.985);
+      box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.22),
+        0 4px 10px rgba(0, 0, 0, 0.55);
     }
 
     /* Mobile / iOS Safari 60fps scroll paint optimization (cards already use GPU-friendly layered backgrounds) */
@@ -1611,10 +1693,10 @@
             <div class="pt-4 border-t border-white/10">
               <span class="text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-2.5">Direct Manufacturer Lines:</span>
               <div class="grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-wider">
-                <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-3 py-2.5 rounded-xl liquid-glass-btn hover:text-white text-silverMuted">Toyota (Denso)</a>
-                <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-3 py-2.5 rounded-xl liquid-glass-btn hover:text-white text-silverMuted">Honda (NGK)</a>
-                <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-3 py-2.5 rounded-xl liquid-glass-btn hover:text-white text-silverMuted">Hyundai (Mobis)</a>
-                <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-3 py-2.5 rounded-xl liquid-glass-btn hover:text-white text-silverMuted">Kia (Mobis)</a>
+                <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Toyota (Denso)</a>
+                <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Honda (NGK)</a>
+                <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Hyundai (Mobis)</a>
+                <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Kia (Mobis)</a>
               </div>
             </div>
           </div>
@@ -1666,7 +1748,7 @@
                 </div>
                 <span class="text-[10px] text-silverMuted/75 block">7:00 AM &ndash; 5:00 PM Mon&ndash;Sat</span>
               </div>
-              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); closeMenu(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl flex items-center gap-2 whitespace-nowrap">
+              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); closeMenu(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl flex items-center gap-2 whitespace-nowrap">
                 <span>Chat with Sales Experts</span>
                 <i class="fas fa-arrow-right text-[11px]"></i>
               </a>
@@ -1729,7 +1811,7 @@
                 <span>GET PRICE ON WHATSAPP</span>
               </a>
 
-              <a href="#wholesale" class="liquid-glass-btn text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-xl text-center flex items-center justify-center gap-2">
+              <a href="#wholesale" class="pill-white-3d text-xs font-extrabold uppercase tracking-widest px-8 py-4 rounded-full text-center flex items-center justify-center gap-2">
                 <span>EXPLORE WHOLESALE</span>
               </a>
             </div>
@@ -1737,10 +1819,10 @@
             <!-- Direct Brand Shortcuts -->
             <div class="mt-12 flex flex-wrap items-center gap-2.5 text-xs text-silverMuted">
               <span class="font-bold uppercase tracking-wider text-[11px] text-white mr-1">Direct Brand Stock:</span>
-              <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-3.5 py-1.5 rounded-lg liquid-glass-btn text-white text-[11px] font-semibold">Toyota (Denso)</a>
-              <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-3.5 py-1.5 rounded-lg liquid-glass-btn text-white text-[11px] font-semibold">Honda (NGK)</a>
-              <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-3.5 py-1.5 rounded-lg liquid-glass-btn text-white text-[11px] font-semibold">Hyundai (Mobis)</a>
-              <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-3.5 py-1.5 rounded-lg liquid-glass-btn text-white text-[11px] font-semibold">Kia (Mobis)</a>
+              <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Toyota (Denso)</a>
+              <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Honda (NGK)</a>
+              <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Hyundai (Mobis)</a>
+              <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Kia (Mobis)</a>
             </div>
 
           </div>
@@ -2295,9 +2377,8 @@
               </div>
 
               <div class="sm:col-span-2 lg:col-span-4 pt-2">
-                <button type="submit" class="w-full bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-3.5 rounded-lg text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                <button type="submit" class="w-full liquid-cta-primary text-white py-3.5 rounded-lg text-xs font-bold uppercase tracking-widest flex items-center justify-center">
                   <span>Generate Wholesale Quote via WhatsApp</span>
-                  <i class="fab fa-whatsapp"></i>
                 </button>
               </div>
             </form>
@@ -2374,7 +2455,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
 
           <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="0">
-            <div class="liquid-glass liquid-glass-interactive p-6 rounded-xl space-y-3 h-full">
+            <div class="risk-inset-card liquid-glass-interactive p-6 rounded-xl space-y-3 h-full">
               <h4 class="oem-eyebrow text-xs font-bold uppercase tracking-wider text-porscheRed">Marketplace Imitation Risks</h4>
               <p class="text-silverMuted leading-relaxed">
                 Standard copper electrodes fail within 10,000 km, causing persistent misfires under heavy air-conditioning load.
@@ -2727,7 +2808,7 @@
                 <h3 class="text-lg font-bold uppercase text-white mb-3">Fast Customer Assistance</h3>
                 <p class="text-silverMuted leading-relaxed mb-6">Send your car model or chassis VIN directly to our active order desk. We provide instant availability, pricing quotes, and courier dispatch arrangements.</p>
               </div>
-              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20inquire%20about%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-3 px-6 rounded-lg text-center font-bold uppercase tracking-wider block">
+              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20inquire%20about%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="liquid-cta-primary text-white py-3 px-6 rounded-lg text-center font-bold uppercase tracking-wider block">
                 Chat with Sales Experts: 024 011 8846
               </a>
             </div>
@@ -2758,7 +2839,7 @@
   </main>
 
   <!-- ================= COMPREHENSIVE LUXURY FOOTER (GLOBAL ACROSS ALL ACTIVE PAGES) ================= -->
-  <footer id="contact" class="bg-[#050505] pt-16 pb-12 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+  <footer id="contact" class="bg-[#050505] pt-16 pb-[100px] px-4 sm:px-6 lg:px-8 border-t border-white/10">
     <div class="max-w-7xl mx-auto">
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
@@ -2816,7 +2897,7 @@
             <p>Fulfillment: Nationwide Delivery Across Ghana</p>
             <p class="text-[11px] text-silverMuted/70">Delivery arrangements available outside normal hours subject to confirmation.</p>
           </div>
-          <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="inline-block liquid-glass-btn hover:bg-porscheRed hover:text-white text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg">
+          <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="inline-block liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg">
             Chat with Sales Experts
           </a>
         </div>
