@@ -435,6 +435,34 @@
         0 4px 10px rgba(0, 0, 0, 0.55);
     }
 
+    /* Hero Direct Brand Stock Heading & Symmetrical 2x2 Grid */
+    .hero-brand-stock-heading {
+      display: block;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    .hero-brand-stock-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+    .hero-brand-stock-grid > a.pill-white-3d {
+      width: 100%;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9px 12px;
+      line-height: 1.2;
+    }
+
     /* Mobile / iOS Safari 60fps scroll paint optimization (cards already use GPU-friendly layered backgrounds) */
     @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
       main .liquid-glass,
@@ -1789,7 +1817,7 @@
             <div class="flex items-center gap-3 mb-7">
               <span class="accent-indicator"></span>
               <span class="text-xs sm:text-[13px] font-bold uppercase tracking-widest text-silverMuted">
-                ORIGINAL SPARK PLUGS IN ACCRA &amp; NATIONWIDE
+                PREMIUM AUTO PARTS &bull; ACCRA &amp; NATIONWIDE
               </span>
             </div>
 
@@ -1799,10 +1827,9 @@
               <span class="text-silverMuted">ZERO COUNTERFEIT</span>
             </h1>
 
-            <!-- Concise 2-Line Supporting Subtext -->
+            <!-- Concise Ghana SEO Supporting Copy -->
             <p class="text-base sm:text-lg text-metallicSilver max-w-xl font-normal leading-relaxed mb-10">
-              Genuine Denso, NGK, and Mobis spark plugs for Toyota, Honda, Hyundai, and Kia.<br class="hidden sm:inline">
-              Confirm your exact OEM part number and live Ghana Cedi pricing before ordering.
+              Buy quality Denso and NGK Iridium spark plugs in Ghana for Toyota (Corolla, Camry, RAV4, etc.), Honda (Civic, Accord, CR-V, etc.), Hyundai (Elantra, Tucson, etc.), and Kia (Sportage, Cerato, etc.).
             </p>
 
             <!-- Action Buttons -->
@@ -1816,13 +1843,15 @@
               </a>
             </div>
 
-            <!-- Direct Brand Shortcuts -->
-            <div class="mt-12 flex flex-wrap items-center gap-2.5 text-xs text-silverMuted">
-              <span class="font-bold uppercase tracking-wider text-[11px] text-white mr-1">Direct Brand Stock:</span>
-              <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Toyota (Denso)</a>
-              <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Honda (NGK)</a>
-              <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Hyundai (Mobis)</a>
-              <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-4 py-1.5 rounded-full pill-white-3d text-[11px] font-bold">Kia (Mobis)</a>
+            <!-- Direct Brand Shortcuts (Bold Sub-Heading + Uniform 2x2 Grid) -->
+            <div class="mt-12 max-w-md w-full">
+              <span class="hero-brand-stock-heading">DIRECT BRAND STOCK:</span>
+              <div class="hero-brand-stock-grid">
+                <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="rounded-full pill-white-3d text-[11px] font-bold">Toyota (Denso)</a>
+                <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="rounded-full pill-white-3d text-[11px] font-bold">Honda (NGK)</a>
+                <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="rounded-full pill-white-3d text-[11px] font-bold">Hyundai (Mobis)</a>
+                <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="rounded-full pill-white-3d text-[11px] font-bold">Kia (Mobis)</a>
+              </div>
             </div>
 
           </div>
