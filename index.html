@@ -1011,14 +1011,16 @@
     }
 
     /* ================= INTERACTIVE SALES FITMENT CHAT POPUP ================= */
+    html.sales-chat-open,
+    body.sales-chat-open {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
     body.sales-chat-open header,
     body.sales-chat-open main,
     body.sales-chat-open footer {
       pointer-events: none;
       user-select: none;
-    }
-    body.sales-chat-open {
-      overflow: hidden;
     }
     #salesChatBackdrop {
       opacity: 0;
@@ -1039,14 +1041,16 @@
     #salesRepChat {
       position: fixed;
       top: 0;
+      left: 0;
       right: 0;
       bottom: 0;
-      left: 0;
       width: 100%;
       height: 100vh;
       height: 100dvh;
       max-height: 100vh;
       max-height: 100dvh;
+      overflow: hidden;
+      overscroll-behavior: none;
       padding:
         env(safe-area-inset-top)
         env(safe-area-inset-right)
@@ -1070,14 +1074,33 @@
       pointer-events: auto;
       transform: translate3d(0, 0, 0);
     }
+    .sales-chat-shell {
+      height: 100%;
+      max-height: 100%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sales-chat-header {
+      flex-shrink: 0;
+    }
     #salesChatMessages {
-      flex: 1 1 0%;
+      flex: 1 1 auto;
       min-height: 0;
       overflow-y: auto;
-      scroll-behavior: smooth;
-      padding-bottom: 24px;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
+      scroll-behavior: smooth;
+      padding: 14px 14px 20px;
+    }
+    @media (min-width: 640px) {
+      #salesChatMessages {
+        padding: 18px 24px 24px;
+      }
+    }
+    #salesChatControls {
+      flex-shrink: 0;
     }
     .sales-chat-avatar-box {
       position: relative;
@@ -2997,9 +3020,9 @@
   <div id="salesChatBackdrop" onclick="closeSalesChat()" aria-hidden="true" class="fixed inset-0 z-[44]"></div>
 
   <aside id="salesRepChat" role="dialog" aria-modal="true" aria-labelledby="salesChatTitle" class="fixed inset-0 z-[45] flex flex-col">
-    <div class="max-w-3xl w-full mx-auto h-full flex flex-col overflow-hidden sm:border-x sm:border-white/10 bg-[#070709]/92">
+    <div class="sales-chat-shell max-w-3xl w-full mx-auto sm:border-x sm:border-white/10 bg-[#070709]/92">
       <!-- Chat Header -->
-      <div class="px-4 sm:px-6 py-3.5 bg-[#0C0C10]/95 border-b border-white/10 flex items-center justify-between gap-3 shrink-0">
+      <div id="salesChatHeader" class="sales-chat-header px-4 sm:px-6 py-3.5 bg-[#0C0C10]/95 border-b border-white/10 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center gap-3 min-w-0">
           <div class="sales-chat-avatar-box bg-[#18181C]">
             <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="38" height="38" class="sales-chat-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
@@ -3024,7 +3047,7 @@
       </div>
 
       <!-- Scrollable Chat Message Stream -->
-      <div id="salesChatMessages" class="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 sm:px-6 pt-5 pb-6 space-y-4 bg-[#08080B]/70" aria-live="polite"></div>
+      <div id="salesChatMessages" class="space-y-4 bg-[#08080B]/70" aria-live="polite"></div>
 
       <!-- Quick Option Chips + Bottom Input Bar -->
       <div id="salesChatControls" class="px-4 sm:px-6 pt-3 pb-3.5 bg-[#0C0C10]/95 border-t border-white/10 shrink-0"></div>
@@ -3421,6 +3444,8 @@
       isOpen: false,
       step: 'greeting',
       showFitmentSelectors: false,
+      lastAssistantHasWaCta: false,
+      savedScrollY: 0,
       brand: '',
       model: '',
       year: '',
@@ -3466,22 +3491,62 @@
       openWhatsAppUrl(`https://wa.me/233240118846?text=${encodeURIComponent(text)}`);
     }
 
-    function scrollSalesChatToBottom(smooth) {
+    let salesChatScrollTimer = null;
+    let salesChatScrollRaf = 0;
+
+    function scrollSalesChatToBottom(smooth, settleMs) {
       const messagesEl = document.getElementById('salesChatMessages');
       if (!messagesEl) return;
-      const runScroll = () => {
-        if (smooth && typeof messagesEl.scrollTo === 'function') {
-          try {
-            messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
-          } catch (e) {
-            messagesEl.scrollTop = messagesEl.scrollHeight;
-          }
+
+      if (salesChatScrollTimer) {
+        window.clearTimeout(salesChatScrollTimer);
+        salesChatScrollTimer = null;
+      }
+      if (salesChatScrollRaf) {
+        window.cancelAnimationFrame(salesChatScrollRaf);
+        salesChatScrollRaf = 0;
+      }
+
+      const performScroll = () => {
+        const el = document.getElementById('salesChatMessages');
+        if (!el) return;
+
+        const lastAssistantRow =
+          el.lastElementChild &&
+          el.lastElementChild.classList &&
+          el.lastElementChild.classList.contains('sales-msg-assistant-row')
+            ? el.lastElementChild
+            : null;
+
+        let targetTop = el.scrollHeight;
+        if (
+          lastAssistantRow &&
+          el.clientHeight > 0 &&
+          lastAssistantRow.offsetHeight > el.clientHeight - 28
+        ) {
+          targetTop = Math.max(0, lastAssistantRow.offsetTop - 14);
         }
-        messagesEl.scrollTop = messagesEl.scrollHeight;
+
+        if (smooth && typeof el.scrollTo === 'function') {
+          try {
+            el.scrollTo({ top: targetTop, behavior: 'smooth' });
+            return;
+          } catch (e) {}
+        }
+        el.scrollTop = targetTop;
       };
-      window.requestAnimationFrame(() => {
-        runScroll();
-        window.requestAnimationFrame(runScroll);
+
+      const delay = typeof settleMs === 'number' ? settleMs : 120;
+      salesChatScrollRaf = window.requestAnimationFrame(() => {
+        salesChatScrollRaf = 0;
+        if (delay <= 0) {
+          performScroll();
+        } else {
+          salesChatScrollTimer = window.setTimeout(() => {
+            salesChatScrollTimer = null;
+            window.requestAnimationFrame(performScroll);
+          }, delay);
+        }
       });
     }
 
@@ -3490,32 +3555,16 @@
     function syncSalesChatViewportHeight() {
       const chatEl = document.getElementById('salesRepChat');
       if (!chatEl) return;
-      if (!salesChatState.isOpen) {
-        chatEl.style.height = '';
-        chatEl.style.maxHeight = '';
-        chatEl.style.top = '';
-        return;
-      }
-      const vv = window.visualViewport;
-      if (vv && typeof vv.height === 'number' && vv.height > 0) {
-        chatEl.style.height = `${Math.round(vv.height)}px`;
-        chatEl.style.maxHeight = `${Math.round(vv.height)}px`;
-        chatEl.style.top = `${Math.max(0, Math.round(vv.offsetTop || 0))}px`;
-      } else {
-        chatEl.style.height = '';
-        chatEl.style.maxHeight = '';
-        chatEl.style.top = '';
-      }
-      scrollSalesChatToBottom(false);
+      // Keep the fixed container strictly anchored via CSS (top:0; left:0; right:0; bottom:0; height:100dvh)
+      // so closing the mobile keyboard or shifting browser toolbars never pushes the drawer down.
+      chatEl.style.height = '';
+      chatEl.style.maxHeight = '';
+      chatEl.style.top = '';
     }
 
     function bindSalesChatViewportListeners() {
       if (salesChatViewportBound) return;
       salesChatViewportBound = true;
-      if (window.visualViewport && typeof window.visualViewport.addEventListener === 'function') {
-        window.visualViewport.addEventListener('resize', syncSalesChatViewportHeight);
-        window.visualViewport.addEventListener('scroll', syncSalesChatViewportHeight);
-      }
       window.addEventListener('resize', syncSalesChatViewportHeight);
     }
 
@@ -3530,6 +3579,7 @@
       const messagesEl = document.getElementById('salesChatMessages');
       if (!chatEl) return;
 
+      salesChatState.savedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
       salesChatState.isOpen = true;
       if (opts.promptPlugs || opts.openVin) {
         salesChatState.showFitmentSelectors = true;
@@ -3547,11 +3597,12 @@
 
       if (backdropEl) backdropEl.classList.add('is-open');
       chatEl.classList.add('is-open');
+      document.documentElement.classList.add('sales-chat-open');
       document.body.classList.add('sales-chat-open');
       if (widgetEl) widgetEl.classList.add('is-chat-open');
       if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'true');
       syncSalesChatViewportHeight();
-      scrollSalesChatToBottom(false);
+      scrollSalesChatToBottom(false, 0);
 
       const isDesktopNonTouch =
         window.innerWidth >= 768 &&
@@ -3571,10 +3622,15 @@
       const triggerBtn = document.getElementById('salesRepTriggerBtn');
       if (!chatEl) return;
 
+      const activeInput = document.getElementById('salesChatInput');
+      if (activeInput && typeof activeInput.blur === 'function') {
+        activeInput.blur();
+      }
       salesChatState.isOpen = false;
       syncSalesChatViewportHeight();
       chatEl.classList.remove('is-open');
       if (backdropEl) backdropEl.classList.remove('is-open');
+      document.documentElement.classList.remove('sales-chat-open');
       document.body.classList.remove('sales-chat-open');
       if (widgetEl) {
         widgetEl.classList.remove('is-chat-open');
@@ -3666,7 +3722,7 @@
       row.appendChild(createBotMsgAvatar());
       row.appendChild(contentCol);
       messagesEl.appendChild(row);
-      scrollSalesChatToBottom(true);
+      scrollSalesChatToBottom(true, 120);
     }
 
     function appendStreamedAssistantMessage(fullText, token, onComplete) {
@@ -3675,6 +3731,8 @@
         if (onComplete) onComplete();
         return;
       }
+
+      salesChatState.lastAssistantHasWaCta = false;
 
       const row = document.createElement('div');
       row.className = 'sales-msg-assistant-row sales-msg-enter';
@@ -3697,7 +3755,7 @@
       row.appendChild(createBotMsgAvatar());
       row.appendChild(contentCol);
       messagesEl.appendChild(row);
-      scrollSalesChatToBottom(true);
+      scrollSalesChatToBottom(true, 120);
 
       let cursor = 0;
       const chunkSize = 5;
@@ -3708,13 +3766,12 @@
         }
         cursor = Math.min(fullText.length, cursor + chunkSize);
         msgPara.textContent = fullText.slice(0, cursor);
-        messagesEl.scrollTop = messagesEl.scrollHeight;
 
         if (cursor < fullText.length) {
           salesStreamTimer = window.setTimeout(stepStream, 18);
         } else {
           salesStreamTimer = null;
-          scrollSalesChatToBottom(true);
+          scrollSalesChatToBottom(true, 120);
           if (onComplete) onComplete();
         }
       }
@@ -3821,6 +3878,8 @@
         }
 
         const shouldShowWaCta = Boolean((detailsObj && detailsObj.showWhatsAppCta) || hasPartCaution);
+        salesChatState.lastAssistantHasWaCta = shouldShowWaCta;
+
         if (shouldShowWaCta) {
           const ctaWrap = document.createElement('div');
           ctaWrap.className = 'mt-2.5 pt-2 border-t border-white/10';
@@ -3850,7 +3909,7 @@
       }
 
       messagesEl.appendChild(row);
-      scrollSalesChatToBottom(true);
+      scrollSalesChatToBottom(true, 120);
     }
 
     function buildQuestionForm(placeholderText, buttonLabel, isChassisInput) {
@@ -3879,6 +3938,10 @@
         if (!val) {
           input.focus();
           return;
+        }
+        // Dismiss mobile keyboard cleanly before settling scroll so the drawer never chases keyboard close
+        if (typeof input.blur === 'function') {
+          input.blur();
         }
         if (['model', 'year', 'engineYear', 'chassis'].includes(salesChatState.step)) {
           handleSalesTextSubmit(val);
@@ -3967,7 +4030,8 @@
               ? (remembered ? `Price ${remembered} on WhatsApp` : 'Get Live Price on WhatsApp')
               : (remembered ? `Order for ${remembered} on WhatsApp` : 'WhatsApp Desk');
 
-          if (remembered || salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0) {
+          // Avoid stacking a redundant WhatsApp link above the 3D pills when the bot message already has one
+          if (!salesChatState.lastAssistantHasWaCta && (remembered || salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0)) {
             chipWrap.appendChild(createSubtleWhatsAppChip(waLabel, waPrefill));
           }
 
@@ -3999,7 +4063,7 @@
             chipWrap.appendChild(pickupChip);
           }
 
-          if (!(remembered || salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0)) {
+          if (!salesChatState.lastAssistantHasWaCta && !(remembered || salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0)) {
             chipWrap.appendChild(createSubtleWhatsAppChip(waLabel, waPrefill));
           }
 
@@ -4012,7 +4076,7 @@
         const { form } = buildQuestionForm(placeholder, 'Ask', false);
 
         controlsEl.appendChild(form);
-        scrollSalesChatToBottom(true);
+        scrollSalesChatToBottom(true, 120);
         return;
       }
 
@@ -4062,7 +4126,7 @@
         controlsEl.appendChild(headerRow);
         controlsEl.appendChild(modelGrid);
         controlsEl.appendChild(form);
-        scrollSalesChatToBottom(true);
+        scrollSalesChatToBottom(true, 120);
         return;
       }
 
@@ -4113,7 +4177,7 @@
         controlsEl.appendChild(headerRow);
         controlsEl.appendChild(yearScroller);
         controlsEl.appendChild(form);
-        scrollSalesChatToBottom(true);
+        scrollSalesChatToBottom(true, 120);
         return;
       }
 
@@ -4165,7 +4229,7 @@
 
         const { form } = buildQuestionForm('Or enter engine size (e.g., 1.8L, 2.4L)...', 'Send', false);
         controlsEl.appendChild(form);
-        scrollSalesChatToBottom(true);
+        scrollSalesChatToBottom(true, 120);
         return;
       }
 
@@ -4189,34 +4253,36 @@
         const { form, input } = buildQuestionForm('Enter Chassis / VIN number...', 'Verify', true);
         controlsEl.appendChild(headerRow);
         controlsEl.appendChild(form);
-        scrollSalesChatToBottom(true);
+        scrollSalesChatToBottom(true, 120);
         window.requestAnimationFrame(() => input.focus({ preventScroll: true }));
         return;
       }
 
       if (salesChatState.step === 'confirm') {
         const actionRow = document.createElement('div');
-        actionRow.className = 'flex flex-wrap items-center gap-2 mb-3';
+        actionRow.className = 'flex flex-wrap items-center gap-2 mb-2.5';
 
-        const waBtn = document.createElement('button');
-        waBtn.type = 'button';
-        waBtn.className = 'sales-whatsapp-subtle-btn flex-1 min-w-[180px] text-xs font-semibold py-2.5 px-4 rounded-full inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/60';
-        waBtn.innerHTML = '<i class="fab fa-whatsapp text-sm text-emerald-400" aria-hidden="true"></i><span>Send Order to WhatsApp &raquo;</span>';
-        waBtn.addEventListener('click', sendSalesChatOrderToWhatsApp);
+        if (!salesChatState.lastAssistantHasWaCta) {
+          const waBtn = document.createElement('button');
+          waBtn.type = 'button';
+          waBtn.className = 'sales-whatsapp-subtle-btn flex-1 min-w-[180px] text-xs font-semibold py-2.5 px-4 rounded-full inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/60';
+          waBtn.innerHTML = '<i class="fab fa-whatsapp text-sm text-emerald-400" aria-hidden="true"></i><span>Send Order to WhatsApp &raquo;</span>';
+          waBtn.addEventListener('click', sendSalesChatOrderToWhatsApp);
+          actionRow.appendChild(waBtn);
+        }
 
         const anotherBtn = document.createElement('button');
         anotherBtn.type = 'button';
-        anotherBtn.className = 'chat-pill-3d text-xs font-extrabold py-2.5 px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+        anotherBtn.className = 'chat-pill-3d text-xs font-extrabold py-2 px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
         anotherBtn.textContent = 'Another Car';
         anotherBtn.addEventListener('click', handleSalesShowCarPicker);
 
-        actionRow.appendChild(waBtn);
         actionRow.appendChild(anotherBtn);
 
         const { form } = buildQuestionForm('Ask a follow-up question...', 'Ask', false);
         controlsEl.appendChild(actionRow);
         controlsEl.appendChild(form);
-        scrollSalesChatToBottom(true);
+        scrollSalesChatToBottom(true, 120);
       }
     }
 
@@ -4231,6 +4297,7 @@
 
       salesChatState.step = opts.openVin ? 'chassis' : 'greeting';
       salesChatState.showFitmentSelectors = Boolean(opts.showFitmentSelectors || opts.openVin);
+      salesChatState.lastAssistantHasWaCta = false;
       salesChatState.brand = '';
       salesChatState.model = '';
       salesChatState.year = '';
