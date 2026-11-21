@@ -308,7 +308,8 @@
 
     /* Tactile 3D Elevated White Primary/Light Card Buttons */
     main .liquid-glass a.liquid-glass-btn,
-    #plugDetailDrawer button.liquid-glass-btn,
+    #product-detail button.liquid-glass-btn,
+    #product-detail a.liquid-glass-btn,
     main .liquid-glass .filter-btn.active {
       background: linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 100%);
       color: #050505;
@@ -321,7 +322,8 @@
       transform: translate3d(0, 0, 0);
     }
     main .liquid-glass a.liquid-glass-btn:hover,
-    #plugDetailDrawer button.liquid-glass-btn:hover,
+    #product-detail button.liquid-glass-btn:hover,
+    #product-detail a.liquid-glass-btn:hover,
     main .liquid-glass .filter-btn.active:hover {
       background: linear-gradient(180deg, #FFFFFF 0%, #ECECF0 100%);
       color: #050505;
@@ -335,7 +337,8 @@
         0 6px 16px rgba(0, 0, 0, 0.72);
     }
     main .liquid-glass a.liquid-glass-btn:active,
-    #plugDetailDrawer button.liquid-glass-btn:active,
+    #product-detail button.liquid-glass-btn:active,
+    #product-detail a.liquid-glass-btn:active,
     main .liquid-glass .filter-btn.active:active {
       transform: translate3d(0, 1px, 0) scale(0.985);
       box-shadow:
@@ -349,7 +352,7 @@
     main a.liquid-cta-primary,
     main button.liquid-cta-primary,
     footer a.liquid-cta-primary,
-    #plugDetailDrawer a.liquid-cta-primary {
+    #product-detail a.liquid-cta-primary {
       background: linear-gradient(180deg, #FF2A2A 0%, #E31818 55%, #B80F0F 100%);
       color: #FFFFFF;
       border: 1px solid rgba(255, 70, 70, 0.55);
@@ -369,7 +372,7 @@
     main a.liquid-cta-primary:hover,
     main button.liquid-cta-primary:hover,
     footer a.liquid-cta-primary:hover,
-    #plugDetailDrawer a.liquid-cta-primary:hover {
+    #product-detail a.liquid-cta-primary:hover {
       background: linear-gradient(180deg, #FF3838 0%, #EB1B1B 55%, #C21212 100%);
       color: #FFFFFF;
       transform: translate3d(0, -1.5px, 0);
@@ -385,7 +388,7 @@
     main a.liquid-cta-primary:active,
     main button.liquid-cta-primary:active,
     footer a.liquid-cta-primary:active,
-    #plugDetailDrawer a.liquid-cta-primary:active {
+    #product-detail a.liquid-cta-primary:active {
       transform: translate3d(0, 1px, 0) scale(0.985);
       box-shadow:
         inset 0 2px 5px rgba(0, 0, 0, 0.4),
@@ -394,8 +397,11 @@
 
     /* Tactile 3D Elevated White Pill Buttons (border-radius: 999px) */
     a.pill-white-3d,
+    button.pill-white-3d,
     header a.pill-white-3d,
-    main a.pill-white-3d {
+    main a.pill-white-3d,
+    main button.pill-white-3d,
+    .chat-pill-3d {
       border-radius: 999px;
       background: linear-gradient(180deg, #FFFFFF 0%, #E6E6EA 100%);
       color: #050505;
@@ -409,12 +415,16 @@
         transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
         box-shadow 220ms ease,
         filter 220ms ease,
+        border-color 180ms ease,
         background 220ms ease;
       transform: translate3d(0, 0, 0);
     }
     a.pill-white-3d:hover,
+    button.pill-white-3d:hover,
     header a.pill-white-3d:hover,
-    main a.pill-white-3d:hover {
+    main a.pill-white-3d:hover,
+    main button.pill-white-3d:hover,
+    .chat-pill-3d:hover {
       background: linear-gradient(180deg, #FFFFFF 0%, #F2F2F5 100%);
       color: #050505;
       border-color: #FFFFFF;
@@ -427,12 +437,35 @@
         0 6px 16px rgba(0, 0, 0, 0.72);
     }
     a.pill-white-3d:active,
+    button.pill-white-3d:active,
     header a.pill-white-3d:active,
-    main a.pill-white-3d:active {
+    main a.pill-white-3d:active,
+    main button.pill-white-3d:active,
+    .chat-pill-3d:active {
       transform: translate3d(0, 1px, 0) scale(0.985);
       box-shadow:
         inset 0 2px 4px rgba(0, 0, 0, 0.22),
         0 4px 10px rgba(0, 0, 0, 0.55);
+    }
+    .chat-pill-3d {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.98),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+        0 6px 16px rgba(255, 255, 255, 0.12),
+        0 3px 10px rgba(0, 0, 0, 0.55);
+    }
+    .chat-pill-3d.is-selected {
+      border-color: #E31818;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+        0 0 0 2px rgba(227, 24, 24, 0.48),
+        0 8px 20px rgba(227, 24, 24, 0.24);
     }
 
     /* Hero Direct Brand Stock Heading & Symmetrical 2x2 Grid */
@@ -1257,94 +1290,8 @@
       border-color: rgba(255, 31, 31, 0.85);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 0 0 2px rgba(255, 31, 31, 0.35), 0 20px 50px rgba(0, 0, 0, 0.78);
     }
-    body.plug-detail-open {
-      overflow: hidden;
-    }
-    body.plug-detail-open header,
-    body.plug-detail-open main,
-    body.plug-detail-open footer {
-      pointer-events: none;
-      user-select: none;
-    }
-    #plugDetailBackdrop {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      background: rgba(0, 0, 0, 0.76);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition:
-        opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 280ms ease;
-    }
-    #plugDetailBackdrop.is-open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    #plugDetailDrawer {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translate3d(0, 22px, 0);
-      transition:
-        opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
-        transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 280ms ease;
-    }
-    #plugDetailDrawer.is-open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translate3d(0, 0, 0);
-    }
-    .plug-drawer-panel {
-      background-color: #070709;
-      background-image:
-        linear-gradient(122deg, rgba(255, 255, 255, 0.045) 0%, transparent 40%, rgba(227, 24, 24, 0.04) 100%),
-        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-        radial-gradient(circle at top right, rgba(227, 24, 24, 0.22), #0D0D10 55%, #070709 100%);
-      background-size: 100% 100%, 24px 24px, 24px 24px, 100% 100%;
-      border: 1px solid rgba(227, 24, 24, 0.34);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(227, 24, 24, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.16);
-    }
-    .plug-drawer-scroll {
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
-      scrollbar-width: thin;
-      scrollbar-color: #2A2A2E #0B0B0F;
-    }
-    .plug-drawer-scroll::-webkit-scrollbar {
-      width: 5px;
-    }
-    .plug-drawer-scroll::-webkit-scrollbar-track {
-      background: #0B0B0F;
-    }
-    .plug-drawer-scroll::-webkit-scrollbar-thumb {
-      background: #2A2A2E;
-      border-radius: 9999px;
-    }
-    .plug-drawer-row {
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: #2A2A2E transparent;
-    }
-    .plug-drawer-row::-webkit-scrollbar {
-      height: 4px;
-    }
-    .plug-drawer-row::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .plug-drawer-row::-webkit-scrollbar-thumb {
-      background: #2A2A2E;
-      border-radius: 9999px;
-    }
     .plug-more-card,
-    #plugDetailDrawer .plug-spec-card {
+    #product-detail .plug-spec-card {
       position: relative;
       background-color: #070709;
       background-image:
@@ -1365,7 +1312,7 @@
         box-shadow 300ms ease;
     }
     .plug-more-card::before,
-    #plugDetailDrawer .plug-spec-card::before {
+    #product-detail .plug-spec-card::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -1511,16 +1458,13 @@
       .sales-avatar-launcher,
       .sales-speech-bubble,
       #salesChatBackdrop,
-      #salesRepChat,
-      #plugDetailBackdrop,
-      #plugDetailDrawer {
+      #salesRepChat {
         transition: opacity 150ms ease, visibility 150ms ease;
         transform: none;
       }
       #salesRepWidget.is-visible:not(.is-chat-open) .sales-avatar-launcher,
       #salesRepWidget.is-visible:not(.is-chat-open) .sales-speech-bubble.is-bubble-open,
-      #salesRepChat.is-open,
-      #plugDetailDrawer.is-open {
+      #salesRepChat.is-open {
         transform: none;
       }
       .sales-msg-enter,
@@ -2172,6 +2116,30 @@
         </a>
       </div>
 
+    </section>
+
+    <!-- ================= DISCRETE PAGE: PRODUCT SPECIFICATION VIEW ================= -->
+    <section id="product-detail" data-page="product-detail" class="page-view py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" hidden>
+      <div class="mb-7 flex flex-wrap items-center justify-between gap-3">
+        <button type="button" id="productBackBtn" onclick="backToCatalogueFromProduct()" class="pill-white-3d text-xs font-extrabold uppercase tracking-wider px-5 py-2.5 inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]">
+          <span aria-hidden="true">&larr;</span>
+          <span>BACK TO CATALOGUE</span>
+        </button>
+        <a href="#plugDetailMoreSection" onclick="event.preventDefault(); const m = document.getElementById('plugDetailMoreSection'); if(m) m.scrollIntoView({ behavior: 'smooth', block: 'start' });" class="liquid-glass-btn text-[11px] font-bold uppercase tracking-wider text-zinc-200 hover:text-white px-4 py-2 rounded-full inline-flex items-center gap-2">
+          <span>Related OEM Plugs</span>
+          <span aria-hidden="true">&darr;</span>
+        </a>
+      </div>
+
+      <div class="mb-8 pb-5 border-b border-white/10">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#FF1F1F] shadow-[0_0_8px_rgba(255,31,31,0.8)] shrink-0"></span>
+          <span id="plugDetailEyebrow" class="text-[11px] font-bold uppercase tracking-widest text-silverMuted">OEM FITMENT SPECIFICATION</span>
+        </div>
+        <h2 id="plugDetailTitle" class="text-2xl sm:text-4xl font-extrabold uppercase text-white tracking-tight">OEM Spark Plug Fitment</h2>
+      </div>
+
+      <div id="plugDetailBody" class="space-y-8"></div>
     </section>
 
     <!-- ================= DISCRETE PAGE: CHASSIS FITMENT FINDER ================= -->
@@ -2948,7 +2916,7 @@
   <!-- ================= SCROLL-TRIGGERED FLOATING SALES REPRESENTATIVE ================= -->
   <aside id="salesRepWidget" aria-label="Sales Representative Quick Fitment Assistant" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-30 flex items-center justify-end gap-3 pointer-events-none">
     <div id="salesSpeechBubble" class="sales-speech-bubble group">
-      <button type="button" onclick="openSalesChat()" aria-haspopup="dialog" aria-controls="salesRepChat" class="sales-speech-bubble-btn text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]">
+      <button type="button" onclick="openSalesChat({ promptPlugs: true })" aria-haspopup="dialog" aria-controls="salesRepChat" class="sales-speech-bubble-btn text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]">
         <span class="block text-xs font-bold text-white leading-snug">
           Need plugs for your car?
         </span>
@@ -3007,32 +2975,6 @@
 
       <!-- Quick Option Chips + Bottom Input Bar -->
       <div id="salesChatControls" class="px-4 sm:px-6 pt-3 pb-4 bg-[#0C0C10]/95 border-t border-white/10 shrink-0"></div>
-    </div>
-  </aside>
-
-  <!-- ================= SEO-ENRICHED OEM SPARK PLUG FITMENT DETAIL DRAWER ================= -->
-  <div id="plugDetailBackdrop" onclick="closePlugDetailModal()" aria-hidden="true" class="fixed inset-0 z-[46]"></div>
-
-  <aside id="plugDetailDrawer" role="dialog" aria-modal="true" aria-labelledby="plugDetailTitle" class="fixed inset-0 z-[47] flex items-end sm:items-center justify-center sm:p-4 lg:p-6">
-    <div class="plug-drawer-panel w-full sm:max-w-4xl h-[92dvh] sm:h-auto sm:max-h-[90dvh] rounded-t-3xl sm:rounded-3xl flex flex-col overflow-hidden">
-
-      <!-- Drawer Sticky Header -->
-      <div class="px-5 sm:px-7 py-4 bg-[#0B0B0F]/95 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
-        <div class="min-w-0">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="w-2 h-2 rounded-full bg-[#FF1F1F] shadow-[0_0_8px_rgba(255,31,31,0.8)] shrink-0"></span>
-            <span id="plugDetailEyebrow" class="text-[11px] font-bold uppercase tracking-widest text-silverMuted truncate">OEM FITMENT SPECIFICATION</span>
-          </div>
-          <h2 id="plugDetailTitle" class="text-base sm:text-xl font-extrabold uppercase text-white tracking-tight truncate">OEM Spark Plug Fitment</h2>
-        </div>
-        <button type="button" id="plugDetailCloseBtn" onclick="closePlugDetailModal()" aria-label="Close spark plug fitment details" class="w-9 h-9 shrink-0 flex items-center justify-center rounded-xl bg-[#FF1F1F]/15 hover:bg-[#E31818] text-[#FF7070] hover:text-white border border-[#FF1F1F]/40 hover:border-[#FF1F1F] transition-all active:scale-95 text-xl leading-none focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]">
-          &times;
-        </button>
-      </div>
-
-      <!-- Scrollable SEO Fitment Body + More Brand Options Strip -->
-      <div id="plugDetailBody" class="plug-drawer-scroll flex-1 min-h-0 overflow-y-auto px-5 sm:px-7 py-6 space-y-6"></div>
-
     </div>
   </aside>
 
@@ -3425,15 +3367,45 @@
     const salesChatState = {
       isOpen: false,
       step: 'greeting',
+      showFitmentSelectors: false,
       brand: '',
       model: '',
       year: '',
       engineYear: '',
       chassis: '',
+      lastBrand: '',
+      lastModel: '',
+      lastYear: '',
+      lastEngine: '',
+      askedPriceCount: 0,
+      turnCount: 0,
       qaHistory: [],
       topicCounts: {},
       lastFallbackIdx: -1
     };
+
+    function syncVehicleContextState(updates) {
+      if (!updates) return;
+      if (Object.prototype.hasOwnProperty.call(updates, 'brand')) {
+        salesChatState.brand = updates.brand || '';
+        salesChatState.lastBrand = updates.brand || '';
+      }
+      if (Object.prototype.hasOwnProperty.call(updates, 'model')) {
+        salesChatState.model = updates.model || '';
+        salesChatState.lastModel = updates.model || '';
+      }
+      if (Object.prototype.hasOwnProperty.call(updates, 'year')) {
+        salesChatState.year = updates.year || '';
+        salesChatState.lastYear = updates.year || '';
+      }
+      if (Object.prototype.hasOwnProperty.call(updates, 'engine')) {
+        salesChatState.engineYear = updates.engine || '';
+        salesChatState.lastEngine = updates.engine || '';
+      }
+      if (Object.prototype.hasOwnProperty.call(updates, 'chassis')) {
+        salesChatState.chassis = updates.chassis || '';
+      }
+    }
 
     function openDirectWhatsAppOrder(prefillText) {
       playLuxuryMicroTap();
@@ -3441,8 +3413,9 @@
       openWhatsAppUrl(`https://wa.me/233240118846?text=${encodeURIComponent(text)}`);
     }
 
-    function openSalesChat() {
+    function openSalesChat(options) {
       if (typeof closeMenu === 'function') closeMenu();
+      const opts = options || {};
       const chatEl = document.getElementById('salesRepChat');
       const backdropEl = document.getElementById('salesChatBackdrop');
       const widgetEl = document.getElementById('salesRepWidget');
@@ -3451,10 +3424,18 @@
       if (!chatEl) return;
 
       salesChatState.isOpen = true;
+      if (opts.promptPlugs || opts.openVin) {
+        salesChatState.showFitmentSelectors = true;
+      }
+      if (opts.openVin) {
+        salesChatState.step = 'chassis';
+      }
       playLuxuryMicroTap();
       hideSalesBubbleImmediate();
       if (messagesEl && messagesEl.children.length === 0) {
-        resetSalesChat();
+        resetSalesChat({ showFitmentSelectors: Boolean(opts.promptPlugs || opts.openVin), openVin: Boolean(opts.openVin) });
+      } else if (opts.promptPlugs || opts.openVin) {
+        renderSalesChatControls();
       }
 
       if (backdropEl) backdropEl.classList.add('is-open');
@@ -3792,6 +3773,7 @@
 
     function handleSalesShowCarPicker() {
       playLuxuryMicroTap();
+      salesChatState.showFitmentSelectors = true;
       salesChatState.step = 'greeting';
       renderSalesChatControls();
     }
@@ -3827,37 +3809,72 @@
       controlsEl.innerHTML = '';
 
       if (salesChatState.step === 'greeting' || salesChatState.step === 'pricing' || salesChatState.step === 'qa') {
-        const chipWrap = document.createElement('div');
-        chipWrap.className = 'flex flex-wrap items-center gap-2 mb-3';
+        const activeBrand = salesChatState.lastBrand || salesChatState.brand;
+        const remembered = getRememberedVehicleLabel();
+        const verifiedPlug = getVerifiedPlugMatch(
+          salesChatState.lastBrand || salesChatState.brand,
+          salesChatState.lastModel || salesChatState.model,
+          salesChatState.lastEngine || salesChatState.engineYear
+        );
 
-        ['Toyota', 'Honda', 'Hyundai', 'Kia'].forEach(brand => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'sales-chip-btn text-xs font-semibold py-2 px-3.5 rounded-lg focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]';
-          btn.textContent = brand;
-          btn.addEventListener('click', () => handleSalesBrandSelect(brand));
-          chipWrap.appendChild(btn);
-        });
+        if (salesChatState.showFitmentSelectors) {
+          const chipWrap = document.createElement('div');
+          chipWrap.className = 'flex flex-wrap items-center gap-2 mb-3';
 
-        const chassisChip = document.createElement('button');
-        chassisChip.type = 'button';
-        chassisChip.className = 'sales-chip-btn text-xs font-semibold py-2 px-3 rounded-lg focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]';
-        chassisChip.textContent = 'Chassis / VIN';
-        chassisChip.addEventListener('click', () => handleSalesSwitchToChassis());
-        chipWrap.appendChild(chassisChip);
+          const waPrefill = buildVehicleWhatsAppPrefill(
+            salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0 ? 'price' : 'order',
+            verifiedPlug
+          );
+          const waLabel = verifiedPlug
+            ? `Order ${verifiedPlug.split('(')[0].trim()} on WhatsApp`
+            : (salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0)
+              ? (remembered ? `Price ${remembered} on WhatsApp` : 'Get Live Price on WhatsApp')
+              : (remembered ? `Order for ${remembered} on WhatsApp` : 'WhatsApp Desk');
 
-        const waPrefill = salesChatState.step === 'pricing'
-          ? 'Hello Kash Option, please confirm live Ghana Cedi pricing and availability for my vehicle spark plugs.'
-          : undefined;
-        const waLabel = salesChatState.step === 'pricing' ? 'Get Price on WhatsApp' : 'WhatsApp Desk';
-        chipWrap.appendChild(createSubtleWhatsAppChip(waLabel, waPrefill));
+          if (remembered || salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0) {
+            chipWrap.appendChild(createSubtleWhatsAppChip(waLabel, waPrefill));
+          }
 
-        const placeholder = salesChatState.step === 'greeting'
-          ? 'Ask about plugs, delivery, VIN, or type your car...'
-          : 'Ask another question...';
+          ['Toyota', 'Honda', 'Hyundai', 'Kia'].forEach(brand => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            const isCurrent = activeBrand === brand;
+            btn.className = isCurrent
+              ? 'chat-pill-3d is-selected text-xs font-extrabold py-2 px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]'
+              : 'chat-pill-3d text-xs font-extrabold py-2 px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+            btn.textContent = brand;
+            btn.addEventListener('click', () => handleSalesBrandSelect(brand));
+            chipWrap.appendChild(btn);
+          });
+
+          const chassisChip = document.createElement('button');
+          chassisChip.type = 'button';
+          chassisChip.className = 'chat-pill-3d text-xs font-extrabold py-2 px-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+          chassisChip.textContent = 'Chassis / VIN';
+          chassisChip.addEventListener('click', () => handleSalesSwitchToChassis());
+          chipWrap.appendChild(chassisChip);
+
+          if (salesChatState.turnCount > 0) {
+            const pickupChip = document.createElement('button');
+            pickupChip.type = 'button';
+            pickupChip.className = 'chat-pill-3d text-xs font-extrabold py-2 px-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+            pickupChip.textContent = 'Pickup / Rider';
+            pickupChip.addEventListener('click', () => handleSalesQuestionSubmit('Can I pick up today or send a rider?'));
+            chipWrap.appendChild(pickupChip);
+          }
+
+          if (!(remembered || salesChatState.step === 'pricing' || salesChatState.askedPriceCount > 0)) {
+            chipWrap.appendChild(createSubtleWhatsAppChip(waLabel, waPrefill));
+          }
+
+          controlsEl.appendChild(chipWrap);
+        }
+
+        const placeholder = !salesChatState.showFitmentSelectors
+          ? 'Ask anything or tell me what car you drive...'
+          : (remembered ? `Add year/engine or ask about ${remembered}...` : 'Ask about plugs, VIN, pickup, or rider...');
         const { form } = buildQuestionForm(placeholder, 'Ask', false);
 
-        controlsEl.appendChild(chipWrap);
         controlsEl.appendChild(form);
         return;
       }
@@ -3891,13 +3908,13 @@
         headerRow.appendChild(actionGroup);
 
         const modelGrid = document.createElement('div');
-        modelGrid.className = 'flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pb-1 mb-2.5';
+        modelGrid.className = 'flex flex-wrap gap-2 max-h-36 overflow-y-auto pb-1 mb-2.5';
 
         const brandCatalog = salesBrandModelCatalog[salesChatState.brand] || {};
         Object.keys(brandCatalog).forEach(modelName => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = 'sales-chip-btn text-xs font-semibold py-1.5 px-3 rounded-lg focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]';
+          btn.className = 'chat-pill-3d text-xs font-extrabold py-1.5 px-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
           btn.textContent = modelName;
           btn.addEventListener('click', () => handleSalesModelSelect(modelName));
           modelGrid.appendChild(btn);
@@ -3939,14 +3956,14 @@
         headerRow.appendChild(actionGroup);
 
         const yearScroller = document.createElement('div');
-        yearScroller.className = 'sales-year-scroller grid grid-cols-4 sm:grid-cols-6 gap-1.5 max-h-40 overflow-y-auto pr-1 pb-1 mb-2.5';
+        yearScroller.className = 'sales-year-scroller grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-40 overflow-y-auto pr-1 pb-1 mb-2.5';
         yearScroller.setAttribute('role', 'listbox');
         yearScroller.setAttribute('aria-label', `${salesChatState.brand} ${salesChatState.model} model year`);
 
         salesAvailableYears.forEach(yr => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = 'sales-chip-btn text-xs font-semibold py-2 px-2 rounded-lg text-center tabular-nums focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]';
+          btn.className = 'chat-pill-3d text-xs font-extrabold py-2 px-2 text-center tabular-nums focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
           btn.textContent = yr;
           btn.setAttribute('aria-label', `Select year ${yr}`);
           btn.addEventListener('click', () => handleSalesYearSelect(yr));
@@ -3994,11 +4011,11 @@
 
         if (engines.length > 0) {
           const engineWrap = document.createElement('div');
-          engineWrap.className = 'flex flex-wrap gap-1.5 mb-2.5';
+          engineWrap.className = 'flex flex-wrap gap-2 mb-2.5';
           engines.forEach(eng => {
             const btn = document.createElement('button');
             btn.type = 'button';
-            btn.className = 'sales-chip-btn text-xs font-semibold py-1.5 px-3 rounded-lg focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]';
+            btn.className = 'chat-pill-3d text-xs font-extrabold py-1.5 px-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
             btn.textContent = eng;
             btn.addEventListener('click', () => handleSalesEngineSelect(eng));
             engineWrap.appendChild(btn);
@@ -4041,13 +4058,13 @@
 
         const waBtn = document.createElement('button');
         waBtn.type = 'button';
-        waBtn.className = 'sales-whatsapp-subtle-btn flex-1 min-w-[180px] text-xs font-semibold py-2.5 px-4 rounded-xl inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/60';
+        waBtn.className = 'sales-whatsapp-subtle-btn flex-1 min-w-[180px] text-xs font-semibold py-2.5 px-4 rounded-full inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/60';
         waBtn.innerHTML = '<i class="fab fa-whatsapp text-sm text-emerald-400" aria-hidden="true"></i><span>Send Order to WhatsApp &raquo;</span>';
         waBtn.addEventListener('click', sendSalesChatOrderToWhatsApp);
 
         const anotherBtn = document.createElement('button');
         anotherBtn.type = 'button';
-        anotherBtn.className = 'sales-chip-btn text-xs font-semibold py-2.5 px-3.5 rounded-xl focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF1F1F]';
+        anotherBtn.className = 'chat-pill-3d text-xs font-extrabold py-2.5 px-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
         anotherBtn.textContent = 'Another Car';
         anotherBtn.addEventListener('click', handleSalesShowCarPicker);
 
@@ -4060,7 +4077,8 @@
       }
     }
 
-    function resetSalesChat() {
+    function resetSalesChat(options) {
+      const opts = options || {};
       const token = ++salesChatTurnToken;
       clearSalesTypingIndicator();
       const messagesEl = document.getElementById('salesChatMessages');
@@ -4068,18 +4086,26 @@
       if (messagesEl) messagesEl.innerHTML = '';
       if (controlsEl) controlsEl.innerHTML = '';
 
-      salesChatState.step = 'greeting';
+      salesChatState.step = opts.openVin ? 'chassis' : 'greeting';
+      salesChatState.showFitmentSelectors = Boolean(opts.showFitmentSelectors || opts.openVin);
       salesChatState.brand = '';
       salesChatState.model = '';
       salesChatState.year = '';
       salesChatState.engineYear = '';
       salesChatState.chassis = '';
+      salesChatState.lastBrand = '';
+      salesChatState.lastModel = '';
+      salesChatState.lastYear = '';
+      salesChatState.lastEngine = '';
+      salesChatState.askedPriceCount = 0;
+      salesChatState.turnCount = 0;
       salesChatState.qaHistory = [];
       salesChatState.topicCounts = {};
       salesChatState.lastFallbackIdx = -1;
 
-      const welcomeCopy =
-        "Welcome to Kash Option! I'm Kash Auto Bot—your OEM spark plug specialist. We supply 100% genuine zero-fake plugs for better fuel economy and engine protection, with fast nationwide delivery across Ghana. Pick your car brand, verify your VIN, or ask anything below.";
+      const welcomeCopy = opts.openVin
+        ? "Drop your 17-character Chassis / VIN below and I'll confirm the exact OEM spark plug spec."
+        : "Welcome to Kash Option—I'm Kash Auto Bot, your Accra OEM spark plug specialist. Ask me anything, or tell me what car you drive to match genuine plugs.";
 
       showSalesTypingIndicator('Kash Auto Bot is typing...');
       salesTypingTimer = window.setTimeout(() => {
@@ -4351,24 +4377,249 @@
         .sort((a, b) => b.score - a.score);
     }
 
-    function formatCatalogueProductReply(matches, rawQuery) {
-      const top = matches.slice(0, 2);
-      if (top.length === 1) {
-        const p = top[0];
-        const primarySpec = p.specs.length ? ` (${p.specs[0]})` : '';
-        return {
-          text: `${p.title} takes ${p.partLabel} — ${p.oemMaker}${primarySpec}. Share your year/VIN to confirm exact fitment or tap WhatsApp to order.`,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I want to check availability and order ${p.title} (${p.partLabel}) — question: "${rawQuery}".`
-        };
+    function getOemMakerLabel(brand) {
+      const b = String(brand || '').toLowerCase();
+      if (b === 'toyota') return 'Denso Japan OEM';
+      if (b === 'honda') return 'NGK Japan OEM';
+      if (b === 'hyundai' || b === 'kia') return 'Mobis Korea OEM';
+      return 'Denso, NGK & Mobis OEM';
+    }
+
+    function getRememberedVehicleParts() {
+      const brand = salesChatState.lastBrand || salesChatState.brand;
+      const year = salesChatState.lastYear || salesChatState.year;
+      const model = salesChatState.lastModel || salesChatState.model;
+      const engine = salesChatState.lastEngine || salesChatState.engineYear;
+      return { brand, year, model, engine };
+    }
+
+    function getRememberedVehicleLabel() {
+      const { brand, year, model, engine } = getRememberedVehicleParts();
+      return [year, brand, model, engine].filter(Boolean).join(' ');
+    }
+
+    function buildVehicleWhatsAppPrefill(mode, verifiedPlug, rawQuery) {
+      const remembered = getRememberedVehicleLabel();
+      const vin = salesChatState.chassis;
+      const detailParts = [];
+      if (remembered) detailParts.push(remembered);
+      if (verifiedPlug) detailParts.push(`(${verifiedPlug})`);
+      if (vin) detailParts.push(`VIN: ${vin}`);
+      const detailText = detailParts.join(' ');
+
+      if (mode === 'price') {
+        return detailText
+          ? `Hello Kash Option, please share live Ghana Cedi pricing and availability for ${detailText}.`
+          : `Hello Kash Option, please share live Ghana Cedi pricing for genuine OEM spark plugs${rawQuery ? ` (${rawQuery})` : ''}.`;
       }
-      const list = top.map(p => `${p.title}: ${p.partLabel}`).join(' | ');
+      if (mode === 'pickup') {
+        return detailText
+          ? `Hello Kash Option, I'm ready to arrange pickup or rider dispatch for ${detailText}.`
+          : `Hello Kash Option, I want to arrange pickup or rider dispatch today (${rawQuery || 'spark plugs'}).`;
+      }
+      if (detailText) {
+        return `Hello Kash Option, I want to order genuine OEM spark plugs for ${detailText} and confirm live pricing.`;
+      }
+      return rawQuery
+        ? `Hello Kash Option, I want to check availability and order genuine OEM spark plugs (${rawQuery}).`
+        : 'Hello Kash Option, I am ready to order genuine OEM spark plugs and check live pricing for my vehicle.';
+    }
+
+    function extractUnsupportedBrandFromText(ql) {
+      const unsupportedBrands = [
+        { re: /\bnissan\b/i, label: 'Nissan' },
+        { re: /\b(?:mercedes(?:\s*-?\s*benz)?|benz)\b/i, label: 'Mercedes-Benz' },
+        { re: /\bbmw\b/i, label: 'BMW' },
+        { re: /\bford\b/i, label: 'Ford' },
+        { re: /\b(?:volkswagen|vw)\b/i, label: 'Volkswagen' },
+        { re: /\baudi\b/i, label: 'Audi' },
+        { re: /\bmazda\b/i, label: 'Mazda' },
+        { re: /\bsubaru\b/i, label: 'Subaru' },
+        { re: /\bmitsubishi\b/i, label: 'Mitsubishi' },
+        { re: /\bsuzuki\b/i, label: 'Suzuki' },
+        { re: /\blexus\b/i, label: 'Lexus' },
+        { re: /\binfiniti\b/i, label: 'Infiniti' },
+        { re: /\bacura\b/i, label: 'Acura' },
+        { re: /\bpeugeot\b/i, label: 'Peugeot' },
+        { re: /\brenault\b/i, label: 'Renault' },
+        { re: /\b(?:chevrolet|chevy)\b/i, label: 'Chevrolet' },
+        { re: /\bgmc\b/i, label: 'GMC' },
+        { re: /\bdodge\b/i, label: 'Dodge' },
+        { re: /\bjeep\b/i, label: 'Jeep' },
+        { re: /\b(?:land\s*rover|range\s*rover)\b/i, label: 'Land Rover' },
+        { re: /\bvolvo\b/i, label: 'Volvo' },
+        { re: /\bporsche\b/i, label: 'Porsche' },
+        { re: /\bopel\b/i, label: 'Opel' },
+        { re: /\bchery\b/i, label: 'Chery' },
+        { re: /\bjetour\b/i, label: 'Jetour' },
+        { re: /\bbyd\b/i, label: 'BYD' },
+        { re: /\bisuzu\b/i, label: 'Isuzu' },
+        { re: /\btesla\b/i, label: 'Tesla' },
+        { re: /\bmini\s+cooper\b/i, label: 'Mini' },
+        { re: /\bjaguar\b/i, label: 'Jaguar' },
+        { re: /\bkia\b/i, label: null }
+      ];
+      for (const entry of unsupportedBrands) {
+        if (entry.label && entry.re.test(ql)) {
+          return entry.label;
+        }
+      }
+      return '';
+    }
+
+    function extractVehicleContextFromText(rawText) {
+      const clean = normalizeDomText(rawText);
+      const ql = clean.toLowerCase();
+      const result = {
+        brand: '',
+        model: '',
+        year: '',
+        engine: '',
+        vin: '',
+        hasAnyEntity: false
+      };
+
+      const brandHit = ql.match(/\b(toyota|honda|hyundai|kia)\b/i);
+      if (brandHit) {
+        result.brand = brandHit[1].charAt(0).toUpperCase() + brandHit[1].slice(1).toLowerCase();
+      }
+
+      // Check aliases & canonical models longest-first so multi-word names match before short ones
+      const modelCandidates = [];
+      if (typeof salesBrandModelCatalog === 'object') {
+        Object.keys(salesBrandModelCatalog).forEach(b => {
+          Object.keys(salesBrandModelCatalog[b]).forEach(canon => {
+            modelCandidates.push({ term: canon, brand: b, model: canon });
+            canon.split('/').map(s => s.trim()).forEach(part => {
+              if (part && part !== canon) {
+                modelCandidates.push({ term: part, brand: b, model: canon });
+              }
+            });
+          });
+        });
+      }
+      if (typeof salesModelAliasMap === 'object') {
+        Object.keys(salesModelAliasMap).forEach(b => {
+          Object.keys(salesModelAliasMap[b]).forEach(alias => {
+            modelCandidates.push({ term: alias, brand: b, model: salesModelAliasMap[b][alias] });
+          });
+        });
+      }
+      modelCandidates.sort((a, b) => b.term.length - a.term.length);
+
+      for (const cand of modelCandidates) {
+        const escaped = cand.term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        if (new RegExp(`\\b${escaped}\\b`, 'i').test(ql)) {
+          if (!result.brand || result.brand === cand.brand) {
+            result.brand = cand.brand;
+            result.model = cand.model;
+            break;
+          }
+        }
+      }
+
+      if (!result.model) {
+        const regHit = matchVehicleRegistryModel(ql);
+        if (regHit) {
+          result.brand = result.brand || regHit.brand;
+          result.model = regHit.model;
+        }
+      }
+
+      // Extract production year (1990-2026) anywhere in text
+      const yearMatch = clean.match(/\b(199\d|20[0-2]\d)\b/);
+      if (yearMatch) {
+        const yr = parseInt(yearMatch[1], 10);
+        if (yr >= 1990 && yr <= 2026) {
+          result.year = String(yr);
+        }
+      }
+
+      // Extract engine spec (e.g., "1.8L", "2.4", "1.5L Turbo", "2.5L Hybrid", "V6", "2ZR")
+      const enginePatterns = [
+        /\b(\d\.\d)\s*l(?:iter|itre)?s?\s*(turbo|hybrid|t-gdi|gdi|v6|v8)?\b/i,
+        /\b(\d\.\d)\s*(t|turbo|hybrid)\b/i,
+        /\b(\d{3,4})\s*cc\b/i,
+        /\b(1\.[0-9]|2\.[0-9]|3\.[0-9]|4\.[0-9]|5\.[0-7])\b/i,
+        /\b(v6|v8|earth\s*dreams|2zr(?:-fe|-fxe)?|2az(?:-fe)?|1gr(?:-fe)?|2gr(?:-fe)?|k24[az]?|r18[az]?|l15b7|theta\s*ii|gamma|nu)\b/i
+      ];
+      for (const pat of enginePatterns) {
+        const em = clean.match(pat);
+        if (em) {
+          if (/cc/i.test(em[0])) {
+            const cc = parseInt(em[1], 10);
+            if (cc >= 800 && cc <= 6200) {
+              result.engine = `${(cc / 1000).toFixed(1)}L`;
+              break;
+            }
+          } else if (/^\d\.\d$/.test(em[1] || '')) {
+            const liters = parseFloat(em[1]);
+            if (liters >= 0.8 && liters <= 6.2) {
+              const suffix = em[2]
+                ? ` ${em[2].toLowerCase() === 't' ? 'Turbo' : em[2].charAt(0).toUpperCase() + em[2].slice(1).toLowerCase()}`
+                : '';
+              result.engine = `${liters.toFixed(1)}L${suffix}`;
+              break;
+            }
+          } else {
+            result.engine = em[0].toUpperCase();
+            break;
+          }
+        }
+      }
+
+      // Extract 17-character VIN anywhere in text
+      const vinTokens = clean.toUpperCase().match(/\b[A-HJ-NPR-Z0-9]{17}\b/g);
+      if (vinTokens) {
+        const validVin = vinTokens.find(v => /[A-Z]/.test(v) && /\d/.test(v));
+        if (validVin) result.vin = validVin;
+      }
+
+      result.hasAnyEntity = Boolean(result.brand || result.model || result.year || result.engine || result.vin);
+      return result;
+    }
+
+    function mergeExtractedVehicleContext(extracted) {
+      if (!extracted || !extracted.hasAnyEntity) return false;
+      const prevBrand = salesChatState.lastBrand || salesChatState.brand;
+      const prevModel = salesChatState.lastModel || salesChatState.model;
+
+      if (extracted.brand && prevBrand && extracted.brand !== prevBrand) {
+        syncVehicleContextState({
+          brand: extracted.brand,
+          model: extracted.model || '',
+          year: extracted.year || '',
+          engine: extracted.engine || ''
+        });
+      } else if (extracted.model && prevModel && extracted.model !== prevModel) {
+        syncVehicleContextState({
+          brand: extracted.brand || prevBrand,
+          model: extracted.model,
+          year: extracted.year || '',
+          engine: extracted.engine || ''
+        });
+      } else {
+        if (extracted.brand) syncVehicleContextState({ brand: extracted.brand });
+        if (extracted.model) syncVehicleContextState({ model: extracted.model });
+        if (extracted.year) syncVehicleContextState({ year: extracted.year });
+        if (extracted.engine) syncVehicleContextState({ engine: extracted.engine });
+      }
+      if (extracted.vin) {
+        syncVehicleContextState({ chassis: extracted.vin });
+      }
+      return true;
+    }
+
+    function formatCatalogueProductReply(matches, rawQuery) {
+      const p = matches[0];
+      const remembered = getRememberedVehicleLabel();
+      const subject = remembered || p.title;
       return {
-        text: `Matching OEM options: ${list}. Share your engine/year or VIN to narrow it down, or tap WhatsApp to order.`,
+        text: `We stock genuine ${p.oemMaker} plugs (${p.partLabel}) for ${subject}. Share your year/engine to verify exact reach or tap WhatsApp to order.`,
         nextStep: 'qa',
         showWhatsAppCta: true,
-        whatsappPrefill: `Hello Kash Option, I want to check ${top[0].title} / ${top[1].title} spark plug availability — question: "${rawQuery}".`
+        whatsappLabel: 'Order on WhatsApp (024 011 8846)',
+        whatsappPrefill: buildVehicleWhatsAppPrefill('order', p.partLabel, rawQuery)
       };
     }
 
@@ -4384,28 +4635,37 @@
         ql === 'kash auto bot' ||
         ql === 'bot';
 
+      const unsupportedBrand = extractUnsupportedBrandFromText(ql);
+      const hasSupportedBrandOrModel = Boolean(/\b(toyota|honda|hyundai|kia)\b/i.test(ql) || matchVehicleRegistryModel(ql));
+
       const isPricing =
         /\b(how much|price|prices|pricing|cost|costs|quote|quotes|quotation|cedi|cedis|ghs|ghana cedi|rate|rates|discount|discounts|cheap|cheaper|expensive|affordable|fee|why are prices not displayed)\b/i.test(ql);
 
+      const isPickupUrgency =
+        /\b(pick ?up|walk[- ]?in|send rider|dispatch now|mechanic sent me|my mechanic|need \d+ plugs?|need a set|want to buy|want to order|ready to buy|order now|available now)\b/i.test(ql) ||
+        (/\b(today|right now|urgent|urgently)\b/i.test(ql) && /\b(plug|plugs|set|buy|order|get|collect|deliver|dispatch|rider|open|shop)\b/i.test(ql));
+
       const isDelivery =
-        /\b(deliver|delivery|shipping|ship|dispatch|courier|rider|kumasi|takoradi|tamale|sunyani|region|regions|outside accra|waybill|stc|vip|how fast|long does delivery)\b/i.test(ql) ||
+        /\b(deliver|delivery|shipping|ship|dispatch|courier|rider|kumasi|takoradi|tamale|sunyani|cape coast|ho|koforidua|region|regions|outside accra|waybill|stc|vip|how fast|long does delivery)\b/i.test(ql) ||
         /\bdeliver(?:y|ing)?\s+to\s+(?:tema|accra)\b/i.test(ql);
 
       const isLocation =
-        /\b(where are you|where're you|where is (?:kash|your|the) (?:shop|store|office|location|place|hub)|your location|shop location|office location|what is your address|your address|where.*located|where.*based|where can i find|visit your shop|walk[- ]?in|directions?|pick ?up point|community\s*18|comm\s*18)\b/i.test(ql) ||
+        /\b(where are you|where're you|where is (?:kash|your|the) (?:shop|store|office|location|place|hub)|your location|shop location|office location|what is your address|your address|where.*located|where.*based|where can i find|visit your shop|directions?|community\s*18|comm\s*18|spintex)\b/i.test(ql) ||
         (ql.includes('location') && !isDelivery) ||
         (ql.includes('address') && !/\bemail\b/i.test(ql)) ||
-        /\bfind\s+you\b/i.test(ql) ||
-        /\bwhere\s+.*\b(shop|store|office|located|based)\b/i.test(ql);
+        /\bfind\s+you\b/i.test(ql);
 
       const isDefectReturn = /\b(defect|defective|faulty|return|returns|refund|exchange|warranty|store credit|broken|damaged)\b/i.test(ql);
-      const isWholesale = /\b(wholesale|carton|cartons|40 plugs|200 plugs|master case|bulk|trade|workshop|workshops|garage|garages|mechanic|mechanics|dealer|dealers|abossey okai|magazine|vat|stockist)\b/i.test(ql);
+      const isWholesale = /\b(wholesale|carton|cartons|40 plugs|200 plugs|master case|bulk|trade|workshop|workshops|garage|garages|dealer|dealers|abossey okai|magazine|vat|stockist)\b/i.test(ql);
       const isHoursContact = /\b(hour|hours|open|opening|close|closing|working hours|when are you open|phone|call|number|email|mail|contact|instagram|tiktok|social)\b/i.test(ql);
       const isPayment = /\b(payment|pay|momo|mobile money|mtn|telecel|vodafone|bank|wire|transfer|cash|cod)\b/i.test(ql);
-      const isAuthFake = /\b(genuine|original|authentic|authenticity|fake|fakes|counterfeit|imitation|jiji|spot counterfeit|real|denso|ngk|mobis|japan|usa|korea)\b/i.test(ql);
-      const isSymptomTech = /\b(misfire|misfires|fuel|economy|consumption|hesitation|idle|coil|coils|iridium|platinum|copper|heat range|resistor|5\.0|ohmmeter|thread reach|19mm|26\.5mm|gap|pre-ignition|carbon fouling|detonation|service interval|100,000|km)\b/i.test(ql);
-      const isVin = /\b(vin|chassis|frame number|how to verify|check fitment|fitment tool|right spark plug|right plug|certain)\b/i.test(ql);
-      const isCasualChat = /^(?:hi|hello|hey|good morning|good afternoon|good evening|greetings|yo|sup|thanks|thank you|ok|okay|alright|cool|great|nice|yes|yeah|yep|no|nope|sure|help|menu)\b[!.]*$/i.test(ql);
+      const isAuthFake = /\b(genuine|original|authentic|authenticity|fake|fakes|counterfeit|imitation|jiji|spot counterfeit|denso|ngk|mobis|japan|usa|korea)\b/i.test(ql);
+      const isSymptomTech = /\b(jerk|jerking|jerks|shake|shaking|vibrat|rough idle|hard start|won'?t start|burning fuel|drinking fuel|fuel burn|poor pickup|sluggish|stalling|misfire|misfiring|misfires|fuel|economy|consumption|hesitation|idle|coil|coils|iridium|platinum|copper|heat range|resistor|5\.0|ohmmeter|thread reach|19mm|26\.5mm|gap|pre-ignition|carbon fouling|detonation|service interval|100,000)\b/i.test(ql);
+      const isVin = /\b(vin|chassis|frame number|how to verify|check fitment|fitment tool|right spark plug|right plug)\b/i.test(ql);
+      const isUnrealisticJoke = /\b(fly|flying|spaceship|rocket|moon|mars|teleport|time travel|airplane|aeroplane|jet|wings|submarine|underwater|magic|superpower|1000\s*hp|make it float)\b/i.test(ql);
+      const isOffTopic = /\b(football|soccer|premier league|champions league|messi|ronaldo|chelsea|arsenal|man u|liverpool|black stars|politics|election|president|parliament|government|weather|rain|sunny|forecast|movie|music|song|recipe|food|jollof|waakye|crypto|bitcoin|betting|casino|relationship|love|girlfriend|boyfriend|married|joke|poem|homework|math)\b/i.test(ql);
+      const isPlugOrFitmentPrompt = /\b(plug|plugs|spark|sparkplug|fitment|fit|toyota|honda|hyundai|kia|model|car|vin|chassis|engine|replace|replacement)\b/i.test(ql);
+      const isCasualChat = /^(?:hi|hello|hey|good morning|good afternoon|good evening|greetings|yo|sup|thanks|thank you|thank u|ty|ok|okay|alright|cool|great|nice|yes|yeah|yep|no|nope|sure|help|menu)\b[!.]*$/i.test(ql);
       const isQuestionShape = /\?$/.test(q) || /^(?:who|what|where|when|why|how|can|could|do|does|did|is|are|will|would|tell me|do you|where do)\b/i.test(ql);
 
       return {
@@ -4413,7 +4673,10 @@
         ql,
         isHumanHandoff,
         isIdentity,
+        unsupportedBrand: unsupportedBrand && !hasSupportedBrandOrModel ? unsupportedBrand : '',
+        isPlugOrFitmentPrompt,
         isPricing,
+        isPickupUrgency,
         isDelivery,
         isLocation,
         isDefectReturn,
@@ -4423,12 +4686,15 @@
         isAuthFake,
         isSymptomTech,
         isVin,
+        isUnrealisticJoke,
+        isOffTopic,
         isCasualChat,
         isQuestionShape,
         hasKnownTopic:
-          isHumanHandoff || isIdentity || isPricing || isDelivery || isLocation ||
-          isDefectReturn || isWholesale || isHoursContact || isPayment ||
-          isAuthFake || isSymptomTech || isVin || isCasualChat
+          isHumanHandoff || isIdentity || Boolean(unsupportedBrand) || isPricing ||
+          isPickupUrgency || isDelivery || isLocation || isDefectReturn ||
+          isWholesale || isHoursContact || isPayment || isAuthFake ||
+          isSymptomTech || isVin || isUnrealisticJoke || isOffTopic || isCasualChat
       };
     }
 
@@ -4440,321 +4706,407 @@
     }
 
     function getSelectedVehicleLabel() {
-      const parts = [salesChatState.brand, salesChatState.year, salesChatState.model, salesChatState.engineYear].filter(Boolean);
-      return parts.length ? parts.join(' ') : '';
+      return getRememberedVehicleLabel();
     }
 
     function generateKashAutoBotReply(rawQuery) {
+      const reply = computeKashAutoBotReply(rawQuery);
+      if (reply && reply.showFitmentPills) {
+        salesChatState.showFitmentSelectors = true;
+      }
+      return reply;
+    }
+
+    function computeKashAutoBotReply(rawQuery) {
+      salesChatState.turnCount = (salesChatState.turnCount || 0) + 1;
+
       const intent = detectKashIntent(rawQuery);
       const q = intent.q;
       const ql = intent.ql;
       const index = getKashKnowledgeIndex();
       const contact = index.contact;
-      const selectedVehicle = getSelectedVehicleLabel();
 
-      // 1. Human / Sales Agent Handoff -> Trigger direct WhatsApp chat + clickable button
+      // 1. Human / Sales Agent Handoff -> Direct WhatsApp
       if (intent.isHumanHandoff) {
         const handoffTurn = bumpTopicCount('handoff');
+        const remembered = getRememberedVehicleLabel();
         const handoffText = handoffTurn === 1
-          ? `Connecting you directly to our Kash Option sales desk on WhatsApp (${contact.phone}). Tap the button below if WhatsApp doesn't open automatically.`
-          : `Our Community 18 desk is live on WhatsApp (${contact.phone}) right now. Tap below to message a representative directly with your car details.`;
+          ? `Connecting you to our Accra sales desk on WhatsApp (${contact.phone}). Tap below if it doesn't open automatically.`
+          : `Our Community 18 desk is live on WhatsApp (${contact.phone}) right now. Tap below${remembered ? ` with your ${remembered} details` : ' to speak with a specialist'}.`;
         return {
           text: handoffText,
           nextStep: 'qa',
           showWhatsAppCta: true,
           autoOpenWhatsApp: true,
           whatsappLabel: `Chat with Sales Desk (${contact.phone})`,
-          whatsappPrefill: `Hello Kash Option, I would like to speak directly with a sales representative regarding genuine OEM spark plugs (${q}).`
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', '', q)
         };
       }
 
       // 2. Identity Questions
       if (intent.isIdentity) {
         const idTurn = bumpTopicCount('identity');
-        const idText = idTurn === 1
-          ? "I'm Kash Auto Bot, your Spark Plug Robot for the Kash Option OEM Catalog Directory. Pick a car brand, enter your VIN, or ask anything about genuine spark plugs below."
-          : "I'm Kash Auto Bot—built to match 100% original Denso, NGK, and Mobis spark plugs to Toyota, Honda, Hyundai, and Kia vehicles across Ghana. What car are we checking today?";
         return {
-          text: idText,
+          text: idTurn === 1
+            ? "I'm Kash Auto Bot, Kash Option's ignition specialist in Accra. Tell me your Toyota, Honda, Hyundai, or Kia model and year to match your exact OEM plug."
+            : "I'm Kash Auto Bot—I match genuine Denso, NGK, and Mobis spark plugs for Toyota, Honda, Hyundai, and Kia across Ghana. Which car are we checking?",
           nextStep: 'qa',
           showWhatsAppCta: false
         };
       }
 
-      // 3. Shop Location Knowledge (Community 18)
+      // 3. Unrealistic / Joke Pivot (Calm dry wit -> ignition fitment, checked BEFORE product catchers)
+      if (intent.isUnrealisticJoke) {
+        const jokeTurn = bumpTopicCount('joke');
+        const extractedJokeVehicle = extractVehicleContextFromText(q);
+        if (extractedJokeVehicle.hasAnyEntity) {
+          mergeExtractedVehicleContext(extractedJokeVehicle);
+        }
+        const rememberedJoke = getRememberedVehicleLabel();
+        const jokeText = rememberedJoke && extractedJokeVehicle.model
+          ? `Still waiting on aviation clearance for that—our genuine plugs keep your ${rememberedJoke} smooth on the road, not airborne. Want to confirm your exact year or tap WhatsApp to order?`
+          : (jokeTurn % 2 === 1
+            ? "Still waiting on aviation clearance for that—our OEM plugs stick strictly to keeping Toyotas, Hondas, Hyundais, and Kias crisp on Ghanaian roads. Which car are we matching today?"
+            : "No rocket fuel required, just zero misfires on four wheels. Tell me your Toyota, Honda, Hyundai, or Kia model and year to grab a genuine set.");
+        return {
+          text: jokeText,
+          nextStep: 'qa',
+          showFitmentPills: Boolean(extractedJokeVehicle.model),
+          showWhatsAppCta: Boolean(rememberedJoke),
+          whatsappLabel: rememberedJoke ? `Order for ${rememberedJoke}` : undefined,
+          whatsappPrefill: rememberedJoke ? buildVehicleWhatsAppPrefill('order', '', q) : undefined
+        };
+      }
+
+      // 3b. Pure Off-Topic Pivot (Weather, Sports, Politics, Crypto, etc. — evaluated before remembered-vehicle catchers)
+      if (intent.isOffTopic && !intent.unsupportedBrand && !/\b(toyota|honda|hyundai|kia|plug|plugs|spark|vin|chassis|price|cost|deliver|rider|pick ?up)\b/i.test(ql)) {
+        const offTurn = bumpTopicCount('offtopic');
+        return {
+          text: offTurn % 2 === 1
+            ? "I leave that outside the workshop—my lane is keeping Toyotas, Hondas, Hyundais, and Kias running smoothly in Accra. Which car are we matching OEM plugs for today?"
+            : "Good question, though I strictly handle genuine Denso, NGK, and Mobis spark plugs at Community 18. Need a factory set matched for your vehicle?",
+          nextStep: 'qa',
+          showWhatsAppCta: false
+        };
+      }
+
+      // 4. Unsupported Brand Guardrail (Evaluated BEFORE merging stale lastBrand so unsupported makes never bypass)
+      if (intent.unsupportedBrand) {
+        const unsupTurn = bumpTopicCount('unsupported_brand');
+        return {
+          text: unsupTurn % 2 === 1
+            ? "Kash Option specializes strictly in genuine OEM spark plugs for Toyota, Honda, Hyundai, and Kia. If you also maintain any of those four makes, tap WhatsApp (024 011 8846) anytime."
+            : "We keep our Community 18 stock 100% focused on factory Denso, NGK, and Mobis plugs for Toyota, Honda, Hyundai, and Kia only. Reach us anytime if you ever need ignition plugs for those four brands.",
+          nextStep: 'qa',
+          showWhatsAppCta: false
+        };
+      }
+
+      // 5. Extract & Merge Supported Vehicle Entities Across Turns
+      const extracted = extractVehicleContextFromText(q);
+      const mergedNewVehicleInfo = mergeExtractedVehicleContext(extracted);
+      const matchedProducts = matchCatalogueProducts(ql, index);
+      const rememberedVehicle = getRememberedVehicleLabel();
+      const { brand: memBrand, model: memModel, year: memYear, engine: memEngine } = getRememberedVehicleParts();
+      const verifiedPlug = getVerifiedPlugMatch(memBrand, memModel, memEngine);
+
+      // 6. Pricing Guardrail (Kash Auto Bot never quotes prices; channels straight to WhatsApp with full vehicle context)
+      if (intent.isPricing) {
+        salesChatState.askedPriceCount = (salesChatState.askedPriceCount || 0) + 1;
+        const priceTurn = salesChatState.askedPriceCount;
+        const vehicleRef = rememberedVehicle
+          ? `${rememberedVehicle}${verifiedPlug ? ` (${verifiedPlug})` : ''}`
+          : (matchedProducts.length > 0 ? `${matchedProducts[0].title} (${matchedProducts[0].partLabel})` : '');
+
+        let priceText;
+        if (priceTurn === 1) {
+          priceText = vehicleRef
+            ? `I don't handle pricing directly—tap WhatsApp (${contact.phone}) below for live Cedi pricing on your ${vehicleRef} set.`
+            : `Kash Auto Bot doesn't handle pricing directly—tap WhatsApp (${contact.phone}) below for live Cedi pricing and stock confirmation.`;
+        } else if (priceTurn === 2) {
+          priceText = vehicleRef
+            ? `Live Cedi totals are issued directly by our Accra sales desk—tap WhatsApp (${contact.phone}) with your ${vehicleRef} prefilled to lock it in.`
+            : `All live Cedi quotes come straight from our Community 18 desk on WhatsApp (${contact.phone}). Tap below or pick a brand pill first so I prefill it for you.`;
+        } else {
+          priceText = `Pricing changes with batch stock, so our WhatsApp desk (${contact.phone}) gives today's exact Cedi figure in seconds. Tap the WhatsApp button below${vehicleRef ? ` for your ${vehicleRef}` : ''}.`;
+        }
+
+        return {
+          text: priceText,
+          nextStep: 'pricing',
+          showFitmentPills: true,
+          showWhatsAppCta: true,
+          whatsappLabel: `Get Live Price (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('price', verifiedPlug || (matchedProducts[0] && matchedProducts[0].partLabel), q)
+        };
+      }
+
+      // 7. Casual Buying Intent, Urgency, Pickup Today, Rider Dispatch, or Mechanic Sent Me
+      if (intent.isPickupUrgency) {
+        const pickTurn = bumpTopicCount('pickup');
+        const specText = rememberedVehicle
+          ? ` for your ${rememberedVehicle}${verifiedPlug ? ` (${verifiedPlug})` : ''}`
+          : '';
+        let pickText;
+        if (/\b(rider|dispatch|deliver|send)\b/i.test(ql)) {
+          pickText = `We can send a rider within 30–45 minutes across Accra/Tema or waybill same-day nationwide${specText}. Tap WhatsApp (${contact.phone}) below to drop your pin and confirm.`;
+        } else if (/\b(pick ?up|walk[- ]?in|community\s*18|comm\s*18)\b/i.test(ql)) {
+          pickText = pickTurn === 1
+            ? `Yes—Community 18 pickup is open Mon–Sat ${contact.hours}${specText ? `, and we'll pack your ${rememberedVehicle} set` : ''}. Tap WhatsApp (${contact.phone}) before heading over so it's ready.`
+            : `Come through to our Community 18 hub anytime ${contact.hours}, or send a rider to pick up. Tap WhatsApp (${contact.phone}) to reserve your set first.`;
+        } else {
+          pickText = rememberedVehicle
+            ? `We have genuine OEM sets in stock${specText}. Tap WhatsApp (${contact.phone}) now to confirm live pricing and pickup or rider dispatch.`
+            : `We stock genuine 4-cylinder and V6 OEM sets for Toyota, Honda, Hyundai, and Kia ready for pickup or 30–45 min rider dispatch. Pick your car below or tap WhatsApp (${contact.phone}).`;
+        }
+        return {
+          text: pickText,
+          nextStep: 'qa',
+          showFitmentPills: true,
+          showWhatsAppCta: true,
+          whatsappLabel: `Confirm Pickup / Dispatch (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('pickup', verifiedPlug, q)
+        };
+      }
+
+      // 8. Shop Location
       if (intent.isLocation) {
         const locTurn = bumpTopicCount('location');
-        const locText = locTurn === 1
-          ? `Kash Option is located at Community 18, with fast nationwide delivery across Ghana. Reach our desk at ${contact.phone} or on WhatsApp for directions or express dispatch.`
-          : `You can visit our hub at Community 18 (Tema/Spintex corridor) Mon–Sat ${contact.hours}, or skip the drive—we dispatch riders across Accra/Tema in 30–45 minutes. Tap WhatsApp for a live pin.`;
         return {
-          text: locText,
+          text: locTurn === 1
+            ? `Our hub is at Community 18 (Tema/Spintex corridor), open Mon–Sat ${contact.hours}. Tap WhatsApp (${contact.phone}) for directions or 30–45 minute rider dispatch.`
+            : `Visit us at Community 18 Mon–Sat ${contact.hours}, or skip traffic and let our Accra/Tema rider deliver straight to you. Tap WhatsApp (${contact.phone}) for a live pin.`,
           nextStep: 'qa',
           showWhatsAppCta: true,
-          whatsappLabel: 'Directions & Orders on WhatsApp',
-          whatsappPrefill: `Hello Kash Option, I'm asking about your Community 18 location / pickup and ordering (${q}).`
+          whatsappLabel: 'Pin & Orders on WhatsApp',
+          whatsappPrefill: buildVehicleWhatsAppPrefill('pickup', verifiedPlug, q)
         };
       }
 
-      const matchedProducts = matchCatalogueProducts(ql, index);
-      const matchedModel = matchVehicleRegistryModel(ql);
-
-      // 4. Pricing Questions (Multi-Turn Anti-Repetition & Actionable Quote Guidance)
-      if (intent.isPricing) {
-        const pricingTurn = bumpTopicCount('pricing');
-        const contextVehicle = matchedProducts.length > 0
-          ? `${matchedProducts[0].title} (${matchedProducts[0].partLabel})`
-          : matchedModel
-            ? `${matchedModel.brand} ${matchedModel.model}`
-            : selectedVehicle;
-
-        if (pricingTurn === 1) {
-          const intro = contextVehicle
-            ? `For ${contextVehicle}, genuine `
-            : 'Genuine ';
-          return {
-            text: `${intro}OEM Denso, NGK, and Mobis Ghana Cedi pricing depends on your exact engine code, 4-cylinder vs. V6 set size (4 or 6 plugs), and whether you're ordering a single retail set or a wholesale carton. Select your vehicle below or tap WhatsApp for today's live stock quote.`,
-            nextStep: 'pricing',
-            showWhatsAppCta: true,
-            whatsappLabel: `Get Live Quote (${contact.phone})`,
-            whatsappPrefill: `Hello Kash Option, please confirm exact Ghana Cedi pricing for my ${contextVehicle || 'vehicle'} (${q}).`
-          };
-        }
-
-        if (pricingTurn === 2) {
-          return {
-            text: `Got it—let's lock in an exact figure for you. Share your specific car make, model, and year (1990–2026) below so we match the OEM part number first, or tap the WhatsApp quote button (${contact.phone}) for instant live Community 18 stock pricing.`,
-            nextStep: 'pricing',
-            showWhatsAppCta: true,
-            whatsappLabel: `WhatsApp Quote (${contact.phone})`,
-            whatsappPrefill: `Hello Kash Option, I'm following up on live Community 18 stock pricing for ${contextVehicle || 'my vehicle'} (${q}).`
-          };
-        }
-
-        return {
-          text: `Since live Cedi totals follow daily Community 18 import batches, confirming your car brand and year (1990–2026) below—or tapping Toyota, Honda, Hyundai, or Kia—pins down the exact OEM code, and our WhatsApp desk (${contact.phone}) replies immediately with your set or carton price.`,
-          nextStep: 'pricing',
-          showWhatsAppCta: true,
-          whatsappLabel: `Tap for Instant Quote (${contact.phone})`,
-          whatsappPrefill: `Hello Kash Option, please send today's Cedi price for ${contextVehicle || 'my OEM spark plugs'} (${q}).`
-        };
-      }
-
-      // 5. Pure brand/model/part query
-      if (matchedProducts.length > 0 && !intent.isDelivery && !intent.isDefectReturn && !intent.isWholesale && !intent.isHoursContact && !intent.isPayment && !intent.isSymptomTech && !intent.isAuthFake && !intent.isVin) {
-        return formatCatalogueProductReply(matchedProducts, q);
-      }
-
-      // 6. Support Hours & Contact Info
-      if (intent.isHoursContact) {
-        const hoursTurn = bumpTopicCount('hours');
-        const hoursText = hoursTurn === 1
-          ? `We are based at Community 18 and open ${contact.hours} (after-hours delivery by confirmation). Call or WhatsApp ${contact.phone}, or email ${contact.email}.`
-          : `Our Community 18 technical desk answers calls and WhatsApp messages on ${contact.phone} from ${contact.hours}. Need after-hours dispatch? Message us on WhatsApp to arrange ahead.`;
-        return {
-          text: hoursText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I would like to speak with the orders desk (${q}).`
-        };
-      }
-
-      // 7. Delivery & Nationwide Fulfillment
-      if (intent.isDelivery) {
-        const delTurn = bumpTopicCount('delivery');
-        let delText;
-        if (delTurn === 1) {
-          delText = 'Accra and Tema riders deliver in 30–45 minutes from our Community 18 hub; regional orders (Kumasi, Takoradi, Tamale, Sunyani, and nationwide) dispatch same-day via VIP/STC. Pick your car below or message WhatsApp to book dispatch.';
-        } else if (delTurn === 2) {
-          delText = `Yes—riders deliver straight to your mechanic's workshop or your doorstep across Accra and Tema (with MoMo or Cash on Delivery), and regional buyers get VIP/STC parcel waybills the same afternoon. Tap WhatsApp (${contact.phone}) to drop your delivery pin.`;
-        } else {
-          delText = `Ready to send a rider? Share your vehicle model below to confirm the plug set, or message your delivery area on WhatsApp (${contact.phone}) for immediate dispatch.`;
-        }
-        return {
-          text: delText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I want to arrange delivery for genuine OEM spark plugs (${q}).`
-        };
-      }
-
-      // 8. Payment Options
-      if (intent.isPayment) {
-        const payTurn = bumpTopicCount('payment');
-        const payText = payTurn === 1
-          ? 'We accept Mobile Money (MTN & Telecel), Bank Wire, and Cash on Delivery (COD). Pick your car below or tap WhatsApp to order.'
-          : 'Accra and Tema buyers can pay cash or MoMo on inspection when the rider arrives, while regional and wholesale orders support MTN/Telecel MoMo and bank transfers before waybill dispatch.';
-        return {
-          text: payText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I would like to place an order and confirm payment (${q}).`
-        };
-      }
-
-      // 9. Wholesale & Trade Supply
-      if (intent.isWholesale) {
-        const tradeTurn = bumpTopicCount('wholesale');
-        let tradeText;
-        if (tradeTurn === 1) {
-          tradeText = 'We supply 40-plug Workshop Cartons (10 sets, VAT invoices included) and 200-plug Master Cases for garages and dealers across Ghana. Tap WhatsApp for live trade rates.';
-        } else if (tradeTurn === 2) {
-          tradeText = `We stock fast-moving Denso, NGK, and Mobis SKUs in bulk for Abossey Okai, Suame Magazine, workshops, and fleet managers—you can mix top Toyota, Honda, Hyundai, and Kia codes in a trade order. Message ${contact.phone} on WhatsApp for today's carton sheet.`;
-        } else {
-          tradeText = `Let us know which OEM codes or workshop volumes you run weekly on WhatsApp (${contact.phone}) so our trade desk can lock in dealer carton rates for you.`;
-        }
-        return {
-          text: tradeText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I would like wholesale trade pricing (${q}).`
-        };
-      }
-
-      // 10. Factory Defect & Returns Policy
-      if (intent.isDefectReturn) {
-        const retTurn = bumpTopicCount('defect');
-        const retText = retTurn === 1
-          ? `Authentic factory defects reported within 48 hours of receipt prior to installation damage qualify for immediate review and exchange or store credit. Reach our desk at ${contact.phone} or on WhatsApp.`
-          : `To keep every fitment risk-free, always verify the OEM part number with our Chassis/VIN check before breaking seal—and if anything arrives damaged in transit, contact ${contact.phone} within 48 hours for fast exchange.`;
-        return {
-          text: retText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I have an inquiry regarding your ordering/defect policy (${q}).`
-        };
-      }
-
-      // 11. Symptoms, Misfires, Fuel Economy, Iridium vs Copper & Heat Range
+      // 9. Engine Symptoms (Jerking, Misfires, Burning Fuel, Hard Start, Technical Spec)
       if (intent.isSymptomTech && !/\b(fake|fakes|counterfeit|imitation)\b/i.test(ql)) {
         const techTurn = bumpTopicCount('tech');
+        let sympText;
         if (/heat|detonation|fouling/i.test(ql)) {
+          sympText = rememberedVehicle
+            ? `Wrong heat ranges cause pinging and burnt coils on ${rememberedVehicle}. Tap WhatsApp (${contact.phone}) below to lock in genuine ${verifiedPlug || 'OEM Iridium'} plugs.`
+            : "Wrong heat ranges cause engine pinging and burnt ignition coils in Accra traffic. Tap your car brand below or message WhatsApp to match your factory spec.";
+        } else if (rememberedVehicle) {
+          sympText = `Jerking and heavy fuel burn usually trace back to worn gaps or imitation plugs straining your coils—your ${rememberedVehicle} needs genuine ${verifiedPlug || `${getOemMakerLabel(memBrand)}`}. Tap WhatsApp (${contact.phone}) to grab a factory set today.`;
+        } else {
+          sympText = techTurn === 1
+            ? "Jerking, rough idling, and heavy fuel burn usually point to worn or counterfeit plugs overloading your coils. Pick your car brand below (or tap WhatsApp) to switch to factory Iridium."
+            : "Weak copper or imitation plugs trigger misfires and drain fuel fast. Select your car brand below—or tap WhatsApp (024 011 8846)—for an instant OEM replacement.";
+        }
+        return {
+          text: sympText,
+          nextStep: 'qa',
+          showFitmentPills: true,
+          showWhatsAppCta: true,
+          whatsappLabel: `Fix with OEM Plugs (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
+        };
+      }
+
+      // 10. Multi-Turn Vehicle Context / Part Lookup Resolution
+      if (mergedNewVehicleInfo || (matchedProducts.length > 0 && !intent.isDelivery && !intent.isDefectReturn && !intent.isWholesale && !intent.isHoursContact && !intent.isPayment && !intent.isAuthFake && !intent.isVin)) {
+        if (extracted.vin) {
           return {
-            text: techTurn === 1
-              ? 'Spark plug tips must run between 450°C and 870°C—wrong heat ranges cause pre-ignition pinging or carbon fouling that burns ignition coils. Share your car model or VIN to match the factory spec.'
-              : 'Matching the OEM heat range number (e.g., Denso 20 vs. NGK 6/7) prevents knock under Accra traffic heat. Tap your car brand below or enter your VIN so we confirm the exact heat code.',
+            text: `VIN ${extracted.vin} noted${rememberedVehicle ? ` for your ${rememberedVehicle}` : ''}. Tap WhatsApp (${contact.phone}) so our desk confirms the exact factory part number and dispatches.`,
             nextStep: 'qa',
+            showFitmentPills: true,
             showWhatsAppCta: true,
-            whatsappPrefill: `Hello Kash Option, I want to verify the correct OEM heat range for my vehicle (${q}).`
+            whatsappLabel: `Verify VIN on WhatsApp (${contact.phone})`,
+            whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
           };
         }
+
+        if (verifiedPlug && rememberedVehicle) {
+          return {
+            text: `Confirmed—your ${rememberedVehicle} runs genuine ${verifiedPlug}, in stock at Community 18. Tap WhatsApp (${contact.phone}) below for live Cedi pricing and dispatch.`,
+            nextStep: 'qa',
+            showFitmentPills: true,
+            showWhatsAppCta: true,
+            whatsappLabel: `Order ${verifiedPlug.split('(')[0].trim()} on WhatsApp`,
+            whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
+          };
+        }
+
+        if (memBrand && memModel) {
+          const makerLabel = getOemMakerLabel(memBrand);
+          const missingPrompt = !memYear && !memEngine
+            ? 'Share your year and engine size (e.g., 2018 1.8L) to pin the exact part code, or tap WhatsApp to order.'
+            : (!memEngine
+              ? 'Reply with your engine size (e.g., 1.8L, 2.4L, V6) to lock the exact part number, or tap WhatsApp.'
+              : `Tap WhatsApp (${contact.phone}) below for live pricing and instant dispatch.`);
+          return {
+            text: `Yes, we stock genuine ${makerLabel} plugs for the ${memYear ? `${memYear} ` : ''}${memBrand} ${memModel}${memEngine ? ` ${memEngine}` : ''}. ${missingPrompt}`,
+            nextStep: 'qa',
+            showFitmentPills: true,
+            showWhatsAppCta: true,
+            whatsappLabel: `Order ${memModel} Plugs (${contact.phone})`,
+            whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
+          };
+        }
+
+        if (matchedProducts.length > 0) {
+          const prodReply = formatCatalogueProductReply(matchedProducts, q);
+          prodReply.showFitmentPills = true;
+          return prodReply;
+        }
+
+        if (memBrand) {
+          const brandTurn = bumpTopicCount(`brand_${memBrand.toLowerCase()}`);
+          const makerLabel = getOemMakerLabel(memBrand);
+          return {
+            text: brandTurn === 1
+              ? `We stock 100% genuine ${makerLabel} spark plugs for ${memBrand}. Tap ${memBrand} below or reply with your model and year to confirm your exact set.`
+              : `Got ${memBrand} noted—tell me your model and year (e.g., 2018 and engine size), or tap WhatsApp (${contact.phone}) to order directly.`,
+            nextStep: 'qa',
+            showFitmentPills: true,
+            showWhatsAppCta: true,
+            whatsappLabel: `Order ${memBrand} Plugs (${contact.phone})`,
+            whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
+          };
+        }
+      }
+
+      // 11. Delivery & Nationwide Fulfillment
+      if (intent.isDelivery) {
+        const delTurn = bumpTopicCount('delivery');
+        const ctxNote = rememberedVehicle ? ` for your ${rememberedVehicle}` : '';
         return {
-          text: techTurn === 1
-            ? "Iridium withstands 2,466°C vs. copper's 1,085°C—standard copper or weak plugs cause misfires, high fuel burn, and coil failure. Our OEM laser-welded Iridium plugs last up to 100,000 km; pick your car below for the exact fit."
-            : "Rough idling, hard morning starts, and sudden fuel spikes usually trace back to worn gaps or counterfeit plugs overloading your ignition coils. Pick your car brand below or verify your VIN to switch back to factory Iridium spec.",
+          text: delTurn === 1
+            ? `Accra and Tema riders deliver in 30–45 minutes${ctxNote}, with same-day VIP/STC waybills nationwide. Tap WhatsApp (${contact.phone}) to drop your delivery pin.`
+            : `We dispatch straight to your mechanic or doorstep in Accra/Tema (MoMo or COD), and send regional parcels same-day via VIP/STC. Tap WhatsApp (${contact.phone}) to book dispatch.`,
           nextStep: 'qa',
+          showFitmentPills: true,
           showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I need genuine OEM spark plugs to solve ignition/fuel issues (${q}).`
+          whatsappLabel: `Book Delivery (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('pickup', verifiedPlug, q)
         };
       }
 
-      // 12. Authenticity, Counterfeit & Brand Lines
+      // 12. Support Hours & Contact Info
+      if (intent.isHoursContact) {
+        return {
+          text: `Our Community 18 desk is open Mon–Sat ${contact.hours} (after-hours by arrangement). Call or WhatsApp ${contact.phone}, or tap below to chat directly.`,
+          nextStep: 'qa',
+          showWhatsAppCta: true,
+          whatsappLabel: `WhatsApp (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
+        };
+      }
+
+      // 13. Payment Options
+      if (intent.isPayment) {
+        return {
+          text: `We accept MTN & Telecel MoMo, Bank Transfer, and Cash on Delivery across Accra and Tema. Tap WhatsApp (${contact.phone}) to confirm your order.`,
+          nextStep: 'qa',
+          showWhatsAppCta: true,
+          whatsappLabel: `Order on WhatsApp (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
+        };
+      }
+
+      // 14. Wholesale & Trade Supply
+      if (intent.isWholesale) {
+        const tradeTurn = bumpTopicCount('wholesale');
+        return {
+          text: tradeTurn === 1
+            ? `We supply 40-plug Workshop Cartons (10 sets, VAT invoices included) and 200-plug Master Cases nationwide. Tap WhatsApp (${contact.phone}) for trade sheet pricing.`
+            : `Workshops and dealers can mix fast-moving Toyota, Honda, Hyundai, and Kia OEM codes by the carton. Message ${contact.phone} on WhatsApp for today's dealer rates.`,
+          nextStep: 'qa',
+          showFitmentPills: true,
+          showWhatsAppCta: true,
+          whatsappLabel: `Wholesale Desk (${contact.phone})`,
+          whatsappPrefill: `Hello Kash Option, I need wholesale carton availability and pricing (${q}).`
+        };
+      }
+
+      // 15. Factory Defect & Returns Policy
+      if (intent.isDefectReturn) {
+        return {
+          text: `Verified factory defects reported within 48 hours of receipt before installation qualify for immediate exchange or store credit. Reach our desk on WhatsApp (${contact.phone}) anytime.`,
+          nextStep: 'qa',
+          showWhatsAppCta: true,
+          whatsappLabel: `Support on WhatsApp (${contact.phone})`,
+          whatsappPrefill: `Hello Kash Option, I have a question about a defect/exchange (${q}).`
+        };
+      }
+
+      // 16. Authenticity & Counterfeit Protection
       if (intent.isAuthFake) {
         const authTurn = bumpTopicCount('auth');
-        let authText;
-        if (authTurn === 1) {
-          authText = 'Every Denso, NGK, and Mobis plug is imported directly from Japan and the USA—zero re-boxed or imitation parts. Authentic plugs carry 0.7mm laser-welded Iridium tips, crisp ceramic print, and a 5.0 kΩ internal resistor.';
-        } else if (authTurn === 2) {
-          authText = 'You can inspect your plugs right on delivery before your mechanic fits them: check for sharp, smudge-free ceramic lettering, a fine laser-welded iridium tip (not thick cut wire), and clean crush-washer threading.';
-        } else {
-          authText = `Unlike open-market mixed stalls, every carton we stock comes from verified OEM supply lines and carries our 48-hour factory-defect guarantee. Pick your car below or message ${contact.phone} on WhatsApp to order with confidence.`;
-        }
         return {
-          text: authText,
+          text: authTurn === 1
+            ? "Every Denso, NGK, and Mobis plug comes straight from verified Japan, USA, and Korea supply lines—never open-market imitations. Tap your car brand below or WhatsApp to order with confidence."
+            : "You can inspect the laser-welded iridium tip, crisp ceramic print, and 5.0 kΩ spec right before fitting. Tap your car brand below or message WhatsApp (024 011 8846) to lock in a genuine set.",
           nextStep: 'qa',
+          showFitmentPills: true,
           showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I want to verify and order 100% genuine OEM spark plugs (${q}).`
+          whatsappLabel: `Order Genuine Plugs (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
         };
       }
 
-      // 13. Chassis / VIN Verification Protocol
+      // 17. Chassis / VIN Verification Protocol
       if (intent.isVin) {
         const vinTurn = bumpTopicCount('vin');
-        let vinText;
-        if (vinTurn === 1) {
-          vinText = 'Identical car models can need different thread reach (19mm vs. 26.5mm) depending on assembly market, so your 17-character chassis/VIN guarantees 100% fitment. Tap Chassis / VIN below to verify yours.';
-        } else if (vinTurn === 2) {
-          vinText = 'You can find your 17-character VIN/chassis number on the bottom corner of your windshield, on the driver-side door jamb sticker, or on your registration card. Tap Chassis / VIN below to type or paste it in.';
-        } else {
-          vinText = `No VIN handy right now? No problem—pick Toyota, Honda, Hyundai, or Kia below with your model and year (1990–2026), or snap a photo of your door-jamb sticker to ${contact.phone} on WhatsApp.`;
-        }
         return {
-          text: vinText,
+          text: vinTurn === 1
+            ? "Your 17-character VIN locks down exact thread reach (19mm vs. 26.5mm) and heat range with zero guesswork. Paste it here, tap Chassis / VIN below, or send a photo to WhatsApp."
+            : "Find your 17-character VIN on the lower windshield corner or driver door jamb sticker, then drop it here or snap it to WhatsApp (024 011 8846).",
           nextStep: 'qa',
+          showFitmentPills: true,
           showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I want to verify fitment with my chassis/VIN number (${q}).`
+          whatsappLabel: `Send VIN on WhatsApp (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
         };
       }
 
-      // 14. Registry Model Match (e.g., Hilux, Pilot, Santa Fe, Picanto, Rio)
-      if (matchedModel) {
+      // 17b. Explicit spark plug / fitment / car model inquiry -> reveal 3D white pills cleanly
+      if (intent.isPlugOrFitmentPrompt) {
         return {
-          text: `Yes, we supply genuine OEM plugs for the ${matchedModel.brand} ${matchedModel.model}. Tap ${matchedModel.brand} below to select your year and engine size, or verify by VIN.`,
+          text: rememberedVehicle
+            ? `Got your ${rememberedVehicle} on file—tap a brand pill below if you want to refine or switch vehicles, or message WhatsApp (${contact.phone}).`
+            : "Yes—we stock 100% genuine OEM spark plugs in Accra and nationwide. Tap your car brand below or type your model and year.",
           nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I need genuine OEM spark plugs for my ${matchedModel.brand} ${matchedModel.model} (${q}).`
+          showFitmentPills: true,
+          showWhatsAppCta: Boolean(rememberedVehicle),
+          whatsappLabel: rememberedVehicle ? `Order for ${rememberedVehicle}` : undefined,
+          whatsappPrefill: rememberedVehicle ? buildVehicleWhatsAppPrefill('order', verifiedPlug, q) : undefined
         };
       }
 
-      // 15. Catalogue Part Match fallback
-      if (matchedProducts.length > 0) {
-        return formatCatalogueProductReply(matchedProducts, q);
-      }
-
-      // 16. Supported Brands vs Other Automotive Makes (still on-topic)
-      if (/\b(toyota|honda|hyundai|kia)\b/i.test(ql)) {
-        const brandHit = ql.match(/\b(toyota|honda|hyundai|kia)\b/i)[1];
-        const capBrand = brandHit.charAt(0).toUpperCase() + brandHit.slice(1).toLowerCase();
-        const brandTurn = bumpTopicCount(`brand_${capBrand.toLowerCase()}`);
-        const brandText = brandTurn === 1
-          ? `We stock genuine OEM plugs for ${capBrand} (Denso, NGK, or Mobis) with fast delivery across Ghana. Tap ${capBrand} below to choose your model, year, and engine size.`
-          : `Ready to narrow down your ${capBrand}? Tap the ${capBrand} chip right below to pick your exact model and year (1990–2026), or share your 17-character VIN for instant matching.`;
-        return {
-          text: brandText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I am inquiring about genuine ${capBrand} OEM spark plugs (${q}).`
-        };
-      }
-
-      if (/\b(nissan|ford|mercedes|benz|bmw|audi|volkswagen|vw|mazda|subaru|mitsubishi|suzuki|lexus|infiniti|acura|peugeot|renault|chevrolet|gmc|dodge|jeep|land rover|range rover|engine|ignition|spark plug|sparkplug|plugs|automobile|automotive|auto parts|mechanic|tune-up|tuneup)\b/i.test(ql)) {
-        const otherTurn = bumpTopicCount('other_make');
-        const otherText = otherTurn === 1
-          ? `We specialize in Toyota (Denso), Honda (NGK), Hyundai (Mobis), and Kia (Mobis) genuine OEM plugs. Message your chassis/VIN on WhatsApp (${contact.phone}) so our technical desk can check stock for your vehicle.`
-          : `For cross-reference or non-standard makes, send your 17-character VIN or old spark plug code directly to ${contact.phone} on WhatsApp so our specialists confirm availability before dispatch.`;
-        return {
-          text: otherText,
-          nextStep: 'qa',
-          showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, can you check genuine OEM spark plug availability for my vehicle (${q})?`
-        };
-      }
-
-      // 17. General Dynamic DOM Search across all website sections
+      // 18. General Dynamic DOM Search across website sections (trimmed strictly to <=2 concise sentences)
       const domMatches = scoreDomEntries(q, index);
-      if (domMatches.length > 0 && domMatches[0].score >= 5) {
+      if (domMatches.length > 0 && domMatches[0].score >= 6) {
         const best = domMatches[0].entry;
-        const sentences = best.body.split(/(?<=[.!?])\s+/).slice(0, 2).join(' ');
+        const firstSentence = best.body.split(/(?<=[.!?])\s+/)[0];
         return {
-          text: `${sentences} Pick your car below or tap WhatsApp to order.`,
+          text: `${firstSentence} Pick your brand below or tap WhatsApp (${contact.phone}) to order.`,
           nextStep: 'qa',
+          showFitmentPills: Boolean(intent.isPlugOrFitmentPrompt),
           showWhatsAppCta: true,
-          whatsappPrefill: `Hello Kash Option, I have a question from your website (${q}).`
+          whatsappLabel: `WhatsApp Desk (${contact.phone})`,
+          whatsappPrefill: buildVehicleWhatsAppPrefill('order', verifiedPlug, q)
         };
       }
 
-      // 18. Conversational Acknowledgments / Casual Follow-ups
+      // 19. Conversational Acknowledgments
       if (intent.isCasualChat) {
-        if (/^(?:thanks|thank you)/i.test(ql)) {
+        if (/^(?:thanks|thank you|thank u|ty)/i.test(ql)) {
           return {
-            text: `You're welcome! Tap a car brand below anytime to match your OEM spark plugs, or reach us at Community 18 / ${contact.phone}.`,
+            text: `Anytime! Whenever you're ready${rememberedVehicle ? ` for your ${rememberedVehicle} set` : ''}, drop your car details or WhatsApp us at ${contact.phone}.`,
             nextStep: 'qa',
-            showWhatsAppCta: false
+            showWhatsAppCta: Boolean(rememberedVehicle),
+            whatsappPrefill: rememberedVehicle ? buildVehicleWhatsAppPrefill('order', verifiedPlug, q) : undefined
           };
         }
         if (/^(?:no|nope)\b/i.test(ql)) {
           return {
-            text: 'No problem at all. Feel free to tap a car brand below, enter your VIN, or message WhatsApp whenever you need help.',
+            text: 'No problem at all. Tell me your car anytime—or message WhatsApp when you need OEM plugs.',
             nextStep: 'qa',
             showWhatsAppCta: false
           };
@@ -4762,34 +5114,33 @@
         const hiTurn = bumpTopicCount('casual_hi');
         return {
           text: hiTurn === 1
-            ? "Hi—I'm Kash Auto Bot. Select Toyota, Honda, Hyundai, or Kia below to find your exact OEM spark plugs, or ask me about pricing, delivery, or our Community 18 location."
-            : "Hey there! Just tap your car make below, paste your 17-character VIN, or ask me about live Cedi quotes, authenticity, or nationwide delivery.",
+            ? "Hey—I'm Kash Auto Bot in Accra. What Toyota, Honda, Hyundai, or Kia are we matching spark plugs for today?"
+            : "Ready when you are—drop your car model and year (or 17-character VIN) and I'll match your factory OEM plug.",
           nextStep: 'qa',
           showWhatsAppCta: false
         };
       }
 
-      // 19. Genuinely Unrelated Topics & Context-Aware Non-Repetitive Guidance
-      const offTopicPattern = /\b(football|soccer|premier league|champions league|messi|ronaldo|chelsea|arsenal|man u|black stars|politics|election|president|parliament|government|weather|rain|sunny|movie|music|song|recipe|food|jollof|waakye|crypto|bitcoin|betting|casino|relationship|love|joke|poem)\b/i;
+      // 20. Calm Off-Topic Pivot & Crisp Fallback
       const offTopicReplies = [
-        `I focus specifically on Kash Option genuine OEM spark plugs and vehicle fitment rather than topics like "${q}". Tap Toyota, Honda, Hyundai, or Kia below—or ask about delivery and our Community 18 shop.`,
-        `I'm purely an ignition & OEM spark plug specialist! Share your car make, model, or 17-character VIN below so I can find your factory plug.`,
-        `I don't cover that topic, but I can match the exact genuine Denso, NGK, or Mobis plug for your car in seconds—just pick a brand below or message a live rep on WhatsApp.`
+        "I leave that outside the workshop—my lane is keeping Toyotas, Hondas, Hyundais, and Kias running smoothly in Accra. Which car are we matching OEM plugs for today?",
+        "Good question, though I strictly handle genuine Denso, NGK, and Mobis spark plugs at Community 18. Need a factory set matched for your vehicle?"
       ];
       const generalClarifyReplies = [
-        `I want to make sure I get that right—could you share your car brand (Toyota, Honda, Hyundai, or Kia), a part number, or your 17-character VIN?`,
-        `Not quite sure what you're looking for from "${q}". You can pick your vehicle below, ask about our Community 18 shop and delivery, or tap WhatsApp for a live rep.`,
-        `Tell me your car make and model (for example, Toyota Corolla 2018 or Kia Picanto), or ask anything about genuine OEM spark plugs.`
+        "I keep things focused on genuine OEM spark plugs for Toyota, Honda, Hyundai, and Kia. What model and year are you driving?",
+        "Drop your Toyota, Honda, Hyundai, or Kia model and year (or paste your 17-character VIN), and I'll match your exact factory plug."
       ];
 
-      const pool = offTopicPattern.test(ql) ? offTopicReplies : generalClarifyReplies;
+      const pool = intent.isOffTopic ? offTopicReplies : generalClarifyReplies;
       const nextIdx = (salesChatState.lastFallbackIdx + 1) % pool.length;
       salesChatState.lastFallbackIdx = nextIdx;
 
       return {
         text: pool[nextIdx],
         nextStep: 'qa',
-        showWhatsAppCta: false
+        showWhatsAppCta: Boolean(rememberedVehicle),
+        whatsappLabel: rememberedVehicle ? `Order for ${rememberedVehicle}` : undefined,
+        whatsappPrefill: rememberedVehicle ? buildVehicleWhatsAppPrefill('order', verifiedPlug, q) : undefined
       };
     }
 
@@ -5045,22 +5396,30 @@
       const m = String(model || '').toLowerCase();
       const e = String(engineText || '').toLowerCase();
       if (b === 'toyota') {
-        if ((m.includes('corolla') || m.includes('matrix') || m.includes('auris')) && e.includes('1.8')) return 'Denso SC20HR11 (90919-01253)';
-        if ((m.includes('camry') || m.includes('rav4') || m.includes('highlander')) && e.includes('2.4')) return 'Denso SK20R11 (90919-01210)';
-        if ((m.includes('prado') || m.includes('land cruiser') || m.includes('fortuner') || m.includes('4runner')) && (e.includes('4.0') || e.includes('3.5'))) return 'Denso FK20HR11 (90919-01247)';
+        if ((m.includes('corolla') || m.includes('matrix') || m.includes('auris') || m.includes('yaris') || m.includes('vitz')) && (!e || e.includes('1.8') || e.includes('1.6') || e.includes('1.5') || e.includes('1.3') || e.includes('2zr'))) {
+          if (e) return 'Denso SC20HR11 (90919-01253)';
+        }
+        if ((m.includes('prius') || m.includes('c-hr')) && e.includes('1.8')) return 'Denso SC20HR11 (90919-01253)';
+        if ((m.includes('camry') || m.includes('rav4') || m.includes('highlander')) && (e.includes('2.4') || e.includes('3.0') || e.includes('3.3'))) return 'Denso SK20R11 (90919-01210)';
+        if (m.includes('hilux') && e.includes('2.7')) return 'Denso SK20R11 (90919-01210)';
+        if ((m.includes('prado') || m.includes('land cruiser') || m.includes('fortuner') || m.includes('4runner') || m.includes('camry') || m.includes('highlander')) && (e.includes('4.0') || e.includes('3.5') || e.includes('v6') || e.includes('v8'))) return 'Denso FK20HR11 (90919-01247)';
       }
       if (b === 'honda') {
-        if ((m.includes('civic') || m.includes('cr-v') || m.includes('accord')) && e.includes('1.5l turbo')) return 'NGK DILZKR7B11GS (12290-59B-003)';
-        if ((m.includes('accord') || m.includes('cr-v')) && e.includes('2.4')) return 'NGK IZFR6K11 (9807B-5617W)';
-        if ((m.includes('civic') || m.includes('hr-v')) && e.includes('1.8')) return 'NGK ILZKR7B11 (12290-R1A-H01)';
+        if ((m.includes('civic') || m.includes('cr-v') || m.includes('accord')) && (e.includes('1.5l turbo') || e.includes('1.5 turbo') || e.includes('2.0l turbo'))) return 'NGK DILZKR7B11GS (12290-59B-003)';
+        if ((m.includes('accord') || m.includes('cr-v') || m.includes('odyssey')) && e.includes('2.4')) return 'NGK IZFR6K11 (9807B-5617W)';
+        if ((m.includes('civic') || m.includes('hr-v')) && (e.includes('1.8') || e.includes('2.0'))) return 'NGK ILZKR7B11 (12290-R1A-H01)';
+        if ((m.includes('pilot') || m.includes('ridgeline') || m.includes('accord') || m.includes('odyssey')) && (e.includes('3.5') || e.includes('v6'))) return 'NGK ILZKR7B11 (12290-R1A-H01)';
       }
       if (b === 'hyundai') {
-        if ((m.includes('elantra') || m.includes('accent')) && (e.includes('1.6') || e.includes('1.8'))) return 'Mobis 18846-10060 (SILZKR6B10E)';
-        if ((m.includes('sonata') || m.includes('tucson')) && (e.includes('2.0') || e.includes('2.4'))) return 'Mobis 18846-11070 (SILZKR7B11)';
+        if ((m.includes('elantra') || m.includes('accent') || m.includes('kona') || m.includes('creta') || m.includes('i30')) && (e.includes('1.6') || e.includes('1.8') || e.includes('2.0')) && !e.includes('turbo')) return 'Mobis 18846-10060 (SILZKR6B10E)';
+        if ((m.includes('sonata') || m.includes('tucson') || m.includes('santa fe') || m.includes('ix35')) && (e.includes('2.0') || e.includes('2.4') || e.includes('2.5')) && !e.includes('turbo')) return 'Mobis 18846-11070 (SILZKR7B11)';
+        if ((m.includes('santa fe') || m.includes('palisade') || m.includes('kona') || m.includes('sonata')) && (e.includes('turbo') || e.includes('3.3') || e.includes('3.5') || e.includes('3.8') || e.includes('v6'))) return 'Mobis 18849-09085 (SILZKR8E9G)';
       }
       if (b === 'kia') {
-        if ((m.includes('forte') || m.includes('cerato') || m.includes('soul')) && (e.includes('1.6') || e.includes('2.0'))) return 'Mobis 18846-10060';
-        if ((m.includes('sportage') || m.includes('optima') || m.includes('k5') || m.includes('sorento')) && (e.includes('2.4') || e.includes('v6'))) return 'Mobis 18846-11070 / 18849-09085';
+        if ((m.includes('picanto') || m.includes('morning')) && (e.includes('1.0') || e.includes('1.1') || e.includes('1.2'))) return 'Mobis 18855-10060 (LZKR6B-10E)';
+        if (m.includes('rio') && (e.includes('1.2') || e.includes('1.4'))) return 'Mobis 18855-10060 (LZKR6B-10E)';
+        if ((m.includes('forte') || m.includes('cerato') || m.includes('soul') || m.includes('rio')) && (e.includes('1.6') || e.includes('1.8') || e.includes('2.0'))) return 'Mobis 18846-10060 (SILZKR6B10E)';
+        if ((m.includes('sportage') || m.includes('optima') || m.includes('k5') || m.includes('sorento') || m.includes('cadenza') || m.includes('carnival')) && (e.includes('2.0') || e.includes('2.4') || e.includes('2.5') || e.includes('3.3') || e.includes('3.5') || e.includes('v6'))) return 'Mobis 18846-11070 (SILZKR7B11)';
       }
       return '';
     }
@@ -5069,32 +5428,28 @@
 
     function handleSalesBrandSelect(brand) {
       playLuxuryMicroTap();
-      salesChatState.brand = brand;
-      salesChatState.model = '';
-      salesChatState.year = '';
-      salesChatState.engineYear = '';
-      salesChatState.chassis = '';
+      syncVehicleContextState({ brand, model: '', year: '', engine: '', chassis: '' });
       salesChatState.step = 'model';
+      salesChatState.turnCount = (salesChatState.turnCount || 0) + 1;
       appendSalesChatMessage('user', brand);
       scheduleAssistantReply(() => {
         appendSalesChatMessage(
           'assistant',
-          `Tap your ${brand} model below, or type the exact ${brand} model if it's not listed.`
+          `Tap your ${brand} model below, or type it in.`
         );
         renderSalesChatControls();
       });
     }
 
     function advanceSalesModelStep(canonicalModel) {
-      salesChatState.model = canonicalModel;
-      salesChatState.year = '';
-      salesChatState.engineYear = '';
+      syncVehicleContextState({ model: canonicalModel, year: '', engine: '' });
       salesChatState.step = 'year';
+      salesChatState.turnCount = (salesChatState.turnCount || 0) + 1;
       appendSalesChatMessage('user', canonicalModel);
       scheduleAssistantReply(() => {
         appendSalesChatMessage(
           'assistant',
-          `Got it—${salesChatState.brand} ${canonicalModel}. Scroll and pick your model year (1990–2026) below.`
+          `Got it—${salesChatState.brand} ${canonicalModel}. Pick your model year (1990–2026) below.`
         );
         renderSalesChatControls();
       });
@@ -5107,16 +5462,16 @@
     }
 
     function advanceSalesYearStep(validYear) {
-      salesChatState.year = validYear;
-      salesChatState.engineYear = '';
+      syncVehicleContextState({ year: validYear, engine: '' });
       salesChatState.step = 'engineYear';
+      salesChatState.turnCount = (salesChatState.turnCount || 0) + 1;
       appendSalesChatMessage('user', validYear);
       const engines = getAccurateEnginesForModel(salesChatState.brand, salesChatState.model);
       scheduleAssistantReply(() => {
         const vehicleLabel = `${validYear} ${salesChatState.brand} ${salesChatState.model}`;
         const msg = engines.length > 0
-          ? `Nice, a ${vehicleLabel}—exact engine size determines thread reach and heat range. Tap your engine capacity below.`
-          : `Got your ${vehicleLabel}. Enter your engine capacity (e.g., 1.8L or 2.5L) below, or tap Enter VIN.`;
+          ? `Nice, a ${vehicleLabel}. Tap your engine size below to lock the exact OEM plug.`
+          : `Got your ${vehicleLabel}. Type your engine size (e.g., 1.8L) or tap Enter VIN.`;
         appendSalesChatMessage('assistant', msg);
         renderSalesChatControls();
       });
@@ -5129,7 +5484,8 @@
 
     function handleSalesEngineSelect(engineLabel) {
       playLuxuryMicroTap();
-      salesChatState.engineYear = engineLabel;
+      syncVehicleContextState({ engine: engineLabel });
+      salesChatState.turnCount = (salesChatState.turnCount || 0) + 1;
       appendSalesChatMessage('user', engineLabel);
       scheduleAssistantReply(() => {
         showSalesChatConfirmation();
@@ -5234,10 +5590,10 @@
         const validated = validateEngineOrVinInput(cleanVal);
         if (validated) {
           if (validated.kind === 'vin') {
-            salesChatState.chassis = validated.value;
+            syncVehicleContextState({ chassis: validated.value });
             appendSalesChatMessage('user', validated.value);
           } else {
-            salesChatState.engineYear = validated.value;
+            syncVehicleContextState({ engine: validated.value });
             appendSalesChatMessage('user', validated.value);
           }
           scheduleAssistantReply(() => {
@@ -5266,7 +5622,7 @@
 
         if (isValidVinOrChassisCode(cleanVal)) {
           const formattedChassis = cleanVal.toUpperCase();
-          salesChatState.chassis = formattedChassis;
+          syncVehicleContextState({ chassis: formattedChassis });
           appendSalesChatMessage('user', formattedChassis);
           scheduleAssistantReply(() => {
             showSalesChatConfirmation();
@@ -5562,6 +5918,7 @@
       'faq': 'faqs',
       'contact': 'contact',
       'contact-view': 'contact',
+      'product-detail': 'product-detail',
       // Brand shortcuts routing to catalogue with brand preselected:
       'toyota': 'catalogue',
       'honda': 'catalogue',
@@ -5575,6 +5932,7 @@
     const pageTitles = {
       home: "KASH OPTION | Genuine OEM Spark Plugs in Ghana • Toyota, Honda, Hyundai & Kia",
       catalogue: "OEM Spark Plug Catalogue | KASH OPTION Ghana",
+      'product-detail': "OEM Spark Plug Fitment | KASH OPTION Ghana",
       fitment: "Chassis Fitment Verification | KASH OPTION Ghana",
       wholesale: "Wholesale Trade Portal | KASH OPTION Ghana",
       trust: "Why KASH OPTION | Authenticity & Direct Sourcing",
@@ -5585,9 +5943,29 @@
     };
 
     let currentActivePage = null;
+    let activeProductPlugId = 'toyota-sc20hr11';
 
     function showPage(pageKey, brandFilter, updateHistory) {
-      const validPage = routeMap[pageKey] || 'home';
+      const normalizedKey = String(pageKey || '').toLowerCase();
+      let validPage = routeMap[normalizedKey] || 'home';
+      let matchedProduct = null;
+      if (normalizedKey.startsWith('product-') && typeof plugDetailCatalog !== 'undefined') {
+        const candidateId = normalizedKey.replace(/^product-/, '');
+        matchedProduct = plugDetailCatalog.find(p => p.id.toLowerCase() === candidateId) || null;
+        if (matchedProduct) {
+          validPage = 'product-detail';
+          activeProductPlugId = matchedProduct.id;
+          renderPlugDetailContent(matchedProduct);
+        }
+      }
+      if (validPage === 'product-detail' && !matchedProduct && typeof plugDetailCatalog !== 'undefined') {
+        const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId) || plugDetailCatalog[0];
+        const bodyEl = document.getElementById('plugDetailBody');
+        if (fallbackPlug && bodyEl && bodyEl.children.length === 0) {
+          activeProductPlugId = fallbackPlug.id;
+          renderPlugDetailContent(fallbackPlug);
+        }
+      }
       const isSamePage = currentActivePage === validPage;
       currentActivePage = validPage;
 
@@ -5605,7 +5983,7 @@
 
       // Handle brand filters in catalogue
       if (validPage === 'catalogue') {
-        const rawBrand = brandFilter || (['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(pageKey) ? pageKey : 'all');
+        const rawBrand = brandFilter || (['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(normalizedKey) ? normalizedKey : 'all');
         const brandToApply = ['catalogue', 'shop', ''].includes(String(rawBrand).toLowerCase()) ? 'all' : String(rawBrand).toLowerCase();
         const targetBtn = Array.from(document.querySelectorAll('#filterTabs button')).find(
           btn => {
@@ -5620,19 +5998,30 @@
       }
 
       // Update document title
-      document.title = pageTitles[validPage] || pageTitles.home;
+      if (validPage === 'product-detail' && matchedProduct) {
+        document.title = `${matchedProduct.partCode} Genuine ${matchedProduct.brand} OEM Spark Plug | KASH OPTION Ghana`;
+      } else if (validPage === 'product-detail' && typeof plugDetailCatalog !== 'undefined') {
+        const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId);
+        document.title = fallbackPlug
+          ? `${fallbackPlug.partCode} Genuine ${fallbackPlug.brand} OEM Spark Plug | KASH OPTION Ghana`
+          : pageTitles['product-detail'];
+      } else {
+        document.title = pageTitles[validPage] || pageTitles.home;
+      }
 
-      // Smoothly glide to top on same-page anchor taps; reset cleanly to top on route swaps
+      // Reset cleanly to top on route swaps
       window.scrollTo({
         top: 0,
-        behavior: isSamePage && !brandFilter ? 'smooth' : 'instant'
+        behavior: isSamePage && !brandFilter && !matchedProduct ? 'smooth' : 'instant'
       });
       updateSalesRepVisibility();
 
       // Update browser history
       if (updateHistory) {
-        const hash = validPage === 'home' ? '#home' : '#' + (brandFilter || pageKey);
-        history.pushState({ page: validPage, brand: brandFilter || null }, '', hash);
+        const hash = validPage === 'home'
+          ? '#home'
+          : (validPage === 'product-detail' ? `#product-${activeProductPlugId}` : '#' + (brandFilter || pageKey));
+        history.pushState({ page: validPage, brand: brandFilter || null, plugId: validPage === 'product-detail' ? activeProductPlugId : null }, '', hash);
       }
 
       // Ensure menu overlay is closed cleanly
@@ -5650,7 +6039,7 @@
       const href = link.getAttribute('href');
       if (!href || href === '#') return;
       const hashKey = href.slice(1).toLowerCase();
-      if (routeMap[hashKey] !== undefined) {
+      if (routeMap[hashKey] !== undefined || hashKey.startsWith('product-')) {
         e.preventDefault();
         const brand = ['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(hashKey) ? hashKey : null;
         showPage(routeMap[hashKey] === 'catalogue' ? 'catalogue' : hashKey, brand, true);
@@ -6162,7 +6551,7 @@
     function buildPlugMoreCard(item) {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'plug-more-card min-w-[235px] sm:flex-1 shrink-0 text-left rounded-2xl p-3.5 flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+      btn.className = 'plug-more-card w-full text-left rounded-2xl p-3.5 flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
       btn.addEventListener('click', () => {
         openPlugDetailModal(item.id, true);
       });
@@ -6273,8 +6662,7 @@
       botBtn.className = 'liquid-glass-btn text-white text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-xl inline-flex items-center justify-center gap-2';
       botBtn.textContent = 'Verify My Chassis VIN';
       botBtn.addEventListener('click', () => {
-        closePlugDetailModal();
-        if (typeof openSalesChat === 'function') openSalesChat();
+        if (typeof openSalesChat === 'function') openSalesChat({ openVin: true });
       });
 
       ctaRow.appendChild(waLink);
@@ -6370,74 +6758,75 @@
       detailColumns.appendChild(fitmentCard);
       article.appendChild(detailColumns);
 
-      // Clean Horizontal Row of "Other OEM Options"
-      const otherPlugs = plugDetailCatalog.filter(p => p.brand === plug.brand && p.id !== plug.id);
-      if (otherPlugs.length > 0) {
+      // Clean Related & Suggested OEM Products Section right inside normal page flow
+      const sameBrandPlugs = plugDetailCatalog.filter(p => p.brand === plug.brand && p.id !== plug.id);
+      const otherBrandPlugs = plugDetailCatalog.filter(p => p.brand !== plug.brand).slice(0, 3);
+      const relatedPlugs = [...sameBrandPlugs, ...otherBrandPlugs];
+      if (relatedPlugs.length > 0) {
         const moreSection = document.createElement('section');
         moreSection.id = 'plugDetailMoreSection';
-        moreSection.className = 'pt-5 border-t border-white/10 space-y-3';
+        moreSection.className = 'pt-8 border-t border-white/10 space-y-4';
 
         const moreHead = document.createElement('div');
-        moreHead.className = 'flex items-center justify-between gap-3';
+        moreHead.className = 'flex flex-wrap items-center justify-between gap-3';
         const moreTitle = document.createElement('h4');
         moreTitle.className = 'text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white';
-        moreTitle.textContent = `Other OEM Options (${plug.brand})`;
+        moreTitle.textContent = `Related & Suggested OEM Spark Plugs (${plug.brand} & Other Makes)`;
         const moreHint = document.createElement('span');
         moreHint.className = 'text-[11px] text-silverMuted';
-        moreHint.textContent = 'Tap to switch seamlessly';
+        moreHint.textContent = 'Tap any plug to inspect specs';
         moreHead.appendChild(moreTitle);
         moreHead.appendChild(moreHint);
 
-        const moreRow = document.createElement('div');
-        moreRow.className = 'plug-drawer-row flex flex-nowrap overflow-x-auto gap-3.5 pb-2';
-        otherPlugs.forEach(other => {
-          moreRow.appendChild(buildPlugMoreCard(other));
+        const moreGrid = document.createElement('div');
+        moreGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4';
+        relatedPlugs.forEach(other => {
+          moreGrid.appendChild(buildPlugMoreCard(other));
         });
 
+        const bottomBackWrap = document.createElement('div');
+        bottomBackWrap.className = 'pt-4 flex justify-start';
+        const bottomBackBtn = document.createElement('button');
+        bottomBackBtn.type = 'button';
+        bottomBackBtn.className = 'pill-white-3d text-xs font-extrabold uppercase tracking-wider px-5 py-2.5 inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+        bottomBackBtn.innerHTML = '<span aria-hidden="true">&larr;</span><span>BACK TO CATALOGUE</span>';
+        bottomBackBtn.addEventListener('click', backToCatalogueFromProduct);
+        bottomBackWrap.appendChild(bottomBackBtn);
+
         moreSection.appendChild(moreHead);
-        moreSection.appendChild(moreRow);
+        moreSection.appendChild(moreGrid);
+        moreSection.appendChild(bottomBackWrap);
         article.appendChild(moreSection);
       }
 
       bodyEl.appendChild(article);
-      bodyEl.scrollTop = 0;
     }
 
-    function openPlugDetailModal(plugId, isSeamlessSwitch) {
+    function backToCatalogueFromProduct() {
+      playLuxuryMicroTap();
+      showPage('catalogue', activeBrandFilter && activeBrandFilter !== 'all' ? activeBrandFilter : null, true);
+    }
+
+    function openPlugDetailModal(plugId) {
       const plug = plugDetailCatalog.find(p => p.id === plugId);
-      const drawerEl = document.getElementById('plugDetailDrawer');
-      const backdropEl = document.getElementById('plugDetailBackdrop');
-      if (!plug || !drawerEl) return;
+      const productPageEl = document.getElementById('product-detail');
+      if (!plug || !productPageEl) return;
 
       playLuxuryMicroTap();
-      renderPlugDetailContent(plug);
+      activeProductPlugId = plug.id;
+      if (typeof closeMenu === 'function') closeMenu();
+      if (typeof closeSalesChat === 'function') closeSalesChat();
 
-      if (!isSeamlessSwitch) {
-        if (typeof closeMenu === 'function') closeMenu();
-        if (typeof closeSalesChat === 'function') closeSalesChat();
-        if (backdropEl) backdropEl.classList.add('is-open');
-        drawerEl.classList.add('is-open');
-        document.body.classList.add('plug-detail-open');
-        const closeBtn = document.getElementById('plugDetailCloseBtn');
-        if (closeBtn) {
-          window.requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
-        }
-      }
+      showPage(`product-${plug.id}`, null, true);
     }
 
     function closePlugDetailModal() {
-      const drawerEl = document.getElementById('plugDetailDrawer');
-      const backdropEl = document.getElementById('plugDetailBackdrop');
-      if (!drawerEl) return;
-      drawerEl.classList.remove('is-open');
-      if (backdropEl) backdropEl.classList.remove('is-open');
-      document.body.classList.remove('plug-detail-open');
+      // No-op: products now open as normal full-page views rather than blocking overlays.
     }
 
     /* ================= DYNAMIC ISLAND DROPDOWN CONTROLLERS ================= */
     function openMenu() {
       closeSalesChat();
-      closePlugDetailModal();
       const overlay = document.getElementById('menuOverlay');
       const backdrop = document.getElementById('menuBackdrop');
       const triggerBtn = document.getElementById('menuTriggerBtn');
@@ -6480,11 +6869,10 @@
       }
     }
 
-    // Close menu, plug detail drawer, and sales chat with Escape key
+    // Close menu and sales chat with Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeMenu();
-        closePlugDetailModal();
         closeSalesChat();
       }
     });
