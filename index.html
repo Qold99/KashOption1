@@ -449,10 +449,13 @@
     }
     .chat-pill-3d {
       min-height: 36px;
+      max-width: 100%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      white-space: nowrap;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.25;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.98),
         inset 0 -2px 0 rgba(0, 0, 0, 0.16),
@@ -725,21 +728,56 @@
       right: 0;
       margin-top: 8px;
       width: 100%;
-      max-height: calc(100dvh - 96px);
-      overflow-y: auto;
-      overflow-x: hidden;
-      overscroll-behavior: contain;
-      background: rgba(14, 14, 18, 0.86);
+      max-height: calc(100dvh - 76px);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(227, 24, 24, 0.14), transparent 58%),
+        linear-gradient(155deg, rgba(22, 22, 28, 0.94) 0%, rgba(12, 12, 16, 0.96) 55%, rgba(8, 8, 11, 0.98) 100%);
       backdrop-filter: blur(26px) saturate(170%);
       -webkit-backdrop-filter: blur(26px) saturate(170%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 20px 45px rgba(0, 0, 0, 0.72);
+      border: none;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 1px 0 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(227, 24, 24, 0.16),
+        inset 0 18px 40px rgba(255, 255, 255, 0.025),
+        0 28px 64px rgba(0, 0, 0, 0.88),
+        0 10px 26px rgba(0, 0, 0, 0.65),
+        0 0 36px rgba(227, 24, 24, 0.10);
       border-radius: 24px;
       transform-origin: top center;
       transition:
         opacity 240ms cubic-bezier(0.22, 1, 0.36, 1),
         transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
         visibility 240ms ease;
+    }
+    #menuOverlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.25px;
+      background: linear-gradient(
+        140deg,
+        rgba(255, 255, 255, 0.30) 0%,
+        rgba(255, 255, 255, 0.10) 28%,
+        rgba(227, 24, 24, 0.24) 64%,
+        rgba(255, 255, 255, 0.06) 86%,
+        rgba(227, 24, 24, 0.34) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .menu-overlay-scroll {
+      position: relative;
+      z-index: 1;
+      max-height: calc(100dvh - 76px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
     }
     #menuOverlay.hidden-overlay {
       opacity: 0;
@@ -1000,9 +1038,14 @@
     }
     #salesRepChat {
       position: fixed;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       width: 100%;
+      height: 100vh;
       height: 100dvh;
+      max-height: 100vh;
       max-height: 100dvh;
       padding:
         env(safe-area-inset-top)
@@ -1026,6 +1069,15 @@
       visibility: visible;
       pointer-events: auto;
       transform: translate3d(0, 0, 0);
+    }
+    #salesChatMessages {
+      flex: 1 1 0%;
+      min-height: 0;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 24px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
     }
     .sales-chat-avatar-box {
       position: relative;
@@ -1637,98 +1689,99 @@
 
       </div>
 
-      <!-- Liquid Glass Dropdown Card Directly Beneath Dynamic Island -->
-      <div id="menuOverlay" class="hidden-overlay p-5 sm:p-7" role="dialog" aria-modal="false" aria-label="Navigation Menu">
+      <!-- Sculpted 3D Liquid Glass Dropdown Card Directly Beneath Dynamic Island -->
+      <div id="menuOverlay" class="hidden-overlay" role="dialog" aria-modal="false" aria-label="Navigation Menu">
+        <div class="menu-overlay-scroll p-3.5 sm:p-6">
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-7">
 
-          <!-- Primary Two Pages & Manufacturer Lines -->
-          <div class="md:col-span-6 space-y-5">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block">Primary Destinations</span>
-            <div class="divide-y divide-white/10">
-              <a href="#catalogue" onclick="closeMenu()" class="block group py-3 rounded-lg transition-colors hover:bg-white/[0.03] px-1 -mx-1">
-                <span class="text-lg sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-porscheRed transition-colors flex items-center justify-between gap-3">
-                  <span>SHOP ALL SPARK PLUGS</span>
-                  <i class="fas fa-arrow-right text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0" aria-hidden="true"></i>
-                </span>
-              </a>
+            <!-- Primary Two Pages & Manufacturer Lines -->
+            <div class="md:col-span-6 space-y-2.5 sm:space-y-4">
+              <div class="divide-y divide-white/10">
+                <a href="#catalogue" onclick="closeMenu()" class="block group py-1.5 sm:py-2.5 rounded-lg transition-colors hover:bg-white/[0.03] px-1 -mx-1">
+                  <span class="text-base sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-porscheRed transition-colors flex items-center justify-between gap-3">
+                    <span>SHOP ALL SPARK PLUGS</span>
+                    <i class="fas fa-arrow-right text-xs sm:text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0" aria-hidden="true"></i>
+                  </span>
+                </a>
 
-              <a href="#fitment-finder" onclick="closeMenu()" class="block group py-3 rounded-lg transition-colors hover:bg-white/[0.03] px-1 -mx-1">
-                <span class="text-lg sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-porscheRed transition-colors flex items-center justify-between gap-3">
-                  <span>CHASSIS FITMENT FINDER</span>
-                  <i class="fas fa-arrow-right text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0" aria-hidden="true"></i>
-                </span>
-              </a>
-            </div>
-
-            <!-- Quick Manufacturer Lines -->
-            <div class="pt-4 border-t border-white/10">
-              <span class="text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-2.5">Direct Manufacturer Lines:</span>
-              <div class="grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-wider">
-                <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Toyota (Denso)</a>
-                <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Honda (NGK)</a>
-                <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Hyundai (Mobis)</a>
-                <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-3.5 py-2.5 rounded-full pill-white-3d text-center">Kia (Mobis)</a>
+                <a href="#fitment-finder" onclick="closeMenu()" class="block group py-1.5 sm:py-2.5 rounded-lg transition-colors hover:bg-white/[0.03] px-1 -mx-1">
+                  <span class="text-base sm:text-2xl font-extrabold uppercase tracking-tight text-white group-hover:text-porscheRed transition-colors flex items-center justify-between gap-3">
+                    <span>CHASSIS FITMENT FINDER</span>
+                    <i class="fas fa-arrow-right text-xs sm:text-sm text-silverMuted group-hover:text-porscheRed transform group-hover:translate-x-1.5 transition-all shrink-0" aria-hidden="true"></i>
+                  </span>
+                </a>
               </div>
-            </div>
-          </div>
 
-          <!-- Complete Directory & Support Box -->
-          <div class="md:col-span-6 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/10 pt-5 md:pt-0 md:pl-7">
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-3">Complete Directory</span>
-              <nav class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs font-bold uppercase tracking-wider text-silverMuted" aria-label="Complete Directory">
-                <a href="#home" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>Home Overview</span>
-                </a>
-                <a href="#wholesale" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>Wholesale Trade</span>
-                </a>
-                <a href="#trust" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>Why KASH OPTION</span>
-                </a>
-                <a href="#how-to-order" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>How to Order</span>
-                </a>
-                <a href="#knowledge" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>Knowledge Centre</span>
-                </a>
-                <a href="#faqs" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>Support FAQs</span>
-                </a>
-                <a href="#contact-view" onclick="closeMenu()" class="py-1.5 hover:text-white transition-colors flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
-                  <span>Contact &amp; Orders</span>
-                </a>
-              </nav>
-            </div>
-
-            <!-- Contact Box in Dropdown -->
-            <div class="mt-6 pt-5 border-t border-white/10 text-xs text-silverMuted flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div class="space-y-1">
-                <span class="text-[10px] uppercase font-bold text-white block">Immediate Support Line &amp; Email:</span>
-                <div class="flex flex-wrap items-center gap-2.5">
-                  <a href="tel:0240118846" class="text-sm font-extrabold text-white hover:text-porscheRed transition-colors">024 011 8846</a>
-                  <span class="text-white/20">&bull;</span>
-                  <a href="mailto:info@mrkash.net" class="text-xs font-semibold text-silverMuted hover:text-white transition-colors">info@mrkash.net</a>
+              <!-- Quick Manufacturer Lines -->
+              <div class="pt-2.5 sm:pt-3.5 border-t border-white/10">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-silverMuted block mb-1.5 sm:mb-2.5">Direct Manufacturer Lines:</span>
+                <div class="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                  <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-full pill-white-3d text-center">Toyota (Denso)</a>
+                  <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-full pill-white-3d text-center">Honda (NGK)</a>
+                  <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-full pill-white-3d text-center">Hyundai (Mobis)</a>
+                  <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-full pill-white-3d text-center">Kia (Mobis)</a>
                 </div>
-                <span class="text-[10px] text-silverMuted/75 block">7:00 AM &ndash; 5:00 PM Mon&ndash;Sat</span>
               </div>
-              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); closeMenu(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="liquid-cta-primary text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl flex items-center gap-2 whitespace-nowrap">
-                <span>Chat with Sales Experts</span>
-                <i class="fas fa-arrow-right text-[11px]"></i>
-              </a>
             </div>
+
+            <!-- Complete Directory & Support Box -->
+            <div class="md:col-span-6 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/10 pt-2.5 md:pt-0 md:pl-7">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-1.5 sm:mb-3">Complete Directory</span>
+                <nav class="grid grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-1 sm:gap-y-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-silverMuted" aria-label="Complete Directory">
+                  <a href="#home" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>Home Overview</span>
+                  </a>
+                  <a href="#wholesale" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>Wholesale Trade</span>
+                  </a>
+                  <a href="#trust" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>Why KASH OPTION</span>
+                  </a>
+                  <a href="#how-to-order" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>How to Order</span>
+                  </a>
+                  <a href="#knowledge" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>Knowledge Centre</span>
+                  </a>
+                  <a href="#faqs" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>Support FAQs</span>
+                  </a>
+                  <a href="#contact-view" onclick="closeMenu()" class="py-0.5 sm:py-1.5 hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0"></span>
+                    <span>Contact &amp; Orders</span>
+                  </a>
+                </nav>
+              </div>
+
+              <!-- Contact Box in Dropdown -->
+              <div class="mt-2.5 sm:mt-5 pt-2.5 sm:pt-4 border-t border-white/10 text-xs text-silverMuted flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 sm:gap-4">
+                <div class="space-y-0.5">
+                  <span class="text-[10px] uppercase font-bold text-white block">Immediate Support Line &amp; Email:</span>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <a href="tel:0240118846" class="text-xs sm:text-sm font-extrabold text-white hover:text-porscheRed transition-colors">024 011 8846</a>
+                    <span class="text-white/20">&bull;</span>
+                    <a href="mailto:info@mrkash.net" class="text-[11px] sm:text-xs font-semibold text-silverMuted hover:text-white transition-colors">info@mrkash.net</a>
+                  </div>
+                  <span class="text-[10px] text-silverMuted/75 block">7:00 AM &ndash; 5:00 PM Mon&ndash;Sat</span>
+                </div>
+                <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20chat%20with%20a%20sales%20expert%20about%20genuine%20spark%20plugs." onclick="event.preventDefault(); closeMenu(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="liquid-cta-primary text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider px-4 py-2 sm:py-2.5 rounded-xl flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto">
+                  <span>Chat with Sales Experts</span>
+                  <i class="fas fa-arrow-right text-[11px]"></i>
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>
-
       </div>
 
     </div>
@@ -2971,10 +3024,10 @@
       </div>
 
       <!-- Scrollable Chat Message Stream -->
-      <div id="salesChatMessages" class="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 sm:px-6 py-5 space-y-4 bg-[#08080B]/70" aria-live="polite"></div>
+      <div id="salesChatMessages" class="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 sm:px-6 pt-5 pb-6 space-y-4 bg-[#08080B]/70" aria-live="polite"></div>
 
       <!-- Quick Option Chips + Bottom Input Bar -->
-      <div id="salesChatControls" class="px-4 sm:px-6 pt-3 pb-4 bg-[#0C0C10]/95 border-t border-white/10 shrink-0"></div>
+      <div id="salesChatControls" class="px-4 sm:px-6 pt-3 pb-3.5 bg-[#0C0C10]/95 border-t border-white/10 shrink-0"></div>
     </div>
   </aside>
 
@@ -3413,8 +3466,62 @@
       openWhatsAppUrl(`https://wa.me/233240118846?text=${encodeURIComponent(text)}`);
     }
 
+    function scrollSalesChatToBottom(smooth) {
+      const messagesEl = document.getElementById('salesChatMessages');
+      if (!messagesEl) return;
+      const runScroll = () => {
+        if (smooth && typeof messagesEl.scrollTo === 'function') {
+          try {
+            messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
+          } catch (e) {
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+          }
+        }
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      };
+      window.requestAnimationFrame(() => {
+        runScroll();
+        window.requestAnimationFrame(runScroll);
+      });
+    }
+
+    let salesChatViewportBound = false;
+
+    function syncSalesChatViewportHeight() {
+      const chatEl = document.getElementById('salesRepChat');
+      if (!chatEl) return;
+      if (!salesChatState.isOpen) {
+        chatEl.style.height = '';
+        chatEl.style.maxHeight = '';
+        chatEl.style.top = '';
+        return;
+      }
+      const vv = window.visualViewport;
+      if (vv && typeof vv.height === 'number' && vv.height > 0) {
+        chatEl.style.height = `${Math.round(vv.height)}px`;
+        chatEl.style.maxHeight = `${Math.round(vv.height)}px`;
+        chatEl.style.top = `${Math.max(0, Math.round(vv.offsetTop || 0))}px`;
+      } else {
+        chatEl.style.height = '';
+        chatEl.style.maxHeight = '';
+        chatEl.style.top = '';
+      }
+      scrollSalesChatToBottom(false);
+    }
+
+    function bindSalesChatViewportListeners() {
+      if (salesChatViewportBound) return;
+      salesChatViewportBound = true;
+      if (window.visualViewport && typeof window.visualViewport.addEventListener === 'function') {
+        window.visualViewport.addEventListener('resize', syncSalesChatViewportHeight);
+        window.visualViewport.addEventListener('scroll', syncSalesChatViewportHeight);
+      }
+      window.addEventListener('resize', syncSalesChatViewportHeight);
+    }
+
     function openSalesChat(options) {
       if (typeof closeMenu === 'function') closeMenu();
+      bindSalesChatViewportListeners();
       const opts = options || {};
       const chatEl = document.getElementById('salesRepChat');
       const backdropEl = document.getElementById('salesChatBackdrop');
@@ -3443,6 +3550,8 @@
       document.body.classList.add('sales-chat-open');
       if (widgetEl) widgetEl.classList.add('is-chat-open');
       if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'true');
+      syncSalesChatViewportHeight();
+      scrollSalesChatToBottom(false);
 
       const isDesktopNonTouch =
         window.innerWidth >= 768 &&
@@ -3463,6 +3572,7 @@
       if (!chatEl) return;
 
       salesChatState.isOpen = false;
+      syncSalesChatViewportHeight();
       chatEl.classList.remove('is-open');
       if (backdropEl) backdropEl.classList.remove('is-open');
       document.body.classList.remove('sales-chat-open');
@@ -3556,7 +3666,7 @@
       row.appendChild(createBotMsgAvatar());
       row.appendChild(contentCol);
       messagesEl.appendChild(row);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      scrollSalesChatToBottom(true);
     }
 
     function appendStreamedAssistantMessage(fullText, token, onComplete) {
@@ -3587,7 +3697,7 @@
       row.appendChild(createBotMsgAvatar());
       row.appendChild(contentCol);
       messagesEl.appendChild(row);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      scrollSalesChatToBottom(true);
 
       let cursor = 0;
       const chunkSize = 5;
@@ -3604,6 +3714,7 @@
           salesStreamTimer = window.setTimeout(stepStream, 18);
         } else {
           salesStreamTimer = null;
+          scrollSalesChatToBottom(true);
           if (onComplete) onComplete();
         }
       }
@@ -3625,6 +3736,17 @@
         clearSalesTypingIndicator();
         onReady(token);
       }, typeof delayMs === 'number' ? delayMs : 280);
+    }
+
+    function mentionsOemPartNumber(text, detailsObj) {
+      const haystacks = [String(text || '')];
+      if (detailsObj && Array.isArray(detailsObj.summaryLines)) {
+        detailsObj.summaryLines.forEach(item => {
+          haystacks.push(String(item && item.value ? item.value : ''));
+        });
+      }
+      const combined = haystacks.join(' ');
+      return /\b(?:SC20HR11|SK20R11|FK20HR11|IZFR6K11|ILZKR7B11|DILZKR7B11GS|SILZKR6B10E|SILZKR7B11|SILZKR8E9G|LZKR6B-10E|90919-\d{5}|9807B-\d{4,5}[A-Z]?|12290-[A-Z0-9-]+|18846-\d{5}|18849-\d{5}|18855-\d{5})\b/i.test(combined);
     }
 
     function appendSalesChatMessage(sender, text, detailsObj) {
@@ -3686,7 +3808,20 @@
         msgPara.textContent = text;
         bubble.appendChild(msgPara);
 
-        if (detailsObj && detailsObj.showWhatsAppCta) {
+        const hasPartCaution = Boolean(
+          (detailsObj && detailsObj.includePartCaution) ||
+          mentionsOemPartNumber(text, detailsObj)
+        );
+
+        if (hasPartCaution) {
+          const cautionBox = document.createElement('div');
+          cautionBox.className = 'sales-part-caution mt-2.5 rounded-lg bg-[#E31818]/10 border border-[#E31818]/30 border-l-2 border-l-[#E31818] px-3 py-2 text-[11px] leading-snug text-zinc-200';
+          cautionBox.textContent = 'Note: AI-suggested part numbers are for reference only and not guaranteed fitment. Always confirm with our WhatsApp desk for verified OEM matching before ordering.';
+          bubble.appendChild(cautionBox);
+        }
+
+        const shouldShowWaCta = Boolean((detailsObj && detailsObj.showWhatsAppCta) || hasPartCaution);
+        if (shouldShowWaCta) {
           const ctaWrap = document.createElement('div');
           ctaWrap.className = 'mt-2.5 pt-2 border-t border-white/10';
 
@@ -3697,11 +3832,12 @@
           waIcon.className = 'fab fa-whatsapp text-sm text-emerald-400';
           waIcon.setAttribute('aria-hidden', 'true');
           const waLabel = document.createElement('span');
-          waLabel.textContent = detailsObj.whatsappLabel || 'Continue on WhatsApp';
+          const rawLabel = (detailsObj && detailsObj.whatsappLabel) || 'Confirm Fitment on WhatsApp (024 011 8846)';
+          waLabel.textContent = rawLabel.includes('024 011 8846') ? rawLabel : `${rawLabel} (024 011 8846)`;
           waInlineBtn.appendChild(waIcon);
           waInlineBtn.appendChild(waLabel);
           waInlineBtn.addEventListener('click', () => {
-            openDirectWhatsAppOrder(detailsObj.whatsappPrefill);
+            openDirectWhatsAppOrder((detailsObj && detailsObj.whatsappPrefill) || buildVehicleWhatsAppPrefill('order'));
           });
 
           ctaWrap.appendChild(waInlineBtn);
@@ -3714,7 +3850,7 @@
       }
 
       messagesEl.appendChild(row);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      scrollSalesChatToBottom(true);
     }
 
     function buildQuestionForm(placeholderText, buttonLabel, isChassisInput) {
@@ -3876,6 +4012,7 @@
         const { form } = buildQuestionForm(placeholder, 'Ask', false);
 
         controlsEl.appendChild(form);
+        scrollSalesChatToBottom(true);
         return;
       }
 
@@ -3908,22 +4045,24 @@
         headerRow.appendChild(actionGroup);
 
         const modelGrid = document.createElement('div');
-        modelGrid.className = 'flex flex-wrap gap-2 max-h-36 overflow-y-auto pb-1 mb-2.5';
+        modelGrid.className = 'sales-year-scroller flex flex-wrap gap-1.5 sm:gap-2 max-h-40 sm:max-h-48 overflow-y-auto pr-1 pb-1 mb-2.5';
 
         const brandCatalog = salesBrandModelCatalog[salesChatState.brand] || {};
         Object.keys(brandCatalog).forEach(modelName => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = 'chat-pill-3d text-xs font-extrabold py-1.5 px-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+          btn.className = 'chat-pill-3d text-[11px] sm:text-xs font-extrabold py-1.5 px-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
           btn.textContent = modelName;
+          btn.setAttribute('aria-label', `${salesChatState.brand} ${modelName}`);
           btn.addEventListener('click', () => handleSalesModelSelect(modelName));
           modelGrid.appendChild(btn);
         });
 
-        const { form } = buildQuestionForm(`Or type another ${salesChatState.brand} model...`, 'Send', false);
+        const { form } = buildQuestionForm(`Or type any ${salesChatState.brand} model...`, 'Send', false);
         controlsEl.appendChild(headerRow);
         controlsEl.appendChild(modelGrid);
         controlsEl.appendChild(form);
+        scrollSalesChatToBottom(true);
         return;
       }
 
@@ -3974,6 +4113,7 @@
         controlsEl.appendChild(headerRow);
         controlsEl.appendChild(yearScroller);
         controlsEl.appendChild(form);
+        scrollSalesChatToBottom(true);
         return;
       }
 
@@ -4025,6 +4165,7 @@
 
         const { form } = buildQuestionForm('Or enter engine size (e.g., 1.8L, 2.4L)...', 'Send', false);
         controlsEl.appendChild(form);
+        scrollSalesChatToBottom(true);
         return;
       }
 
@@ -4048,6 +4189,7 @@
         const { form, input } = buildQuestionForm('Enter Chassis / VIN number...', 'Verify', true);
         controlsEl.appendChild(headerRow);
         controlsEl.appendChild(form);
+        scrollSalesChatToBottom(true);
         window.requestAnimationFrame(() => input.focus({ preventScroll: true }));
         return;
       }
@@ -4074,6 +4216,7 @@
         const { form } = buildQuestionForm('Ask a follow-up question...', 'Ask', false);
         controlsEl.appendChild(actionRow);
         controlsEl.appendChild(form);
+        scrollSalesChatToBottom(true);
       }
     }
 
@@ -4489,9 +4632,13 @@
       if (typeof salesBrandModelCatalog === 'object') {
         Object.keys(salesBrandModelCatalog).forEach(b => {
           Object.keys(salesBrandModelCatalog[b]).forEach(canon => {
+            const cleanCanon = canon.replace(/\s*\([^)]*\)/g, '').trim();
             modelCandidates.push({ term: canon, brand: b, model: canon });
-            canon.split('/').map(s => s.trim()).forEach(part => {
-              if (part && part !== canon) {
+            if (cleanCanon && cleanCanon !== canon) {
+              modelCandidates.push({ term: cleanCanon, brand: b, model: canon });
+            }
+            cleanCanon.split('/').map(s => s.trim()).forEach(part => {
+              if (part && part !== canon && part !== cleanCanon) {
                 modelCandidates.push({ term: part, brand: b, model: canon });
               }
             });
@@ -4508,6 +4655,9 @@
       modelCandidates.sort((a, b) => b.term.length - a.term.length);
 
       for (const cand of modelCandidates) {
+        if (cand.term === '86' && result.brand !== 'Toyota' && !/\b(?:toyota|gt)\s*86\b/i.test(ql)) {
+          continue;
+        }
         const escaped = cand.term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         if (new RegExp(`\\b${escaped}\\b`, 'i').test(ql)) {
           if (!result.brand || result.brand === cand.brand) {
@@ -5183,96 +5333,214 @@
 
     const salesBrandModelCatalog = {
       Toyota: {
-        'Corolla': ['1.4L', '1.5L', '1.6L', '1.8L', '2.0L', '1.8L Hybrid'],
-        'Camry': ['2.0L', '2.2L', '2.4L', '2.5L', '2.5L Hybrid', '3.0L V6', '3.5L V6'],
-        'RAV4': ['2.0L', '2.4L', '2.5L', '2.5L Hybrid', '3.5L V6'],
-        'Hilux': ['2.0L', '2.7L', '4.0L V6'],
-        'Yaris': ['1.0L', '1.3L', '1.5L'],
-        'Vitz': ['1.0L', '1.3L', '1.5L'],
-        'Highlander': ['2.4L', '2.7L', '3.0L V6', '3.3L V6', '3.5L V6', '3.5L Hybrid'],
-        'Land Cruiser': ['4.0L V6', '4.6L V8', '4.7L V8', '5.7L V8'],
-        'Prado': ['2.7L', '3.4L V6', '4.0L V6'],
-        'Sienna': ['2.7L', '3.3L V6', '3.5L V6'],
         'Avalon': ['2.5L Hybrid', '3.0L V6', '3.5L V6'],
-        'Matrix': ['1.8L', '2.4L'],
+        'Aygo / Aygo X': ['1.0L'],
+        'Belta': ['1.0L', '1.3L'],
         'C-HR': ['1.2L Turbo', '1.8L Hybrid', '2.0L'],
-        'Auris': ['1.4L', '1.6L', '1.8L'],
-        'Tacoma': ['2.7L', '3.5L V6', '4.0L V6'],
-        'Fortuner': ['2.7L', '4.0L V6'],
-        '4Runner': ['2.7L', '4.0L V6'],
-        'Prius': ['1.5L Hybrid', '1.8L Hybrid']
+        'Camry': ['2.0L', '2.2L', '2.4L', '2.5L', '2.5L Hybrid', '3.0L V6', '3.5L V6'],
+        'Corolla / Corolla Cross / Corolla Hatchback': ['1.4L', '1.5L', '1.6L', '1.8L', '2.0L', '1.8L Hybrid', '2.0L Hybrid'],
+        'Crown / Crown Signia': ['2.4L Turbo Hybrid', '2.5L Hybrid', '3.0L V6', '3.5L V6'],
+        'Echo / Platz': ['1.0L', '1.3L', '1.5L'],
+        'FJ Cruiser': ['4.0L V6'],
+        'Fortuner (Gasoline only)': ['2.7L', '4.0L V6'],
+        'GR86 / 86 / GT86': ['2.0L', '2.4L'],
+        'GR Corolla': ['1.6L Turbo'],
+        'GR Supra': ['2.0L Turbo', '3.0L Turbo'],
+        'GR Yaris': ['1.6L Turbo'],
+        'Grand Highlander': ['2.4L Turbo', '2.4L Turbo Hybrid', '2.5L Hybrid'],
+        'Harrier': ['2.0L', '2.2L', '2.4L', '2.5L Hybrid', '3.0L V6', '3.5L V6'],
+        'HiAce (Gasoline only)': ['2.0L', '2.7L', '3.5L V6'],
+        'Highlander': ['2.4L', '2.4L Turbo', '2.5L Hybrid', '2.7L', '3.0L V6', '3.3L V6', '3.5L V6', '3.5L Hybrid'],
+        'Hilux (Gasoline only)': ['2.0L', '2.7L', '4.0L V6'],
+        'Innova': ['2.0L', '2.7L'],
+        'Ist': ['1.3L', '1.5L', '1.8L'],
+        'Land Cruiser (Gasoline only)': ['3.4L V6 Turbo', '4.0L V6', '4.6L V8', '4.7L V8', '5.7L V8'],
+        'Land Cruiser Prado (Gasoline only)': ['2.7L', '3.4L V6', '4.0L V6'],
+        'Matrix': ['1.8L', '2.4L'],
+        'Passo': ['1.0L', '1.3L'],
+        'Prius / Prius Prime': ['1.5L Hybrid', '1.8L Hybrid', '2.0L Hybrid'],
+        'Ractis': ['1.3L', '1.5L'],
+        'RAV4 / RAV4 Hybrid / RAV4 Prime': ['2.0L', '2.4L', '2.5L', '2.5L Hybrid', '3.5L V6'],
+        'Rush': ['1.5L'],
+        'Sequoia': ['3.4L V6 Turbo Hybrid', '4.7L V8', '5.7L V8'],
+        'Sienna': ['2.5L Hybrid', '2.7L', '3.3L V6', '3.5L V6'],
+        'Sienta': ['1.5L', '1.5L Hybrid'],
+        'Starlet': ['1.3L', '1.4L', '1.5L'],
+        'Tacoma': ['2.4L Turbo', '2.7L', '3.5L V6', '4.0L V6'],
+        'Tercel': ['1.3L', '1.5L'],
+        'Tundra': ['3.4L V6 Turbo', '4.0L V6', '4.6L V8', '4.7L V8', '5.7L V8'],
+        'Urban Cruiser': ['1.3L', '1.5L'],
+        'Venza': ['2.5L Hybrid', '2.7L', '3.5L V6'],
+        'Vitz / Yaris / Yaris Cross': ['1.0L', '1.3L', '1.5L', '1.5L Hybrid'],
+        'Voxy / Noah': ['1.8L Hybrid', '2.0L'],
+        'Wish': ['1.8L', '2.0L']
       },
       Honda: {
-        'Civic': ['1.5L Turbo', '1.6L', '1.7L', '1.8L', '2.0L'],
-        'Accord': ['1.5L Turbo', '2.0L', '2.0L Turbo', '2.4L', '3.0L V6', '3.5L V6'],
-        'CR-V': ['1.5L Turbo', '2.0L', '2.4L'],
-        'Fit': ['1.3L', '1.5L'],
-        'HR-V': ['1.5L', '1.8L', '2.0L'],
-        'Pilot': ['3.5L V6'],
+        'Accord / Accord Hybrid': ['1.5L Turbo', '2.0L', '2.0L Hybrid', '2.0L Turbo', '2.4L', '3.0L V6', '3.5L V6'],
+        'Amaze': ['1.2L'],
+        'BR-V': ['1.5L'],
+        'Brio': ['1.2L'],
+        'City': ['1.0L Turbo', '1.5L', '1.5L Hybrid'],
+        'Civic / Civic Si / Civic Type R / Civic Hybrid': ['1.5L Turbo', '1.6L', '1.7L', '1.8L', '2.0L', '2.0L Hybrid', '2.0L Turbo'],
+        'CR-V / CR-V Hybrid': ['1.5L Turbo', '2.0L', '2.0L Hybrid', '2.4L'],
+        'CR-Z': ['1.5L Hybrid'],
+        'Crosstour': ['2.4L', '3.5L V6'],
+        'Element': ['2.4L'],
+        'Fit / Jazz': ['1.2L', '1.3L', '1.5L', '1.5L Hybrid'],
+        'Freed': ['1.5L', '1.5L Hybrid'],
+        'HR-V / Vezel': ['1.5L', '1.5L Hybrid', '1.5L Turbo', '1.8L', '2.0L'],
+        'Insight': ['1.3L Hybrid', '1.5L Hybrid'],
         'Odyssey': ['2.4L', '3.5L V6'],
+        'Passport': ['3.5L V6'],
+        'Pilot': ['3.5L V6'],
+        'Prelude': ['2.2L', '2.3L'],
         'Ridgeline': ['3.5L V6'],
-        'Insight': ['1.3L Hybrid', '1.5L Hybrid']
+        'S2000': ['2.0L', '2.2L'],
+        'Stepwgn': ['1.5L Turbo', '2.0L', '2.0L Hybrid'],
+        'Stream': ['1.7L', '1.8L', '2.0L'],
+        'WR-V': ['1.2L', '1.5L']
       },
       Hyundai: {
-        'Elantra': ['1.6L', '1.8L', '2.0L'],
-        'Sonata': ['1.6L Turbo', '2.0L', '2.4L', '2.5L', '3.3L V6'],
-        'Tucson': ['1.6L Turbo', '2.0L', '2.4L', '2.5L', '2.7L V6'],
-        'Accent': ['1.4L', '1.6L'],
-        'Santa Fe': ['2.0L Turbo', '2.4L', '2.5L', '2.7L V6', '3.3L V6', '3.5L V6'],
-        'Kona': ['1.6L Turbo', '2.0L'],
-        'Creta': ['1.4L Turbo', '1.5L', '1.6L'],
-        'Venue': ['1.0L Turbo', '1.6L'],
-        'ix35': ['1.6L', '2.0L', '2.4L'],
-        'i10': ['1.0L', '1.1L', '1.2L'],
-        'i20': ['1.2L', '1.4L', '1.6L'],
-        'i30': ['1.4L', '1.6L', '2.0L'],
-        'Palisade': ['3.8L V6']
+        'Accent / Verna': ['1.4L', '1.5L', '1.6L'],
+        'Atos / Santro': ['1.0L', '1.1L'],
+        'Azera / Grandeur': ['2.4L', '2.5L', '3.0L V6', '3.3L V6', '3.5L V6'],
+        'Bayon': ['1.0L Turbo', '1.2L', '1.4L'],
+        'Casper': ['1.0L', '1.0L Turbo'],
+        'Creta / ix25': ['1.4L Turbo', '1.5L', '1.6L'],
+        'Elantra / Avante / i30': ['1.4L', '1.6L', '1.6L Turbo', '1.8L', '2.0L'],
+        'Eon': ['0.8L', '1.0L'],
+        'Exter': ['1.2L'],
+        'Getz': ['1.1L', '1.3L', '1.4L', '1.6L'],
+        'i10 / Grand i10': ['1.0L', '1.1L', '1.2L'],
+        'i20': ['1.0L Turbo', '1.2L', '1.4L', '1.6L'],
+        'i40': ['1.6L', '2.0L'],
+        'Ioniq (Original Hybrid & Plug-in Hybrid only)': ['1.6L Hybrid'],
+        'Kona (Gasoline & Hybrid only)': ['1.6L Hybrid', '1.6L Turbo', '2.0L'],
+        'Matrix': ['1.6L', '1.8L'],
+        'Palisade': ['3.8L V6'],
+        'Santa Cruz': ['2.5L', '2.5L Turbo'],
+        'Santa Fe / Santa Fe Hybrid': ['1.6L Turbo Hybrid', '2.0L Turbo', '2.4L', '2.5L', '2.5L Turbo', '2.7L V6', '3.3L V6', '3.5L V6'],
+        'Sonata / Sonata Hybrid': ['1.6L Turbo', '2.0L', '2.0L Hybrid', '2.4L', '2.5L', '3.3L V6'],
+        'Stargazer': ['1.5L'],
+        'Staria (Gasoline only)': ['3.5L V6'],
+        'Tucson / Tucson Hybrid': ['1.6L Turbo', '1.6L Turbo Hybrid', '2.0L', '2.4L', '2.5L', '2.7L V6'],
+        'Veloster': ['1.6L', '1.6L Turbo', '2.0L'],
+        'Venue': ['1.0L Turbo', '1.2L', '1.6L']
       },
       Kia: {
-        'Sportage': ['1.6L', '2.0L', '2.4L', '2.5L', '2.7L V6'],
-        'Forte / Cerato': ['1.6L', '1.8L', '2.0L'],
-        'Optima / K5': ['1.6L Turbo', '2.0L', '2.4L', '2.5L', '2.7L V6'],
-        'Soul': ['1.6L', '2.0L'],
-        'Sorento': ['2.4L', '2.5L', '3.3L V6', '3.5L V6', '3.8L V6'],
-        'Rio': ['1.2L', '1.4L', '1.6L'],
-        'Picanto': ['1.0L', '1.1L', '1.2L'],
-        'Morning': ['1.0L', '1.1L', '1.2L'],
-        'Carnival': ['2.5L', '3.3L V6', '3.5L V6', '3.8L V6'],
-        'Cadenza': ['3.3L V6', '3.5L V6'],
-        'Sedona': ['3.3L V6', '3.5L V6']
+        'Carens / Rondo': ['1.5L', '1.6L', '2.0L', '2.4L'],
+        'Carnival / Sedona (Gasoline & Hybrid only)': ['1.6L Turbo Hybrid', '2.5L', '3.3L V6', '3.5L V6', '3.8L V6'],
+        'Ceed / ProCeed / XCeed': ['1.0L Turbo', '1.4L', '1.5L Turbo', '1.6L', '1.6L Turbo'],
+        'Cerato / Forte / K3 / Spectra': ['1.6L', '1.6L Turbo', '1.8L', '2.0L'],
+        'K4': ['1.6L Turbo', '2.0L'],
+        'K5 / Optima': ['1.6L Turbo', '2.0L', '2.0L Hybrid', '2.4L', '2.5L', '2.5L Turbo', '2.7L V6'],
+        'K8 / Cadenza': ['2.5L', '3.3L V6', '3.5L V6'],
+        'K9 / K900 / Quoris': ['3.3L V6 Turbo', '3.8L V6', '5.0L V8'],
+        'Mohave / Borrego (Gasoline only)': ['3.8L V6', '4.6L V8'],
+        'Morning / Picanto': ['1.0L', '1.1L', '1.2L'],
+        'Niro (Hybrid & Plug-in Hybrid only)': ['1.6L Hybrid'],
+        'Pegas / Soluto': ['1.4L'],
+        'Pride / Rio': ['1.2L', '1.4L', '1.6L'],
+        'Seltos': ['1.4L Turbo', '1.5L', '1.6L Turbo', '2.0L'],
+        'Sonet': ['1.0L Turbo', '1.2L', '1.5L'],
+        'Sorento / Sorento Hybrid (Gasoline & Hybrid only)': ['1.6L Turbo Hybrid', '2.4L', '2.5L', '2.5L Turbo', '3.3L V6', '3.5L V6', '3.8L V6'],
+        'Soul (Gasoline only)': ['1.6L', '1.6L Turbo', '2.0L'],
+        'Sportage / Sportage Hybrid (Gasoline & Hybrid only)': ['1.6L', '1.6L Turbo', '1.6L Turbo Hybrid', '2.0L', '2.4L', '2.5L', '2.7L V6'],
+        'Stinger': ['2.0L Turbo', '2.5L Turbo', '3.3L V6 Turbo'],
+        'Stonic': ['1.0L Turbo', '1.2L', '1.4L'],
+        'Telluride': ['3.8L V6']
       }
     };
 
     const salesModelAliasMap = {
       Honda: {
-        'jazz': 'Fit',
-        'fit / jazz': 'Fit',
-        'fit/jazz': 'Fit',
-        'crv': 'CR-V',
-        'hrv': 'HR-V'
+        'jazz': 'Fit / Jazz',
+        'fit': 'Fit / Jazz',
+        'fit / jazz': 'Fit / Jazz',
+        'fit/jazz': 'Fit / Jazz',
+        'crv': 'CR-V / CR-V Hybrid',
+        'cr-v': 'CR-V / CR-V Hybrid',
+        'hrv': 'HR-V / Vezel',
+        'hr-v': 'HR-V / Vezel',
+        'vezel': 'HR-V / Vezel',
+        'stepwagon': 'Stepwgn',
+        'accord': 'Accord / Accord Hybrid',
+        'civic': 'Civic / Civic Si / Civic Type R / Civic Hybrid'
       },
       Toyota: {
-        'rav 4': 'RAV4',
+        'rav 4': 'RAV4 / RAV4 Hybrid / RAV4 Prime',
+        'rav4': 'RAV4 / RAV4 Hybrid / RAV4 Prime',
         'chr': 'C-HR',
-        'landcruiser': 'Land Cruiser',
-        'prado 120': 'Prado',
-        'prado 150': 'Prado'
+        'landcruiser': 'Land Cruiser (Gasoline only)',
+        'land cruiser': 'Land Cruiser (Gasoline only)',
+        'prado': 'Land Cruiser Prado (Gasoline only)',
+        'prado 120': 'Land Cruiser Prado (Gasoline only)',
+        'prado 150': 'Land Cruiser Prado (Gasoline only)',
+        'fortuner': 'Fortuner (Gasoline only)',
+        'hiace': 'HiAce (Gasoline only)',
+        'hilux': 'Hilux (Gasoline only)',
+        'corolla': 'Corolla / Corolla Cross / Corolla Hatchback',
+        'corolla cross': 'Corolla / Corolla Cross / Corolla Hatchback',
+        'vitz': 'Vitz / Yaris / Yaris Cross',
+        'yaris': 'Vitz / Yaris / Yaris Cross',
+        'yaris cross': 'Vitz / Yaris / Yaris Cross',
+        'prius': 'Prius / Prius Prime',
+        'supra': 'GR Supra',
+        'gt86': 'GR86 / 86 / GT86',
+        'gr86': 'GR86 / 86 / GT86'
       },
       Hyundai: {
-        'santafe': 'Santa Fe',
-        'sante fe': 'Santa Fe',
-        'ix 35': 'ix35',
-        'i-10': 'i10',
+        'santafe': 'Santa Fe / Santa Fe Hybrid',
+        'sante fe': 'Santa Fe / Santa Fe Hybrid',
+        'santa fe': 'Santa Fe / Santa Fe Hybrid',
+        'ix35': 'Tucson / Tucson Hybrid',
+        'ix 35': 'Tucson / Tucson Hybrid',
+        'tucson': 'Tucson / Tucson Hybrid',
+        'i-10': 'i10 / Grand i10',
+        'i10': 'i10 / Grand i10',
+        'grand i10': 'i10 / Grand i10',
         'i-20': 'i20',
-        'i-30': 'i30'
+        'i-30': 'Elantra / Avante / i30',
+        'i30': 'Elantra / Avante / i30',
+        'elantra': 'Elantra / Avante / i30',
+        'avante': 'Elantra / Avante / i30',
+        'accent': 'Accent / Verna',
+        'verna': 'Accent / Verna',
+        'santro': 'Atos / Santro',
+        'grandeur': 'Azera / Grandeur',
+        'ix25': 'Creta / ix25',
+        'ioniq': 'Ioniq (Original Hybrid & Plug-in Hybrid only)',
+        'kona': 'Kona (Gasoline & Hybrid only)',
+        'sonata': 'Sonata / Sonata Hybrid',
+        'staria': 'Staria (Gasoline only)'
       },
       Kia: {
-        'forte': 'Forte / Cerato',
-        'cerato': 'Forte / Cerato',
-        'k3': 'Forte / Cerato',
-        'optima': 'Optima / K5',
-        'k5': 'Optima / K5',
-        'k 5': 'Optima / K5'
+        'forte': 'Cerato / Forte / K3 / Spectra',
+        'cerato': 'Cerato / Forte / K3 / Spectra',
+        'k3': 'Cerato / Forte / K3 / Spectra',
+        'spectra': 'Cerato / Forte / K3 / Spectra',
+        'optima': 'K5 / Optima',
+        'k5': 'K5 / Optima',
+        'k 5': 'K5 / Optima',
+        'cadenza': 'K8 / Cadenza',
+        'k8': 'K8 / Cadenza',
+        'k9': 'K9 / K900 / Quoris',
+        'k900': 'K9 / K900 / Quoris',
+        'quoris': 'K9 / K900 / Quoris',
+        'carnival': 'Carnival / Sedona (Gasoline & Hybrid only)',
+        'sedona': 'Carnival / Sedona (Gasoline & Hybrid only)',
+        'picanto': 'Morning / Picanto',
+        'morning': 'Morning / Picanto',
+        'rio': 'Pride / Rio',
+        'pride': 'Pride / Rio',
+        'soluto': 'Pegas / Soluto',
+        'rondo': 'Carens / Rondo',
+        'borrego': 'Mohave / Borrego (Gasoline only)',
+        'mohave': 'Mohave / Borrego (Gasoline only)',
+        'niro': 'Niro (Hybrid & Plug-in Hybrid only)',
+        'sorento': 'Sorento / Sorento Hybrid (Gasoline & Hybrid only)',
+        'soul': 'Soul (Gasoline only)',
+        'sportage': 'Sportage / Sportage Hybrid (Gasoline & Hybrid only)'
       }
     };
 
@@ -5280,7 +5548,7 @@
       Toyota: 'Corolla, Camry, RAV4, Hilux, Yaris, Vitz',
       Honda: 'Civic, Accord, CR-V, Fit, HR-V, Pilot',
       Hyundai: 'Elantra, Sonata, Tucson, Accent, Santa Fe, Kona',
-      Kia: 'Sportage, Forte, Cerato, Optima, K5, Picanto',
+      Kia: 'Sportage, Cerato, Forte, K5, Picanto, Sorento',
     };
 
     function findValidModelForBrand(brand, rawModel) {
@@ -5296,13 +5564,15 @@
       if (brandAliases[compact]) return brandAliases[compact];
 
       for (const canonical of Object.keys(catalog)) {
-        const parts = canonical.toLowerCase().split('/').map(s => s.trim());
-        if (canonical.toLowerCase() === lower || parts.includes(lower)) {
+        const cleanCanonical = canonical.replace(/\s*\([^)]*\)/g, '').trim();
+        const parts = cleanCanonical.toLowerCase().split('/').map(s => s.trim());
+        if (canonical.toLowerCase() === lower || cleanCanonical.toLowerCase() === lower || parts.includes(lower)) {
           return canonical;
         }
         const canonicalCompact = canonical.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const cleanCompact = cleanCanonical.toLowerCase().replace(/[^a-z0-9]/g, '');
         const partCompacts = parts.map(p => p.replace(/[^a-z0-9]/g, ''));
-        if (compact && (canonicalCompact === compact || partCompacts.includes(compact))) {
+        if (compact && (canonicalCompact === compact || cleanCompact === compact || partCompacts.includes(compact))) {
           return canonical;
         }
       }
@@ -5520,7 +5790,15 @@
         ? `Recommended OEM plug: ${matchedPlug}. Tap Send Order to WhatsApp below to confirm live stock and pricing.`
         : 'Ready to verify stock and live Cedi pricing on WhatsApp—tap Send Order to WhatsApp below.';
 
-      appendSalesChatMessage('assistant', readyMsg, { summaryLines });
+      appendSalesChatMessage('assistant', readyMsg, {
+        summaryLines,
+        includePartCaution: Boolean(matchedPlug),
+        showWhatsAppCta: true,
+        whatsappLabel: matchedPlug
+          ? 'Verify Fitment on WhatsApp (024 011 8846)'
+          : 'Confirm Fitment on WhatsApp (024 011 8846)',
+        whatsappPrefill: buildVehicleWhatsAppPrefill('order', matchedPlug)
+      });
       renderSalesChatControls();
     }
 
