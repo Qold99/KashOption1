@@ -652,18 +652,15 @@
       -webkit-backdrop-filter: blur(8px);
       opacity: 0;
       pointer-events: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       transition: opacity 200ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
       cursor: pointer;
     }
-    .kash-gallery:hover .kash-gallery-arrow,
     .kash-gallery:focus-within .kash-gallery-arrow,
     .kash-gallery.is-controls-visible .kash-gallery-arrow {
       opacity: 1;
       pointer-events: auto;
-    }
-    .kash-gallery-arrow:hover {
-      background: #E31818;
-      border-color: #FF4D4D;
     }
     .kash-gallery-arrow.prev { left: 6px; }
     .kash-gallery-arrow.next { right: 6px; }
@@ -671,6 +668,8 @@
       position: relative;
       background-color: #0B0B0F;
       border: 1px solid rgba(255, 255, 255, 0.06);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       transform: translate3d(0, 0, 0);
       transition:
         transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -678,11 +677,21 @@
         border-color 220ms ease,
         box-shadow 260ms ease;
     }
-    .kash-product-card:hover {
-      background-color: #101016;
-      border-color: rgba(255, 255, 255, 0.14);
-      transform: translate3d(0, -2px, 0);
-      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.72);
+    @media (hover: hover) and (pointer: fine) {
+      .kash-gallery:hover .kash-gallery-arrow {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .kash-gallery-arrow:hover {
+        background: #E31818;
+        border-color: #FF4D4D;
+      }
+      .kash-product-card:hover {
+        background-color: #101016;
+        border-color: rgba(255, 255, 255, 0.14);
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.72);
+      }
     }
     .kash-product-card:active {
       transform: scale(0.99) translate3d(0, 0, 0);
@@ -714,6 +723,8 @@
       border: none;
       padding: 0;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       transition: width 180ms ease, background-color 180ms ease;
     }
     .kash-gallery-dot.is-active {
@@ -735,6 +746,9 @@
       letter-spacing: 0.04em;
       pointer-events: none;
     }
+    .kash-gallery-detail .kash-gallery-slide {
+      cursor: zoom-in;
+    }
     .kash-gallery-detail .kash-gallery-arrow {
       width: 34px;
       height: 34px;
@@ -742,6 +756,34 @@
     }
     .kash-gallery-detail .kash-gallery-arrow.prev { left: 10px; }
     .kash-gallery-detail .kash-gallery-arrow.next { right: 10px; }
+    .kash-gallery-expand-btn {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 5;
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      background: rgba(5, 5, 8, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .kash-gallery-expand-btn:hover {
+        background: #E31818;
+        border-color: #FF4D4D;
+        transform: scale(1.05);
+      }
+    }
     .kash-gallery-thumbs {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -756,19 +798,59 @@
       background: #07070A;
       padding: 0;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       opacity: 0.68;
       transition: border-color 180ms ease, opacity 180ms ease, transform 180ms ease;
     }
-    .kash-gallery-thumb.is-active,
-    .kash-gallery-thumb:hover {
+    .kash-gallery-thumb.is-active {
       opacity: 1;
       border-color: #E31818;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .kash-gallery-thumb:hover {
+        opacity: 1;
+        border-color: #E31818;
+      }
     }
     .kash-gallery-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    /* Full-Screen Product Image Lightbox */
+    #kashLightboxModal[hidden] {
+      display: none;
+    }
+    #kashLightboxModal {
+      touch-action: pan-y;
+    }
+    .kash-lightbox-nav {
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      background: rgba(12, 12, 16, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 180ms ease, border-color 180ms ease, transform 160ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .kash-lightbox-nav:hover {
+        background: #E31818;
+        border-color: #FF4D4D;
+      }
+    }
+    .kash-lightbox-nav:active {
+      transform: scale(0.94);
     }
     .line-clamp-2 {
       display: -webkit-box;
@@ -1521,19 +1603,26 @@
       background-color: #09090D;
       border: 1px solid rgba(255, 255, 255, 0.10);
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       transform: translate3d(0, 0, 0);
       transition:
         transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
         border-color 220ms ease,
         box-shadow 220ms ease;
     }
-    .plug-more-card:hover {
-      transform: translate3d(0, -2px, 0);
-      border-color: rgba(227, 24, 24, 0.52);
-      box-shadow:
-        0 20px 44px rgba(0, 0, 0, 0.86),
-        0 0 28px rgba(227, 24, 24, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    @media (hover: hover) and (pointer: fine) {
+      .plug-more-card:hover {
+        transform: translate3d(0, -2px, 0);
+        border-color: rgba(227, 24, 24, 0.52);
+        box-shadow:
+          0 20px 44px rgba(0, 0, 0, 0.86),
+          0 0 28px rgba(227, 24, 24, 0.14),
+          inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      }
+    }
+    .plug-more-card:active {
+      transform: scale(0.99) translate3d(0, 0, 0);
     }
     #product-detail .plug-spec-card {
       position: relative;
@@ -2216,14 +2305,6 @@
           <span>Related OEM Plugs</span>
           <span aria-hidden="true">&darr;</span>
         </a>
-      </div>
-
-      <div class="mb-8 pb-5 border-b border-white/10">
-        <div class="flex items-center gap-2 mb-1.5">
-          <span class="w-2 h-2 rounded-full bg-[#FF1F1F] shadow-[0_0_8px_rgba(255,31,31,0.8)] shrink-0"></span>
-          <span id="plugDetailEyebrow" class="text-[11px] font-bold uppercase tracking-widest text-silverMuted">OEM FITMENT SPECIFICATION</span>
-        </div>
-        <h2 id="plugDetailTitle" class="text-2xl sm:text-4xl font-extrabold uppercase text-white tracking-tight">OEM Spark Plug Fitment</h2>
       </div>
 
       <div id="plugDetailBody" class="space-y-8"></div>
@@ -3119,6 +3200,27 @@
       <div id="salesChatControls" class="px-4 sm:px-6 pt-3 pb-3.5 bg-[#0C0C10]/95 border-t border-white/10 shrink-0"></div>
     </div>
   </aside>
+
+  <!-- ================= FULL-SCREEN PRODUCT IMAGE LIGHTBOX ================= -->
+  <div id="kashLightboxModal" role="dialog" aria-modal="true" aria-label="Full-screen product image viewer" aria-hidden="true" hidden class="fixed inset-0 z-[70] bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-8">
+    <div class="flex items-center justify-between gap-4 max-w-6xl w-full mx-auto shrink-0">
+      <div class="min-w-0 flex items-center gap-3">
+        <span id="kashLightboxCounter" class="px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-zinc-100 tabular-nums shrink-0">1 / 1</span>
+        <span id="kashLightboxCaption" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-200 truncate"></span>
+      </div>
+      <button type="button" id="kashLightboxCloseBtn" onclick="closeImageLightbox()" aria-label="Close full-screen image" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E31818] border border-white/20 hover:border-[#FF4D4D] text-white text-2xl leading-none flex items-center justify-center shrink-0 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
+        &times;
+      </button>
+    </div>
+
+    <div id="kashLightboxStage" class="relative flex-1 flex items-center justify-center max-w-6xl w-full mx-auto my-3 sm:my-4 min-h-0">
+      <button type="button" id="kashLightboxPrevBtn" aria-label="Previous image" class="kash-lightbox-nav absolute left-1 sm:left-3 z-10">&#8249;</button>
+      <img id="kashLightboxImg" src="" alt="" referrerpolicy="no-referrer" class="max-w-full max-h-[78vh] w-auto h-auto object-contain rounded-xl shadow-[0_24px_64px_rgba(0,0,0,0.85)] select-none">
+      <button type="button" id="kashLightboxNextBtn" aria-label="Next image" class="kash-lightbox-nav absolute right-1 sm:right-3 z-10">&#8250;</button>
+    </div>
+
+    <div id="kashLightboxDots" class="flex items-center justify-center gap-2 shrink-0 py-1"></div>
+  </div>
 
   <!-- ================= JAVASCRIPT: ROUTING, LIVE SEARCH, FITMENT, OVERLAY & SCROLL REVEAL ================= -->
   <script>
@@ -7005,6 +7107,187 @@
       }
     ];
 
+    let lightboxImages = [];
+    let lightboxActiveIndex = 0;
+    let lightboxTitle = '';
+    let lightboxPreviousOverflow = '';
+
+    function syncLightboxView() {
+      const modal = document.getElementById('kashLightboxModal');
+      const imgEl = document.getElementById('kashLightboxImg');
+      const counterEl = document.getElementById('kashLightboxCounter');
+      const captionEl = document.getElementById('kashLightboxCaption');
+      const prevBtn = document.getElementById('kashLightboxPrevBtn');
+      const nextBtn = document.getElementById('kashLightboxNextBtn');
+      const dotsWrap = document.getElementById('kashLightboxDots');
+      if (!modal || !imgEl || lightboxImages.length === 0) return;
+
+      const total = lightboxImages.length;
+      const safeIdx = ((lightboxActiveIndex % total) + total) % total;
+      lightboxActiveIndex = safeIdx;
+
+      imgEl.src = lightboxImages[safeIdx];
+      imgEl.alt = `${lightboxTitle || 'OEM Spark Plug'} (${safeIdx + 1} of ${total})`;
+      if (counterEl) counterEl.textContent = `${safeIdx + 1} / ${total}`;
+      if (captionEl) captionEl.textContent = lightboxTitle || '';
+      if (prevBtn) prevBtn.hidden = total <= 1;
+      if (nextBtn) nextBtn.hidden = total <= 1;
+
+      if (dotsWrap) {
+        dotsWrap.innerHTML = '';
+        if (total > 1) {
+          lightboxImages.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = `kash-gallery-dot${idx === safeIdx ? ' is-active' : ''}`;
+            dot.setAttribute('aria-label', `View full-screen photo ${idx + 1}`);
+            dot.addEventListener('click', e => {
+              e.stopPropagation();
+              lightboxActiveIndex = idx;
+              syncLightboxView();
+            });
+            dotsWrap.appendChild(dot);
+          });
+        }
+      }
+    }
+
+    function openImageLightbox(images, startIndex, caption) {
+      const modal = document.getElementById('kashLightboxModal');
+      if (!modal) return;
+      lightboxImages = Array.isArray(images) && images.length > 0 ? images.slice() : ['https://iili.io/oHVNlFS.png'];
+      lightboxActiveIndex = Number.isFinite(startIndex) ? startIndex : 0;
+      lightboxTitle = caption || '';
+      lightboxPreviousOverflow = document.body ? document.body.style.overflow : '';
+      if (document.body) document.body.style.overflow = 'hidden';
+
+      syncLightboxView();
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeImageLightbox() {
+      const modal = document.getElementById('kashLightboxModal');
+      if (!modal || modal.hidden) return;
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      if (document.body) document.body.style.overflow = lightboxPreviousOverflow || '';
+    }
+
+    (function initLightboxControls() {
+      const modal = document.getElementById('kashLightboxModal');
+      const stage = document.getElementById('kashLightboxStage');
+      const closeBtn = document.getElementById('kashLightboxCloseBtn');
+      const prevBtn = document.getElementById('kashLightboxPrevBtn');
+      const nextBtn = document.getElementById('kashLightboxNextBtn');
+      if (!modal) return;
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          closeImageLightbox();
+        });
+      }
+      if (prevBtn) {
+        prevBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          lightboxActiveIndex -= 1;
+          syncLightboxView();
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          lightboxActiveIndex += 1;
+          syncLightboxView();
+        });
+      }
+      modal.addEventListener('click', e => {
+        if (e.target === modal || e.target === stage) {
+          closeImageLightbox();
+        }
+      });
+
+      if (stage) {
+        let lbTouchX = 0;
+        let lbTouchY = 0;
+        stage.addEventListener('touchstart', e => {
+          if (!e.touches || !e.touches[0]) return;
+          lbTouchX = e.touches[0].clientX;
+          lbTouchY = e.touches[0].clientY;
+        }, { passive: true });
+        stage.addEventListener('touchend', e => {
+          if (lightboxImages.length <= 1 || !e.changedTouches || !e.changedTouches[0]) return;
+          const dx = e.changedTouches[0].clientX - lbTouchX;
+          const dy = e.changedTouches[0].clientY - lbTouchY;
+          if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy)) {
+            lightboxActiveIndex += dx < 0 ? 1 : -1;
+            syncLightboxView();
+          }
+        }, { passive: true });
+      }
+    })();
+
+    function attachSingleTapHandler(el, onActivate, options) {
+      const opts = options || {};
+      const ignoreSelector = opts.ignoreSelector !== undefined ? opts.ignoreSelector : 'button, a';
+      let startX = 0;
+      let startY = 0;
+      let startTime = 0;
+      let touchMoved = false;
+      let lastTouchHandledAt = 0;
+
+      function isIgnoredTarget(target) {
+        if (!ignoreSelector || !target || !target.closest) return false;
+        const matched = target.closest(ignoreSelector);
+        return Boolean(matched && matched !== el);
+      }
+
+      function isRecentGallerySwipe() {
+        const gallery = el.querySelector('.kash-gallery');
+        if (!gallery || !gallery.dataset.swipedAt) return false;
+        return Date.now() - Number(gallery.dataset.swipedAt) < 420;
+      }
+
+      el.addEventListener('touchstart', e => {
+        if (!e.touches || !e.touches[0]) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        startTime = Date.now();
+        touchMoved = false;
+      }, { passive: true });
+
+      el.addEventListener('touchmove', e => {
+        if (touchMoved || !e.touches || !e.touches[0]) return;
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        if (dx > 10 || dy > 10) {
+          touchMoved = true;
+        }
+      }, { passive: true });
+
+      el.addEventListener('touchend', e => {
+        if (touchMoved || !e.changedTouches || !e.changedTouches[0]) return;
+        if (isIgnoredTarget(e.target)) return;
+        if (isRecentGallerySwipe()) return;
+        const dx = Math.abs(e.changedTouches[0].clientX - startX);
+        const dy = Math.abs(e.changedTouches[0].clientY - startY);
+        const elapsed = Date.now() - startTime;
+        if (dx < 10 && dy < 10 && elapsed < 500) {
+          lastTouchHandledAt = Date.now();
+          if (e.cancelable) e.preventDefault();
+          onActivate();
+        }
+      });
+
+      el.addEventListener('click', e => {
+        if (Date.now() - lastTouchHandledAt < 550) return;
+        if (isIgnoredTarget(e.target)) return;
+        if (isRecentGallerySwipe()) return;
+        onActivate();
+      });
+    }
+
     function createSwipeGallery(images, altText, options) {
       const opts = options || {};
       const imgs = Array.isArray(images) && images.length > 0 ? images : ['https://iili.io/oHVNlFS.png'];
@@ -7046,6 +7329,20 @@
         counter.textContent = `${activeIndex + 1}/${imgs.length}`;
         dotButtons.forEach((dot, i) => dot.classList.toggle('is-active', i === activeIndex));
         thumbButtons.forEach((thumb, i) => thumb.classList.toggle('is-active', i === activeIndex));
+      }
+
+      if (opts.isDetail || opts.enableLightbox) {
+        const expandBtn = document.createElement('button');
+        expandBtn.type = 'button';
+        expandBtn.className = 'kash-gallery-expand-btn';
+        expandBtn.setAttribute('aria-label', 'View full-screen photo');
+        expandBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
+        expandBtn.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+          openImageLightbox(imgs, activeIndex, opts.lightboxTitle || altText);
+        });
+        gallery.appendChild(expandBtn);
       }
 
       if (imgs.length > 1) {
@@ -7095,7 +7392,6 @@
         let touchStartY = 0;
         let didSwipe = false;
         gallery.addEventListener('touchstart', e => {
-          gallery.classList.add('is-controls-visible');
           if (!e.touches || !e.touches[0]) return;
           touchStartX = e.touches[0].clientX;
           touchStartY = e.touches[0].clientY;
@@ -7107,15 +7403,26 @@
           const dy = e.changedTouches[0].clientY - touchStartY;
           if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
             didSwipe = true;
+            gallery.dataset.swipedAt = String(Date.now());
+            gallery.classList.add('is-controls-visible');
             goToSlide(dx < 0 ? activeIndex + 1 : activeIndex - 1);
           }
         }, { passive: true });
         gallery.addEventListener('click', e => {
-          gallery.classList.add('is-controls-visible');
           if (didSwipe) {
             e.preventDefault();
             e.stopPropagation();
             didSwipe = false;
+            return;
+          }
+          if ((opts.isDetail || opts.enableLightbox) && !e.target.closest('button, a')) {
+            openImageLightbox(imgs, activeIndex, opts.lightboxTitle || altText);
+          }
+        });
+      } else if (opts.isDetail || opts.enableLightbox) {
+        gallery.addEventListener('click', e => {
+          if (!e.target.closest('button, a')) {
+            openImageLightbox(imgs, activeIndex, opts.lightboxTitle || altText);
           }
         });
       }
@@ -7163,10 +7470,9 @@
         `${plug.brand} ${plug.oemMaker} ${plug.partCode} ${plug.oemNumber} ${plug.models.join(' ')} ${plug.priceLabel} ${plug.priceGhs}`.toLowerCase()
       );
 
-      card.addEventListener('click', e => {
-        if (e.target.closest('button, a')) return;
+      attachSingleTapHandler(card, () => {
         openPlugDetailModal(plug.id, origin);
-      });
+      }, { ignoreSelector: 'button, a' });
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           if (e.target.closest && e.target.closest('button, a')) return;
@@ -7257,9 +7563,9 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'plug-more-card w-full text-left rounded-2xl p-3.5 flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
-      btn.addEventListener('click', () => {
+      attachSingleTapHandler(btn, () => {
         openPlugDetailModal(item.id, lastCatalogueOrigin);
-      });
+      }, { ignoreSelector: '' });
 
       const thumbWrap = document.createElement('div');
       thumbWrap.className = 'w-14 h-14 rounded-xl bg-porscheBlack border border-white/10 overflow-hidden shrink-0';
@@ -7302,61 +7608,62 @@
     }
 
     function renderPlugDetailContent(plug) {
-      const eyebrowEl = document.getElementById('plugDetailEyebrow');
-      const titleEl = document.getElementById('plugDetailTitle');
       const bodyEl = document.getElementById('plugDetailBody');
       if (!bodyEl || !plug) return;
-
-      if (eyebrowEl) {
-        eyebrowEl.textContent = `${plug.authenticityLabel} \u2022 ${plug.oemMaker.toUpperCase()}`;
-      }
-      if (titleEl) {
-        titleEl.textContent = `${plug.brand} Original Iridium Spark Plug`;
-      }
 
       bodyEl.innerHTML = '';
 
       const article = document.createElement('article');
       article.className = 'space-y-8';
 
-      // Top split: Swipeable Photo Gallery + Clean Single Price, Single OEM Number & Fitment Models
-      const heroGrid = document.createElement('div');
-      heroGrid.className = 'grid grid-cols-1 md:grid-cols-12 gap-7 items-start';
+      // Top Product Photo Gallery (Tap any picture for full-screen view)
+      const mediaWrap = document.createElement('div');
+      mediaWrap.id = 'plugDetailGalleryWrap';
+      mediaWrap.className = 'max-w-2xl mx-auto w-full';
+      mediaWrap.appendChild(createSwipeGallery(plug.images, `${plug.brand} ${plug.partCode}`, {
+        isDetail: true,
+        enableLightbox: true,
+        lightboxTitle: `${plug.brand} \u2022 ${plug.oemNumber}`
+      }));
+      article.appendChild(mediaWrap);
 
-      const mediaCol = document.createElement('div');
-      mediaCol.className = 'md:col-span-5';
-      mediaCol.appendChild(createSwipeGallery(plug.images, `${plug.brand} ${plug.partCode}`, { isDetail: true }));
+      // Below Pictures: Eyebrow, Product Title, Woven Compatible Models & Price Strip
+      const summaryBlock = document.createElement('div');
+      summaryBlock.id = 'plugDetailSummaryBlock';
+      summaryBlock.className = 'pb-6 border-b border-white/10 space-y-4';
 
-      const summaryCol = document.createElement('div');
-      summaryCol.className = 'md:col-span-7 space-y-5';
+      const eyebrowRow = document.createElement('div');
+      eyebrowRow.className = 'flex items-center gap-2';
+      const dotSpan = document.createElement('span');
+      dotSpan.className = 'w-2 h-2 rounded-full bg-[#FF1F1F] shadow-[0_0_8px_rgba(255,31,31,0.8)] shrink-0';
+      const eyebrowEl = document.createElement('span');
+      eyebrowEl.id = 'plugDetailEyebrow';
+      eyebrowEl.className = 'text-[11px] font-bold uppercase tracking-widest text-silverMuted';
+      eyebrowEl.textContent = `${plug.authenticityLabel} \u2022 ${plug.oemMaker.toUpperCase()}`;
+      eyebrowRow.appendChild(dotSpan);
+      eyebrowRow.appendChild(eyebrowEl);
 
-      const partHeading = document.createElement('h3');
-      partHeading.className = 'text-xl sm:text-3xl font-extrabold uppercase text-white leading-tight tracking-tight';
-      partHeading.textContent = plug.oemNumber;
+      const titleEl = document.createElement('h2');
+      titleEl.id = 'plugDetailTitle';
+      titleEl.className = 'text-2xl sm:text-4xl font-extrabold uppercase text-white tracking-tight leading-tight';
+      titleEl.textContent = `${plug.brand} Original Iridium Spark Plug`;
+
+      const detailModels = Array.isArray(plug.models) ? plug.models : [];
+      const modelsPhrase = detailModels.length > 0 ? ` for ${plug.brand} ${detailModels.join(', ')}, etc.` : '';
+      const summaryPara = document.createElement('p');
+      summaryPara.id = 'plugDetailDescription';
+      summaryPara.className = 'text-sm sm:text-base text-zinc-200 leading-relaxed max-w-3xl';
+      summaryPara.textContent = `Genuine Iridium spark plugs (${plug.oemNumber})${modelsPhrase}`;
 
       const priceStrip = document.createElement('div');
-      priceStrip.className = 'flex flex-wrap items-center gap-3';
+      priceStrip.className = 'flex flex-wrap items-center gap-3 pt-1';
       priceStrip.innerHTML = `<span class="text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">${plug.priceLabel}</span><span class="px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-[11px] font-bold uppercase tracking-wider text-zinc-200">${plug.packLabel}</span><span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[11px] font-bold uppercase tracking-wider text-emerald-300">Ready in Accra</span>`;
 
-      const fitWrap = document.createElement('div');
-      fitWrap.className = 'pt-2 border-t border-white/[0.08] space-y-1.5';
-      const fitLabel = document.createElement('span');
-      fitLabel.className = 'block text-[10px] font-bold uppercase tracking-widest text-silverMuted';
-      fitLabel.textContent = `Compatible ${plug.brand} Models`;
-      const detailModels = Array.isArray(plug.models) ? plug.models : [];
-      const summaryPara = document.createElement('p');
-      summaryPara.className = 'text-xs sm:text-sm text-zinc-200 leading-relaxed';
-      summaryPara.textContent = detailModels.length > 0 ? `${detailModels.join(', ')}, etc.` : '';
-      fitWrap.appendChild(fitLabel);
-      fitWrap.appendChild(summaryPara);
-
-      summaryCol.appendChild(partHeading);
-      summaryCol.appendChild(priceStrip);
-      summaryCol.appendChild(fitWrap);
-
-      heroGrid.appendChild(mediaCol);
-      heroGrid.appendChild(summaryCol);
-      article.appendChild(heroGrid);
+      summaryBlock.appendChild(eyebrowRow);
+      summaryBlock.appendChild(titleEl);
+      summaryBlock.appendChild(summaryPara);
+      summaryBlock.appendChild(priceStrip);
+      article.appendChild(summaryBlock);
 
       // Technical OEM Specifications (Minimalist Hairline Spec List — No Repeated Codes or Brand Noise)
       const specCard = document.createElement('div');
@@ -8201,8 +8508,27 @@
       }
     }
 
-    // Close menu and sales chat with Escape key
+    // Close lightbox, menu, and sales chat with Escape / Arrow keys
     document.addEventListener('keydown', function(e) {
+      const lb = document.getElementById('kashLightboxModal');
+      if (lb && !lb.hidden) {
+        if (e.key === 'Escape') {
+          closeImageLightbox();
+          return;
+        }
+        if (lightboxImages.length > 1) {
+          if (e.key === 'ArrowLeft') {
+            lightboxActiveIndex -= 1;
+            syncLightboxView();
+            return;
+          }
+          if (e.key === 'ArrowRight') {
+            lightboxActiveIndex += 1;
+            syncLightboxView();
+            return;
+          }
+        }
+      }
       if (e.key === 'Escape') {
         closeMenu();
         closeSalesChat();
