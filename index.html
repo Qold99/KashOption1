@@ -37,7 +37,6 @@
   <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://js.paystack.co/v2/inline.js"></script>
 
   <script>
     tailwind.config = {
@@ -1484,54 +1483,45 @@
       border-color: rgba(255, 31, 31, 0.85);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 0 0 2px rgba(255, 31, 31, 0.35), 0 20px 50px rgba(0, 0, 0, 0.78);
     }
-    .plug-more-card,
-    #product-detail .plug-spec-card {
+    .plug-more-card {
       position: relative;
-      background-color: #070709;
-      background-image:
-        linear-gradient(122deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%, rgba(227, 24, 24, 0.04) 100%),
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        radial-gradient(circle at top right, rgba(227, 24, 24, 0.22), #0D0D10 55%, #070709 100%);
-      background-size: 100% 100%, 24px 24px, 24px 24px, 100% 100%;
-      border: 1px solid rgba(227, 24, 24, 0.3);
-      box-shadow:
-        0 20px 44px rgba(0, 0, 0, 0.85),
-        0 0 28px rgba(227, 24, 24, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      background-color: #09090D;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       transform: translate3d(0, 0, 0);
       transition:
-        transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 240ms ease,
-        box-shadow 300ms ease;
-    }
-    .plug-more-card::before,
-    #product-detail .plug-spec-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(
-        135deg,
-        rgba(227, 24, 24, 0.72) 0%,
-        rgba(255, 255, 255, 0.2) 36%,
-        rgba(255, 255, 255, 0.05) 70%,
-        rgba(227, 24, 24, 0.5) 100%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      z-index: 1;
+        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 220ms ease,
+        box-shadow 220ms ease;
     }
     .plug-more-card:hover {
-      transform: translate3d(0, -3px, 0);
-      border-color: rgba(227, 24, 24, 0.62);
+      transform: translate3d(0, -2px, 0);
+      border-color: rgba(227, 24, 24, 0.52);
       box-shadow:
-        0 26px 56px rgba(0, 0, 0, 0.92),
-        0 0 38px rgba(227, 24, 24, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+        0 20px 44px rgba(0, 0, 0, 0.86),
+        0 0 28px rgba(227, 24, 24, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+    #product-detail .plug-spec-card {
+      position: relative;
+      background: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none;
+    }
+    #checkout .plug-spec-card {
+      position: relative;
+      background-color: #0A0A0E;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
     }
     /* ================= 3D FLAGSHIP COMMERCIAL RELIABILITY SHOWCASE CARD ================= */
     .flagship-showcase-card {
@@ -1973,24 +1963,13 @@
 
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 max-w-md">
-              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20am%20ready%20to%20order%20genuine%20OEM%20spark%20plugs%20for%20my%20vehicle." onclick="event.preventDefault(); openSalesChat();" aria-haspopup="dialog" aria-controls="salesRepChat" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-extrabold uppercase tracking-widest px-8 py-4 rounded-xl text-center flex items-center justify-center gap-2.5">
-                <span>GET PRICE ON WHATSAPP</span>
+              <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20need%20fitment%20or%20customer%20support%20for%20genuine%20OEM%20spark%20plugs." target="_blank" rel="noopener noreferrer" class="bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white text-xs font-extrabold uppercase tracking-widest px-8 py-4 rounded-xl text-center flex items-center justify-center gap-2.5">
+                <span>CONTACT SUPPORT</span>
               </a>
 
               <a href="#wholesale" class="pill-white-3d text-xs font-extrabold uppercase tracking-widest px-8 py-4 rounded-full text-center flex items-center justify-center gap-2">
                 <span>EXPLORE WHOLESALE</span>
               </a>
-            </div>
-
-            <!-- Direct Brand Shortcuts (Bold Sub-Heading + Uniform 2x2 Grid) -->
-            <div class="mt-12 max-w-md w-full">
-              <span class="hero-brand-stock-heading">DIRECT BRAND STOCK:</span>
-              <div class="hero-brand-stock-grid">
-                <a href="#toyota" data-brand-filter="toyota" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('toyota');" class="rounded-full pill-white-3d text-[11px] font-bold">Toyota (Denso)</a>
-                <a href="#honda" data-brand-filter="honda" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('honda');" class="rounded-full pill-white-3d text-[11px] font-bold">Honda (NGK)</a>
-                <a href="#hyundai" data-brand-filter="hyundai" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('hyundai');" class="rounded-full pill-white-3d text-[11px] font-bold">Hyundai (Mobis)</a>
-                <a href="#kia" data-brand-filter="kia" onclick="event.preventDefault(); event.stopPropagation(); triggerBrandFilter('kia');" class="rounded-full pill-white-3d text-[11px] font-bold">Kia (Mobis)</a>
-              </div>
             </div>
 
           </div>
@@ -2012,7 +1991,7 @@
             </h2>
           </div>
           <p class="text-xs sm:text-sm text-silverMuted max-w-md font-normal leading-relaxed">
-            Tap any plug card to inspect full OEM specs, confirm fitment via Chassis / VIN, and order on WhatsApp.
+            Shop genuine Denso, NGK, and Hyundai/Kia Mobis iridium spark plugs in Ghana with transparent Cedi pricing, instant Chassis / VIN fitment verification, and direct WhatsApp ordering.
           </p>
         </div>
 
@@ -2040,7 +2019,7 @@
 
         <div class="mt-6 sm:mt-8 flex justify-center">
           <a href="#catalogue" class="pill-white-3d text-xs font-extrabold uppercase tracking-wider px-6 py-3 inline-flex items-center gap-2">
-            <span>View All 20 OEM Spark Plugs</span>
+            <span>View All OEM Spark Plugs</span>
             <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -2170,6 +2149,21 @@
       </div>
 
       <div id="plugDetailBody" class="space-y-8"></div>
+    </section>
+
+    <!-- ================= DISCRETE PAGE: DEDICATED LUXURY CHECKOUT ================= -->
+    <section id="checkout" data-page="checkout" class="page-view py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto" hidden>
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <button type="button" id="checkoutBackBtn" onclick="backToSpecsFromCheckout()" class="pill-white-3d text-xs font-extrabold uppercase tracking-wider px-5 py-2.5 inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]">
+          <span aria-hidden="true">&larr;</span>
+          <span>Back to Part Specs</span>
+        </button>
+        <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-silverMuted px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10">
+          Step 2 of 2 &bull; Express Checkout
+        </span>
+      </div>
+
+      <div id="checkoutPageBody" class="space-y-6"></div>
     </section>
 
     <!-- ================= DISCRETE PAGE: CHASSIS FITMENT FINDER ================= -->
@@ -2552,9 +2546,9 @@
               <span aria-hidden="true" class="step-watermark">04</span>
               <div class="relative z-10">
                 <span class="oem-eyebrow text-porscheRed font-extrabold text-xs block mb-3 uppercase tracking-widest">Step 04</span>
-                <h3 class="text-sm font-bold uppercase text-white mb-2">Tap Complete Order</h3>
+                <h3 class="text-sm font-bold uppercase text-white mb-2">Tap Complete Order on WhatsApp</h3>
                 <p class="text-xs text-silverMuted leading-relaxed">
-                  Tap Complete Order to dispatch your checkout summary straight to WhatsApp (024 011 8846) for fast Accra or regional delivery.
+                  Tap Complete Order on WhatsApp to send your verified order summary straight to 024 011 8846 for fast Accra or regional delivery.
                 </p>
               </div>
             </div>
@@ -2838,6 +2832,70 @@
       </div>
     </section>
 
+    <!-- ================= DEDICATED PRIVACY & DATA PROTECTION POLICY VIEW ================= -->
+    <section id="privacy-policy" data-page="privacy-policy" class="page-view py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#050505]" hidden>
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-6">
+          <a href="#home" class="pill-white-3d text-[11px] font-extrabold uppercase tracking-wider px-4 py-2 inline-flex items-center gap-2">
+            <span aria-hidden="true">&larr;</span>
+            <span>Back to Storefront</span>
+          </a>
+        </div>
+
+        <div class="mb-10 scroll-reveal" data-reveal="headline">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="accent-indicator"></span>
+            <span class="text-[11px] font-bold uppercase tracking-widest text-porscheRed">mrkash.net &bull; Customer Trust</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold uppercase text-white tracking-tight mb-3">
+            Privacy &amp; Data Protection Policy
+          </h1>
+          <p class="text-xs sm:text-sm text-silverMuted leading-relaxed max-w-2xl">
+            At <strong class="text-white">MrKash.net (Kash Option Automotive Parts)</strong>, we treat your personal contact information, delivery location, and vehicle identification records with strict confidentiality.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+          <div class="liquid-glass p-6 sm:p-7 rounded-2xl border border-white/10">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-2">01 &bull; Purpose Limitation</span>
+            <h2 class="text-base font-extrabold uppercase text-white mb-2.5">Information We Collect &amp; Why</h2>
+            <p class="text-silverMuted leading-relaxed">
+              Your full name, phone/WhatsApp number, delivery address, and vehicle fitment details (Make, Model, Year, Engine Capacity, and optional 17-character Chassis / VIN) are collected solely to verify exact OEM part compatibility, process your order, and coordinate delivery across Ghana.
+            </p>
+          </div>
+
+          <div class="liquid-glass p-6 sm:p-7 rounded-2xl border border-white/10">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-2">02 &bull; Strict Confidentiality</span>
+            <h2 class="text-base font-extrabold uppercase text-white mb-2.5">Zero Data Selling or Renting</h2>
+            <p class="text-silverMuted leading-relaxed">
+              MrKash.net (Kash Option Automotive Parts) never sells, rents, trades, or shares personal or vehicle data with third-party marketers, data brokers, or unrelated external entities.
+            </p>
+          </div>
+
+          <div class="liquid-glass p-6 sm:p-7 rounded-2xl border border-white/10">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-2">03 &bull; Direct Order Desk</span>
+            <h2 class="text-base font-extrabold uppercase text-white mb-2.5">Direct WhatsApp Ordering</h2>
+            <p class="text-silverMuted leading-relaxed">
+              Orders are submitted directly to our official WhatsApp orders desk (<strong class="text-white">024 011 8846</strong>) so our team can confirm vehicle fitment before arranging delivery and payment (Mobile Money, Bank Transfer, or Cash on Delivery). No card PINs or payment credentials are ever collected on this website.
+            </p>
+          </div>
+
+          <div class="liquid-glass p-6 sm:p-7 rounded-2xl border border-white/10">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-porscheRed block mb-2">04 &bull; Your Rights</span>
+            <h2 class="text-base font-extrabold uppercase text-white mb-2.5">Customer Control &amp; Support</h2>
+            <p class="text-silverMuted leading-relaxed mb-4">
+              You remain in full control of your information. Contact our support desk anytime to update, correct, or request deletion of your order contact details.
+            </p>
+            <div class="flex flex-wrap gap-3 text-[11px] font-bold">
+              <a href="tel:0240118846" class="text-white hover:text-porscheRed transition-colors">Call: 024 011 8846</a>
+              <span class="text-white/25">&bull;</span>
+              <a href="mailto:info@mrkash.net" class="text-white hover:text-porscheRed transition-colors">Email: info@mrkash.net</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ================= COMPREHENSIVE LUXURY FOOTER (GLOBAL ACROSS ALL ACTIVE PAGES) ================= -->
@@ -2906,10 +2964,31 @@
 
       </div>
 
+      <!-- Privacy & Data Protection Summary -->
+      <div class="scroll-reveal mb-8 rounded-2xl border border-white/10 bg-[#0A0A0E] p-5 sm:p-6" data-reveal="fade-up" data-reveal-delay="50">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-shield-halved text-porscheRed text-xs" aria-hidden="true"></i>
+            <h4 class="text-xs font-extrabold uppercase tracking-widest text-white">Privacy &amp; Data Protection</h4>
+          </div>
+          <a href="#privacy-policy" class="text-[11px] font-bold uppercase tracking-wider text-porscheRed hover:text-white transition-colors inline-flex items-center gap-1.5">
+            <span>Read Full Privacy Policy</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-[11px] text-silverMuted leading-relaxed">
+          <p><strong class="text-white">Information We Collect:</strong> Name, phone/WhatsApp, delivery address, and vehicle fitment details (Make, Model, Year, Engine, optional VIN) are used solely to verify OEM compatibility and dispatch orders in Ghana.</p>
+          <p><strong class="text-white">Zero Data Selling:</strong> MrKash.net (Kash Option Automotive Parts) never sells, rents, trades, or shares customer or vehicle data with third-party marketers.</p>
+          <p><strong class="text-white">Direct WhatsApp Orders:</strong> Orders go straight to our official desk (<a href="https://wa.me/233240118846" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">024 011 8846</a>) to verify fitment and arrange delivery; no card details or PINs are collected on site.</p>
+          <p><strong class="text-white">Customer Control:</strong> Contact <a href="tel:0240118846" class="text-white hover:underline">024 011 8846</a> or <a href="mailto:info@mrkash.net" class="text-white hover:underline">info@mrkash.net</a> anytime to update or delete your order contact details.</p>
+        </div>
+      </div>
+
       <!-- Legal & Copyright -->
       <div class="scroll-reveal pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-silverMuted/60" data-reveal="fade-up" data-reveal-delay="100">
         <p>&copy; 2026 KASH OPTION AUTOMOTIVE PARTS &bull; GHANA. All rights reserved. The Right Spark Plug. The Right Fit. Zero Guesswork.</p>
-        <div class="flex gap-6">
+        <div class="flex flex-wrap justify-center gap-6">
+          <a href="#privacy-policy" class="hover:text-white transition-colors">Privacy &amp; Data Protection</a>
           <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20please%20share%20your%20ordering%20and%20returns%20terms." target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Ordering &amp; Returns Policy</a>
           <a href="#faqs" class="hover:text-white transition-colors">Support FAQs</a>
         </div>
@@ -2985,7 +3064,6 @@
 
   <!-- ================= JAVASCRIPT: ROUTING, LIVE SEARCH, FITMENT, OVERLAY & SCROLL REVEAL ================= -->
   <script>
-    const PAYSTACK_PUBLIC_KEY = "pk_live_9c28803a2f8cab58a2cdd7929766d243b91c86d9";
 
     /* ================= GLOBAL FAST-SCROLL REVEAL & COMPOSITOR ENGINE ================= */
     const revealConfig = {
@@ -5861,7 +5939,10 @@
       'faq': 'faqs',
       'contact': 'contact',
       'contact-view': 'contact',
+      'privacy-policy': 'privacy-policy',
+      'privacy': 'privacy-policy',
       'product-detail': 'product-detail',
+      'checkout': 'checkout',
       // Brand shortcuts routing to catalogue with brand preselected:
       'toyota': 'catalogue',
       'honda': 'catalogue',
@@ -5876,13 +5957,15 @@
       home: "KASH OPTION | Genuine OEM Spark Plugs in Ghana • Toyota, Honda, Hyundai & Kia",
       catalogue: "OEM Spark Plug Catalogue | KASH OPTION Ghana",
       'product-detail': "OEM Spark Plug Fitment | KASH OPTION Ghana",
+      'checkout': "Secure Checkout | KASH OPTION Ghana",
       fitment: "Chassis Fitment Verification | KASH OPTION Ghana",
       wholesale: "Wholesale Trade Portal | KASH OPTION Ghana",
       trust: "Why KASH OPTION | Authenticity & Direct Sourcing",
       'how-to-order': "How to Order Spark Plugs | KASH OPTION Ghana",
       knowledge: "Technical Knowledge Centre | KASH OPTION Ghana",
       faqs: "Frequently Asked Questions | KASH OPTION Ghana",
-      contact: "Contact & Customer Desk | KASH OPTION Ghana"
+      contact: "Contact & Customer Desk | KASH OPTION Ghana",
+      'privacy-policy': "Privacy & Data Protection Policy | KASH OPTION Ghana"
     };
 
     let currentActivePage = null;
@@ -5893,6 +5976,7 @@
       const normalizedKey = String(pageKey || '').toLowerCase();
       let validPage = routeMap[normalizedKey] || 'home';
       let matchedProduct = null;
+      let matchedCheckoutProduct = null;
       if (normalizedKey.startsWith('product-') && typeof plugDetailCatalog !== 'undefined') {
         const candidateId = normalizedKey.replace(/^product-/, '');
         matchedProduct = plugDetailCatalog.find(p => p.id.toLowerCase() === candidateId) || null;
@@ -5901,6 +5985,14 @@
           activeProductPlugId = matchedProduct.id;
           renderPlugDetailContent(matchedProduct);
         }
+      } else if (normalizedKey.startsWith('checkout-') && typeof plugDetailCatalog !== 'undefined') {
+        const candidateId = normalizedKey.replace(/^checkout-/, '');
+        matchedCheckoutProduct = plugDetailCatalog.find(p => p.id.toLowerCase() === candidateId) || null;
+        if (matchedCheckoutProduct) {
+          validPage = 'checkout';
+          activeProductPlugId = matchedCheckoutProduct.id;
+          renderCheckoutPageContent(matchedCheckoutProduct);
+        }
       }
       if (validPage === 'product-detail' && !matchedProduct && typeof plugDetailCatalog !== 'undefined') {
         const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId) || plugDetailCatalog[0];
@@ -5908,6 +6000,14 @@
         if (fallbackPlug && bodyEl && bodyEl.children.length === 0) {
           activeProductPlugId = fallbackPlug.id;
           renderPlugDetailContent(fallbackPlug);
+        }
+      }
+      if (validPage === 'checkout' && !matchedCheckoutProduct && typeof plugDetailCatalog !== 'undefined') {
+        const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId) || plugDetailCatalog[0];
+        const checkoutEl = document.getElementById('checkoutPageBody');
+        if (fallbackPlug && checkoutEl && checkoutEl.children.length === 0) {
+          activeProductPlugId = fallbackPlug.id;
+          renderCheckoutPageContent(fallbackPlug);
         }
       }
       const isSamePage = currentActivePage === validPage;
@@ -5951,6 +6051,11 @@
         document.title = fallbackPlug
           ? `${fallbackPlug.partCode} Genuine ${fallbackPlug.brand} OEM Spark Plug (${fallbackPlug.priceLabel}) | KASH OPTION Ghana`
           : pageTitles['product-detail'];
+      } else if (validPage === 'checkout') {
+        const checkoutPlug = matchedCheckoutProduct || (typeof plugDetailCatalog !== 'undefined' && plugDetailCatalog.find(p => p.id === activeProductPlugId));
+        document.title = checkoutPlug
+          ? `Checkout: ${checkoutPlug.partCode} (${checkoutPlug.priceLabel}) | KASH OPTION Ghana`
+          : pageTitles.checkout;
       } else {
         document.title = pageTitles[validPage] || pageTitles.home;
       }
@@ -5958,7 +6063,7 @@
       // Reset cleanly to top on route swaps
       window.scrollTo({
         top: 0,
-        behavior: isSamePage && !brandFilter && !matchedProduct ? 'smooth' : 'instant'
+        behavior: isSamePage && !brandFilter && !matchedProduct && !matchedCheckoutProduct ? 'smooth' : 'instant'
       });
       updateSalesRepVisibility();
 
@@ -5966,8 +6071,14 @@
       if (updateHistory) {
         const hash = validPage === 'home'
           ? '#home'
-          : (validPage === 'product-detail' ? `#product-${activeProductPlugId}` : '#' + (brandFilter || pageKey));
-        history.pushState({ page: validPage, brand: brandFilter || null, plugId: validPage === 'product-detail' ? activeProductPlugId : null }, '', hash);
+          : (validPage === 'product-detail'
+            ? `#product-${activeProductPlugId}`
+            : (validPage === 'checkout' ? `#checkout-${activeProductPlugId}` : '#' + (brandFilter || pageKey)));
+        history.pushState({
+          page: validPage,
+          brand: brandFilter || null,
+          plugId: (validPage === 'product-detail' || validPage === 'checkout') ? activeProductPlugId : null
+        }, '', hash);
       }
 
       // Ensure menu overlay is closed cleanly
@@ -5985,7 +6096,7 @@
       const href = link.getAttribute('href');
       if (!href || href === '#') return;
       const hashKey = href.slice(1).toLowerCase();
-      if (routeMap[hashKey] !== undefined || hashKey.startsWith('product-')) {
+      if (routeMap[hashKey] !== undefined || hashKey.startsWith('product-') || hashKey.startsWith('checkout-')) {
         e.preventDefault();
         const brand = ['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(hashKey) ? hashKey : null;
         showPage(routeMap[hashKey] === 'catalogue' ? 'catalogue' : hashKey, brand, true);
@@ -7150,7 +7261,7 @@
 
       const priceStrip = document.createElement('div');
       priceStrip.className = 'flex flex-wrap items-center gap-3';
-      priceStrip.innerHTML = `<span class="text-2xl sm:text-3xl font-black text-white tracking-tight">${plug.priceLabel}</span><span class="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold uppercase tracking-wider text-zinc-200">${plug.packLabel}</span><span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/35 text-[11px] font-bold uppercase tracking-wider text-emerald-300">Ready in Accra</span>`;
+      priceStrip.innerHTML = `<span class="text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">${plug.priceLabel}</span><span class="px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-[11px] font-bold uppercase tracking-wider text-zinc-200">${plug.packLabel}</span><span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[11px] font-bold uppercase tracking-wider text-emerald-300">Ready in Accra</span>`;
 
       const seoHeading = document.createElement('h3');
       seoHeading.className = 'text-lg sm:text-2xl font-extrabold uppercase text-white leading-snug tracking-tight';
@@ -7168,10 +7279,10 @@
       heroGrid.appendChild(summaryCol);
       article.appendChild(heroGrid);
 
-      // Technical OEM Specifications Card (purely technical specs)
+      // Technical OEM Specifications (Minimalist Hairline Spec List)
       const specCard = document.createElement('div');
       specCard.id = 'plugConsolidatedSpecCard';
-      specCard.className = 'plug-spec-card rounded-2xl p-4 sm:p-6 space-y-5';
+      specCard.className = 'plug-spec-card py-6 space-y-4';
 
       const specHeader = document.createElement('h4');
       specHeader.className = 'text-xs font-extrabold uppercase tracking-widest text-[#FF1F1F]';
@@ -7179,7 +7290,7 @@
       specCard.appendChild(specHeader);
 
       const specDl = document.createElement('dl');
-      specDl.className = 'grid grid-cols-1 md:grid-cols-2 gap-x-8 divide-y divide-white/10 text-xs';
+      specDl.className = 'grid grid-cols-1 md:grid-cols-2 gap-x-10 divide-y divide-white/[0.08] text-xs';
       [
         ['OEM Part Number', plug.oemNumber],
         ['Brand & Maker', `${plug.brand} \u2022 ${plug.oemMaker}`],
@@ -7192,12 +7303,12 @@
         ['Pack Size', plug.packLabel]
       ].forEach(([label, val]) => {
         const row = document.createElement('div');
-        row.className = 'py-2.5 flex justify-between items-start gap-3';
+        row.className = 'py-3 flex justify-between items-start gap-4';
         const dt = document.createElement('dt');
         dt.className = 'text-silverMuted shrink-0';
         dt.textContent = label + ':';
         const dd = document.createElement('dd');
-        dd.className = 'font-semibold text-white text-right';
+        dd.className = 'font-semibold text-white text-right tabular-nums';
         dd.textContent = val;
         row.appendChild(dt);
         row.appendChild(dd);
@@ -7207,355 +7318,27 @@
 
       article.appendChild(specCard);
 
-      // Fast Checkout & Optional Chassis / VIN Verification Form
-      const getModelsForBrand = targetBrand => {
-        const raw = [
-          ...(targetBrand === plug.brand && Array.isArray(plug.models) ? plug.models : []),
-          ...(Array.isArray(vehicleRegistry[targetBrand]) ? vehicleRegistry[targetBrand] : [])
-        ];
-        const out = [];
-        const seen = new Set();
-        raw.forEach(m => {
-          const clean = String(m || '').trim();
-          if (clean && !seen.has(clean.toLowerCase())) {
-            seen.add(clean.toLowerCase());
-            out.push(clean);
-          }
-        });
-        return out;
-      };
-      const brandModels = getModelsForBrand(plug.brand);
-      const makeList = ['Toyota', 'Honda', 'Hyundai', 'Kia'];
-      const yearOptions = [];
-      for (let yr = 2026; yr >= 1995; yr--) {
-        yearOptions.push(String(yr));
-      }
-      const engineOptions = [
-        '1.0L', '1.2L', '1.3L', '1.4L', '1.5L', '1.6L', '1.8L',
-        '2.0L', '2.2L', '2.4L', '2.5L', '2.7L', '3.0L', '3.3L',
-        '3.5L', '4.0L', '4.6L', '4.7L', '5.7L', 'Hybrid / Other'
-      ];
+      // Step 1 Primary CTA: Proceed to Dedicated Checkout View
+      const proceedWrap = document.createElement('div');
+      proceedWrap.id = 'plugProceedOrderWrap';
+      proceedWrap.className = 'pt-1 space-y-2.5';
 
-      const orderCard = document.createElement('section');
-      orderCard.id = 'orderCard';
-      orderCard.className = 'plug-spec-card rounded-2xl p-5 sm:p-6 space-y-4';
-      orderCard.innerHTML = `
-        <div>
-          <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#FF1F1F] block">Quick Checkout</span>
-          <h4 class="text-base sm:text-lg font-extrabold uppercase text-white tracking-tight">Complete Your Order</h4>
-          <p class="text-[11px] text-silverMuted mt-1">Select your vehicle details and quantity, then complete payment securely via Paystack.</p>
-        </div>
-      `;
-
-      const orderForm = document.createElement('form');
-      orderForm.id = 'orderCheckoutForm';
-      orderForm.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3.5';
-
-      const escHtml = str => String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-
-      const makeOptionsHtml = makeList.map(mk =>
-        `<option value="${escHtml(mk)}"${mk === plug.brand ? ' selected' : ''}>${escHtml(mk)}</option>`
-      ).join('');
-
-      const buildModelOptionsHtml = (targetBrand, selectFirst = false) => {
-        const list = getModelsForBrand(targetBrand);
-        return [
-          `<option value="">Select ${escHtml(targetBrand)} Model...</option>`,
-          ...list.map((m, idx) => `<option value="${escHtml(m)}"${selectFirst && idx === 0 ? ' selected' : ''}>${escHtml(targetBrand)} ${escHtml(m)}</option>`),
-          `<option value="Other ${escHtml(targetBrand)} Model">Other ${escHtml(targetBrand)} Model</option>`
-        ].join('');
-      };
-
-      const yearOptionsHtml = [
-        '<option value="">Select Year...</option>',
-        ...yearOptions.map(y => `<option value="${y}">${y}</option>`),
-        '<option value="Other">Other</option>'
-      ].join('');
-
-      const engineOptionsHtml = [
-        '<option value="">Select Engine Capacity...</option>',
-        ...engineOptions.map(e => `<option value="${e}">${e}</option>`)
-      ].join('');
-
-      const defaultCarName = `${plug.brand}${brandModels[0] ? ' ' + brandModels[0] : ''}`;
-
-      orderForm.innerHTML = `
-        <div>
-          <label for="orderCustCarName" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Car Name / Make &amp; Model</label>
-          <input type="text" id="orderCustCarName" required value="${escHtml(defaultCarName)}" placeholder="e.g. ${escHtml(plug.brand)} ${escHtml(brandModels[0] || '')}" class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none placeholder:text-zinc-500 placeholder:text-xs">
-        </div>
-        <div>
-          <label for="orderCustQty" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Quantity (Sets) &bull; Total: <span id="orderTotalEstimate" class="text-white">${escHtml(plug.priceLabel)}</span></label>
-          <input type="number" id="orderCustQty" min="1" max="200" value="1" required class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none">
-        </div>
-        <div>
-          <label for="orderCustMake" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Make</label>
-          <select id="orderCustMake" required class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none">
-            ${makeOptionsHtml}
-          </select>
-        </div>
-        <div>
-          <label for="orderCustModel" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Model</label>
-          <select id="orderCustModel" class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none">
-            ${buildModelOptionsHtml(plug.brand, true)}
-          </select>
-        </div>
-        <div>
-          <label for="orderCustYear" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Year</label>
-          <select id="orderCustYear" class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none">
-            ${yearOptionsHtml}
-          </select>
-        </div>
-        <div>
-          <label for="orderCustEngine" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Engine Capacity</label>
-          <select id="orderCustEngine" class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none">
-            ${engineOptionsHtml}
-          </select>
-        </div>
-        <div class="sm:col-span-2">
-          <label for="orderCustVin" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">17-Character Chassis / VIN <span class="text-zinc-400 font-semibold normal-case">(Optional &mdash; verifies exact part number fitment)</span></label>
-          <input type="text" id="orderCustVin" maxlength="17" placeholder="Optional: e.g. JTDZR42E60J..." class="w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-lg px-3.5 py-2.5 text-base outline-none uppercase font-mono placeholder:normal-case placeholder:font-sans placeholder:text-zinc-500 placeholder:text-xs">
-        </div>
-        <div id="orderCheckoutStatus" hidden class="sm:col-span-2 rounded-xl border border-white/15 bg-[#09090D] px-3.5 py-2.5 text-xs text-silverMuted"></div>
-        <div class="sm:col-span-2 pt-1">
-          <button type="submit" id="placeOrderSubmitBtn" class="w-full bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-3.5 px-5 rounded-xl text-xs font-extrabold uppercase tracking-widest inline-flex items-center justify-center gap-2.5">
-            <i class="fas fa-lock text-xs" aria-hidden="true"></i>
-            <span>Place Order</span>
-          </button>
-        </div>
-      `;
-
-      const orderReceiptMount = document.createElement('div');
-      orderReceiptMount.id = 'orderReceiptMount';
-      orderReceiptMount.hidden = true;
-
-      const qtyInput = orderForm.querySelector('#orderCustQty');
-      const totalSpan = orderForm.querySelector('#orderTotalEstimate');
-      if (qtyInput && totalSpan) {
-        qtyInput.addEventListener('input', () => {
-          const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
-          const total = qty * plug.priceGhs;
-          totalSpan.textContent = `GH\u00A2${total.toLocaleString('en-US')}`;
-        });
-      }
-
-      const makeSelect = orderForm.querySelector('#orderCustMake');
-      const modelSelect = orderForm.querySelector('#orderCustModel');
-      const carNameInput = orderForm.querySelector('#orderCustCarName');
-      if (makeSelect && modelSelect) {
-        makeSelect.addEventListener('change', () => {
-          const chosenMake = makeSelect.value || plug.brand;
-          modelSelect.innerHTML = buildModelOptionsHtml(chosenMake, true);
-          const firstModel = modelSelect.value || '';
-          if (carNameInput) {
-            carNameInput.value = firstModel && !firstModel.startsWith('Other ')
-              ? `${chosenMake} ${firstModel}`
-              : chosenMake;
-          }
-        });
-        modelSelect.addEventListener('change', () => {
-          const chosenMake = makeSelect.value || plug.brand;
-          const chosenModel = modelSelect.value;
-          if (carNameInput) {
-            carNameInput.value = chosenModel && !chosenModel.startsWith('Other ')
-              ? `${chosenMake} ${chosenModel}`
-              : chosenMake;
-          }
-        });
-      }
-
-      const statusBox = orderForm.querySelector('#orderCheckoutStatus');
-      const submitBtn = orderForm.querySelector('#placeOrderSubmitBtn');
-
-      const showCheckoutStatus = (text, isError = false) => {
-        if (!statusBox) return;
-        statusBox.hidden = false;
-        statusBox.className = isError
-          ? 'sm:col-span-2 rounded-xl border border-[#E31818]/50 bg-[#E31818]/10 px-3.5 py-2.5 text-xs text-red-200'
-          : 'sm:col-span-2 rounded-xl border border-white/15 bg-[#09090D] px-3.5 py-2.5 text-xs text-silverMuted';
-        statusBox.textContent = text;
-      };
-
-      const hideCheckoutStatus = () => {
-        if (statusBox) {
-          statusBox.hidden = true;
-          statusBox.textContent = '';
-        }
-      };
-
-      orderForm.addEventListener('submit', e => {
-        e.preventDefault();
-        hideCheckoutStatus();
-
-        const custCarName = (carNameInput && carNameInput.value || '').trim();
-        const custMake = (makeSelect && makeSelect.value || plug.brand).trim();
-        const custModel = (modelSelect && modelSelect.value || '').trim();
-        const custYear = (orderForm.querySelector('#orderCustYear').value || '').trim();
-        const custEngine = (orderForm.querySelector('#orderCustEngine').value || '').trim();
-        const custVin = (orderForm.querySelector('#orderCustVin').value || '').trim().toUpperCase();
-        const qtyRaw = parseInt(orderForm.querySelector('#orderCustQty').value, 10);
-        const qty = Number.isFinite(qtyRaw) && qtyRaw >= 1 ? Math.min(200, qtyRaw) : 1;
-        const totalGhs = qty * plug.priceGhs;
-        const totalFormatted = `GH\u00A2${totalGhs.toLocaleString('en-US')}`;
-        const modelDisplay = custModel || custCarName || `${custMake} Model`;
-
-        if (!custMake || !custCarName) {
-          showCheckoutStatus('Please confirm your Car Name and Make before placing your order.', true);
-          return;
-        }
-
-        const PaystackCtor = window.PaystackPop || (typeof PaystackPop !== 'undefined' ? PaystackPop : null);
-        if (typeof PaystackCtor !== 'function') {
-          showCheckoutStatus('Paystack checkout is still loading. Please check your internet connection and click Place Order again.', true);
-          return;
-        }
-
-        let paymentCompleted = false;
-        let cancelHandled = false;
-        if (submitBtn) submitBtn.disabled = true;
-
-        const handleCancelOrClose = () => {
-          if (paymentCompleted || cancelHandled) return;
-          cancelHandled = true;
-          if (submitBtn) submitBtn.disabled = false;
-          showCheckoutStatus('Payment was cancelled. Your vehicle selections and quantity are saved — click Place Order whenever you are ready.', false);
-        };
-
-        try {
-          const paystack = new PaystackCtor();
-          paystack.newTransaction({
-            key: PAYSTACK_PUBLIC_KEY,
-            email: 'orders@mrkash.net',
-            amount: Math.round(totalGhs * 100),
-            currency: 'GHS',
-            metadata: {
-              custom_fields: [
-                { display_name: 'Part Number', variable_name: 'part_number', value: plug.oemNumber },
-                { display_name: 'Product Name', variable_name: 'product_name', value: plug.title },
-                { display_name: 'Quantity', variable_name: 'quantity', value: `${qty} ${qty === 1 ? 'Set' : 'Sets'} (${plug.packLabel})` },
-                { display_name: 'Car Make', variable_name: 'car_make', value: custMake },
-                { display_name: 'Car Model', variable_name: 'car_model', value: modelDisplay },
-                { display_name: 'Year', variable_name: 'year', value: custYear || 'Not specified' },
-                { display_name: 'Engine Capacity', variable_name: 'engine_capacity', value: custEngine || 'Not specified' },
-                { display_name: 'Optional Chassis/VIN', variable_name: 'optional_chassis_vin', value: custVin || 'Not provided' }
-              ]
-            },
-            onSuccess(transaction) {
-              paymentCompleted = true;
-              if (submitBtn) submitBtn.disabled = false;
-              const refId = (transaction && (transaction.reference || transaction.trxref))
-                ? String(transaction.reference || transaction.trxref)
-                : 'PAID-VERIFIED';
-
-              const waReceiptMsg = [
-                '*KASH OPTION PAID ORDER RECEIPT*',
-                `*Paystack Reference:* ${refId}`,
-                `*Part Number:* ${plug.oemNumber}`,
-                `*Product:* ${plug.title}`,
-                `*Quantity:* ${qty} ${qty === 1 ? 'Set' : 'Sets'} (${plug.packLabel})`,
-                `*Total Paid:* ${totalFormatted}`,
-                `*Car Name:* ${custCarName}`,
-                `*Car Make / Model:* ${custMake} — ${modelDisplay}`,
-                `*Year / Engine:* ${custYear || 'Not specified'} • ${custEngine || 'Not specified'}`,
-                `*Optional Chassis / VIN:* ${custVin || 'Not provided'}`,
-                '',
-                'Please verify fitment and arrange delivery dispatch.'
-              ].join('\n');
-              const waReceiptUrl = `https://wa.me/233240118846?text=${encodeURIComponent(waReceiptMsg)}`;
-
-              orderForm.hidden = true;
-              orderReceiptMount.hidden = false;
-              orderReceiptMount.innerHTML = `
-                <div id="orderConfirmedReceipt" class="rounded-2xl border border-emerald-500/35 bg-[#09090D] p-5 space-y-4">
-                  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-                    <div>
-                      <span class="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-emerald-400">
-                        <i class="fas fa-circle-check" aria-hidden="true"></i>
-                        <span>Payment Successful</span>
-                      </span>
-                      <h5 class="text-base sm:text-lg font-extrabold uppercase text-white tracking-tight mt-0.5">Order Confirmed</h5>
-                    </div>
-                    <span class="text-base sm:text-lg font-extrabold text-white">${escHtml(totalFormatted)}</span>
-                  </div>
-
-                  <dl class="divide-y divide-white/10 text-xs">
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Paystack Reference:</dt>
-                      <dd class="font-mono font-bold text-white text-right break-all">${escHtml(refId)}</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Part Number:</dt>
-                      <dd class="font-bold text-white text-right">${escHtml(plug.oemNumber)}</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Product Name:</dt>
-                      <dd class="font-semibold text-white text-right">${escHtml(plug.title)}</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Quantity:</dt>
-                      <dd class="font-semibold text-white text-right">${qty} ${qty === 1 ? 'Set' : 'Sets'} (${escHtml(plug.packLabel)})</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Total Paid:</dt>
-                      <dd class="font-extrabold text-emerald-400 text-right">${escHtml(totalFormatted)}</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Vehicle:</dt>
-                      <dd class="font-semibold text-white text-right">${escHtml(custMake)} ${escHtml(modelDisplay)}</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Year &amp; Engine:</dt>
-                      <dd class="font-semibold text-white text-right">${escHtml(custYear || 'Not specified')} &bull; ${escHtml(custEngine || 'Not specified')}</dd>
-                    </div>
-                    <div class="py-2 flex justify-between items-start gap-3">
-                      <dt class="text-silverMuted shrink-0">Optional Chassis / VIN:</dt>
-                      <dd class="font-mono font-semibold text-white text-right">${escHtml(custVin || 'Not provided')}</dd>
-                    </div>
-                  </dl>
-
-                  <div class="pt-1 space-y-2.5">
-                    <a id="shareReceiptWhatsappBtn" href="${waReceiptUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-3.5 px-5 rounded-xl text-xs font-extrabold uppercase tracking-widest inline-flex items-center justify-center gap-2.5">
-                      <i class="fab fa-whatsapp text-base" aria-hidden="true"></i>
-                      <span>Share Receipt to WhatsApp</span>
-                    </a>
-                    <button type="button" id="orderAnotherSetBtn" class="w-full pill-white-3d text-[11px] font-extrabold uppercase tracking-wider py-2.5 px-4">
-                      Place Another Order
-                    </button>
-                  </div>
-                </div>
-              `;
-
-              const anotherBtn = orderReceiptMount.querySelector('#orderAnotherSetBtn');
-              if (anotherBtn) {
-                anotherBtn.addEventListener('click', () => {
-                  orderReceiptMount.hidden = true;
-                  orderReceiptMount.innerHTML = '';
-                  orderForm.hidden = false;
-                  hideCheckoutStatus();
-                });
-              }
-            },
-            onCancel() {
-              handleCancelOrClose();
-            },
-            onClose() {
-              handleCancelOrClose();
-            }
-          });
-        } catch (err) {
-          if (submitBtn) submitBtn.disabled = false;
-          showCheckoutStatus('Unable to open Paystack checkout right now. Please try again in a moment.', true);
-        }
+      const proceedBtn = document.createElement('button');
+      proceedBtn.type = 'button';
+      proceedBtn.id = 'proceedToOrderBtn';
+      proceedBtn.className = 'w-full bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-4 px-6 rounded-2xl text-xs sm:text-sm font-extrabold uppercase tracking-widest inline-flex items-center justify-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-white';
+      proceedBtn.innerHTML = '<span>Proceed to Order</span><span aria-hidden="true" class="text-base leading-none">&rarr;</span>';
+      proceedBtn.addEventListener('click', () => {
+        openPlugCheckoutPage(plug.id);
       });
 
-      orderCard.appendChild(orderForm);
-      orderCard.appendChild(orderReceiptMount);
-      article.appendChild(orderCard);
+      const proceedNote = document.createElement('p');
+      proceedNote.className = 'text-center text-[11px] text-silverMuted';
+      proceedNote.textContent = 'Fast 2-step checkout \u2014 Confirm vehicle & delivery details to order directly on WhatsApp (024 011 8846).';
+
+      proceedWrap.appendChild(proceedBtn);
+      proceedWrap.appendChild(proceedNote);
+      article.appendChild(proceedWrap);
 
       // Related & Suggested OEM Spark Plugs Section (strictly 3 same-brand products)
       const relatedPlugs = plugDetailCatalog.filter(p => p.brand === plug.brand && p.id !== plug.id).slice(0, 3);
@@ -7597,6 +7380,554 @@
       }
 
       bodyEl.appendChild(article);
+    }
+
+    const CHECKOUT_BRAND_MODELS = {
+      Toyota: [
+        'Camry', 'Corolla', 'Corolla Cross', 'RAV4', 'Vios', 'Avalon',
+        'Yaris', 'Yaris Cross', 'Prius', 'C-HR', 'Highlander', 'Tacoma',
+        'Tundra', '4Runner', 'Sequoia', 'FJ Cruiser', 'Land Cruiser',
+        'Auris', 'Avensis', 'Belta'
+      ],
+      Honda: [
+        'Accord', 'Civic', 'CR-V', 'HR-V', 'Fit', 'Jazz', 'City',
+        'Pilot', 'Odyssey', 'Crosstour'
+      ],
+      Hyundai: [
+        'Elantra', 'Sonata', 'Tucson', 'Santa Fe', 'Kona', 'Accent',
+        'Veloster', 'i30', 'i40'
+      ],
+      Kia: [
+        'Sportage', 'Seltos', 'Optima', 'Cerato', 'Rio', 'Soul',
+        'Carens', 'Ceed'
+      ]
+    };
+
+    const CHECKOUT_ENGINE_CAPACITIES = [
+      '1.0L', '1.2L', '1.3L', '1.4L', '1.5L', '1.6L', '1.8L',
+      '2.0L', '2.4L', '2.5L', '2.7L', '3.0L', '3.5L', '4.0L',
+      '4.6L', '5.7L'
+    ];
+
+    function generateOrderConfirmationCode() {
+      const stamp = Date.now().toString(36).toUpperCase().slice(-4);
+      const rand = Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 3).padEnd(3, 'K');
+      return `KO-${stamp}${rand}`;
+    }
+
+    function openPlugCheckoutPage(plugId) {
+      const plug = plugDetailCatalog.find(p => p.id === plugId);
+      if (!plug) return;
+      playLuxuryMicroTap();
+      activeProductPlugId = plug.id;
+      showPage(`checkout-${plug.id}`, null, true);
+    }
+
+    function backToSpecsFromCheckout() {
+      playLuxuryMicroTap();
+      const targetId = activeProductPlugId || (plugDetailCatalog[0] && plugDetailCatalog[0].id) || 'toyota-sc20hr11';
+      showPage(`product-${targetId}`, null, true);
+    }
+
+    function renderCheckoutPageContent(plug) {
+      const bodyEl = document.getElementById('checkoutPageBody');
+      if (!bodyEl || !plug) return;
+      bodyEl.innerHTML = '';
+
+      const escHtml = str => String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+      // Brand-locked model list: plug's primary models first, then full curated brand list, then vehicleRegistry brand entries
+      const getBrandLockedModels = targetBrand => {
+        const raw = [
+          ...(Array.isArray(plug.models) ? plug.models : []),
+          ...(Array.isArray(CHECKOUT_BRAND_MODELS[targetBrand]) ? CHECKOUT_BRAND_MODELS[targetBrand] : []),
+          ...(Array.isArray(vehicleRegistry[targetBrand]) ? vehicleRegistry[targetBrand] : [])
+        ];
+        const out = [];
+        const seen = new Set();
+        raw.forEach(m => {
+          const clean = String(m || '').trim();
+          if (clean && !seen.has(clean.toLowerCase())) {
+            seen.add(clean.toLowerCase());
+            out.push(clean);
+          }
+        });
+        return out;
+      };
+
+      const brandModels = getBrandLockedModels(plug.brand);
+      const primaryModel = (Array.isArray(plug.models) && plug.models[0]) || brandModels[0] || '';
+
+      const yearOptions = [];
+      for (let yr = 2026; yr >= 2000; yr--) {
+        yearOptions.push(String(yr));
+      }
+
+      const checkoutShell = document.createElement('div');
+      checkoutShell.id = 'checkoutActiveFlow';
+      checkoutShell.className = 'space-y-5';
+
+      // Order Summary Pill (Part Number, Brand, Quantity -/+, Live GH¢ Total)
+      const summaryPill = document.createElement('div');
+      summaryPill.id = 'checkoutSummaryPill';
+      summaryPill.className = 'plug-spec-card rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4';
+      summaryPill.innerHTML = `
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-14 h-14 rounded-xl bg-[#050505] border border-white/15 overflow-hidden shrink-0">
+            <img src="${escHtml((plug.images && plug.images[0]) || 'https://iili.io/oHVNlFS.png')}" alt="${escHtml(plug.brand)} ${escHtml(plug.partCode)}" referrerpolicy="no-referrer" class="w-full h-full object-cover">
+          </div>
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-0.5">
+              <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#FF1F1F]">${escHtml(plug.brand)}</span>
+              <span class="text-[10px] text-silverMuted">&bull;</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-300">${escHtml(plug.packLabel)}</span>
+            </div>
+            <h2 class="text-base sm:text-lg font-extrabold uppercase text-white tracking-tight truncate">${escHtml(plug.oemNumber)}</h2>
+            <p class="text-[11px] text-silverMuted truncate">${escHtml(plug.title)}</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between sm:justify-end gap-4 pt-3 sm:pt-0 border-t sm:border-t-0 border-white/10 shrink-0">
+          <div class="inline-flex items-center rounded-full bg-[#09090D] border border-white/15 p-1 gap-1" role="group" aria-label="Quantity selector">
+            <button type="button" id="checkoutQtyMinus" aria-label="Decrease quantity" class="w-8 h-8 rounded-full bg-white/5 hover:bg-[#E31818] text-white font-extrabold text-sm flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]">&minus;</button>
+            <span id="checkoutQtyDisplay" class="min-w-[3.2rem] text-center text-xs font-extrabold uppercase text-white px-1">1 Set</span>
+            <button type="button" id="checkoutQtyPlus" aria-label="Increase quantity" class="w-8 h-8 rounded-full bg-white/5 hover:bg-[#E31818] text-white font-extrabold text-sm flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]">+</button>
+          </div>
+          <div class="text-right">
+            <span class="block text-[9px] font-bold uppercase tracking-widest text-silverMuted">Live Total</span>
+            <span id="checkoutTotalDisplay" class="text-lg sm:text-xl font-black text-white tracking-tight">${escHtml(plug.priceLabel)}</span>
+          </div>
+        </div>
+      `;
+
+      // Micro-copy header
+      const introCopy = document.createElement('div');
+      introCopy.className = 'px-1';
+      introCopy.innerHTML = `
+        <h3 class="text-xl sm:text-2xl font-extrabold uppercase text-white tracking-tight">Confirm Fitment &amp; Delivery</h3>
+        <p class="text-xs sm:text-sm text-silverMuted mt-1">Two quick steps to lock in your genuine ${escHtml(plug.brand)} OEM set for express Accra &amp; nationwide dispatch.</p>
+      `;
+
+      const formCard = document.createElement('form');
+      formCard.id = 'checkoutForm';
+      formCard.noValidate = true;
+      formCard.className = 'plug-spec-card rounded-2xl p-5 sm:p-7 space-y-7';
+
+      const baseInputClass = 'w-full bg-[#09090D] border border-white/15 focus:border-[#E31818] text-white rounded-xl px-3.5 py-3 text-base outline-none transition-colors placeholder:text-zinc-500 placeholder:text-xs';
+
+      const modelOptionsHtml = [
+        `<option value="">Select ${escHtml(plug.brand)} Model...</option>`,
+        ...brandModels.map(m => `<option value="${escHtml(m)}"${m === primaryModel ? ' selected' : ''}>${escHtml(plug.brand)} ${escHtml(m)}</option>`)
+      ].join('');
+
+      const yearOptionsHtml = [
+        '<option value="">Select Year...</option>',
+        ...yearOptions.map(y => `<option value="${y}">${y}</option>`)
+      ].join('');
+
+      const engineOptionsHtml = [
+        '<option value="">Select Engine Capacity...</option>',
+        ...CHECKOUT_ENGINE_CAPACITIES.map(e => `<option value="${e}">${e}</option>`)
+      ].join('');
+
+      formCard.innerHTML = `
+        <!-- Section 1: Vehicle Fitment -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between gap-2 pb-2.5 border-b border-white/10">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#FF1F1F] block">Step 1</span>
+              <h4 class="text-sm sm:text-base font-extrabold uppercase text-white tracking-tight">1. Vehicle Fitment</h4>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
+              ${escHtml(plug.brand)} Brand-Locked
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="checkoutMake" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Car Make <span class="text-zinc-400 font-semibold normal-case">(Pre-filled)</span></label>
+              <div class="relative">
+                <input type="text" id="checkoutMake" value="${escHtml(plug.brand)}" readonly aria-readonly="true" class="w-full bg-[#0C0C12] border border-white/15 text-white font-bold rounded-xl px-3.5 py-3 text-base outline-none cursor-default">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold uppercase tracking-wider text-emerald-400">Locked</span>
+              </div>
+            </div>
+
+            <div>
+              <label for="checkoutModel" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Car Model <span class="text-[#FF1F1F]">*</span></label>
+              <select id="checkoutModel" class="${baseInputClass}">
+                ${modelOptionsHtml}
+              </select>
+              <p id="err-checkoutModel" hidden class="mt-1.5 text-[11px] font-semibold text-[#FF4D4D]"></p>
+            </div>
+
+            <div>
+              <label for="checkoutYear" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Year <span class="text-[#FF1F1F]">*</span></label>
+              <select id="checkoutYear" class="${baseInputClass}">
+                ${yearOptionsHtml}
+              </select>
+              <p id="err-checkoutYear" hidden class="mt-1.5 text-[11px] font-semibold text-[#FF4D4D]"></p>
+            </div>
+
+            <div>
+              <label for="checkoutEngine" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Engine Capacity <span class="text-[#FF1F1F]">*</span></label>
+              <select id="checkoutEngine" class="${baseInputClass}">
+                ${engineOptionsHtml}
+              </select>
+              <p id="err-checkoutEngine" hidden class="mt-1.5 text-[11px] font-semibold text-[#FF4D4D]"></p>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="checkoutVin" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Chassis / VIN Number <span class="text-zinc-400 font-semibold normal-case">(Optional &mdash; speeds up 100% fitment check)</span></label>
+              <input type="text" id="checkoutVin" maxlength="17" placeholder="Optional — speeds up 100% fitment check (e.g. JTDZR42E60J...)" class="${baseInputClass} uppercase font-mono placeholder:normal-case placeholder:font-sans">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Delivery & Contact Details -->
+        <div class="space-y-4">
+          <div class="pb-2.5 border-b border-white/10">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#FF1F1F] block">Step 2</span>
+            <h4 class="text-sm sm:text-base font-extrabold uppercase text-white tracking-tight">2. Delivery &amp; Contact Details</h4>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="checkoutFullName" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Full Name <span class="text-[#FF1F1F]">*</span></label>
+              <input type="text" id="checkoutFullName" autocomplete="name" placeholder="e.g. Kwame Mensah" class="${baseInputClass}">
+              <p id="err-checkoutFullName" hidden class="mt-1.5 text-[11px] font-semibold text-[#FF4D4D]"></p>
+            </div>
+
+            <div>
+              <label for="checkoutPhone" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Phone / WhatsApp Number <span class="text-[#FF1F1F]">*</span></label>
+              <input type="tel" id="checkoutPhone" autocomplete="tel" placeholder="e.g. 024 011 8846" class="${baseInputClass}">
+              <p id="err-checkoutPhone" hidden class="mt-1.5 text-[11px] font-semibold text-[#FF4D4D]"></p>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="checkoutAddress" class="block text-[10px] font-bold uppercase tracking-wider text-silverMuted mb-1.5">Delivery Address / City &amp; Landmark <span class="text-[#FF1F1F]">*</span></label>
+              <input type="text" id="checkoutAddress" autocomplete="street-address" placeholder="e.g. East Legon, Accra (near A&amp;C Mall) or Adum, Kumasi" class="${baseInputClass}">
+              <p id="err-checkoutAddress" hidden class="mt-1.5 text-[11px] font-semibold text-[#FF4D4D]"></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="checkoutGatewayStatus" hidden class="rounded-xl border border-white/15 bg-[#09090D] px-4 py-3 text-xs text-silverMuted"></div>
+
+        <!-- Single Direct WhatsApp Checkout Action -->
+        <div class="pt-2 space-y-3">
+          <button type="button" id="checkoutWhatsappBtn" class="w-full bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-4 px-5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider inline-flex items-center justify-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
+            <i class="fab fa-whatsapp text-base" aria-hidden="true"></i>
+            <span>Complete Order on WhatsApp</span>
+          </button>
+
+          <p class="text-center text-[11px] text-silverMuted leading-relaxed pt-1">
+            &#128274; 100% Secure Checkout: Your vehicle, phone, and delivery details are used strictly to verify OEM fitment and dispatch your order. We never sell, rent, or share customer data.
+            <a href="#privacy-policy" class="text-white/90 hover:text-porscheRed underline ml-1">Privacy Policy</a>
+          </p>
+        </div>
+      `;
+
+      const orderConfirmMount = document.createElement('div');
+      orderConfirmMount.id = 'checkoutOrderConfirmMount';
+      orderConfirmMount.hidden = true;
+
+      checkoutShell.appendChild(summaryPill);
+      checkoutShell.appendChild(introCopy);
+      checkoutShell.appendChild(formCard);
+
+      bodyEl.appendChild(checkoutShell);
+      bodyEl.appendChild(orderConfirmMount);
+
+      // Quantity selector state & handlers
+      let qty = 1;
+      const qtyMinusBtn = summaryPill.querySelector('#checkoutQtyMinus');
+      const qtyPlusBtn = summaryPill.querySelector('#checkoutQtyPlus');
+      const qtyDisplayEl = summaryPill.querySelector('#checkoutQtyDisplay');
+      const totalDisplayEl = summaryPill.querySelector('#checkoutTotalDisplay');
+
+      const syncQtyAndTotal = () => {
+        const totalGhs = qty * plug.priceGhs;
+        if (qtyDisplayEl) qtyDisplayEl.textContent = `${qty} ${qty === 1 ? 'Set' : 'Sets'}`;
+        if (totalDisplayEl) totalDisplayEl.textContent = `GH\u00A2${totalGhs.toLocaleString('en-US')}`;
+      };
+
+      if (qtyMinusBtn) {
+        qtyMinusBtn.addEventListener('click', () => {
+          if (qty > 1) {
+            playLuxuryMicroTap();
+            qty--;
+            syncQtyAndTotal();
+          }
+        });
+      }
+      if (qtyPlusBtn) {
+        qtyPlusBtn.addEventListener('click', () => {
+          if (qty < 200) {
+            playLuxuryMicroTap();
+            qty++;
+            syncQtyAndTotal();
+          }
+        });
+      }
+
+      const modelEl = formCard.querySelector('#checkoutModel');
+      const yearEl = formCard.querySelector('#checkoutYear');
+      const engineEl = formCard.querySelector('#checkoutEngine');
+      const vinEl = formCard.querySelector('#checkoutVin');
+      const fullNameEl = formCard.querySelector('#checkoutFullName');
+      const phoneEl = formCard.querySelector('#checkoutPhone');
+      const addressEl = formCard.querySelector('#checkoutAddress');
+      const gatewayStatusEl = formCard.querySelector('#checkoutGatewayStatus');
+      const whatsappBtn = formCard.querySelector('#checkoutWhatsappBtn');
+
+      const showGatewayStatus = (msg, isError) => {
+        if (!gatewayStatusEl) return;
+        gatewayStatusEl.hidden = false;
+        gatewayStatusEl.className = isError
+          ? 'rounded-xl border border-[#E31818]/60 bg-[#E31818]/12 px-4 py-3 text-xs font-semibold text-red-200'
+          : 'rounded-xl border border-white/15 bg-[#09090D] px-4 py-3 text-xs text-silverMuted';
+        gatewayStatusEl.textContent = msg;
+      };
+
+      const hideGatewayStatus = () => {
+        if (!gatewayStatusEl) return;
+        gatewayStatusEl.hidden = true;
+        gatewayStatusEl.textContent = '';
+      };
+
+      const requiredRules = [
+        {
+          id: 'checkoutModel',
+          el: modelEl,
+          errEl: formCard.querySelector('#err-checkoutModel'),
+          validate: val => val.trim().length > 0,
+          message: 'Select your vehicle model'
+        },
+        {
+          id: 'checkoutYear',
+          el: yearEl,
+          errEl: formCard.querySelector('#err-checkoutYear'),
+          validate: val => val.trim().length > 0,
+          message: 'Select your vehicle year'
+        },
+        {
+          id: 'checkoutEngine',
+          el: engineEl,
+          errEl: formCard.querySelector('#err-checkoutEngine'),
+          validate: val => val.trim().length > 0,
+          message: 'Select your engine capacity'
+        },
+        {
+          id: 'checkoutFullName',
+          el: fullNameEl,
+          errEl: formCard.querySelector('#err-checkoutFullName'),
+          validate: val => val.trim().length >= 2,
+          message: 'Enter your full name'
+        },
+        {
+          id: 'checkoutPhone',
+          el: phoneEl,
+          errEl: formCard.querySelector('#err-checkoutPhone'),
+          validate: val => val.replace(/\D/g, '').length >= 7,
+          message: 'Enter a valid phone / WhatsApp number'
+        },
+        {
+          id: 'checkoutAddress',
+          el: addressEl,
+          errEl: formCard.querySelector('#err-checkoutAddress'),
+          validate: val => val.trim().length >= 3,
+          message: 'Enter delivery address or landmark'
+        }
+      ];
+
+      const setFieldError = (rule, hasError) => {
+        if (!rule || !rule.el) return;
+        if (hasError) {
+          rule.el.className = `${baseInputClass} border-[#E31818] ring-2 ring-[#E31818]/35`;
+          rule.el.setAttribute('aria-invalid', 'true');
+          if (rule.errEl) {
+            rule.errEl.textContent = rule.message;
+            rule.errEl.hidden = false;
+          }
+        } else {
+          rule.el.className = baseInputClass;
+          rule.el.removeAttribute('aria-invalid');
+          if (rule.errEl) {
+            rule.errEl.textContent = '';
+            rule.errEl.hidden = true;
+          }
+        }
+      };
+
+      requiredRules.forEach(rule => {
+        if (!rule.el) return;
+        const evt = rule.el.tagName === 'SELECT' ? 'change' : 'input';
+        rule.el.addEventListener(evt, () => {
+          if (rule.validate(rule.el.value || '')) {
+            setFieldError(rule, false);
+          }
+        });
+      });
+
+      const validateCheckoutForm = () => {
+        let firstInvalid = null;
+        let allValid = true;
+        requiredRules.forEach(rule => {
+          const valid = rule.el ? rule.validate(rule.el.value || '') : false;
+          setFieldError(rule, !valid);
+          if (!valid) {
+            allValid = false;
+            if (!firstInvalid) firstInvalid = rule.el;
+          }
+        });
+
+        if (!allValid && firstInvalid) {
+          showGatewayStatus('Please complete the highlighted required fields above before continuing.', true);
+          if (typeof firstInvalid.scrollIntoView === 'function') {
+            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          if (typeof firstInvalid.focus === 'function') {
+            firstInvalid.focus({ preventScroll: true });
+          }
+          return null;
+        }
+
+        hideGatewayStatus();
+        const totalGhs = qty * plug.priceGhs;
+        return {
+          make: plug.brand,
+          model: modelEl.value.trim(),
+          year: yearEl.value.trim(),
+          engine: engineEl.value.trim(),
+          vin: (vinEl && vinEl.value ? vinEl.value : '').trim().toUpperCase(),
+          fullName: fullNameEl.value.trim(),
+          phone: phoneEl.value.trim(),
+          address: addressEl.value.trim(),
+          qty,
+          totalGhs,
+          totalFormatted: `GH\u00A2${totalGhs.toLocaleString('en-US')}`
+        };
+      };
+
+      const renderOrderSentConfirmationCard = (orderData, confirmNo, waUrl) => {
+        checkoutShell.hidden = true;
+        orderConfirmMount.hidden = false;
+        orderConfirmMount.innerHTML = `
+          <div id="checkoutOrderSentScreen" class="plug-spec-card rounded-2xl p-6 sm:p-8 space-y-6">
+            <div class="flex flex-wrap items-start justify-between gap-4 border-b border-white/[0.08] pb-5">
+              <div>
+                <span class="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-widest text-emerald-400">
+                  <i class="fab fa-whatsapp text-sm" aria-hidden="true"></i>
+                  <span>Sent to WhatsApp</span>
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold uppercase text-white tracking-tight mt-1">Order Ready on WhatsApp</h2>
+                <p class="text-xs sm:text-sm text-silverMuted mt-1">Your genuine ${escHtml(plug.brand)} order summary has been prepared for our dispatch desk (024 011 8846).</p>
+              </div>
+              <div class="text-left sm:text-right bg-[#060609] border border-white/10 rounded-xl px-4 py-2.5">
+                <span class="block text-[9px] font-bold uppercase tracking-widest text-silverMuted">Order Confirmation ID</span>
+                <span id="orderConfirmNumber" class="font-mono text-sm sm:text-base font-extrabold text-white tabular-nums">${escHtml(confirmNo)}</span>
+              </div>
+            </div>
+
+            <dl class="divide-y divide-white/[0.08] text-xs sm:text-sm">
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Part Number:</dt>
+                <dd class="font-bold text-white text-right">${escHtml(plug.oemNumber)}</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Product Name:</dt>
+                <dd class="font-semibold text-white text-right">${escHtml(plug.title)}</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Quantity:</dt>
+                <dd class="font-semibold text-white text-right tabular-nums">${orderData.qty} ${orderData.qty === 1 ? 'Set' : 'Sets'} (${escHtml(plug.packLabel)})</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Total:</dt>
+                <dd class="font-extrabold text-white text-right tabular-nums">${escHtml(orderData.totalFormatted)}</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Vehicle Details:</dt>
+                <dd class="font-semibold text-white text-right">${escHtml(orderData.make)} ${escHtml(orderData.model)} &bull; ${escHtml(orderData.year)} &bull; ${escHtml(orderData.engine)}</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Chassis / VIN:</dt>
+                <dd class="font-mono font-semibold text-white text-right">${escHtml(orderData.vin || 'Not provided')}</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Customer &amp; Phone:</dt>
+                <dd class="font-semibold text-white text-right">${escHtml(orderData.fullName)} &bull; ${escHtml(orderData.phone)}</dd>
+              </div>
+              <div class="py-3 flex justify-between items-start gap-4">
+                <dt class="text-silverMuted shrink-0">Delivery Address:</dt>
+                <dd class="font-semibold text-white text-right">${escHtml(orderData.address)}</dd>
+              </div>
+            </dl>
+
+            <div class="pt-2 space-y-3">
+              <a id="reopenOrderWhatsappBtn" href="${waUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-porscheRed hover:bg-porscheRedHover liquid-cta-primary text-white py-4 px-5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider inline-flex items-center justify-center gap-2.5">
+                <i class="fab fa-whatsapp text-base" aria-hidden="true"></i>
+                <span>Reopen / Re-send on WhatsApp</span>
+              </a>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" id="orderSentBackToSpecsBtn" class="pill-white-3d text-xs font-extrabold uppercase tracking-wider py-3 px-4">
+                  &larr; Back to Part Specs
+                </button>
+                <button type="button" id="orderSentBrowseBtn" class="liquid-glass-btn text-white text-xs font-extrabold uppercase tracking-wider py-3 px-4 rounded-full">
+                  Browse All Plugs
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const backSpecsBtn = orderConfirmMount.querySelector('#orderSentBackToSpecsBtn');
+        if (backSpecsBtn) backSpecsBtn.addEventListener('click', backToSpecsFromCheckout);
+        const browseBtn = orderConfirmMount.querySelector('#orderSentBrowseBtn');
+        if (browseBtn) browseBtn.addEventListener('click', () => showPage('catalogue', null, true));
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // Single Primary Action: Complete Order on WhatsApp (strictly gated by validation)
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+          playLuxuryMicroTap();
+          const data = validateCheckoutForm();
+          if (!data) return;
+
+          const confirmNo = generateOrderConfirmationCode();
+          const waMsg = [
+            '*KASH OPTION SPARK PLUG ORDER*',
+            `*Order Confirmation ID:* ${confirmNo}`,
+            `*Part Number:* ${plug.oemNumber}`,
+            `*Product Name:* ${plug.title}`,
+            `*Quantity:* ${data.qty} ${data.qty === 1 ? 'Set' : 'Sets'} (${plug.packLabel})`,
+            `*Total:* ${data.totalFormatted}`,
+            `*Vehicle Details:* ${data.make} ${data.model} • ${data.year} • ${data.engine}`,
+            `*Optional Chassis / VIN:* ${data.vin || 'Not provided'}`,
+            `*Customer Name:* ${data.fullName}`,
+            `*Phone / WhatsApp:* ${data.phone}`,
+            `*Delivery Address:* ${data.address}`,
+            '',
+            'Please confirm availability and dispatch rider delivery.'
+          ].join('\n');
+
+          const waUrl = `https://wa.me/233240118846?text=${encodeURIComponent(waMsg)}`;
+          openWhatsAppUrl(waUrl);
+          renderOrderSentConfirmationCard(data, confirmNo, waUrl);
+        });
+      }
+
+      // Guard keyboard Enter submission on the form
+      formCard.addEventListener('submit', e => {
+        e.preventDefault();
+        if (whatsappBtn) whatsappBtn.click();
+      });
     }
 
     function backToCatalogueFromProduct() {
