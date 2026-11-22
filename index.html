@@ -4273,8 +4273,8 @@
       salesChatState.lastFallbackIdx = -1;
 
       const welcomeCopy = opts.openVin
-        ? "Enter your 17-character Chassis / VIN to confirm the exact genuine OEM spark plug part number and GHS price."
-        : "Kash Option Sales Desk (mrkash.net). Ask any Toyota, Honda, Hyundai, or Kia spark plug price, OEM part number, or submit your 17-character Chassis / VIN.";
+        ? "Drop your 17-character Chassis / VIN below and I'll match your vehicle with the exact genuine OEM spark plug and live Ghana price right away."
+        : "Welcome to Kash Option Sales Bot! Tell me your car make, model, year, or OEM part number\u2014or drop your 17-character Chassis / VIN\u2014and I'll get you matched with the right plug and price right away.";
 
       showSalesTypingIndicator('Kash Auto Bot is typing...');
       salesTypingTimer = window.setTimeout(() => {
@@ -4900,8 +4900,8 @@
         const idTurn = bumpTopicCount('identity');
         return {
           text: idTurn === 1
-            ? "Kash Option Ignition Desk (mrkash.net) in Community 18, Accra. Provide your Toyota, Honda, Hyundai, or Kia model, part number, or Chassis / VIN for exact GHS pricing."
-            : "Kash Option supplies genuine DENSO, NGK, and Hyundai/Kia Mobis OEM spark plugs in Accra (GH¢300–GH¢700 per set of 4). Share your car model or Chassis / VIN.",
+            ? "I'm Kash Option Sales Bot\u2014here to match your Toyota, Honda, Hyundai, or Kia with genuine DENSO, NGK, or Mobis OEM spark plugs and quote live Ghana pricing. What car model, part number, or Chassis / VIN can I check for you?"
+            : "I'm Kash Option Sales Bot (mrkash.net). Tell me your vehicle make, model, year, or 17-character Chassis / VIN and I'll confirm the exact OEM plug and Accra delivery timing.",
           nextStep: 'qa',
           showWhatsAppCta: false
         };
@@ -5168,8 +5168,8 @@
       if (intent.isPlugOrFitmentPrompt) {
         return {
           text: rememberedVehicle
-            ? `Recorded ${rememberedVehicle}—provide your Chassis / VIN or select a brand below to check exact OEM plug prices.`
-            : "We stock 20 genuine OEM spark plug lines (GH\u00A2300 to GH\u00A2700) across Toyota, Honda, Hyundai, and Kia. Select your brand below or enter your car model / Chassis VIN.",
+            ? `Got ${rememberedVehicle} on file\u2014share your Chassis / VIN or select a brand below and I'll confirm the exact OEM spark plug and price right away.`
+            : "We stock genuine DENSO, NGK, and Hyundai/Kia Mobis OEM spark plugs (GH\u00A2300 to GH\u00A2700 per set of 4) for Toyota, Honda, Hyundai, and Kia. Pick your brand below or share your car model or Chassis / VIN to get matched right away.",
           nextStep: 'qa',
           showFitmentPills: true,
           showWhatsAppCta: Boolean(rememberedVehicle),
@@ -5211,8 +5211,8 @@
         const hiTurn = bumpTopicCount('casual_hi');
         return {
           text: hiTurn === 1
-            ? "Kash Option Ignition Desk, Accra. Ask any Toyota, Honda, Hyundai, or Kia spark plug price, OEM part number, or provide your Chassis / VIN."
-            : "Enter your car model, OEM part number, or 17-character Chassis / VIN to get started.",
+            ? "Welcome to Kash Option Sales Bot! Tell me your car make, model, year, or OEM part number\u2014or drop your 17-character Chassis / VIN\u2014and I'll get you matched with the right plug and price right away."
+            : "I'm ready whenever you are\u2014share your car make, model, OEM part number, or 17-character Chassis / VIN for an instant price and fitment match.",
           nextStep: 'qa',
           showWhatsAppCta: false
         };
@@ -5223,8 +5223,8 @@
         "Kash Option supplies genuine DENSO, NGK, and Mobis spark plugs at Community 18. Share a part number, vehicle model, or VIN for pricing."
       ];
       const generalClarifyReplies = [
-        "We stock genuine OEM spark plugs for Toyota, Honda, Hyundai, and Kia. Enter your car model, part number, or 17-character Chassis / VIN.",
-        "Provide your Toyota, Honda, Hyundai, or Kia model, OEM part code, or Chassis / VIN for exact availability and GHS pricing."
+        "Tell me your Toyota, Honda, Hyundai, or Kia model (with year or engine), OEM part number, or 17-character Chassis / VIN and I'll quote the exact plug and Ghana price.",
+        "Share your car make and model, OEM part code, or Chassis / VIN\u2014I'll match the right genuine OEM spark plug set right away."
       ];
 
       const pool = intent.isOffTopic ? offTopicReplies : generalClarifyReplies;
@@ -7200,9 +7200,8 @@
       partTitle.textContent = plug.oemNumber;
 
       const modelsList = Array.isArray(plug.models) ? plug.models : [];
-      const modelCopy = modelsList.length > 5
-        ? `${modelsList.slice(0, 5).join(', ')} & more`
-        : modelsList.join(', ');
+      const visibleModels = modelsList.length > 5 ? modelsList.slice(0, 5) : modelsList;
+      const modelCopy = visibleModels.length > 0 ? `${visibleModels.join(', ')}, etc.` : '';
 
       const fitDesc = document.createElement('p');
       fitDesc.className = 'text-[11px] sm:text-xs text-zinc-400 leading-relaxed line-clamp-2';
@@ -7344,9 +7343,10 @@
       const fitLabel = document.createElement('span');
       fitLabel.className = 'block text-[10px] font-bold uppercase tracking-widest text-silverMuted';
       fitLabel.textContent = `Compatible ${plug.brand} Models`;
+      const detailModels = Array.isArray(plug.models) ? plug.models : [];
       const summaryPara = document.createElement('p');
       summaryPara.className = 'text-xs sm:text-sm text-zinc-200 leading-relaxed';
-      summaryPara.textContent = (Array.isArray(plug.models) ? plug.models : []).join(' \u2022 ');
+      summaryPara.textContent = detailModels.length > 0 ? `${detailModels.join(', ')}, etc.` : '';
       fitWrap.appendChild(fitLabel);
       fitWrap.appendChild(summaryPara);
 
@@ -7377,8 +7377,7 @@
         ['Hex Size', plug.hexSize],
         ['Gap', plug.gap],
         ['Torque', plug.torque],
-        ['Electrode / Design', plug.electrodeMaterial],
-        ['Warranty Coverage', '20,000 KM OEM Warranty']
+        ['Electrode / Design', plug.electrodeMaterial]
       ].forEach(([label, val]) => {
         const row = document.createElement('div');
         row.className = 'py-3 flex justify-between items-start gap-4';
