@@ -2123,9 +2123,9 @@
               <span class="text-silverMuted">ZERO COUNTERFEIT</span>
             </h1>
 
-            <!-- Concise Ghana SEO Supporting Copy -->
+            <!-- Concise Hero Supporting Copy -->
             <p class="text-base sm:text-lg text-metallicSilver max-w-xl font-normal leading-relaxed mb-10">
-              Genuine spark plugs in Ghana for Toyota, Honda, Hyundai, and Kia. Original Iridium spark plugs—factory NGK spark plugs Ghana and DENSO spark plugs Ghana—delivered same-day in Accra or nationwide.
+           Genuine NGK, DENSO, and Mobis Iridium spark plugs for Toyota, Honda, Hyundai, and Kia verified by Chassis / VIN and delivered same-day across Accra and nationwide in Ghana.
             </p>
 
             <!-- Action Buttons -->
@@ -2158,7 +2158,7 @@
             </h2>
           </div>
           <p class="text-xs sm:text-sm text-silverMuted max-w-md font-normal leading-relaxed">
-            Toyota spark plugs Ghana, Honda spark plugs Ghana, and Hyundai and Kia spark plugs with live Cedi pricing and direct WhatsApp ordering.
+           Premium Toyota, Honda, Hyundai, and Kia OEM spark plugs wholesale
           </p>
         </div>
 
@@ -2170,7 +2170,7 @@
           </div>
 
           <div class="flex flex-wrap items-center gap-1.5 sm:gap-2" id="homeFilterTabs">
-            <button type="button" onclick="setBrandFilter('all', this)" class="filter-btn active liquid-glass-btn text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg text-silverMuted hover:text-white">Featured (4)</button>
+            <button type="button" onclick="setBrandFilter('featured', this)" class="filter-btn active liquid-glass-btn text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg text-silverMuted hover:text-white">All</button>
             <button type="button" onclick="setBrandFilter('toyota', this)" class="filter-btn liquid-glass-btn text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg text-silverMuted hover:text-white">Toyota</button>
             <button type="button" onclick="setBrandFilter('honda', this)" class="filter-btn liquid-glass-btn text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg text-silverMuted hover:text-white">Honda</button>
             <button type="button" onclick="setBrandFilter('hyundai', this)" class="filter-btn liquid-glass-btn text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg text-silverMuted hover:text-white">Hyundai</button>
@@ -2267,7 +2267,7 @@
 
           <!-- Filter Pill Tabs -->
           <div class="flex flex-wrap items-center gap-2" id="filterTabs">
-            <button type="button" onclick="setBrandFilter('all', this)" class="filter-btn active liquid-glass-btn text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg text-silverMuted hover:text-white">All (20)</button>
+            <button type="button" onclick="setBrandFilter('all', this)" class="filter-btn active liquid-glass-btn text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg text-silverMuted hover:text-white">All</button>
             <button type="button" onclick="setBrandFilter('toyota', this)" class="filter-btn liquid-glass-btn text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg text-silverMuted hover:text-white">Toyota</button>
             <button type="button" onclick="setBrandFilter('honda', this)" class="filter-btn liquid-glass-btn text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg text-silverMuted hover:text-white">Honda</button>
             <button type="button" onclick="setBrandFilter('hyundai', this)" class="filter-btn liquid-glass-btn text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg text-silverMuted hover:text-white">Hyundai</button>
@@ -6335,10 +6335,28 @@
       openWhatsAppUrl(`https://wa.me/233240118846?text=${message}`);
     }
 
-    /* ================= CATALOGUE LIVE SEARCH & FILTER ================= */
+    /* ================= CATALOGUE LIVE SEARCH, SHUFFLE & FILTER ================= */
     let activeBrandFilter = 'all';
 
     const HOME_FEATURED_PLUG_IDS = new Set();
+
+    function fisherYatesShuffle(list) {
+      const copy = Array.isArray(list) ? list.slice() : [];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = tmp;
+      }
+      return copy;
+    }
+
+    function shuffleGridChildren(gridEl) {
+      if (!gridEl) return;
+      const items = Array.from(gridEl.querySelectorAll('.product-item'));
+      if (items.length <= 1) return;
+      fisherYatesShuffle(items).forEach(node => gridEl.appendChild(node));
+    }
 
     function initHomeFeaturedPlugIds() {
       HOME_FEATURED_PLUG_IDS.clear();
@@ -6349,6 +6367,13 @@
           const picked = candidates[Math.floor(Math.random() * candidates.length)];
           HOME_FEATURED_PLUG_IDS.add(picked.id);
         }
+      });
+    }
+
+    function syncFeaturedCardAttributes() {
+      document.querySelectorAll('#homeProductGrid .product-item, #productGrid .product-item').forEach(card => {
+        const pid = card.getAttribute('data-plug-id');
+        card.setAttribute('data-featured', HOME_FEATURED_PLUG_IDS.has(pid) ? 'true' : 'false');
       });
     }
 
@@ -6430,6 +6455,14 @@
         });
       });
       if (btn) btn.classList.add('active');
+
+      if (activeBrandFilter === 'all') {
+        initHomeFeaturedPlugIds();
+        syncFeaturedCardAttributes();
+      }
+      shuffleGridChildren(document.getElementById('homeProductGrid'));
+      shuffleGridChildren(document.getElementById('productGrid'));
+
       filterCatalogueCards(true);
 
       if (!skipRevealRefresh && typeof initScrollReveals === 'function') {
@@ -7488,12 +7521,12 @@
       topBlock.appendChild(galleryEl);
 
       const content = document.createElement('div');
-      content.className = 'p-3.5 sm:p-5 space-y-2.5';
+      content.className = 'pt-3.5 px-3.5 pb-3 sm:pt-4 sm:px-5 sm:pb-4 space-y-2';
 
       const metaRow = document.createElement('div');
       metaRow.className = 'flex items-center justify-between gap-2';
       const eyebrow = document.createElement('span');
-      eyebrow.className = 'text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-porscheRed truncate';
+      eyebrow.className = 'text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-porscheRed';
       eyebrow.textContent = `${plug.brand} \u2022 ${plug.makerTag.toUpperCase()}`;
       const packBadge = document.createElement('span');
       packBadge.className = 'text-[9px] sm:text-[10px] font-medium text-silverMuted shrink-0';
@@ -7502,7 +7535,7 @@
       metaRow.appendChild(packBadge);
 
       const partTitle = document.createElement('h3');
-      partTitle.className = 'text-xs sm:text-[15px] font-extrabold uppercase text-white leading-snug tracking-tight truncate';
+      partTitle.className = 'text-xs sm:text-[15px] font-extrabold uppercase text-white leading-snug tracking-tight break-words';
       partTitle.textContent = plug.oemNumber;
 
       const modelsList = Array.isArray(plug.models) ? plug.models : [];
@@ -7519,7 +7552,7 @@
       topBlock.appendChild(content);
 
       const footer = document.createElement('div');
-      footer.className = 'px-3.5 pb-4 sm:px-5 sm:pb-5 pt-3 border-t border-white/[0.06]';
+      footer.className = 'px-3.5 pb-3.5 sm:px-5 sm:pb-4 pt-2.5 border-t border-white/[0.06]';
 
       const priceRow = document.createElement('div');
       priceRow.className = 'flex items-baseline justify-between gap-2';
@@ -7549,7 +7582,7 @@
         const gridEl = document.getElementById(gridId);
         if (!gridEl) return;
         gridEl.innerHTML = '';
-        plugDetailCatalog.forEach(plug => {
+        fisherYatesShuffle(plugDetailCatalog).forEach(plug => {
           gridEl.appendChild(buildCompactProductCard(plug, origin));
         });
       });
@@ -7591,7 +7624,7 @@
       codeRow.appendChild(arrowSpan);
 
       const partEl = document.createElement('div');
-      partEl.className = 'text-sm font-extrabold uppercase text-white truncate';
+      partEl.className = 'text-sm font-extrabold uppercase text-white break-words';
       partEl.textContent = item.partCode;
 
       const metaEl = document.createElement('div');
@@ -7870,7 +7903,7 @@
               <span class="text-[10px] text-silverMuted">&bull;</span>
               <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-300">${escHtml(plug.packLabel)}</span>
             </div>
-            <h2 class="text-base sm:text-lg font-extrabold uppercase text-white tracking-tight truncate">${escHtml(plug.oemNumber)}</h2>
+            <h2 class="text-base sm:text-lg font-extrabold uppercase text-white tracking-tight break-words">${escHtml(plug.oemNumber)}</h2>
           </div>
         </div>
         <div class="flex items-center justify-between sm:justify-end gap-4 pt-3 sm:pt-0 border-t sm:border-t-0 border-white/10 shrink-0">
