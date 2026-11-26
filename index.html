@@ -664,18 +664,20 @@
     }
     .kash-gallery-arrow.prev { left: 6px; }
     .kash-gallery-arrow.next { right: 6px; }
-    .kash-product-card {
+    .kash-product-card,
+    .product-item.hover-lift {
       position: relative;
       background-color: #0B0B0F;
       border: 1px solid rgba(255, 255, 255, 0.06);
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
       transform: translate3d(0, 0, 0);
+      will-change: transform, box-shadow;
       transition:
-        transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-        background-color 220ms ease,
-        border-color 220ms ease,
-        box-shadow 260ms ease;
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 240ms ease,
+        border-color 240ms ease,
+        box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     @media (hover: hover) and (pointer: fine) {
       .kash-gallery:hover .kash-gallery-arrow {
@@ -686,17 +688,31 @@
         background: #E31818;
         border-color: #FF4D4D;
       }
-      .kash-product-card:hover {
+      .kash-product-card:hover,
+      .product-item.hover-lift:hover {
         background-color: #101016;
         border-color: rgba(255, 255, 255, 0.14);
-        transform: translate3d(0, -2px, 0);
-        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.72);
+        transform: translate3d(0, -5px, 0);
+        box-shadow:
+          0 18px 38px -10px rgba(0, 0, 0, 0.48),
+          0 8px 20px -6px rgba(227, 24, 24, 0.12);
       }
     }
-    .kash-product-card:active {
+    @media (prefers-reduced-motion: reduce) {
+      .kash-product-card,
+      .product-item.hover-lift,
+      .kash-product-card:hover,
+      .product-item.hover-lift:hover {
+        transform: none !important;
+        transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease !important;
+      }
+    }
+    .kash-product-card:active,
+    .product-item.hover-lift:active {
       transform: scale(0.99) translate3d(0, 0, 0);
     }
-    .kash-product-card:focus-visible {
+    .kash-product-card:focus-visible,
+    .product-item.hover-lift:focus-visible {
       outline: none;
       border-color: rgba(227, 24, 24, 0.75);
       box-shadow: 0 0 0 2px rgba(227, 24, 24, 0.35);
@@ -1962,15 +1978,16 @@
     }
   </style>
 
-  <!-- Technical JSON-LD Structured Data: AutoPartsStore, Organization, Product Catalog (GHS) -->
+  <!-- Technical JSON-LD Structured Data: AutoPartsStore & Organization (Service-Area Business, Ghana) -->
   <script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
       "@type": "AutoPartsStore",
       "@id": "https://mrkash.net/#store",
-      "name": "KASH OPTION | Genuine NGK & DENSO OEM Spark Plugs in Ghana",
-      "url": "https://mrkash.net/",
+      "name": "Kash Option",
+      "alternateName": ["Mr Kash", "Kash Option", "mrkash.net"],
+      "url": "https://mrkash.net",
       "image": "https://iili.io/oHVNlFS.png",
       "logo": "https://mrkash.net/logo.png",
       "telephone": "+233240118846",
@@ -1978,17 +1995,12 @@
       "priceRange": "GH₵300 - GH₵700",
       "paymentAccepted": "Mobile Money, Bank Transfer, Cash on Delivery",
       "currenciesAccepted": "GHS",
+      "areaServed": ["Accra", "Tema", "Kumasi", "Ghana"],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Community 18, Greater Accra",
         "addressLocality": "Accra",
         "addressRegion": "Greater Accra",
         "addressCountry": "GH"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 5.6037,
-        "longitude": -0.1870
       },
       "openingHoursSpecification": [
         {
@@ -1999,66 +2011,22 @@
         }
       ],
       "sameAs": [
-        "https://www.instagram.com/Kashoption_",
+        "https://www.instagram.com/kashoption_/",
         "https://www.tiktok.com/@kashoption_"
       ],
-      "areaServed": {
-        "@type": "Country",
-        "name": "Ghana"
-      },
-      "description": "Genuine spark plugs in Ghana. Supplier of NGK spark plugs Ghana, DENSO spark plugs Ghana, and Hyundai & Kia Mobis OEM spark plugs in Accra for wholesale and retail delivery.",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Genuine OEM Iridium Spark Plugs Ghana",
-        "itemListElement": [
-          {
-            "@type": "Product",
-            "name": "Toyota Genuine OEM Spark Plug 90919-01253 / SC20HR11",
-            "sku": "SC20HR11",
-            "brand": { "@type": "Brand", "name": "DENSO / Toyota OEM" },
-            "offers": { "@type": "Offer", "priceCurrency": "GHS", "price": "400", "availability": "https://schema.org/InStock", "url": "https://mrkash.net/#product-toyota-sc20hr11" }
-          },
-          {
-            "@type": "Product",
-            "name": "Toyota Genuine OEM Spark Plug 90919-01210 / SK20R11",
-            "sku": "SK20R11",
-            "brand": { "@type": "Brand", "name": "DENSO / Toyota OEM" },
-            "offers": { "@type": "Offer", "priceCurrency": "GHS", "price": "300", "availability": "https://schema.org/InStock", "url": "https://mrkash.net/#product-toyota-sk20r11" }
-          },
-          {
-            "@type": "Product",
-            "name": "Honda Genuine OEM Spark Plug 12290-542-A01",
-            "sku": "12290-542-A01",
-            "brand": { "@type": "Brand", "name": "NGK / Honda OEM" },
-            "offers": { "@type": "Offer", "priceCurrency": "GHS", "price": "600", "availability": "https://schema.org/InStock", "url": "https://mrkash.net/#product-honda-12290-542-a01" }
-          },
-          {
-            "@type": "Product",
-            "name": "Hyundai & Kia Genuine OEM Spark Plug 18846-10060 / SILZKR6B10E",
-            "sku": "18846-10060",
-            "brand": { "@type": "Brand", "name": "Mobis OEM" },
-            "offers": { "@type": "Offer", "priceCurrency": "GHS", "price": "400", "availability": "https://schema.org/InStock", "url": "https://mrkash.net/#product-hyundai-18846-10060-a" }
-          },
-          {
-            "@type": "Product",
-            "name": "Hyundai & Kia Genuine OEM Spark Plug 18846-11070",
-            "sku": "18846-11070",
-            "brand": { "@type": "Brand", "name": "Mobis OEM" },
-            "offers": { "@type": "Offer", "priceCurrency": "GHS", "price": "400", "availability": "https://schema.org/InStock", "url": "https://mrkash.net/#product-hyundai-18846-11070" }
-          }
-        ]
-      }
+      "description": "Genuine spark plugs in Ghana. Supplier of NGK spark plugs Ghana, DENSO spark plugs Ghana, and Hyundai & Kia Mobis OEM spark plugs in Accra for wholesale and retail delivery."
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "@id": "https://mrkash.net/#organization",
-      "name": "KASH OPTION",
-      "url": "https://mrkash.net/",
+      "name": "Kash Option",
+      "alternateName": ["Mr Kash", "Kash Option", "mrkash.net"],
+      "url": "https://mrkash.net",
       "logo": "https://iili.io/oHVNlFS.png",
       "email": "info@mrkash.net",
       "sameAs": [
-        "https://www.instagram.com/Kashoption_",
+        "https://www.instagram.com/kashoption_/",
         "https://www.tiktok.com/@kashoption_"
       ],
       "contactPoint": {
@@ -2490,6 +2458,22 @@
       <div id="plugDetailBody" class="space-y-8"></div>
     </section>
 
+    <!-- ================= DISCRETE PAGE: STANDALONE KNOWLEDGE ARTICLE VIEW ================= -->
+    <section id="guide-detail" data-page="guide-detail" class="page-view py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto" hidden>
+      <div class="mb-7 flex flex-wrap items-center justify-between gap-3">
+        <a href="/#knowledge" onclick="event.preventDefault(); showPage('knowledge', null, true);" class="pill-white-3d text-xs font-extrabold uppercase tracking-wider px-5 py-2.5 inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]">
+          <span aria-hidden="true">&larr;</span>
+          <span>Back to Knowledge Centre</span>
+        </a>
+        <a href="/#catalogue" onclick="event.preventDefault(); showPage('catalogue', null, true);" class="liquid-glass-btn text-[11px] font-bold uppercase tracking-wider text-zinc-200 hover:text-white px-4 py-2 rounded-full inline-flex items-center gap-2">
+          <span>Shop OEM Catalog</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <div id="guideDetailBody" class="space-y-8"></div>
+    </section>
+
     <!-- ================= DISCRETE PAGE: DEDICATED LUXURY CHECKOUT ================= -->
     <section id="checkout" data-page="checkout" class="page-view py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto" hidden>
       <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -2914,93 +2898,80 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-7">
 
         <!-- Article 1 -->
         <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="0">
-          <article class="liquid-glass liquid-glass-interactive p-8 rounded-2xl flex flex-col justify-between h-full">
+          <article class="liquid-glass liquid-glass-interactive p-7 sm:p-8 rounded-2xl flex flex-col justify-between h-full">
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <img src="https://iili.io/oHVNlFS.png" alt="Spark Plug Authenticity Inspection" class="h-12 w-auto object-contain">
+                <img src="https://iili.io/oHVNlFS.png" alt="How to Spot Fake Denso &amp; NGK Spark Plugs in Ghana" class="h-12 w-auto object-contain shrink-0">
                 <div>
                   <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 01 &bull; Anti-Counterfeit</span>
-                  <h3 class="text-base font-bold uppercase text-white">How to Spot Counterfeit Spark Plugs in Ghana</h3>
+                  <h3 class="text-base font-bold uppercase text-white leading-snug">How to Spot Fake Denso &amp; NGK Spark Plugs in Ghana</h3>
                 </div>
               </div>
-              <p class="text-xs text-silverMuted leading-relaxed mb-4">
-                Counterfeit spark plugs are one of the leading causes of ignition coil failure in Ghana. Learn how to verify authentic laser-welded tips, inspect printed ceramic lettering, and test internal resistor values with an ohmmeter before installing spark plugs into your engine.
+              <p class="text-xs text-silverMuted leading-relaxed mb-5">
+                Counterfeit plugs cause ignition coil burnout and heavy fuel consumption on Ghanaian roads. Inspect the 0.4 mm laser-welded iridium tip, ceramic glaze printing, captive crush washer, and 3.5–7.5 k&Omega; internal resistor reading before installation.
               </p>
             </div>
-            <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20would%20like%20to%20learn%20more%20about%20verifying%20authentic%20spark%20plugs." target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider text-white hover:text-porscheRed transition-colors flex items-center gap-1.5 pt-2 border-t border-white/10">
-              <span>Ask Our Technical Desk</span>
-              <i class="fas fa-arrow-right text-[10px]"></i>
-            </a>
+            <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/10">
+              <a href="/guides/how-to-spot-fake-denso-ngk-spark-plugs-ghana" class="text-xs font-extrabold uppercase tracking-wider text-white hover:text-porscheRed transition-colors inline-flex items-center gap-1.5">
+                <span>Read Full Guide</span>
+                <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
+              </a>
+              <span class="text-[10px] uppercase tracking-wider text-silverMuted">4 min read</span>
+            </div>
           </article>
         </div>
 
         <!-- Article 2 -->
         <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="100">
-          <article class="liquid-glass liquid-glass-interactive p-8 rounded-2xl flex flex-col justify-between h-full">
+          <article class="liquid-glass liquid-glass-interactive p-7 sm:p-8 rounded-2xl flex flex-col justify-between h-full">
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <img src="https://iili.io/oHVNlFS.png" alt="Iridium vs Copper Plugs" class="h-12 w-auto object-contain">
+                <img src="https://iili.io/oHVNlFS.png" alt="US-Spec vs JDM Toyota Corolla Spark Plugs Thread Reach" class="h-12 w-auto object-contain shrink-0">
                 <div>
-                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 02 &bull; Metallurgy &amp; Performance</span>
-                  <h3 class="text-base font-bold uppercase text-white">Iridium vs Standard Copper Spark Plugs</h3>
+                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 02 &bull; Thread Reach</span>
+                  <h3 class="text-base font-bold uppercase text-white leading-snug">US-Spec vs. JDM Toyota Corolla Spark Plugs: Avoiding Thread Reach Mistakes</h3>
                 </div>
               </div>
-              <p class="text-xs text-silverMuted leading-relaxed mb-4">
-                While copper plugs have a melting point of 1,085&deg;C, Iridium withstands up to 2,466&deg;C. In modern high-compression Toyota and Honda engines, installing standard copper plugs increases the electrical burden on your ignition coils, leading to premature coil blowout and higher fuel consumption.
+              <p class="text-xs text-silverMuted leading-relaxed mb-5">
+                Identical model-year Toyota Corollas in Accra can require 19 mm standard reach (SK20R11, M14) or 26.5 mm extended reach (SC20HR11 / SC16HR11, M12) depending on US-spec vs. JDM engine families. Avoid misfires and head damage with Chassis VIN matching.
               </p>
             </div>
-            <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20have%20questions%20regarding%20Iridium%20vs%20Copper%20plugs%20for%20my%20vehicle." target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider text-white hover:text-porscheRed transition-colors flex items-center gap-1.5 pt-2 border-t border-white/10">
-              <span>Ask Our Technical Desk</span>
-              <i class="fas fa-arrow-right text-[10px]"></i>
-            </a>
+            <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/10">
+              <a href="/guides/us-spec-vs-jdm-toyota-corolla-spark-plugs-thread-reach" class="text-xs font-extrabold uppercase tracking-wider text-white hover:text-porscheRed transition-colors inline-flex items-center gap-1.5">
+                <span>Read Full Guide</span>
+                <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
+              </a>
+              <span class="text-[10px] uppercase tracking-wider text-silverMuted">5 min read</span>
+            </div>
           </article>
         </div>
 
         <!-- Article 3 -->
         <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="200">
-          <article class="liquid-glass liquid-glass-interactive p-8 rounded-2xl flex flex-col justify-between h-full">
+          <article class="liquid-glass liquid-glass-interactive p-7 sm:p-8 rounded-2xl flex flex-col justify-between h-full">
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <img src="https://iili.io/oHVNlFS.png" alt="Spark Plug Heat Range Physics" class="h-12 w-auto object-contain">
+                <img src="https://iili.io/oHVNlFS.png" alt="Wholesale OEM Spark Plug Supply Abossey Okai and Kumasi Magazine" class="h-12 w-auto object-contain shrink-0">
                 <div>
-                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 03 &bull; Combustion Physics</span>
-                  <h3 class="text-base font-bold uppercase text-white">Why Incorrect Heat Ranges Destroy Coils</h3>
+                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 03 &bull; Trade &amp; Fleet</span>
+                  <h3 class="text-base font-bold uppercase text-white leading-snug">Wholesale OEM Spark Plug Supply for Workshops in Abossey Okai &amp; Kumasi Magazine</h3>
                 </div>
               </div>
-              <p class="text-xs text-silverMuted leading-relaxed mb-4">
-                A spark plug must maintain a self-cleaning tip temperature between 450&deg;C and 870&deg;C. Installing a plug that is too hot causes pre-ignition detonation (engine pinging), while a plug that is too cold causes carbon fouling, cylinder misfires, and catalytic converter clogging.
+              <p class="text-xs text-silverMuted leading-relaxed mb-5">
+                Reliable Tier-1 Denso, NGK, and Hyundai/Kia Mobis cartons for service bays and spare-parts shops—same-day rider drops across Accra &amp; Tema plus overnight VIP/STC waybills straight to Kumasi Magazine.
               </p>
             </div>
-            <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20want%20to%20verify%20the%20correct%20heat%20range%20for%20my%20engine." target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider text-white hover:text-porscheRed transition-colors flex items-center gap-1.5 pt-2 border-t border-white/10">
-              <span>Ask Our Technical Desk</span>
-              <i class="fas fa-arrow-right text-[10px]"></i>
-            </a>
-          </article>
-        </div>
-
-        <!-- Article 4 -->
-        <div class="scroll-reveal h-full" data-reveal="fade-up" data-reveal-delay="300">
-          <article class="liquid-glass liquid-glass-interactive p-8 rounded-2xl flex flex-col justify-between h-full">
-            <div>
-              <div class="flex items-center gap-4 mb-4">
-                <img src="https://iili.io/oHVNlFS.png" alt="Chassis Number VIN Verification Protocol" class="h-12 w-auto object-contain">
-                <div>
-                  <span class="oem-eyebrow text-[10px] font-bold uppercase tracking-wider text-porscheRed block">Guide 04 &bull; Fitment Precision</span>
-                  <h3 class="text-base font-bold uppercase text-white">The Chassis Number (VIN) Matching Protocol</h3>
-                </div>
-              </div>
-              <p class="text-xs text-silverMuted leading-relaxed mb-4">
-                Two identical-looking Toyota Corollas or Honda Civics can require completely different spark plug thread reaches (19mm vs 26.5mm) depending on whether they were assembled for the North American, European, or Japanese domestic market. Chassis VIN matching eliminates this hazard completely.
-              </p>
+            <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/10">
+              <a href="/guides/wholesale-oem-spark-plug-supply-abossey-okai-kumasi-magazine" class="text-xs font-extrabold uppercase tracking-wider text-white hover:text-porscheRed transition-colors inline-flex items-center gap-1.5">
+                <span>Read Full Guide</span>
+                <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
+              </a>
+              <span class="text-[10px] uppercase tracking-wider text-silverMuted">4 min read</span>
             </div>
-            <a href="https://wa.me/233240118846?text=Hello%20Kash%20Option%2C%20I%20want%20to%20verify%20my%20chassis%20VIN%20number%20for%20fitment." target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider text-white hover:text-porscheRed transition-colors flex items-center gap-1.5 pt-2 border-t border-white/10">
-              <span>Ask Our Technical Desk</span>
-              <i class="fas fa-arrow-right text-[10px]"></i>
-            </a>
           </article>
         </div>
 
@@ -3336,7 +3307,7 @@
 
     <button type="button" onclick="openSalesChat()" aria-haspopup="dialog" aria-controls="salesRepChat" aria-expanded="false" aria-label="Open Kash Auto Bot fitment chat" id="salesRepTriggerBtn" class="sales-avatar-launcher group focus:outline-none focus-visible:ring-2 focus-visible:ring-porscheRed">
       <span class="sales-rep-avatar-box">
-        <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="58" height="58" class="sales-rep-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+        <img src="/salesrep.png" alt="KASH OPTION Sales Representative" width="58" height="58" class="sales-rep-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
         <span class="sales-ko-fallback" aria-hidden="true">K<span class="text-[#FF1F1F]">O</span></span>
       </span>
       <span class="sales-avatar-online-dot" aria-hidden="true"></span>
@@ -3352,7 +3323,7 @@
       <div id="salesChatHeader" class="sales-chat-header px-4 sm:px-6 py-3.5 bg-[#0C0C10]/95 border-b border-white/10 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center gap-3 min-w-0">
           <div class="sales-chat-avatar-box bg-[#18181C]">
-            <img src="./salesrep.png" alt="KASH OPTION Sales Representative" width="38" height="38" class="sales-chat-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+            <img src="/salesrep.png" alt="KASH OPTION Sales Representative" width="38" height="38" class="sales-chat-avatar-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
             <span class="sales-ko-fallback" aria-hidden="true">K<span class="text-[#FF1F1F]">O</span></span>
           </div>
           <div class="min-w-0">
@@ -7068,7 +7039,439 @@
       document.body.removeChild(link);
     }
 
-    /* ================= PAGE ROUTING ARCHITECTURE (CLEAN ISOLATED PAGES) ================= */
+    /* ================= PAGE ROUTING & DYNAMIC SEO ARCHITECTURE ================= */
+    const KASH_SITE_ORIGIN = 'https://mrkash.net';
+    const DEFAULT_SEO_TITLE = "KASH OPTION | Genuine NGK & DENSO OEM Spark Plugs in Ghana | Toyota, Honda, Hyundai & Kia | Wholesale & Retail Supplier";
+    const DEFAULT_SEO_DESCRIPTION = "Genuine spark plugs in Ghana on mrkash.net. Shop OEM spark plugs in Accra\u2014Toyota spark plugs Ghana, Honda spark plugs Ghana, Hyundai and Kia spark plugs, NGK & DENSO Original Iridium spark plugs.";
+
+    const KNOWLEDGE_GUIDE_ARTICLES = [
+      {
+        slug: 'how-to-spot-fake-denso-ngk-spark-plugs-ghana',
+        eyebrow: 'Guide 01 \u2022 Anti-Counterfeit Inspection',
+        title: 'How to Spot Fake Denso & NGK Spark Plugs in Ghana',
+        metaTitle: 'How to Spot Fake Denso & NGK Spark Plugs in Ghana | KASH OPTION',
+        metaDescription: 'Learn how drivers and mechanics in Ghana can spot counterfeit Denso and NGK iridium spark plugs using tip inspection, ceramic markings, thread plating, and an ohmmeter test.',
+        heroSummary: 'Counterfeit spark plugs are the number one cause of blown ignition coils, rough idling, and poor fuel economy on Ghanaian roads. Use this four-point workshop checklist before installing any Denso or NGK spark plug set.',
+        readTime: '4 min engineering read',
+        sections: [
+          {
+            heading: '1. Inspect the 0.4 mm / 0.6 mm Laser-Welded Iridium Tip',
+            subheading: 'Counterfeits rely on thick nickel wire or un-welded blunt tips',
+            paragraphs: [
+              'Genuine DENSO Iridium TT (0.4 mm) and NGK Laser Iridium (0.6 mm) center electrodes feature a razor-sharp, pin-fine needle welded cleanly onto the core. On Toyota SC20HR11, SK20R11, and Honda ILZKAR8J8SY plugs, look closely for an opposing platinum disc or needle welded squarely onto the ground strap.',
+              'Fake plugs sold in open-air spare parts stalls typically use a thick 1.0\u20131.5 mm standard copper/nickel tip painted silver or filed down to mimic iridium. Within 2,000\u20135,000 km in Accra stop-and-go heat, the soft electrode erodes, widening the spark gap and forcing your ignition coils to overheat.'
+            ]
+          },
+          {
+            heading: '2. Measure Internal Resistor Ohms with a Multimeter',
+            subheading: 'The fastest 10-second verification test for every workshop',
+            paragraphs: [
+              'Nearly all modern DENSO and NGK OEM spark plugs (designated by "R" in codes like SK20R11, SC20HR11, IZFR6K-11S, or IK20TT) contain an internal monolithic ceramic resistor rated around 3.5 k\u03A9 to 7.5 k\u03A9.',
+              'Touch your digital multimeter probes (set to 20 k\u03A9) to the top terminal stud and the bottom center tip. A genuine resistor plug reads consistently between 3.5 and 7.5 k\u03A9 across all four plugs in the pack. Counterfeit plugs frequently measure 0 \u03A9 (no resistor, causing ECU radio-frequency interference and coil driver damage) or open circuit (OL).'
+            ]
+          },
+          {
+            heading: '3. Examine Ceramic Glaze Font, Hex Stamping & Crush Washer',
+            subheading: 'Manufacturing precision counterfeiters cannot replicate',
+            paragraphs: [
+              'Authentic Japanese DENSO and NGK ceramics feature crisp, smudge-proof blue or black part printing sitting underneath a glass-smooth glaze. Look at the metal hex flat for uniform cold-stamped Japan production lot codes and smooth, burr-free rolled M12 or M14 threads with even trivalent silver plating.',
+              'Check the compressible steel sealing gasket (crush washer): genuine factory plugs ship with a captive washer that spins freely yet will not slide off the bottom threads, whereas cheap imitations often lose their washer straight out of the box.'
+            ]
+          }
+        ],
+        faqs: [
+          {
+            question: 'How can I tell if a DENSO SC20HR11 or SK20R11 spark plug is fake in Ghana?',
+            answer: 'Check four details: a fine laser-welded iridium needle with an opposing platinum ground pad, crisp ceramic printing under smooth glaze, a captive crush washer that does not fall off the threads, and an ohmmeter reading around 4 to 6 k\u03A9 between the terminal stud and center tip.'
+          },
+          {
+            question: 'What happens if counterfeit spark plugs are installed in a Toyota or Honda engine?',
+            answer: 'Counterfeit plugs lack proper internal resistance and genuine iridium thermal tolerance. Within weeks of Accra traffic driving, they cause misfires, engine shaking, high fuel consumption, check-engine codes (P0300\u2013P0304), and burned ignition coils.'
+          },
+          {
+            question: 'Can Kash Option verify the right genuine OEM spark plug using my Chassis / VIN?',
+            answer: 'Yes. Send your 17-character Chassis / VIN to Kash Option on WhatsApp (024 011 8846) and our technical desk confirms the exact factory DENSO, NGK, or Hyundai/Kia Mobis part number before same-day dispatch in Accra, Tema, or nationwide.'
+          }
+        ],
+        ctaText: 'Browse Verified Genuine Plugs',
+        whatsappPrefill: 'Hello Kash Option, I read your anti-counterfeit guide and would like to verify genuine Denso / NGK spark plugs for my car.',
+        recommendedBrandFilter: 'denso'
+      },
+      {
+        slug: 'us-spec-vs-jdm-toyota-corolla-spark-plugs-thread-reach',
+        eyebrow: 'Guide 02 \u2022 Fitment Precision',
+        title: 'US-Spec vs. JDM Toyota Corolla Spark Plugs: Avoiding Thread Reach Mistakes',
+        metaTitle: 'US-Spec vs. JDM Toyota Corolla Spark Plugs: Thread Reach Guide | KASH OPTION',
+        metaDescription: 'Avoid engine damage in Ghana: learn the critical thread reach (19 mm vs 26.5 mm) and M14 vs M12 differences between US-spec and JDM/Euro Toyota Corolla, Camry, and Yaris engines.',
+        heroSummary: 'Two Toyota Corollas from the exact same model year in Accra can have completely different cylinder head thread depths depending on whether the vehicle was built for North America (US-spec) or Japan/Europe (JDM/Euro). Guessing by model name alone risks misfires or cylinder head damage.',
+        readTime: '5 min engineering read',
+        sections: [
+          {
+            heading: '1. 19 mm Standard Reach (SK20R11) vs. 26.5 mm Long Reach (SC20HR11 / SC16HR11)',
+            subheading: 'Why identical-looking Corollas cannot swap spark plugs',
+            paragraphs: [
+              'Older 1ZZ-FE Toyota Corollas (and 2AZ-FE Camrys/RAV4s) run M14 x 1.25 threads with a 19 mm reach and 16 mm hex socket\u2014factory fitted with DENSO SK20R11 (90919-01210) or SK16R11 (90919-01240).',
+              'By contrast, newer 2ZR-FE, 1ZR-FE, and 1NR-FE Dual VVT-i Corollas (plus Matrix, Auris, and Yaris variants common across Ghana) use slim M12 x 1.25 threads with a 26.5 mm extended reach and narrow 14 mm hex\u2014factory fitted with DENSO SC20HR11 (90919-01253) or SC16HR11 (90919-01275), while newer Dynamic Force models move to FC16HR-Q8 (90919-01289) at a 0.80 mm gap.'
+            ]
+          },
+          {
+            heading: '2. US-Spec vs. JDM / European Domestic Market Transitions',
+            subheading: 'Mid-cycle engine code splits across imported vehicles in Ghana',
+            paragraphs: [
+              'Ghanaian roads carry a mix of US salvage/clean-title imports (1.8L 1ZZ-FE / 2ZR-FE / 2.4L 2AZ-FE), Japanese Domestic Market units (1.5L 1NZ-FE Belta/Corolla Axio/Fielder), and European trims. Engine families swapped over different calendar years in each region.',
+              'For example, a 2008 JDM Corolla Axio 1.5L (1NZ-FE) can require a different plug heat range and reach than a 2008 US-spec Corolla 1.8L or a 2009 2ZR-FE 1.8L. Never let a mechanic force an M14 plug or guess reach length by eye.'
+            ]
+          },
+          {
+            heading: '3. How the Wrong Thread Reach Damages Your Engine & Coils',
+            subheading: 'Piston collision vs. carbon pocket fouling',
+            paragraphs: [
+              'Installing a 26.5 mm long-reach plug into a 19 mm cylinder head exposes 7.5 mm of bare thread inside the combustion chamber\u2014causing carbon buildup on exposed threads (stripping the aluminum head on removal) or catastrophic piston-to-ground-electrode impact.',
+              'Conversely, fitting a short 19 mm plug into a 26.5 mm head leaves the spark recessed up inside the thread bore, preventing clean flame propagation, triggering persistent misfires, and leaving raw carbon along the lower head threads.'
+            ]
+          }
+        ],
+        faqs: [
+          {
+            question: 'Which spark plug fits a Toyota Corolla in Ghana: SK20R11 or SC20HR11?',
+            answer: 'Corolla engines with M14 x 1.25 19 mm reach heads (such as 1ZZ-FE) use SK20R11 (90919-01210, GH\u20B5300 per set of 4), whereas Dual VVT-i 2ZR-FE / 1ZR-FE Corolla heads with M12 x 1.25 26.5 mm reach use SC20HR11 (90919-01253, GH\u20B5400 per set of 4) or SC16HR11 (90919-01275, GH\u20B5400).'
+          },
+          {
+            question: 'Can a 19 mm reach plug replace a 26.5 mm long-reach Toyota spark plug?',
+            answer: 'No. Thread reach (19 mm vs 26.5 mm) and thread diameter (M14 vs M12) must match the factory cylinder head exactly. Mixing thread reaches causes misfires, fouled head threads, or piston interference.'
+          },
+          {
+            question: 'How do I confirm whether my Corolla uses US-spec or JDM spark plugs?',
+            answer: 'Message your 17-character Chassis / VIN (or frame number for JDM imports) to Kash Option on WhatsApp (024 011 8846). We cross-reference factory Toyota EPC tables and confirm the exact OEM part before dispatch.'
+          }
+        ],
+        ctaText: 'Shop Toyota OEM Spark Plugs',
+        whatsappPrefill: 'Hello Kash Option, I want to verify the exact OEM spark plug thread reach for my Toyota Corolla using my Chassis/VIN.',
+        recommendedBrandFilter: 'toyota'
+      },
+      {
+        slug: 'wholesale-oem-spark-plug-supply-abossey-okai-kumasi-magazine',
+        eyebrow: 'Guide 03 \u2022 Wholesale & Fleet Supply',
+        title: 'Wholesale OEM Spark Plug Supply for Workshops in Abossey Okai & Kumasi Magazine',
+        metaTitle: 'Wholesale OEM Spark Plug Supply in Abossey Okai & Kumasi Magazine | KASH OPTION',
+        metaDescription: 'Consistent Tier-1 OEM spark plug cartons for auto shops, service bays, and parts dealers in Abossey Okai (Accra), Tema, and Kumasi Magazine. Denso, NGK & Hyundai/Kia Mobis wholesale.',
+        heroSummary: 'Workshops and spare-parts dealers across Abossey Okai, Spintex, Tema, and Kumasi Magazine lose repeat customers whenever mixed or counterfeit spark plugs slip into their shelves. KASH OPTION supplies consistent, verifiable OEM cartons with rapid same-day dispatch.',
+        readTime: '4 min trade read',
+        sections: [
+          {
+            heading: '1. Consistent Tier-1 Cartons Without Counterfeit Mixing',
+            subheading: 'Protect your workshop reputation and eliminate comeback misfires',
+            paragraphs: [
+              'Every service bay in Accra and Kumasi knows the hidden cost of a bad plug batch: a customer returns two days after servicing with a flashing check-engine light and a damaged ignition coil.',
+              'KASH OPTION supplies factory-sealed DENSO Japan, NGK Japan, and Hyundai/Kia Mobis Korea spark plugs vetted directly from authorized Tier-1 export channels\u2014so workshops and parts retailers can install and resell with full confidence.'
+            ]
+          },
+          {
+            heading: '2. Fast-Moving Fleet & Workshop SKUs Always in Stock',
+            subheading: 'Covering Ghana\u2019s highest-volume Toyota, Honda, Hyundai, Kia & Nissan engines',
+            paragraphs: [
+              'Our trade inventory maintains steady depth across the highest-turnover SKUs on Ghanaian roads: Toyota DENSO SC20HR11 (90919-01253), SK20R11 (90919-01210), SK16R11 (90919-01240), SC16HR11 (90919-01275), and FC16HR-Q8 (90919-01289).',
+              'For Korean and Honda service specialists, we stock Hyundai/Kia Mobis 18846-10060 (SILZKR6B10E), 18846-11070, 27410-37100, and 18867-09095 alongside Honda NGK 12290-5PA-A01, 12290-6A0-A01, 12290-R70-A01, IZFR6K-11S, NGK LZKAR6AP11 (#6643), and DENSO Iridium TT series (IK16TT, IK20TT, IKH16TT, IKH20TT, IXEH20TT, IXEH22TT).'
+            ]
+          },
+          {
+            heading: '3. Same-Day Accra Dispatch & Overnight Waybills to Kumasi Magazine',
+            subheading: 'Reliable logistics built around busy mechanic bays',
+            paragraphs: [
+              'Trade orders placed before 3:00 PM qualify for direct 30\u201345 minute rider delivery across Abossey Okai, Kokomlemle, Circle, East Legon, Spintex, and Tema Industrial Area.',
+              'For dealers and garages in Kumasi Magazine, Takoradi, Sunyani, Cape Coast, and Tamale, sealed cartons leave the same day via VIP / STC parcel waybills for crisp next-morning counter pickup.'
+            ]
+          }
+        ],
+        faqs: [
+          {
+            question: 'How do workshops in Abossey Okai or Kumasi Magazine qualify for wholesale spark plug pricing?',
+            answer: 'Message KASH OPTION on WhatsApp at 024 011 8846 with your workshop or shop name, location, and target SKUs or monthly pack volume. Our trade desk issues carton pricing tiers immediately.'
+          },
+          {
+            question: 'How fast do wholesale shipments reach Kumasi Magazine or Takoradi?',
+            answer: 'Accra and Tema workshops receive rider dispatch in 30\u201345 minutes. Regional wholesale cartons to Kumasi Magazine, Takoradi, Sunyani, Cape Coast, and Tamale ship same-day via trusted VIP or STC parcel services for next-morning pickup.'
+          },
+          {
+            question: 'Can we order mixed OEM brands in one wholesale carton dispatch?',
+            answer: 'Yes. Workshops can combine Toyota DENSO, Honda NGK, Hyundai/Kia Mobis, and DENSO Iridium TT packs in a single wholesale order tailored to their bay schedule.'
+          }
+        ],
+        ctaText: 'Explore Wholesale & Full Catalog',
+        whatsappPrefill: 'Hello Kash Option Trade Desk, I run an auto shop / workshop and would like your current wholesale OEM spark plug carton price list.',
+        recommendedBrandFilter: 'all'
+      }
+    ];
+
+    function slugifySeoSegment(str) {
+      return String(str || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function getPlugSeoSlug(plug) {
+      if (!plug) return '';
+      if (plug.seoSlug) return slugifySeoSegment(plug.seoSlug);
+      const brandSlug = slugifySeoSegment(plug.brand);
+      const makerSlug = slugifySeoSegment(plug.makerTag);
+      const oemText = String(plug.oemNumber || plug.partCode || plug.id || '');
+      const primaryOem = slugifySeoSegment(oemText.split('/')[0]);
+      const stockMatch = oemText.match(/stock\s*#\s*([a-z0-9]+)/i);
+      if (makerSlug && brandSlug && makerSlug !== brandSlug) {
+        return [brandSlug, makerSlug, primaryOem || slugifySeoSegment(plug.partCode)].filter(Boolean).join('-');
+      }
+      const partSlug = slugifySeoSegment(plug.partCode) || primaryOem;
+      return [brandSlug || makerSlug, partSlug, stockMatch ? slugifySeoSegment(stockMatch[1]) : ''].filter(Boolean).join('-');
+    }
+
+    function getPlugBySeoSlug(slug) {
+      if (typeof plugDetailCatalog === 'undefined' || !Array.isArray(plugDetailCatalog)) return null;
+      const clean = slugifySeoSegment(String(slug || '').replace(/\.html$/i, ''));
+      if (!clean) return null;
+      const used = new Set();
+      for (let i = 0; i < plugDetailCatalog.length; i++) {
+        const p = plugDetailCatalog[i];
+        const base = getPlugSeoSlug(p) || slugifySeoSegment(p.id);
+        let candidate = base;
+        let suffix = 2;
+        while (used.has(candidate)) {
+          candidate = `${base}-${suffix}`;
+          suffix++;
+        }
+        used.add(candidate);
+        if (candidate === clean || slugifySeoSegment(p.id) === clean) {
+          return p;
+        }
+      }
+      return null;
+    }
+
+    function getPlugCanonicalPath(plug) {
+      if (!plug || typeof plugDetailCatalog === 'undefined' || !Array.isArray(plugDetailCatalog)) {
+        return '/parts/' + getPlugSeoSlug(plug);
+      }
+      const used = new Set();
+      for (let i = 0; i < plugDetailCatalog.length; i++) {
+        const p = plugDetailCatalog[i];
+        const base = getPlugSeoSlug(p) || slugifySeoSegment(p.id);
+        let candidate = base;
+        let suffix = 2;
+        while (used.has(candidate)) {
+          candidate = `${base}-${suffix}`;
+          suffix++;
+        }
+        used.add(candidate);
+        if (p.id === plug.id) return `/parts/${candidate}`;
+      }
+      return '/parts/' + getPlugSeoSlug(plug);
+    }
+
+    function getSchemaBrandName(plug) {
+      const maker = String((plug && plug.makerTag) || '').toLowerCase();
+      if (maker === 'ngk') return 'NGK';
+      if (maker === 'denso') return 'DENSO';
+      if (maker === 'mobis') return 'Hyundai/Kia Mobis';
+      return (plug && plug.brand) || 'KASH OPTION';
+    }
+
+    function getPlugGhanaSeoDescription(plug) {
+      if (!plug) return DEFAULT_SEO_DESCRIPTION;
+      const models = Array.isArray(plug.models) ? plug.models.slice(0, 6).join(', ') : '';
+      const isVehicleBrand = ['Toyota', 'Honda', 'Hyundai', 'Kia'].includes(plug.brand);
+      const appPrefix = isVehicleBrand
+        ? `Genuine ${plug.brand} OEM spark plug (${plug.oemNumber}) for ${plug.brand} ${models}`
+        : `Genuine ${plug.brand} OEM spark plug (${plug.oemNumber}) for ${models}`;
+      return `${appPrefix} in Ghana \u2014 verified by Chassis/VIN with same-day delivery in Accra & Tema.`;
+    }
+
+    function upsertSeoHeadTag(selector, tagName, attrs, content) {
+      if (typeof document === 'undefined' || !document.head) return;
+      let el = document.head.querySelector(selector);
+      if (!el) {
+        el = document.createElement(tagName);
+        Object.keys(attrs).forEach(k => el.setAttribute(k, attrs[k]));
+        document.head.appendChild(el);
+      }
+      if (tagName === 'link') {
+        el.setAttribute('href', content);
+      } else {
+        el.setAttribute('content', content);
+      }
+    }
+
+    function updateSeoMetaAndSchema(validPage, payload) {
+      let title = pageTitles[validPage] || DEFAULT_SEO_TITLE;
+      let description = DEFAULT_SEO_DESCRIPTION;
+      let canonicalUrl = `${KASH_SITE_ORIGIN}/`;
+      let ogType = 'website';
+      let ogImage = 'https://iili.io/oHVNlFS.png';
+      let dynamicSchema = null;
+
+      if (validPage === 'product-detail' && payload && payload.plug) {
+        const plug = payload.plug;
+        const skuPath = getPlugCanonicalPath(plug);
+        canonicalUrl = `${KASH_SITE_ORIGIN}${skuPath}`;
+        title = `${plug.partCode} Genuine ${plug.brand} OEM Spark Plug (${plug.priceLabel}) | KASH OPTION Ghana`;
+        description = getPlugGhanaSeoDescription(plug);
+        ogType = 'product';
+        ogImage = (Array.isArray(plug.images) && plug.images[0]) || ogImage;
+        const primaryMpn = String(plug.oemNumber || plug.partCode || '').split('/')[0].trim() || plug.partCode;
+        dynamicSchema = {
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          '@id': `${canonicalUrl}#product`,
+          name: plug.detailTitle || plug.title,
+          brand: {
+            '@type': 'Brand',
+            name: getSchemaBrandName(plug)
+          },
+          sku: plug.partCode,
+          mpn: primaryMpn,
+          image: Array.isArray(plug.images) && plug.images.length > 0 ? plug.images : [ogImage],
+          description: description,
+          offers: {
+            '@type': 'Offer',
+            priceCurrency: 'GHS',
+            price: String(Number(plug.priceGhs) || 0),
+            availability: 'https://schema.org/InStock',
+            url: canonicalUrl,
+            seller: {
+              '@type': 'AutoPartsStore',
+              name: 'Kash Option',
+              url: KASH_SITE_ORIGIN
+            }
+          }
+        };
+      } else if (validPage === 'guide-detail' && payload && payload.guide) {
+        const guide = payload.guide;
+        canonicalUrl = `${KASH_SITE_ORIGIN}/guides/${guide.slug}`;
+        title = guide.metaTitle || `${guide.title} | KASH OPTION`;
+        description = guide.metaDescription || guide.heroSummary;
+        ogType = 'article';
+        dynamicSchema = {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          '@id': `${canonicalUrl}#faq`,
+          url: canonicalUrl,
+          name: guide.title,
+          mainEntity: guide.faqs.map(faq => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer
+            }
+          }))
+        };
+      } else if (validPage === 'checkout' && payload && payload.plug) {
+        const plug = payload.plug;
+        title = `Checkout: ${plug.partCode} (${plug.priceLabel}) | KASH OPTION Ghana`;
+        canonicalUrl = `${KASH_SITE_ORIGIN}${getPlugCanonicalPath(plug)}`;
+        description = getPlugGhanaSeoDescription(plug);
+      } else if (validPage !== 'home') {
+        canonicalUrl = `${KASH_SITE_ORIGIN}/#${validPage}`;
+      }
+
+      document.title = title;
+      upsertSeoHeadTag('meta[name="description"]', 'meta', { name: 'description' }, description);
+      upsertSeoHeadTag('link[rel="canonical"]', 'link', { rel: 'canonical' }, canonicalUrl);
+      upsertSeoHeadTag('meta[property="og:type"]', 'meta', { property: 'og:type' }, ogType);
+      upsertSeoHeadTag('meta[property="og:title"]', 'meta', { property: 'og:title' }, title);
+      upsertSeoHeadTag('meta[property="og:description"]', 'meta', { property: 'og:description' }, description);
+      upsertSeoHeadTag('meta[property="og:url"]', 'meta', { property: 'og:url' }, canonicalUrl);
+      upsertSeoHeadTag('meta[property="og:image"]', 'meta', { property: 'og:image' }, ogImage);
+      upsertSeoHeadTag('meta[name="twitter:title"]', 'meta', { name: 'twitter:title' }, title);
+      upsertSeoHeadTag('meta[name="twitter:description"]', 'meta', { name: 'twitter:description' }, description);
+      upsertSeoHeadTag('meta[name="twitter:image"]', 'meta', { name: 'twitter:image' }, ogImage);
+
+      const existingDynamic = document.getElementById('dynamicSeoJsonLd');
+      if (dynamicSchema) {
+        const scriptEl = existingDynamic || document.createElement('script');
+        scriptEl.id = 'dynamicSeoJsonLd';
+        scriptEl.type = 'application/ld+json';
+        scriptEl.textContent = JSON.stringify(dynamicSchema, null, 2);
+        if (!existingDynamic && document.head) {
+          document.head.appendChild(scriptEl);
+        }
+      } else if (existingDynamic && existingDynamic.parentNode) {
+        existingDynamic.parentNode.removeChild(existingDynamic);
+      }
+    }
+
+    function renderGuideDetailContent(guide) {
+      const bodyEl = document.getElementById('guideDetailBody');
+      if (!bodyEl || !guide) return;
+
+      const escGuide = str => String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+      const waHref = `https://wa.me/233240118846?text=${encodeURIComponent(guide.whatsappPrefill)}`;
+      const brandFilter = guide.recommendedBrandFilter && guide.recommendedBrandFilter !== 'all' ? guide.recommendedBrandFilter : null;
+
+      const sectionsHtml = guide.sections.map(sec => `
+        <section class="liquid-glass p-6 sm:p-8 rounded-2xl space-y-3">
+          <h2 class="text-lg sm:text-2xl font-extrabold uppercase text-white tracking-tight">${escGuide(sec.heading)}</h2>
+          ${sec.subheading ? `<h3 class="text-xs font-bold uppercase tracking-widest text-porscheRed">${escGuide(sec.subheading)}</h3>` : ''}
+          ${sec.paragraphs.map(p => `<p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">${escGuide(p)}</p>`).join('')}
+        </section>
+      `).join('');
+
+      const faqsHtml = guide.faqs.map(faq => `
+        <div class="liquid-glass p-6 rounded-2xl">
+          <h3 class="oem-eyebrow font-bold uppercase text-white text-sm mb-2">${escGuide(faq.question)}</h3>
+          <p class="text-xs sm:text-sm text-silverMuted leading-relaxed">${escGuide(faq.answer)}</p>
+        </div>
+      `).join('');
+
+      bodyEl.innerHTML = `
+        <article class="space-y-8">
+          <header class="space-y-4 pb-6 border-b border-white/10">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="accent-indicator"></span>
+              <span class="text-[11px] font-bold uppercase tracking-widest text-porscheRed">${escGuide(guide.eyebrow)}</span>
+              <span class="text-[11px] text-silverMuted">&bull; ${escGuide(guide.readTime)}</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase text-white tracking-tight leading-tight">${escGuide(guide.title)}</h1>
+            <p class="text-sm sm:text-base text-zinc-200 leading-relaxed max-w-3xl">${escGuide(guide.heroSummary)}</p>
+          </header>
+
+          <div class="space-y-5">${sectionsHtml}</div>
+
+          <section class="pt-4 space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="accent-indicator"></span>
+              <h2 class="text-xl sm:text-2xl font-extrabold uppercase text-white tracking-tight">Frequently Asked Questions</h2>
+            </div>
+            <div class="space-y-4">${faqsHtml}</div>
+          </section>
+
+          <div class="pt-4 flex flex-col sm:flex-row gap-3">
+            <a href="/#${escGuide(brandFilter || 'catalogue')}" id="guideCatalogCtaBtn" class="pill-white-3d text-xs font-extrabold uppercase tracking-wider px-6 py-3.5 text-center inline-flex items-center justify-center gap-2">
+              <span>${escGuide(guide.ctaText)}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="${escGuide(waHref)}" target="_blank" rel="noopener noreferrer" class="liquid-cta-primary text-white text-xs font-extrabold uppercase tracking-wider px-6 py-3.5 rounded-full text-center inline-flex items-center justify-center gap-2">
+              <span>WhatsApp Technical Desk (024 011 8846)</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </article>
+      `;
+
+      const catBtn = bodyEl.querySelector('#guideCatalogCtaBtn');
+      if (catBtn) {
+        catBtn.addEventListener('click', e => {
+          e.preventDefault();
+          showPage('catalogue', brandFilter, true);
+        });
+      }
+    }
+
     const routeMap = {
       '': 'home',
       'home': 'home',
@@ -7081,6 +7484,7 @@
       'why-kash-option': 'trust',
       'how-to-order': 'how-to-order',
       'knowledge': 'knowledge',
+      'guide-detail': 'guide-detail',
       'faqs': 'faqs',
       'faq': 'faqs',
       'contact': 'contact',
@@ -7100,9 +7504,10 @@
     };
 
     const pageTitles = {
-      home: "KASH OPTION | Genuine NGK & DENSO OEM Spark Plugs in Ghana | Toyota, Honda, Hyundai & Kia | Wholesale & Retail Supplier",
+      home: DEFAULT_SEO_TITLE,
       catalogue: "OEM Spark Plug Catalogue | KASH OPTION Ghana",
       'product-detail': "OEM Spark Plug Fitment | KASH OPTION Ghana",
+      'guide-detail': "Technical Knowledge Guide | KASH OPTION Ghana",
       'checkout': "Secure Checkout | KASH OPTION Ghana",
       fitment: "Chassis Fitment Verification | KASH OPTION Ghana",
       wholesale: "Wholesale Trade Portal | KASH OPTION Ghana",
@@ -7116,16 +7521,49 @@
 
     let currentActivePage = null;
     let activeProductPlugId = 'toyota-sc20hr11';
+    let activeGuideSlug = KNOWLEDGE_GUIDE_ARTICLES[0].slug;
     let lastCatalogueOrigin = 'home';
 
+    function resolvePathnameRoute(pathname) {
+      const cleanPath = String(pathname || '/').replace(/\/+$/, '').replace(/\.html$/i, '') || '/';
+      if (cleanPath.toLowerCase().startsWith('/parts/')) {
+        const slug = cleanPath.slice('/parts/'.length).toLowerCase();
+        return { key: `parts/${slug}`, brand: null };
+      }
+      if (cleanPath.toLowerCase().startsWith('/guides/')) {
+        const slug = cleanPath.slice('/guides/'.length).toLowerCase();
+        return { key: `guides/${slug}`, brand: null };
+      }
+      return null;
+    }
+
     function showPage(pageKey, brandFilter, updateHistory) {
-      const normalizedKey = String(pageKey || '').toLowerCase();
+      const rawKey = String(pageKey || '').trim().replace(/^\/+/, '').replace(/\/+$/, '').replace(/\.html$/i, '');
+      const normalizedKey = rawKey.toLowerCase();
       let validPage = routeMap[normalizedKey] || 'home';
       let matchedProduct = null;
       let matchedCheckoutProduct = null;
-      if (normalizedKey.startsWith('product-') && typeof plugDetailCatalog !== 'undefined') {
+      let matchedGuide = null;
+
+      if (normalizedKey.startsWith('parts/')) {
+        const slug = normalizedKey.replace(/^parts\//, '');
+        matchedProduct = getPlugBySeoSlug(slug);
+        if (matchedProduct) {
+          validPage = 'product-detail';
+          activeProductPlugId = matchedProduct.id;
+          renderPlugDetailContent(matchedProduct);
+        }
+      } else if (normalizedKey.startsWith('guides/') || normalizedKey.startsWith('guide-')) {
+        const slug = normalizedKey.replace(/^guides\//, '').replace(/^guide-/, '');
+        matchedGuide = KNOWLEDGE_GUIDE_ARTICLES.find(g => g.slug === slug) || null;
+        if (matchedGuide) {
+          validPage = 'guide-detail';
+          activeGuideSlug = matchedGuide.slug;
+          renderGuideDetailContent(matchedGuide);
+        }
+      } else if (normalizedKey.startsWith('product-') && typeof plugDetailCatalog !== 'undefined') {
         const candidateId = normalizedKey.replace(/^product-/, '');
-        matchedProduct = plugDetailCatalog.find(p => p.id.toLowerCase() === candidateId) || null;
+        matchedProduct = plugDetailCatalog.find(p => p.id.toLowerCase() === candidateId) || getPlugBySeoSlug(candidateId);
         if (matchedProduct) {
           validPage = 'product-detail';
           activeProductPlugId = matchedProduct.id;
@@ -7140,22 +7578,33 @@
           renderCheckoutPageContent(matchedCheckoutProduct);
         }
       }
+
       if (validPage === 'product-detail' && !matchedProduct && typeof plugDetailCatalog !== 'undefined') {
         const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId) || plugDetailCatalog[0];
+        matchedProduct = fallbackPlug;
         const bodyEl = document.getElementById('plugDetailBody');
-        if (fallbackPlug && bodyEl && bodyEl.children.length === 0) {
+        if (fallbackPlug && bodyEl) {
           activeProductPlugId = fallbackPlug.id;
           renderPlugDetailContent(fallbackPlug);
         }
       }
+      if (validPage === 'guide-detail' && !matchedGuide) {
+        matchedGuide = KNOWLEDGE_GUIDE_ARTICLES.find(g => g.slug === activeGuideSlug) || KNOWLEDGE_GUIDE_ARTICLES[0];
+        if (matchedGuide) {
+          activeGuideSlug = matchedGuide.slug;
+          renderGuideDetailContent(matchedGuide);
+        }
+      }
       if (validPage === 'checkout' && !matchedCheckoutProduct && typeof plugDetailCatalog !== 'undefined') {
         const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId) || plugDetailCatalog[0];
+        matchedCheckoutProduct = fallbackPlug;
         const checkoutEl = document.getElementById('checkoutPageBody');
         if (fallbackPlug && checkoutEl && checkoutEl.children.length === 0) {
           activeProductPlugId = fallbackPlug.id;
           renderCheckoutPageContent(fallbackPlug);
         }
       }
+
       const isSamePage = currentActivePage === validPage;
       currentActivePage = validPage;
 
@@ -7189,22 +7638,11 @@
         }
       }
 
-      // Update document title
-      if (validPage === 'product-detail' && matchedProduct) {
-        document.title = `${matchedProduct.partCode} Genuine ${matchedProduct.brand} OEM Spark Plug (${matchedProduct.priceLabel}) | KASH OPTION Ghana`;
-      } else if (validPage === 'product-detail' && typeof plugDetailCatalog !== 'undefined') {
-        const fallbackPlug = plugDetailCatalog.find(p => p.id === activeProductPlugId);
-        document.title = fallbackPlug
-          ? `${fallbackPlug.partCode} Genuine ${fallbackPlug.brand} OEM Spark Plug (${fallbackPlug.priceLabel}) | KASH OPTION Ghana`
-          : pageTitles['product-detail'];
-      } else if (validPage === 'checkout') {
-        const checkoutPlug = matchedCheckoutProduct || (typeof plugDetailCatalog !== 'undefined' && plugDetailCatalog.find(p => p.id === activeProductPlugId));
-        document.title = checkoutPlug
-          ? `Checkout: ${checkoutPlug.partCode} (${checkoutPlug.priceLabel}) | KASH OPTION Ghana`
-          : pageTitles.checkout;
-      } else {
-        document.title = pageTitles[validPage] || pageTitles.home;
-      }
+      // Update dynamic <title>, <meta name="description">, <link rel="canonical">, OpenGraph, and JSON-LD schema
+      updateSeoMetaAndSchema(validPage, {
+        plug: matchedProduct || matchedCheckoutProduct,
+        guide: matchedGuide
+      });
 
       if (validPage === 'checkout' && typeof closeSalesChat === 'function') {
         closeSalesChat();
@@ -7213,22 +7651,34 @@
       // Reset cleanly to top on route swaps
       window.scrollTo({
         top: 0,
-        behavior: isSamePage && !brandFilter && !matchedProduct && !matchedCheckoutProduct ? 'smooth' : 'instant'
+        behavior: isSamePage && !brandFilter && !matchedProduct && !matchedCheckoutProduct && !matchedGuide ? 'smooth' : 'instant'
       });
       updateSalesRepVisibility();
 
-      // Update browser history
+      // Update browser history using clean indexable paths when served over http(s)
       if (updateHistory) {
-        const hash = validPage === 'home'
-          ? '#home'
-          : (validPage === 'product-detail'
-            ? `#product-${activeProductPlugId}`
-            : (validPage === 'checkout' ? `#checkout-${activeProductPlugId}` : '#' + (brandFilter || pageKey)));
-        history.pushState({
-          page: validPage,
-          brand: brandFilter || null,
-          plugId: (validPage === 'product-detail' || validPage === 'checkout') ? activeProductPlugId : null
-        }, '', hash);
+        const isFileProtocol = window.location.protocol === 'file:';
+        let targetUrl = '';
+        if (validPage === 'product-detail' && matchedProduct) {
+          targetUrl = isFileProtocol ? `#product-${matchedProduct.id}` : getPlugCanonicalPath(matchedProduct);
+        } else if (validPage === 'guide-detail' && matchedGuide) {
+          targetUrl = isFileProtocol ? `#guide-${matchedGuide.slug}` : `/guides/${matchedGuide.slug}`;
+        } else if (validPage === 'checkout') {
+          targetUrl = isFileProtocol ? `#checkout-${activeProductPlugId}` : `/#checkout-${activeProductPlugId}`;
+        } else if (validPage === 'home') {
+          targetUrl = isFileProtocol ? '#home' : '/';
+        } else {
+          const hashTarget = brandFilter || (routeMap[normalizedKey] ? normalizedKey : validPage);
+          targetUrl = isFileProtocol ? `#${hashTarget}` : `/#${hashTarget}`;
+        }
+        try {
+          history.pushState({
+            page: validPage,
+            brand: brandFilter || null,
+            plugId: (validPage === 'product-detail' || validPage === 'checkout') ? activeProductPlugId : null,
+            guideSlug: validPage === 'guide-detail' ? activeGuideSlug : null
+          }, '', targetUrl);
+        } catch (_histErr) {}
       }
 
       // Ensure menu overlay is closed cleanly
@@ -7238,21 +7688,44 @@
       initScrollReveals({ resetPage: !isSamePage });
     }
 
-    // Intercept internal anchor clicks for clean page transitions & smooth in-page jumps
+    // Intercept internal anchor & path clicks for clean SPA transitions while preserving crawler links
     document.addEventListener('click', function(e) {
-      const link = e.target.closest('a[href^="#"]');
+      const link = e.target.closest('a[href]');
       if (!link) return;
       if (link.hasAttribute('data-brand-filter')) return;
-      const href = link.getAttribute('href');
-      if (!href || href === '#') return;
-      const hashKey = href.slice(1).toLowerCase();
-      if (routeMap[hashKey] !== undefined || hashKey.startsWith('product-') || hashKey.startsWith('checkout-')) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+      const href = link.getAttribute('href') || '';
+      if (href === '/') {
+        e.preventDefault();
+        showPage('home', null, true);
+        return;
+      }
+      if (href.startsWith('/parts/')) {
+        e.preventDefault();
+        const slug = href.slice('/parts/'.length).replace(/\/+$/, '');
+        if (currentActivePage === 'home' || currentActivePage === 'catalogue') {
+          lastCatalogueOrigin = currentActivePage;
+        }
+        showPage(`parts/${slug}`, null, true);
+        return;
+      }
+      if (href.startsWith('/guides/')) {
+        e.preventDefault();
+        const slug = href.slice('/guides/'.length).replace(/\/+$/, '');
+        showPage(`guides/${slug}`, null, true);
+        return;
+      }
+      const hashSrc = href.startsWith('/#') ? href.slice(1) : href;
+      if (!hashSrc.startsWith('#') || hashSrc === '#') return;
+      const hashKey = hashSrc.slice(1).toLowerCase();
+      if (routeMap[hashKey] !== undefined || hashKey.startsWith('product-') || hashKey.startsWith('checkout-') || hashKey.startsWith('guide-')) {
         e.preventDefault();
         const brand = ['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(hashKey) ? hashKey : null;
         showPage(routeMap[hashKey] === 'catalogue' ? 'catalogue' : hashKey, brand, true);
         return;
       }
-      const targetEl = document.getElementById(href.slice(1));
+      const targetEl = document.getElementById(hashSrc.slice(1));
       if (targetEl) {
         e.preventDefault();
         closeMenu();
@@ -7262,6 +7735,11 @@
 
     // Browser back/forward navigation support
     window.addEventListener('popstate', function() {
+      const pathRoute = resolvePathnameRoute(location.pathname);
+      if (pathRoute) {
+        showPage(pathRoute.key, pathRoute.brand, false);
+        return;
+      }
       const key = (location.hash || '#home').slice(1).toLowerCase();
       const brand = ['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(key) ? key : null;
       showPage(key, brand, false);
@@ -8924,8 +9402,9 @@
     }
 
     function buildCompactProductCard(plug, origin) {
+      const skuPath = getPlugCanonicalPath(plug);
       const card = document.createElement('article');
-      card.className = 'product-item kash-product-card rounded-2xl overflow-hidden flex flex-col justify-between group cursor-pointer';
+      card.className = 'product-item kash-product-card hover-lift rounded-2xl overflow-hidden flex flex-col justify-between group cursor-pointer';
       card.tabIndex = 0;
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', `${plug.brand} ${plug.oemNumber} \u2014 ${plug.priceLabel}`);
@@ -8972,7 +9451,17 @@
 
       const partTitle = document.createElement('h3');
       partTitle.className = 'text-xs sm:text-[15px] font-extrabold uppercase text-white leading-snug tracking-tight break-words';
-      partTitle.textContent = plug.oemNumber;
+      const partTitleLink = document.createElement('a');
+      partTitleLink.href = skuPath;
+      partTitleLink.className = 'hover:text-white focus:outline-none';
+      partTitleLink.textContent = plug.oemNumber;
+      partTitleLink.addEventListener('click', e => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openPlugDetailModal(plug.id, origin);
+      });
+      partTitle.appendChild(partTitleLink);
 
       const modelsList = Array.isArray(plug.models) ? plug.models : [];
       const visibleModels = modelsList.length > 5 ? modelsList.slice(0, 5) : modelsList;
@@ -8995,9 +9484,16 @@
       const priceSpan = document.createElement('span');
       priceSpan.className = 'text-sm sm:text-lg font-black text-white tracking-tight tabular-nums';
       priceSpan.textContent = plug.priceLabel;
-      const specHint = document.createElement('span');
+      const specHint = document.createElement('a');
+      specHint.href = skuPath;
       specHint.className = 'text-[9px] sm:text-[10px] font-bold text-zinc-400 group-hover:text-white uppercase tracking-wider shrink-0 transition-colors';
       specHint.textContent = 'View Specs \u2192';
+      specHint.addEventListener('click', e => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openPlugDetailModal(plug.id, origin);
+      });
       priceRow.appendChild(priceSpan);
       priceRow.appendChild(specHint);
 
@@ -9029,12 +9525,14 @@
     }
 
     function buildPlugMoreCard(item) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'plug-more-card w-full text-left rounded-2xl p-3.5 flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
-      attachSingleTapHandler(btn, () => {
+      const link = document.createElement('a');
+      link.href = getPlugCanonicalPath(item);
+      link.className = 'plug-more-card w-full text-left rounded-2xl p-3.5 flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+      link.addEventListener('click', e => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
         openPlugDetailModal(item.id, lastCatalogueOrigin);
-      }, { ignoreSelector: '' });
+      });
 
       const thumbWrap = document.createElement('div');
       thumbWrap.className = 'w-14 h-14 rounded-xl bg-porscheBlack border border-white/10 overflow-hidden shrink-0';
@@ -9071,9 +9569,9 @@
       infoWrap.appendChild(partEl);
       infoWrap.appendChild(metaEl);
 
-      btn.appendChild(thumbWrap);
-      btn.appendChild(infoWrap);
-      return btn;
+      link.appendChild(thumbWrap);
+      link.appendChild(infoWrap);
+      return link;
     }
 
     function renderPlugDetailContent(plug) {
@@ -9112,7 +9610,7 @@
       eyebrowRow.appendChild(dotSpan);
       eyebrowRow.appendChild(eyebrowEl);
 
-      const titleEl = document.createElement('h2');
+      const titleEl = document.createElement('h1');
       titleEl.id = 'plugDetailTitle';
       titleEl.className = 'text-2xl sm:text-4xl font-extrabold uppercase text-white tracking-tight leading-tight';
       titleEl.textContent = plug.detailTitle || `${plug.brand} Original Iridium Spark Plug`;
@@ -9122,7 +9620,8 @@
       const summaryPara = document.createElement('p');
       summaryPara.id = 'plugDetailDescription';
       summaryPara.className = 'text-sm sm:text-base text-zinc-200 leading-relaxed max-w-3xl';
-      summaryPara.textContent = plug.detailSummary || `Genuine Iridium spark plugs (${plug.oemNumber})${modelsPhrase}`;
+      const baseSummary = plug.detailSummary || `Genuine Iridium spark plugs (${plug.oemNumber})${modelsPhrase}`;
+      summaryPara.textContent = `${baseSummary} Verified in Ghana by Chassis/VIN with same-day delivery in Accra & Tema.`;
 
       const priceStrip = document.createElement('div');
       priceStrip.className = 'flex flex-wrap items-center gap-3 pt-1';
@@ -9171,10 +9670,10 @@
 
       article.appendChild(specCard);
 
-      // Step 1 Primary CTA: Proceed to Dedicated Checkout View
+      // Step 1 Primary CTA: Proceed to Dedicated Checkout View + Direct WhatsApp Order Button
       const proceedWrap = document.createElement('div');
       proceedWrap.id = 'plugProceedOrderWrap';
-      proceedWrap.className = 'pt-1 space-y-2.5';
+      proceedWrap.className = 'pt-1 space-y-3';
 
       const proceedBtn = document.createElement('button');
       proceedBtn.type = 'button';
@@ -9185,11 +9684,21 @@
         openPlugCheckoutPage(plug.id);
       });
 
+      const directWaPrefill = encodeURIComponent(`Hello Kash Option, I want to order ${plug.brand} ${plug.oemNumber} (${plug.priceLabel} / ${plug.packLabel}).`);
+      const directWaBtn = document.createElement('a');
+      directWaBtn.id = 'directWhatsappOrderBtn';
+      directWaBtn.href = `https://wa.me/233240118846?text=${directWaPrefill}`;
+      directWaBtn.target = '_blank';
+      directWaBtn.rel = 'noopener noreferrer';
+      directWaBtn.className = 'w-full pill-white-3d py-3.5 px-6 text-xs sm:text-sm font-extrabold uppercase tracking-wider inline-flex items-center justify-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1F1F]';
+      directWaBtn.innerHTML = '<i class="fab fa-whatsapp text-base" aria-hidden="true"></i><span>Order Direct on WhatsApp (024 011 8846)</span>';
+
       const proceedNote = document.createElement('p');
       proceedNote.className = 'text-center text-[11px] text-silverMuted';
-      proceedNote.textContent = 'Fast 2-step checkout \u2014 Confirm vehicle & delivery details to order directly on WhatsApp (024 011 8846).';
+      proceedNote.textContent = 'Fast 2-step checkout or direct WhatsApp dispatch (024 011 8846) \u2014 same-day rider delivery in Accra & Tema.';
 
       proceedWrap.appendChild(proceedBtn);
+      proceedWrap.appendChild(directWaBtn);
       proceedWrap.appendChild(proceedNote);
       article.appendChild(proceedWrap);
 
@@ -10067,6 +10576,11 @@
       renderAllCatalogueGrids();
       if (typeof initCatalogAutoTimers === 'function') {
         initCatalogAutoTimers();
+      }
+      const pathRoute = typeof resolvePathnameRoute === 'function' ? resolvePathnameRoute(location.pathname) : null;
+      if (pathRoute) {
+        showPage(pathRoute.key, pathRoute.brand, false);
+        return;
       }
       const initialKey = (location.hash || '#home').slice(1).toLowerCase();
       const brand = ['toyota', 'honda', 'hyundai', 'kia', 'denso', 'ngk', 'mobis'].includes(initialKey) ? initialKey : null;
